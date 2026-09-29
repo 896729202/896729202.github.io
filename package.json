@@ -1,0 +1,12 @@
+{
+  "name": "896729202-learning-notes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "个人知识手记 · 毕业论文与八股文",
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "preview": "python3 -m http.server 4173 --bind 127.0.0.1"
+  },
+  "devDependencies": { "mathjax-full": "3.2.1" },
+  "engines": { "node": ">=20" }
+}

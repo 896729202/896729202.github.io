@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+{{head}}
+<script>try{var t=localStorage.getItem('notebook-theme');document.documentElement.dataset.theme=(t==='dark'||t==='light')?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}</script>
+<link rel="icon" type="image/svg+xml" href="{{prefix}}assets/favicon.svg">
+<link rel="stylesheet" href="{{prefix}}assets/site.css">
+<script src="{{prefix}}assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+{{progress}}
+{{header}}
+<div class="{{layout_class}}">
+{{sidebar}}
+{{main}}
+</div>
+{{footer}}
+<button type="button" class="icon-button back-top" data-back-top hidden aria-label="返回页面顶部" title="返回页面顶部">{{up_icon}}</button>
+<div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+</body>
+</html>

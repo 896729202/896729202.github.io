@@ -1,0 +1,12 @@
+[
+  {
+    "slug": "lora",
+    "label": "LoRA",
+    "title": "大模型 LoRA 与微调显存面试复习手册",
+    "summary": "从低秩矩阵的底层原理，到微调显存估算与部署。用两个模块，串起六道高频面试题。",
+    "date": "2026-09-29",
+    "tags": ["LoRA", "PEFT", "显存优化"],
+    "modules": 2,
+    "questions": 6
+  }
+]

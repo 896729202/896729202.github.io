@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>大模型 LoRA 与微调显存面试复习手册 · 896729202</title>
+<meta name="description" content="从低秩矩阵的底层原理，到微调显存估算与部署。用两个模块，串起六道高频面试题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大模型 LoRA 与微调显存面试复习手册 · 896729202">
+<meta property="og:description" content="从低秩矩阵的底层原理，到微调显存估算与部署。用两个模块，串起六道高频面试题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://896729202.github.io/notes/lora/">
+<link rel="canonical" href="https://896729202.github.io/notes/lora/">
+<script>try{var t=localStorage.getItem('notebook-theme');document.documentElement.dataset.theme=(t==='dark'||t==='light')?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}</script>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="../../index.html" aria-label="896729202 知识手记首页"><span class="brand-mark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h5c2.4 0 4 1.4 4 3v14c0-2-1.6-3-4-3H3zM21 4h-5c-2.4 0-4 1.4-4 3v14c0-2 1.6-3 4-3h5z"/></svg></span><span class="brand-name">896729202<span class="brand-divider">/</span><span class="brand-sub">知识手记</span></span></a>
+<nav class="header-nav" aria-label="主导航"><a href="../../thesis/index.html">毕业论文</a><a href="../../notes/index.html" aria-current="page">八股文</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
+</div></header>
+<div class="layout article-layout">
+<aside class="toc-sidebar" aria-label="文章目录"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回八股文</a><p class="toc-heading">本页目录</p><nav class="toc" aria-label="章节导航"><a href="#module-1" class="toc-module">01 · 核心知识与底层原理</a><a href="#section-1" class="toc-section">1. 显存由哪四部分构成？</a><a href="#section-2" class="toc-section">2. LoRA 的数学原理与维度推导</a><a href="#module-2" class="toc-module">02 · 高频面试问答</a><a href="#q1" class="toc-section">Q1 · 原理与初始化</a><a href="#q2" class="toc-section">Q2 · Rank 与 α 的选择</a><a href="#q3" class="toc-section">Q3 · 为什么节约显存</a><a href="#q4" class="toc-section">Q4 · 单卡 24G 能否微调</a><a href="#q5" class="toc-section">Q5 · OOM 的调整顺序</a><a href="#q6" class="toc-section">Q6 · 合并与多业务部署</a></nav><div class="toc-hint">先看核心原理，<br>再用问答检查：<br>能否不看笔记，独立讲清楚？</div></aside>
+<main class="article-main" id="main"><article><header class="article-header"><nav class="breadcrumb" aria-label="面包屑"><a href="../../index.html">首页</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../notes/index.html">八股文</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">LoRA</span></nav><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>大模型 · 参数高效微调</p><h1 tabindex="-1"><span>大模型 LoRA 与微调显存</span><span>面试复习手册</span></h1><div class="article-meta"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><time datetime="2026-09-29">2026 年 9 月 29 日</time><span>·</span><span>2 个模块</span><span>·</span><span>6 道面试问答</span></div><div class="article-toolbar"><div class="note-tags"><span class="tag">LoRA</span><span class="tag">PEFT</span><span class="tag">显存优化</span></div><div class="article-actions"><a class="button" href="../../content/notes/lora.md" download><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 10l5 5 5-5M4 15v5h16v-5"/></svg> 原文</a><button class="button" data-copy-link type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m4 2 1-1a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0" transform="translate(0 1) scale(.94)"/></svg> 复制链接</button><button class="button" data-print type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7zM16 11h1"/></svg> 打印</button></div></div></header>
+<aside class="original-notice" aria-label="笔记口径说明"><strong>原文收录</strong> · 正文保留个人复习笔记的原有表述，未作为逐条核验后的技术结论。显存数值为特定假设下的估算，实际占用取决于训练配置与实现。</aside>
+<details class="mobile-toc"><summary>本页目录 · 2 个模块 / 6 道问答</summary><nav class="toc" aria-label="移动端章节导航"><a href="#module-1" class="toc-module">01 · 核心知识与底层原理</a><a href="#section-1" class="toc-section">1. 显存由哪四部分构成？</a><a href="#section-2" class="toc-section">2. LoRA 的数学原理与维度推导</a><a href="#module-2" class="toc-module">02 · 高频面试问答</a><a href="#q1" class="toc-section">Q1 · 原理与初始化</a><a href="#q2" class="toc-section">Q2 · Rank 与 α 的选择</a><a href="#q3" class="toc-section">Q3 · 为什么节约显存</a><a href="#q4" class="toc-section">Q4 · 单卡 24G 能否微调</a><a href="#q5" class="toc-section">Q5 · OOM 的调整顺序</a><a href="#q6" class="toc-section">Q6 · 合并与多业务部署</a></nav></details>
+<div class="article-body"><h2 id="module-1"><span class="module-number" aria-hidden="true">01</span><span>核心知识点与底层原理速记</span></h2>
+<h3 id="section-1">1. 显存由哪四部分构成？</h3>
+<ul>
+<li>
+<p><strong>模型权重（Weights）</strong>：前向计算底座。FP16/BF16 下，每个参数吃 <strong>2 字节</strong>。</p>
+</li>
+<li>
+<p><strong>梯度（Gradients）</strong>：反向传播导数。FP16/BF16 下，每个参数吃 <strong>2 字节</strong>。</p>
+</li>
+<li>
+<p><strong>优化器状态（Optimizer States）</strong>：AdamW 需要保存 <strong>FP32 权重备份、一阶动量、二阶动量</strong>，每个参数吃 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>4</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>4</mn><mo>=</mo><mrow data-mjx-texclass="ORD"><mn mathvariant="bold">12</mn><mtext> 字节</mtext></mrow></math></span>。</p>
+</li>
+<li>
+<p><strong>激活值（Activations）+ 碎屑缓存</strong>：每一层前向传播算出的中间特征图，随 Batch Size 和序列长度平方级暴涨；可通过梯度检查点（Gradient Checkpointing）压到极低。</p>
+</li>
+<li>
+<p><strong>静态显存计算公式（全量微调，16-bit + AdamW）</strong>：</p>
+<div class="math-block" role="region" aria-label="公式；较长时可横向滚动" tabindex="0"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtext>&#x6BCF;&#x4E2A;&#x53C2;&#x6570;&#x603B;&#x5F00;&#x9500;</mtext><mo>=</mo><mn>2</mn><mo stretchy="false">(</mo><mtext>&#x6743;&#x91CD;</mtext><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mo stretchy="false">(</mo><mtext>&#x68AF;&#x5EA6;</mtext><mo stretchy="false">)</mo><mo>+</mo><mn>12</mn><mo stretchy="false">(</mo><mtext>&#x4F18;&#x5316;&#x5668;</mtext><mo stretchy="false">)</mo><mo>=</mo><mrow data-mjx-texclass="ORD"><mn mathvariant="bold">16</mn><mtext>&#xA0;&#x5B57;&#x8282;</mtext></mrow></math></div>
+<ul>
+<li>7B 模型静态占用：<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>7</mn><mo>×</mo><mn>16</mn><mo>=</mo><mrow data-mjx-texclass="ORD"><mn mathvariant="bold">112</mn><mtext> GB</mtext></mrow></math></span></li>
+<li>8B 模型静态占用：<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>8</mn><mo>×</mo><mn>16</mn><mo>=</mo><mrow data-mjx-texclass="ORD"><mn mathvariant="bold">128</mn><mtext> GB</mtext></mrow></math></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="section-2">2. LoRA 的数学原理与维度推导</h3>
+<ul>
+<li>
+<p><strong>前向计算公式</strong>：</p>
+<div class="math-block" role="region" aria-label="公式；较长时可横向滚动" tabindex="0"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtext>&#x8F93;&#x51FA;</mtext><mo>=</mo><msub><mi>W</mi><mn>0</mn></msub><mi>x</mi><mo>+</mo><mi mathvariant="normal">&#x394;</mi><mi>W</mi><mi>x</mi><mo>=</mo><msub><mi>W</mi><mn>0</mn></msub><mi>x</mi><mo>+</mo><mfrac><mi>&#x3B1;</mi><mi>r</mi></mfrac><mo stretchy="false">(</mo><mi>B</mi><mo>&#x22C5;</mo><mi>A</mi><mo stretchy="false">)</mo><mi>x</mi></math></div>
+</li>
+<li>
+<p><strong>低秩拆解（为什么新增参数极少？）</strong>：</p>
+<ul>
+<li>
+<p>原矩阵 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mn>0</mn></msub></math></span> 维度为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mo>×</mo><mi>k</mi></math></span>（例如 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>4096</mn><mo>×</mo><mn>4096</mn><mo>≈</mo><mn>1677</mn><mtext>万</mtext></math></span> 参数）。</p>
+</li>
+<li>
+<p>矩阵 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span>（负责降维压缩）：维度为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>×</mo><mi>k</mi></math></span>（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>8</mn><mo>×</mo><mn>4096</mn><mo>≈</mo><mn>3.2</mn><mtext>万</mtext></math></span> 参数）。</p>
+</li>
+<li>
+<p>矩阵 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span>（负责升维还原）：维度为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mo>×</mo><mi>r</mi></math></span>（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>4096</mn><mo>×</mo><mn>8</mn><mo>≈</mo><mn>3.2</mn><mtext>万</mtext></math></span> 参数）。</p>
+</li>
+<li>
+<p><strong>LoRA 新增参数量公式</strong>：</p>
+<div class="math-block" role="region" aria-label="公式；较长时可横向滚动" tabindex="0"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mtext>Params</mtext><mrow data-mjx-texclass="ORD"><mtext>LoRA</mtext></mrow></msub><mo>=</mo><mo stretchy="false">(</mo><mi>d</mi><mo>&#xD7;</mo><mi>r</mi><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><mi>r</mi><mo>&#xD7;</mo><mi>k</mi><mo stretchy="false">)</mo></math></div>
+<p>仅占原参数量的不到 <strong>0.4%</strong>。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>初始化设计机制</strong>：</p>
+<ul>
+<li><strong><span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 设为高斯分布随机数</strong>：保留高维数据降维投影的多样性，打破反向传播的梯度对称性死锁。</li>
+<li><strong><span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span> 设为全 0</strong>：充当阀门，使初始时刻 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">Δ</mi><mi>W</mi><mo>=</mo><mi>B</mi><mo>×</mo><mi>A</mi><mo>=</mo><mn>0</mn></math></span>，<strong>保证 Step 0 模型输出完全等于原预训练底座</strong>，不冲击原有能力。</li>
+</ul>
+</li>
+</ul>
+<h2 id="module-2"><span class="module-number" aria-hidden="true">02</span><span>高频面试真题与标准答题模板</span></h2>
+<h3 id="q1">Q1：LoRA 是什么？它的核心原理与初始化机制是怎样的？</h3>
+<p class="answer-label"><strong>参考答案</strong></p>
+<blockquote>
+<p>“LoRA 是一种参数高效微调方法（PEFT）。它的核心假设是<strong>模型在特定下游任务上的参数更新矩阵具有很低的本征秩</strong>。</p>
+<p>具体实现上，它完全冻结原始权重 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mn>0</mn></msub></math></span>，旁路引入低秩矩阵 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 和 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span>（维度分别为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>×</mo><mi>k</mi></math></span> 与 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mo>×</mo><mi>r</mi></math></span>），用两者的乘积 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mo>⋅</mo><mi>A</mi></math></span> 来模拟参数增量 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">Δ</mi><mi>W</mi></math></span>。</p>
+<p>初始化时，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 采用高斯随机初始化，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span> 采用全 0 初始化。这样在初始步（Step 0）时，增量 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mo>×</mo><mi>A</mi><mo>=</mo><mn>0</mn></math></span>，使模型输出完全与原预训练模型对齐，保证平滑微调。训练第 1 步时，因为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 非零，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span> 优先获取非零梯度脱离 0，随后两者协同自激更新。”</p>
+</blockquote>
+<h3 id="q2">Q2：微调时 Rank（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math></span>）和 Scaling Factor（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>α</mi></math></span>）怎么选？有什么考量？</h3>
+<p class="answer-label"><strong>参考答案</strong></p>
+<blockquote>
+<p>“1. <strong>关于 Rank（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math></span>）</strong>：</p>
+<ul>
+<li>不是盲目越大越好，而是由任务复杂度决定。</li>
+<li>格式对齐、分类、简单问答等通用任务，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mn>8</mn><mo>∼</mo><mn>16</mn></math></span> 足够好；复杂推理、代码或大规模领域垂直注入，通常尝试 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mn>32</mn><mo>∼</mo><mn>64</mn></math></span>。</li>
+<li>无脑设置过大的 rank 会导致在小样本上严重<strong>过拟合</strong>，并且削弱低秩约束，引发原模型的<strong>灾难性遗忘</strong>。</li>
+</ul>
+<ol start="2">
+<li><strong>关于 Scaling Factor（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>α</mi></math></span>）</strong>：</li>
+</ol>
+<ul>
+<li>它在前向计算中以系数 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mi>α</mi><mi>r</mi></mfrac></math></span> 缩放增量 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mi>A</mi></math></span>。</li>
+<li>其核心作用有两点：第一是控制微调知识对原模型的<strong>介入强度</strong>；第二是<strong>解耦 Rank 与学习率（尺度不变性）</strong>，让不同 rank 尝试时无需重新精细搜索学习率。</li>
+<li>工程上通常保持 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>α</mi><mo>=</mo><mi>r</mi></math></span> 或 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>α</mi><mo>=</mo><mn>2</mn><mi>r</mi></math></span>（即比例保持为 1 或 2）。”</li>
+</ul>
+</blockquote>
+<h3 id="q3">Q3：为什么说 LoRA 能极大节约显存？参数量不是还有原模型加上 B 和 A 吗？</h3>
+<p class="answer-label"><strong>参考答案</strong></p>
+<blockquote>
+<p>“训练显存开销的最大头不是静态模型文件本身，而是 <strong>AdamW 优化器状态（占 12 字节/参数）与梯度（占 2 字节/参数）</strong>。</p>
+<p>全量微调时，原模型所有参数都要分配梯度和优化器状态（比如 8B 模型仅静态就需要 128GB）。而 LoRA <strong>完全冻结了原模型的全部参数</strong>，原权重不计算、不保存任何梯度与动量。LoRA 仅引入了 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mi>d</mi><mo>×</mo><mi>r</mi><mo>+</mo><mi>r</mi><mo>×</mo><mi>k</mi><mo stretchy="false">)</mo></math></span> 的低秩矩阵，可训参数占比通常低于 0.5%，因此原本极其庞大的优化器与梯度显存被砍掉了 99% 以上。”</p>
+</blockquote>
+<h3 id="q4">Q4：手头只有单张 24G 显存的 RTX 4090，要跑 Llama-3-8B（FP16/BF16），全量微调行不行？LoRA 能不能行？</h3>
+<p class="answer-label"><strong>参考答案</strong></p>
+<blockquote>
+<p>“1. <strong>全量微调绝对不行</strong>：</p>
+<ul>
+<li>8B 模型静态显存为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>8</mn><mo>×</mo><mo stretchy="false">(</mo><mn>2</mn><mtext>权重</mtext><mo>+</mo><mn>2</mn><mtext>梯度</mtext><mo>+</mo><mn>12</mn><mtext>优化器</mtext><mo stretchy="false">)</mo><mo>=</mo><mn>128</mn><mtext> GB</mtext></math></span>。</li>
+<li>加上激活值直接突破 140GB，24G 单卡会立即 OOM，至少需要两张 80G A100/H100。</li>
+</ul>
+<ol start="2">
+<li><strong>LoRA 微调可以胜任</strong>：</li>
+</ol>
+<ul>
+<li>原模型冻结仅占 16GB 权重，LoRA 的梯度与优化器只需几百 MB，加上开启重计算后的激活值（约 2～3GB），总显存可稳定在 <strong>18～20 GB</strong> 左右，正好放进 24G 显存内。”</li>
+</ul>
+</blockquote>
+<h3 id="q5">Q5：微调过程中即使开了 LoRA 依然爆显存（OOM），训练参数里优先调整哪些？</h3>
+<p class="answer-label"><strong>参考答案</strong></p>
+<blockquote>
+<p>“1. <strong>开启梯度检查点（Gradient Checkpointing）</strong>：用重算时间换空间，不保留大部分中间层激活值，立即砍掉几 GB 到十几 GB 显存。</p>
+<ol start="2">
+<li>
+<p><strong>压低单卡 Batch Size + 增大梯度累加步数（Gradient Accumulation Steps）</strong>：设 <code>per_device_train_batch_size=1</code>，通过增大累加步数维持整体等效 Batch Size。</p>
+</li>
+<li>
+<p><strong>截断最大序列长度（cutoff_len / max_seq_length）</strong>：Self-Attention 显存是序列长度的平方阶（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>O</mi><mo stretchy="false">(</mo><msup><mi>L</mi><mn>2</mn></msup><mo stretchy="false">)</mo></math></span>），截短上下文能立竿见影释放显存。</p>
+</li>
+<li>
+<p><strong>升级为 QLoRA（4-bit 量化微调）</strong>：用 bitsandbytes 将原模型权重压到 4-bit，8B 基础权重直接从 16GB 缩减到 5GB 左右，整套训练能直接压到 10GB 显存以内。”</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="q6">Q6：训练好的 LoRA 权重，线上高并发部署时推荐怎么挂载？多业务如何设计？</h3>
+<p class="answer-label"><strong>参考答案</strong></p>
+<blockquote>
+<p>“1. <strong>单任务/固定场景：权重静态合并（Merge-and-Unload）</strong></p>
+<ul>
+<li>部署时直接调用 <code>model.merge_and_unload()</code>，将 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mrow data-mjx-texclass="ORD"><mtext>new</mtext></mrow></msub><mo>=</mo><msub><mi>W</mi><mn>0</mn></msub><mo>+</mo><mfrac><mi>α</mi><mi>r</mi></mfrac><mo stretchy="false">(</mo><mi>B</mi><mi>A</mi><mo stretchy="false">)</mo></math></span> 一次性加回主干权重并保存。</li>
+<li><strong>优势</strong>：推理时不需要同时走两条旁路计算，<strong>零额外推理延迟，零额外显存占用</strong>。</li>
+</ul>
+<ol start="2">
+<li><strong>多业务场景（如一套客服、一套润色）：动态挂载架构（如 vLLM / S-LoRA）</strong></li>
+</ol>
+<ul>
+<li>显存中只常驻一份通用的 Base Model 骨干。</li>
+<li>各业务的小型 LoRA Adapter 权重常驻内存或显存缓存池中，推理引擎在 Batch 处理请求时根据任务路由动态挂载对应的 LoRA 算子，实现一份大底座支持上百种异构业务的高并发请求。”</li>
+</ul>
+</blockquote>
+</div>
+<footer class="article-end"><span>读到这里，不妨合上笔记，再讲一遍。</span><a class="button" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回八股文</a></footer></article></main>
+</div>
+<footer class="site-footer"><div class="footer-inner"><span>© 2026 <a href="https://github.com/896729202" target="_blank" rel="noopener noreferrer">896729202</a> · 知识手记</span><span>保持好奇，持续记录。</span></div></footer>
+<button type="button" class="icon-button back-top" data-back-top hidden aria-label="返回页面顶部" title="返回页面顶部"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20V4M6 10l6-6 6 6"/></svg></button>
+<div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+</body>
+</html>
