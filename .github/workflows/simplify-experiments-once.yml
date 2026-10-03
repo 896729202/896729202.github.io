@@ -1,0 +1,45 @@
+name: Rebuild concise experiment pages
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/simplify-experiments-once.yml']
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact change
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Build pages from unchanged experiment data
+        run: |
+          python -m pip install -r requirements.txt
+          python scripts/build.py
+      - name: Check concise content and preservation
+        run: |
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          p = Path('thesis/experiments/2026-09-29-endogs')
+          s = (p/'index.html').read_text()
+          assert s.count('class="experiment-block"') == 4
+          assert s.count('class="experiment-conclusion"') == 4
+          assert '<details' not in s
+          for t in ('35.865', '0.91735', '0.09144', '2.377 ± 0.115', '0.241 ± 0.007', '0.321 ± 0.002', '0.080 ± 0.006', '72.6%', '-0.94 dB', '8.5%'):
+              assert t in s, t
+          assert hashlib.sha256((p/'endogs_experiment_log_2026-09-29.xlsx').read_bytes()).hexdigest() == 'df2d25c212faa117986bbdc6e314d72b27928b2c4d22c9f56663412563b9efaa'
+          PY
+          git diff --exit-code -- notes/lora/index.html content/notes content/experiments
+      - name: Commit only the three generated experiment pages
+        run: |
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$GITHUB_SHA"
+          git add thesis/index.html thesis/experiments/index.html thesis/experiments/2026-09-29-endogs/index.html
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git diff --cached --quiet && exit 0
+          git commit -m 'style: simplify experiment pages to setup, metrics and conclusions'
+          git push origin HEAD:main
