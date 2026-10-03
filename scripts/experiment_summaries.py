@@ -24,6 +24,7 @@ def build_summary(core, item, data):
     if not groups:
         raise ValueError('An experiment summary must contain completed groups')
     body = ''
+    jump_links = []
     for number, group in enumerate(groups, 1):
         for key in ('title', 'what', 'conclusion'):
             if not isinstance(group.get(key), str) or not group[key].strip():
@@ -31,10 +32,18 @@ def build_summary(core, item, data):
         tables = group.get('tables', [])
         if not tables:
             raise ValueError('An experiment group must have a results table')
-        metrics = ''.join(table(t['headers'], t['rows'], t['caption'],
-                                trials=t.get('wrap', False)) for t in tables)
+        metrics = ''
+        for t in tables:
+            rendered = table(t['headers'], t['rows'], t['caption'], trials=t.get('wrap', False))
+            if t.get('supplemental', False):
+                rendered = f'<details class="experiment-extra"><summary>{E(t["caption"])}</summary>{rendered}</details>'
+            metrics += rendered
+        jump_links.append(f'<a href="#experiment-{number}">{number:02d} {E(group["title"])}</a>')
         body += block(number, group['title'], group['what'], metrics,
                       group['conclusion'], group.get('note', ''))
+    navigation = '<nav class="experiment-jump" aria-label="本页实验"><span>本页跳转</span>' + ''.join(jump_links) + '</nav>'
+    if len(groups) < 4:
+        navigation = ''
     root = ROOT / 'thesis/experiments' / item['slug']
     root.mkdir(parents=True, exist_ok=True)
     # Only the curated summary is copied, never raw reports, imagery or checkpoints.
@@ -42,7 +51,7 @@ def build_summary(core, item, data):
     links = f'<a class="experiment-download" href="summary.json" download>{core.icon("download")} 摘要数据</a>'
     if item.get('source_file'):
         links += f' <a class="experiment-download" href="{E(item["source_file"])}" download>{core.icon("download")} 原始 Excel</a>'
-    main = f'<main id="main" class="experiment-main"><header class="experiment-header"><a class="back-link" href="../index.html">{core.icon("left")} 返回实验</a><p class="experiment-date"><time datetime="{E(item["date"])}">{E(item["date"])}</time> · {E(item.get("date_kind", "记录日期"))}</p><h1>{E(item["title"])}</h1><p class="experiment-subtitle">{E(item["subtitle"])}</p>{links}<p class="experiment-note">窄屏可横向滑动表格查看完整指标。</p></header>{body}<footer class="experiment-source">{E(data.get("source_note", "依据已提供的实验汇总整理。"))}</footer></main>'
+    main = f'<main id="main" class="experiment-main"><header class="experiment-header"><a class="back-link" href="../index.html">{core.icon("left")} 返回实验</a><p class="experiment-date"><time datetime="{E(item["date"])}">{E(item["date"])}</time> · {E(item.get("date_kind", "记录日期"))}</p><h1>{E(item["title"])}</h1><p class="experiment-subtitle">{E(item["subtitle"])}</p>{links}<p class="experiment-note">窄屏可横向滑动表格查看完整指标。</p></header>{navigation}{body}<footer class="experiment-source">{E(data.get("source_note", "依据已提供的实验汇总整理。"))}</footer></main>'
     core.shell(f'thesis/experiments/{item["slug"]}/index.html',
                f'{item["date"]} · {item["title"]}', main, 'thesis', toc='',
                description=item.get('summary', item['subtitle']))
@@ -50,7 +59,9 @@ def build_summary(core, item, data):
 
 def build(core):
     items = entries()
-    cards = ''
+    index_rows = ''
+    date_links = []
+    seen_dates = set()
     for item in items:
         slug = item['slug']
         data_file = item.get('data_file', slug + '.json')
@@ -73,7 +84,16 @@ def build(core):
             build_record(core, item, data)
         else:
             raise ValueError('Unsupported experiment schema')
-        cards += f'<a class="experiment-folder" href="{slug}/index.html"><div><time datetime="{E(item["date"])}">{E(item["date"])}</time><h2>{E(item["title"])}</h2><p>{E(item["subtitle"])}</p></div>{core.icon("arrow")}</a>'
-    main = f'<main class="page-main" id="main"><header class="page-heading"><a class="back-link" href="../index.html">{core.icon("left")} 返回毕业论文</a><h1>实验</h1><p class="description">做了什么 · 结果指标 · 实验结论</p></header>{cards}</main>'
+        day = item['date']
+        anchor = ''
+        if day not in seen_dates:
+            anchor = f' id="date-{E(day)}"'
+            seen_dates.add(day)
+            date_links.append(f'<a href="#date-{E(day)}">{E(day[5:])}</a>')
+        takeaway = item.get('takeaway', item['summary'])
+        index_rows += f'<tr{anchor}><td><time datetime="{E(day)}">{E(day)}</time></td><td><a href="{slug}/index.html">{E(item["title"])}</a></td><td>{E(takeaway)}</td></tr>'
+    dates = '<nav class="experiment-dates" aria-label="按日期跳转">' + ''.join(date_links) + '</nav>'
+    catalog = '<div class="experiment-catalog"><table><thead><tr><th scope="col">记录日期</th><th scope="col">实验主题</th><th scope="col">核心结论</th></tr></thead><tbody>' + index_rows + '</tbody></table></div>'
+    main = f'<main class="page-main" id="main"><header class="page-heading"><a class="back-link" href="../index.html">{core.icon("left")} 返回毕业论文</a><h1>实验</h1><p class="description">按日期回看目的、指标与结论；同一组对照合并展示。</p></header>{dates}{catalog}<p class="experiment-note">归档截至2026-10-03已提供结果；未执行及进行中的实验不列入。缺失指标明确标注，不等于零。</p></main>'
     core.shell('thesis/experiments/index.html', '实验', main, 'thesis')
     print(f'Built {len(items)} concise experiment archive(s); retained workbook verified.')

@@ -6,7 +6,8 @@
     "title": "评测审计与训练帧初始化",
     "subtitle": "先统一比较范围，再建立训练帧初始化基准",
     "summary": "先统一比较范围，再建立训练帧初始化基准",
-    "data_file": "2026-09-25-protocol-baseline.json"
+    "data_file": "2026-09-25-protocol-baseline.json",
+    "takeaway": "旧配置存在信息混用；建立训练帧隔离基准。"
   },
   {
     "slug": "2026-09-29-endogs",
@@ -16,7 +17,8 @@
     "subtitle": "真实序列的深度变化、解析真值及改进的质量取舍",
     "summary": "真实序列的深度变化、解析真值及改进的质量取舍",
     "data_file": "2026-09-29-endogs-summary.json",
-    "source_file": "endogs_experiment_log_2026-09-29.xlsx"
+    "source_file": "endogs_experiment_log_2026-09-29.xlsx",
+    "takeaway": "曝光影响渲染深度；解析真值误差增加，多种控制仍有代价。"
   },
   {
     "slug": "2026-09-30-dn-wg-screen",
@@ -25,7 +27,8 @@
     "title": "DN与WG模块迁移初筛",
     "subtitle": "几何收益是否伴随画质或覆盖率代价",
     "summary": "几何收益是否伴随画质或覆盖率代价",
-    "data_file": "2026-09-30-dn-wg-screen.json"
+    "data_file": "2026-09-30-dn-wg-screen.json",
+    "takeaway": "六候选均未达标；深度收益伴随画质或覆盖率代价。"
   },
   {
     "slug": "2026-09-30-wg-supervision",
@@ -34,7 +37,8 @@
     "title": "WG监督分工与训练预算",
     "subtitle": "区分结构项、外观网络和追加训练的作用",
     "summary": "区分结构项、外观网络和追加训练的作用",
-    "data_file": "2026-09-30-wg-supervision.json"
+    "data_file": "2026-09-30-wg-supervision.json",
+    "takeaway": "监督分工未获额外收益；等预算续训仍未过门槛。"
   },
   {
     "slug": "2026-10-01-exposure-calibration",
@@ -43,7 +47,8 @@
     "title": "低维曝光校准与三种子复验",
     "subtitle": "简单统计、自由预测与相对曝光监督",
     "summary": "简单统计、自由预测与相对曝光监督",
-    "data_file": "2026-10-01-exposure-calibration.json"
+    "data_file": "2026-10-01-exposure-calibration.json",
+    "takeaway": "C1在旧场景3/3种子通过；相对监督未优于简单统计。"
   },
   {
     "slug": "2026-10-02-content-robustness",
@@ -52,7 +57,8 @@
     "title": "内容变化会误导曝光校准吗？",
     "subtitle": "冻结C1，在新纹理与视野条件下测试",
     "summary": "冻结C1，在新纹理与视野条件下测试",
-    "data_file": "2026-10-02-content-robustness.json"
+    "data_file": "2026-10-02-content-robustness.json",
+    "takeaway": "新内容条件暴露C1混淆；两个条件均未过综合门槛。"
   },
   {
     "slug": "2026-10-02-strong-baselines",
@@ -61,7 +67,8 @@
     "title": "真实场景强对照与EC曝光重建",
     "subtitle": "原始数据、曝光数据与观测适配分别比较",
     "summary": "原始数据、曝光数据与观测适配分别比较",
-    "data_file": "2026-10-02-strong-baselines.json"
+    "data_file": "2026-10-02-strong-baselines.json",
+    "takeaway": "各方法有取舍；DGX曝光收益明显，但预算与适配条件不同。"
   },
   {
     "slug": "2026-10-03-dgx-partial",
@@ -70,7 +77,8 @@
     "title": "光照适配的保留区选择",
     "subtitle": "左半表现能否预测右半收益",
     "summary": "左半表现能否预测右半收益",
-    "data_file": "2026-10-03-dgx-partial.json"
+    "data_file": "2026-10-03-dgx-partial.json",
+    "takeaway": "保留区选择未减少负收益帧；新增可靠性规则未成立。"
   },
   {
     "slug": "2026-10-03-correspondence-synthetic",
@@ -79,7 +87,8 @@
     "title": "跨帧对应曝光：解析内容场景",
     "subtitle": "从全图亮度转为同一内容的亮度比较",
     "summary": "从全图亮度转为同一内容的亮度比较",
-    "data_file": "2026-10-03-correspondence-synthetic.json"
+    "data_file": "2026-10-03-correspondence-synthetic.json",
+    "takeaway": "对应估计缓解内容混淆；N0/N1单种子初筛通过。"
   },
   {
     "slug": "2026-10-03-correspondence-real",
@@ -88,6 +97,7 @@
     "title": "跨帧对应曝光：真实窗口验证",
     "subtitle": "相对baseline有收益，相对简单C1尚无明确增量",
     "summary": "相对baseline有收益，相对简单C1尚无明确增量",
-    "data_file": "2026-10-03-correspondence-real.json"
+    "data_file": "2026-10-03-correspondence-real.json",
+    "takeaway": "比baseline +0.424 dB；比C1仅+0.0015 dB，增量未确认。"
   }
 ]
