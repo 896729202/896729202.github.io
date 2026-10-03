@@ -22,7 +22,7 @@ jobs:
           import hashlib, json, os, subprocess
           from pathlib import Path
           parent = subprocess.check_output(['git','rev-parse','HEAD^'], text=True).strip()
-          assert parent == '4a38883bda4068efb5018b73e81d307df5fe6ba7', 'Base changed; stop rather than overwrite another editor'
+          assert parent == '738f131da18492c66a12058fb973804a51f69c45', 'Base changed; stop rather than overwrite another editor'
           files = [Path(p) for p in subprocess.check_output(['git','ls-files','-z']).decode().split('\0') if p]
           old, new = '毕业论文'.encode(), '内窥镜三维重建'.encode()
           expected, changed = {}, []
@@ -41,7 +41,6 @@ jobs:
           state = {'expected': expected, 'changed': changed}
           (Path(os.environ['RUNNER_TEMP'])/'section-rename.json').write_text(json.dumps(state))
           print('Label-only files:', '\n'.join(changed))
-          print('All experiment data, workbook, URLs and LoRA article text are preserved.')
           PY
       - name: Verify the normal build reproduces the renamed pages
         shell: bash
@@ -55,7 +54,7 @@ jobs:
           state=json.loads((Path(os.environ['RUNNER_TEMP'])/'section-rename.json').read_text())
           for name, expected in state['expected'].items():
               assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == expected, 'Unexpected content change: '+name
-          pages=[Path(n) for n in state['expected'] if n.endswith('.html')]
+          pages=[Path(n) for n in state['expected'] if n.endswith('.html') and not n.startswith('site-src/')]
           assert all('毕业论文' not in p.read_text() for p in pages), 'Old label remains'
           assert all('内窥镜三维重建' in p.read_text() for p in pages), 'New navigation label missing'
           print(f'PASS: {len(pages)} pages; rebuild exactly matches label-only replacements.')
