@@ -62,7 +62,7 @@ def href_is_safe(value: str) -> bool:
 
 def header(prefix: str, section: str) -> str:
     nav = ''
-    for key, label, target in [('thesis', '毕业论文', 'thesis/index.html'), ('notes', '八股文', 'notes/index.html')]:
+    for key, label, target in [('thesis', '内窥镜三维重建', 'thesis/index.html'), ('notes', '八股文', 'notes/index.html')]:
         current = ' aria-current="page"' if key == section else ''
         nav += f'<a href="{prefix}{target}"{current}>{label}</a>'
     return f'''<header class="site-header"><div class="header-inner">
@@ -81,7 +81,7 @@ def sidebar(prefix: str, section: str) -> str:
 <a class="profile-github" href="{ESC(CONFIG['github'])}" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('external')}</a>
 <div class="profile-tags"><span class="tag">学习笔记</span><span class="tag tag-neutral">持续整理</span></div>
 <nav class="sidebar-nav" aria-label="内容板块"><p class="section-eyebrow">内容板块</p>
-<a href="{prefix}thesis/index.html"{thesis_current}>{icon('paper')}<span>毕业论文</span><span class="nav-meta">{thesis_count}</span></a>
+<a href="{prefix}thesis/index.html"{thesis_current}>{icon('paper')}<span>内窥镜三维重建</span><span class="nav-meta">{thesis_count}</span></a>
 <a href="{prefix}notes/index.html"{notes_current}>{icon('note')}<span>八股文</span><span class="nav-meta">{len(NOTES):02d}</span></a>
 </nav><div class="sidebar-note">{icon('leaf')}<p>把学过的东西，<br>变成自己的知识。</p></div></aside>'''
 
@@ -146,16 +146,16 @@ def breadcrumb(prefix: str, current: str, article: bool = False) -> str:
 def home() -> None:
     cards = ''
     for idx, (key, title, desc, status, ico) in enumerate([
-        ('thesis', '毕业论文', '研究过程、写作整理与最终成果。<br>按自己的节奏，慢慢完成。', f'{len(THESES):02d} 篇论文' if THESES else '内容待补充', 'paper'),
+        ('thesis', '内窥镜三维重建', '研究过程、写作整理与最终成果。<br>按自己的节奏，慢慢完成。', f'{len(THESES):02d} 篇论文' if THESES else '内容待补充', 'paper'),
         ('notes', '八股文', '从基本原理到面试表达，<br>把每个知识点真正弄明白。', f'{len(NOTES):02d} 篇笔记', 'note')
     ], 1):
         cards += f'''<a href="./{key}/index.html" class="collection-card{' notes-card' if key == 'notes' else ''}"><div class="collection-top"><span class="collection-icon">{icon(ico)}</span><span class="collection-number">0{idx}</span></div><h2>{title}</h2><p>{desc}</p><div class="collection-bottom"><span class="collection-state">{status}</span><span class="card-arrow">{icon('arrow')}</span></div></a>'''
     recent = ''.join(note_card(n, './') for n in sorted(NOTES, key=lambda n: n['date'], reverse=True)[:3])
     main = f'''<main class="page-main" id="main"><section class="hero" aria-labelledby="home-title"><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>一份持续生长的学习档案</p>
 <h1 id="home-title" tabindex="-1"><span>把知识写下来，</span><span>让理解<em>更进一步。</em></span></h1>
-<p class="hero-description">这里收藏我的毕业论文与技术学习笔记。<br>不止记录答案，也记录思考的过程。</p>
+<p class="hero-description">这里收藏我的内窥镜三维重建与技术学习笔记。<br>不止记录答案，也记录思考的过程。</p>
 <div class="hero-bottom"><a class="browse-link" href="#collections">浏览两个板块 {icon('down')}</a><span class="edition">个人知识手记 / {CONFIG['year']}</span></div></section>
-<section class="collection-grid" id="collections" aria-label="毕业论文与八股文">{cards}</section>
+<section class="collection-grid" id="collections" aria-label="内窥镜三维重建与八股文">{cards}</section>
 <section class="latest" aria-labelledby="latest-title"><div class="section-heading"><h2 id="latest-title">最近整理</h2><a href="./notes/index.html">全部笔记 {icon('external')}</a></div><div class="note-list">{recent}</div></section></main>'''
     shell('index.html', '', main)
 
@@ -188,8 +188,8 @@ def thesis_index() -> None:
                 href = '../' + href
             body += f'<a class="thesis-item" href="{ESC(href, quote=True)}"><span class="tag">{ESC(str(item.get("year", "论文")))}</span><h2>{ESC(item["title"])}</h2><p>{ESC(item.get("summary", ""))}</p><span class="browse-link">阅读全文 {icon("external")}</span></a>'
         body += '</div>'
-    main = f'''<main class="page-main" id="main"><header class="page-heading">{breadcrumb('../','毕业论文')}<p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>研究 · 写作 · 记录</p><h1 tabindex="-1">毕业论文</h1><p class="description">记录一项研究，从问题到答案。<br>这里留给论文、思考与一步步走过的过程。</p></header>{body}</main>'''
-    shell('thesis/index.html', '毕业论文', main, 'thesis')
+    main = f'''<main class="page-main" id="main"><header class="page-heading">{breadcrumb('../','内窥镜三维重建')}<p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>研究 · 写作 · 记录</p><h1 tabindex="-1">内窥镜三维重建</h1><p class="description">记录一项研究，从问题到答案。<br>这里留给论文、思考与一步步走过的过程。</p></header>{body}</main>'''
+    shell('thesis/index.html', '内窥镜三维重建', main, 'thesis')
 
 
 MATH_PATTERN = re.compile(r'\$\$(.+?)\$\$|\$([^\n$]+?)\$', re.S)
@@ -287,7 +287,7 @@ def main() -> None:
     note_index()
     thesis_index()
     not_found()
-    print(f'已构建：主页、毕业论文、八股文、{len(NOTES)} 篇文章与 404 页面。公式缓存：{len(CACHE)} 条。')
+    print(f'已构建：主页、内窥镜三维重建、八股文、{len(NOTES)} 篇文章与 404 页面。公式缓存：{len(CACHE)} 条。')
 
 if __name__ == '__main__':
     main()

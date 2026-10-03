@@ -103,6 +103,6 @@ def build(core):
         build_summary(core, overview_item, overview_data)
         overview_nav = '<nav class="experiment-dates" aria-label="复现汇总"><a href="reproductions/index.html">原方法复现指标汇总 →</a></nav>'
     catalog = '<div class="experiment-catalog"><table><thead><tr><th scope="col">记录日期</th><th scope="col">实验主题</th><th scope="col">核心结论</th></tr></thead><tbody>' + index_rows + '</tbody></table></div>'
-    main = f'<main class="page-main" id="main"><header class="page-heading"><a class="back-link" href="../index.html">{core.icon("left")} 返回毕业论文</a><h1>实验</h1><p class="description">按日期回看目的、指标与结论；同一组对照合并展示。</p></header>{overview_nav}{dates}{catalog}<p class="experiment-note">归档截至2026-10-03已提供结果；未执行及进行中的实验不列入。缺失指标明确标注，不等于零。</p></main>'
+    main = f'<main class="page-main" id="main"><header class="page-heading"><a class="back-link" href="../index.html">{core.icon("left")} 返回内窥镜三维重建</a><h1>实验</h1><p class="description">按日期回看目的、指标与结论；同一组对照合并展示。</p></header>{overview_nav}{dates}{catalog}<p class="experiment-note">归档截至2026-10-03已提供结果；未执行及进行中的实验不列入。缺失指标明确标注，不等于零。</p></main>'
     core.shell('thesis/experiments/index.html', '实验', main, 'thesis')
     print(f'Built {len(items)} concise experiment archive(s); retained workbook verified.')

@@ -153,6 +153,6 @@ def build(core):
             raise ValueError('Original workbook checksum mismatch')
         build_record(core, item, data)
         cards += f'<a class="experiment-folder" href="{slug}/index.html"><div><time datetime="{E(item["date"])}">{E(item["date"])}</time><h2>{E(item["title"])}</h2><p>{E(item["subtitle"])}</p></div>{core.icon("arrow")}</a>'
-    main = f'<main class="page-main" id="main"><header class="page-heading"><a class="back-link" href="../index.html">{core.icon("left")} 返回毕业论文</a><h1>实验</h1><p class="description">做了什么 · 结果指标 · 实验结论</p></header>{cards}</main>'
+    main = f'<main class="page-main" id="main"><header class="page-heading"><a class="back-link" href="../index.html">{core.icon("left")} 返回内窥镜三维重建</a><h1>实验</h1><p class="description">做了什么 · 结果指标 · 实验结论</p></header>{cards}</main>'
     core.shell('thesis/experiments/index.html', '实验', main, 'thesis')
     print(f'Built {len(items)} concise experiment archive(s); original workbook verified.')
