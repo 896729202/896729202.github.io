@@ -1,0 +1,76 @@
+name: Rename research section
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/rename-section-once.yml']
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact reviewed revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - name: Rename only the section label in sources and pages
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          parent = subprocess.check_output(['git','rev-parse','HEAD^'], text=True).strip()
+          assert parent == '4a38883bda4068efb5018b73e81d307df5fe6ba7', 'Base changed; stop rather than overwrite another editor'
+          files = [Path(p) for p in subprocess.check_output(['git','ls-files','-z']).decode().split('\0') if p]
+          old, new = '毕业论文'.encode(), '内窥镜三维重建'.encode()
+          expected, changed = {}, []
+          for p in files:
+              before = p.read_bytes()
+              selected = (p.suffix == '.html' or (p.suffix == '.py' and p.parts[0] == 'scripts') or p.name == 'README.md' or (p.suffix == '.md' and p.parts[0] == 'docs') or str(p) in ('site.config.json','package.json'))
+              after = before.replace(old, new) if selected else before
+              if str(p) == 'assets/site.css':
+                  after += ('\n/* Keep the longer research-section label on one line in narrow navigation. */\n.header-nav>a{white-space:nowrap}\n@media(max-width:370px){.header-inner{gap:8px}.header-nav{gap:8px}.brand{gap:6px}.brand-name{font-size:11px}}\n').encode()
+              if after != before:
+                  p.write_bytes(after)
+                  changed.append(str(p))
+              expected[str(p)] = hashlib.sha256(after).hexdigest()
+          assert 'scripts/build_core.py' in changed and 'thesis/index.html' in changed
+          assert not any(p.startswith('content/') or p.endswith(('summary.json','.xlsx')) for p in changed)
+          state = {'expected': expected, 'changed': changed}
+          (Path(os.environ['RUNNER_TEMP'])/'section-rename.json').write_text(json.dumps(state))
+          print('Label-only files:', '\n'.join(changed))
+          print('All experiment data, workbook, URLs and LoRA article text are preserved.')
+          PY
+      - name: Verify the normal build reproduces the renamed pages
+        shell: bash
+        run: |
+          python3 -m venv "$RUNNER_TEMP/site-label-env"
+          "$RUNNER_TEMP/site-label-env/bin/python" -m pip install -q -r requirements.txt
+          "$RUNNER_TEMP/site-label-env/bin/python" scripts/build.py
+          python3 - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          state=json.loads((Path(os.environ['RUNNER_TEMP'])/'section-rename.json').read_text())
+          for name, expected in state['expected'].items():
+              assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == expected, 'Unexpected content change: '+name
+          pages=[Path(n) for n in state['expected'] if n.endswith('.html')]
+          assert all('毕业论文' not in p.read_text() for p in pages), 'Old label remains'
+          assert all('内窥镜三维重建' in p.read_text() for p in pages), 'New navigation label missing'
+          print(f'PASS: {len(pages)} pages; rebuild exactly matches label-only replacements.')
+          print('PASS: experiment metrics, conclusions, source files and original attachments unchanged.')
+          subprocess.run(['git','add','--',*state['changed']],check=True)
+          PY
+      - name: Commit without overwriting concurrent changes
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.sha }}
+        run: |
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$EXPECTED_HEAD"
+          git diff --cached --stat
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'style: rename research section to 内窥镜三维重建'
+          git push origin HEAD:main
