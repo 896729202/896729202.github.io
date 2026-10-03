@@ -1,10 +1,93 @@
 [
   {
+    "slug": "2026-09-25-protocol-baseline",
+    "date": "2026-09-25",
+    "date_kind": "记录日期",
+    "title": "评测审计与训练帧初始化",
+    "subtitle": "先统一比较范围，再建立训练帧初始化基准",
+    "summary": "先统一比较范围，再建立训练帧初始化基准",
+    "data_file": "2026-09-25-protocol-baseline.json"
+  },
+  {
     "slug": "2026-09-29-endogs",
     "date": "2026-09-29",
-    "title": "内窥镜动态三维重建实验记录",
-    "subtitle": "曝光敏感性、几何准确度与改进探索",
-    "summary": "整理评测协议、基准结果、曝光配对诊断及改进探索。已报告结果、负结果、候选方案与历史口径分开归档。",
+    "date_kind": "记录日期",
+    "title": "曝光敏感性、基准与机制对照",
+    "subtitle": "真实序列的深度变化、解析真值及改进的质量取舍",
+    "summary": "真实序列的深度变化、解析真值及改进的质量取舍",
+    "data_file": "2026-09-29-endogs-summary.json",
     "source_file": "endogs_experiment_log_2026-09-29.xlsx"
+  },
+  {
+    "slug": "2026-09-30-dn-wg-screen",
+    "date": "2026-09-30",
+    "date_kind": "记录日期",
+    "title": "DN与WG模块迁移初筛",
+    "subtitle": "几何收益是否伴随画质或覆盖率代价",
+    "summary": "几何收益是否伴随画质或覆盖率代价",
+    "data_file": "2026-09-30-dn-wg-screen.json"
+  },
+  {
+    "slug": "2026-09-30-wg-supervision",
+    "date": "2026-09-30",
+    "date_kind": "记录日期",
+    "title": "WG监督分工与训练预算",
+    "subtitle": "区分结构项、外观网络和追加训练的作用",
+    "summary": "区分结构项、外观网络和追加训练的作用",
+    "data_file": "2026-09-30-wg-supervision.json"
+  },
+  {
+    "slug": "2026-10-01-exposure-calibration",
+    "date": "2026-10-01",
+    "date_kind": "记录日期",
+    "title": "低维曝光校准与三种子复验",
+    "subtitle": "简单统计、自由预测与相对曝光监督",
+    "summary": "简单统计、自由预测与相对曝光监督",
+    "data_file": "2026-10-01-exposure-calibration.json"
+  },
+  {
+    "slug": "2026-10-02-content-robustness",
+    "date": "2026-10-02",
+    "date_kind": "记录日期",
+    "title": "内容变化会误导曝光校准吗？",
+    "subtitle": "冻结C1，在新纹理与视野条件下测试",
+    "summary": "冻结C1，在新纹理与视野条件下测试",
+    "data_file": "2026-10-02-content-robustness.json"
+  },
+  {
+    "slug": "2026-10-02-strong-baselines",
+    "date": "2026-10-02",
+    "date_kind": "记录日期",
+    "title": "真实场景强对照与EC曝光重建",
+    "subtitle": "原始数据、曝光数据与观测适配分别比较",
+    "summary": "原始数据、曝光数据与观测适配分别比较",
+    "data_file": "2026-10-02-strong-baselines.json"
+  },
+  {
+    "slug": "2026-10-03-dgx-partial",
+    "date": "2026-10-03",
+    "date_kind": "记录日期",
+    "title": "光照适配的保留区选择",
+    "subtitle": "左半表现能否预测右半收益",
+    "summary": "左半表现能否预测右半收益",
+    "data_file": "2026-10-03-dgx-partial.json"
+  },
+  {
+    "slug": "2026-10-03-correspondence-synthetic",
+    "date": "2026-10-03",
+    "date_kind": "记录日期",
+    "title": "跨帧对应曝光：解析内容场景",
+    "subtitle": "从全图亮度转为同一内容的亮度比较",
+    "summary": "从全图亮度转为同一内容的亮度比较",
+    "data_file": "2026-10-03-correspondence-synthetic.json"
+  },
+  {
+    "slug": "2026-10-03-correspondence-real",
+    "date": "2026-10-03",
+    "date_kind": "记录日期",
+    "title": "跨帧对应曝光：真实窗口验证",
+    "subtitle": "相对baseline有收益，相对简单C1尚无明确增量",
+    "summary": "相对baseline有收益，相对简单C1尚无明确增量",
+    "data_file": "2026-10-03-correspondence-real.json"
   }
 ]

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>2026-10-03 · 跨帧对应曝光：解析内容场景 · 896729202</title>
+<meta name="description" content="从全图亮度转为同一内容的亮度比较">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2026-10-03 · 跨帧对应曝光：解析内容场景 · 896729202">
+<meta property="og:description" content="从全图亮度转为同一内容的亮度比较">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://896729202.github.io/thesis/experiments/2026-10-03-correspondence-synthetic/">
+<link rel="canonical" href="https://896729202.github.io/thesis/experiments/2026-10-03-correspondence-synthetic/">
+<script>try{var t=localStorage.getItem('notebook-theme');document.documentElement.dataset.theme=(t==='dark'||t==='light')?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}</script>
+<link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script src="../../../assets/site.js" defer></script>
+<link rel="stylesheet" href="../../../assets/experiments.css">
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="../../../index.html" aria-label="896729202 知识手记首页"><span class="brand-mark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h5c2.4 0 4 1.4 4 3v14c0-2-1.6-3-4-3H3zM21 4h-5c-2.4 0-4 1.4-4 3v14c0-2 1.6-3 4-3h5z"/></svg></span><span class="brand-name">896729202<span class="brand-divider">/</span><span class="brand-sub">知识手记</span></span></a>
+<nav class="header-nav" aria-label="主导航"><a href="../../../thesis/index.html" aria-current="page">毕业论文</a><a href="../../../notes/index.html">八股文</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
+</div></header>
+<div class="layout experiment-layout">
+
+<main id="main" class="experiment-main"><header class="experiment-header"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回实验</a><p class="experiment-date"><time datetime="2026-10-03">2026-10-03</time> · 记录日期</p><h1>跨帧对应曝光：解析内容场景</h1><p class="experiment-subtitle">从全图亮度转为同一内容的亮度比较</p><a class="experiment-download" href="summary.json" download><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 10l5 5 5-5M4 15v5h16v-5"/></svg> 摘要数据</a><p class="experiment-note">窄屏可横向滑动表格查看完整指标。</p></header><section class="experiment-block" id="experiment-1"><h2><span>01</span>对应区域是否减少内容混淆？</h2><h3>做了什么实验</h3><p>在修订后的N0/N1上，仅替换C1曝光估计：用训练帧匹配区域的亮度比形成曲线；主体和训练预算不变。</p><h3>结果指标</h3><div class="experiment-table" tabindex="0" role="region" aria-label="N0：解析开发验证，1种子、3000步；窄屏可横向滚动"><table><caption>N0：解析开发验证，1种子、3000步</caption><thead><tr><th scope="col">配置</th><th scope="col">真值MAE ↓ / mm · A/B</th><th scope="col">全有效像素PSNR ↑ / dB · A/B</th><th scope="col">块SSIM ↑ · A/B</th><th scope="col">块LPIPS ↓ · A/B</th><th scope="col">覆盖率 ↑ · A/B</th></tr></thead><tbody><tr><td>baseline</td><td>0.274419 / 0.485850</td><td>56.320 / 52.634</td><td>未提供</td><td>未提供</td><td>100% / 100%</td></tr><tr><td>C1</td><td>0.281826 / 0.289532</td><td>55.851 / 56.084</td><td>未提供</td><td>未提供</td><td>100% / 100%</td></tr><tr><td>对应曝光估计</td><td>0.276058 / 0.291805</td><td>56.289 / 56.322</td><td>未提供</td><td>未提供</td><td>绝对值未提供；保护项通过</td></tr></tbody></table></div><div class="experiment-table" tabindex="0" role="region" aria-label="N1：解析开发验证，1种子、3000步；窄屏可横向滚动"><table><caption>N1：解析开发验证，1种子、3000步</caption><thead><tr><th scope="col">配置</th><th scope="col">真值MAE ↓ / mm · A/B</th><th scope="col">全有效像素PSNR ↑ / dB · A/B</th><th scope="col">块SSIM ↑ · A/B</th><th scope="col">块LPIPS ↓ · A/B</th><th scope="col">覆盖率 ↑ · A/B</th></tr></thead><tbody><tr><td>baseline</td><td>0.335574 / 0.498647</td><td>53.938 / 51.147</td><td>未提供</td><td>未提供</td><td>100% / 100%</td></tr><tr><td>C1</td><td>0.409628 / 0.396560</td><td>52.949 / 52.264</td><td>未提供</td><td>未提供</td><td>100% / 100%</td></tr><tr><td>对应曝光估计</td><td>0.338916 / 0.359973</td><td>54.552 / 54.465</td><td>未提供</td><td>未提供</td><td>绝对值未提供；保护项通过</td></tr></tbody></table></div><p class="experiment-note">作者汇总确认LPIPS与覆盖率保护项通过，但未提供完整绝对值；不能把通过状态换成编造数值。N0/N1已用于方法开发，不是独立最终测试。</p><div class="experiment-conclusion"><h3>实验结论</h3><p>新方法两条件均通过原联合门槛，B-MAE相对baseline下降39.94%／27.81%，A仅增加0.60%／1.00%。并非全面优于C1：N0-B MAE高约0.79%。</p></div></section><section class="experiment-block" id="experiment-2"><h2><span>02</span>内容响应及真实EV信息对照</h2><h3>做了什么实验</h3><p>N1恒曝光时比较预测偏差；另以真实训练曝光替换估计，完成N0-B、N1-B两条机制对照。</p><h3>结果指标</h3><div class="experiment-table" tabindex="0" role="region" aria-label="曝光估计诊断；窄屏可横向滚动"><table><caption>曝光估计诊断</caption><thead><tr><th scope="col">检查</th><th scope="col">C1</th><th scope="col">对应估计</th></tr></thead><tbody><tr><td>N1恒曝光平均估计偏差 ↓ / EV</td><td>0.21875</td><td>0.00636</td></tr></tbody></table></div><div class="experiment-table" tabindex="0" role="region" aria-label="额外信息对照；窄屏可横向滚动"><table><caption>额外信息对照</caption><thead><tr><th scope="col">实验</th><th scope="col">结果指标</th></tr></thead><tbody><tr><td>N0-B／真实训练EV</td><td>已完成；绝对指标未提供</td></tr><tr><td>N1-B／真实训练EV</td><td>已完成；绝对指标未提供</td></tr></tbody></table></div><div class="experiment-conclusion"><h3>实验结论</h3><p>内容相关曝光偏差得到缓解，与正常条件损伤减轻一致，但不能唯一归因。真实EV对照依赖额外信息，缺少数值时不作定量机制结论。</p></div></section><footer class="experiment-source">来源：作者提供的CORR-EV-001完成汇总。未把后续跨场景或多种子计划写成结果。</footer></main>
+</div>
+<footer class="site-footer"><div class="footer-inner"><span>© 2026 <a href="https://github.com/896729202" target="_blank" rel="noopener noreferrer">896729202</a> · 知识手记</span><span>保持好奇，持续记录。</span></div></footer>
+<button type="button" class="icon-button back-top" data-back-top hidden aria-label="返回页面顶部" title="返回页面顶部"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20V4M6 10l6-6 6 6"/></svg></button>
+<div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+</body>
+</html>

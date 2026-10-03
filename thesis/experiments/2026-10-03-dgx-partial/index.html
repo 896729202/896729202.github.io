@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>2026-10-03 · 光照适配的保留区选择 · 896729202</title>
+<meta name="description" content="左半表现能否预测右半收益">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2026-10-03 · 光照适配的保留区选择 · 896729202">
+<meta property="og:description" content="左半表现能否预测右半收益">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://896729202.github.io/thesis/experiments/2026-10-03-dgx-partial/">
+<link rel="canonical" href="https://896729202.github.io/thesis/experiments/2026-10-03-dgx-partial/">
+<script>try{var t=localStorage.getItem('notebook-theme');document.documentElement.dataset.theme=(t==='dark'||t==='light')?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}</script>
+<link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script src="../../../assets/site.js" defer></script>
+<link rel="stylesheet" href="../../../assets/experiments.css">
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="../../../index.html" aria-label="896729202 知识手记首页"><span class="brand-mark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h5c2.4 0 4 1.4 4 3v14c0-2-1.6-3-4-3H3zM21 4h-5c-2.4 0-4 1.4-4 3v14c0-2 1.6-3 4-3h5z"/></svg></span><span class="brand-name">896729202<span class="brand-divider">/</span><span class="brand-sub">知识手记</span></span></a>
+<nav class="header-nav" aria-label="主导航"><a href="../../../thesis/index.html" aria-current="page">毕业论文</a><a href="../../../notes/index.html">八股文</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
+</div></header>
+<div class="layout experiment-layout">
+
+<main id="main" class="experiment-main"><header class="experiment-header"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回实验</a><p class="experiment-date"><time datetime="2026-10-03">2026-10-03</time> · 记录日期</p><h1>光照适配的保留区选择</h1><p class="experiment-subtitle">左半表现能否预测右半收益</p><a class="experiment-download" href="summary.json" download><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 10l5 5 5-5M4 15v5h16v-5"/></svg> 摘要数据</a><p class="experiment-note">窄屏可横向滑动表格查看完整指标。</p></header><section class="experiment-block" id="experiment-1"><h2><span>01</span>拟合后直接采用，还是先做内部选择？</h2><h3>做了什么实验</h3><p>冻结DGX场景参数；左半棋盘区域拟合光照、另一部分选采用比例0／0.5／1，右半独立评价。</p><h3>结果指标</h3><div class="experiment-table" tabindex="0" role="region" aria-label="开发集右半：每场景同一权重；窄屏可横向滚动"><table><caption>开发集右半：每场景同一权重</caption><thead><tr><th scope="col">场景／方案</th><th scope="col">全有效像素PSNR ↑ / dB</th><th scope="col">有效窗口SSIM ↑</th><th scope="col">块LPIPS ↓</th><th scope="col">负收益帧 ↓</th></tr></thead><tbody><tr><td>pulling／A不适配</td><td>28.184</td><td>0.91692</td><td>0.06337</td><td>—</td></tr><tr><td>pulling／B直接采用</td><td>38.183</td><td>0.96327</td><td>0.03615</td><td>0/4</td></tr><tr><td>pulling／C保留区选择</td><td>38.183</td><td>0.96327</td><td>0.03615</td><td>0/4</td></tr><tr><td>cutting／A不适配</td><td>29.425</td><td>0.92161</td><td>0.05610</td><td>—</td></tr><tr><td>cutting／B直接采用</td><td>38.096</td><td>0.96638</td><td>0.03818</td><td>2/10</td></tr><tr><td>cutting／C保留区选择</td><td>38.107</td><td>0.96638</td><td>0.03818</td><td>2/10</td></tr></tbody></table></div><p class="experiment-note">未做场景从头训练；C没有额外适配优化。冻结几何不等于几何更准确。</p><div class="experiment-conclusion"><h3>实验结论</h3><p>原有适配平均收益明显，新增C规则却没有减少负收益帧，未通过主要终点。13/14帧直接采用B，不能宣称可靠性改进成立。</p></div></section><section class="experiment-block" id="experiment-2"><h2><span>02</span>为什么选择规则没有防止退化？</h2><h3>做了什么实验</h3><p>检查两帧的左半保留区选择与右半误差；不使用右半分数重新选候选。</p><h3>结果指标</h3><div class="experiment-table trials" tabindex="0" role="region" aria-label="右半相对不适配的PSNR变化；窄屏可横向滚动"><table><caption>右半相对不适配的PSNR变化</caption><thead><tr><th scope="col">cutting帧</th><th scope="col">B直接采用 / dB</th><th scope="col">C选择后 / dB</th><th scope="col">左半选择现象</th></tr></thead><tbody><tr><td data-label="cutting帧">69</td><td data-label="B直接采用 / dB">−0.022</td><td data-label="C选择后 / dB">−0.022</td><td data-label="左半选择现象">保留区L1下降约1.06%，选完全适配</td></tr><tr><td data-label="cutting帧">117</td><td data-label="B直接采用 / dB">−0.171</td><td data-label="C选择后 / dB">−0.067</td><td data-label="左半选择现象">保留区L1下降约0.61%，选半适配</td></tr></tbody></table></div><div class="experiment-conclusion"><h3>实验结论</h3><p>左保留区L1和MSE均改善，右半却变差，并非仅因选择与评价指标不同。第117帧减轻退化但未减少失败数量；开发集没有&gt;0.2 dB严重退化，无法证明防护严重失败。</p></div></section><footer class="experiment-source">来源：DGX-PARTIAL-001报告、14帧候选记录及保存浮点输出的独立核算；仅公开聚合结果。</footer></main>
+</div>
+<footer class="site-footer"><div class="footer-inner"><span>© 2026 <a href="https://github.com/896729202" target="_blank" rel="noopener noreferrer">896729202</a> · 知识手记</span><span>保持好奇，持续记录。</span></div></footer>
+<button type="button" class="icon-button back-top" data-back-top hidden aria-label="返回页面顶部" title="返回页面顶部"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20V4M6 10l6-6 6 6"/></svg></button>
+<div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+</body>
+</html>
