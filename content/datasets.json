@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "title": "当前数据集",
+  "subtitle": "内窥镜三维重建 · 本地数据清单",
+  "record_date": "2026-10-04",
+  "records": [
+    {
+      "name": "EndoNeRF",
+      "content": "pulling 63 帧、cutting 156 帧，共 219 帧。"
+    },
+    {
+      "name": "StereoMIS",
+      "content": "P1 的两个片段、P3 的一个片段，各 184 组双目图像，共 552 组。"
+    },
+    {
+      "name": "EndoNeRF-EC",
+      "content": "pulling、cutting 的曝光变化版本，已用于 4DGX 实验。"
+    },
+    {
+      "name": "自建解析合成数据",
+      "content": "动态曲面、N0/N1 内容变化及曝光 A/B，用于机制和几何验证。"
+    },
+    {
+      "name": "SCARED、EndoSLAM、C3VD",
+      "content": "当前对应目录为空，尚无实际数据。"
+    }
+  ],
+  "note": "帧与双目图像组按原始记录分别计数；EndoNeRF-EC 和自建解析合成数据未提供数量。",
+  "source_note": "依据用户提供的本地数据清单整理；本次更新未扫描服务器目录。日期为清单记录日期，不是全部数据的下载日期。"
+}
