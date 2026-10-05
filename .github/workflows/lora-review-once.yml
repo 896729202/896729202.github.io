@@ -25,7 +25,7 @@ jobs:
           python3 - <<'PY'
           import hashlib,json,os,subprocess
           from pathlib import Path
-          assert subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip() == 'f1da8747d86650d9a856a5a1a732d828661b95ab'
+          assert subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip() == '536f23117b29173f4989a1b6bf57d54bb60a7470'
           files = subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
           before = {n: hashlib.sha256(Path(n).read_bytes()).hexdigest() for n in files if n}
           (Path(os.environ['RUNNER_TEMP'])/'lora-before.json').write_text(json.dumps(before))
@@ -45,7 +45,7 @@ jobs:
             'content/notes/lora.md': '9d8e46329fd491a7eca81c1cf363701e36f967a4fba67b3d83c8b896dc7f1293',
             'content/notes/index.json': '44d5b2c4de6f94404c5b8f50906d70485975063407dccad8be15a7777323b61f',
             'scripts/build_core.py': 'b5b20c576a8ffe48b711dddf7ee15ffd09a059ac02fd336fae82cb7bbd436a5a',
-            'assets/lora-practice.css': '01989f52f752a97836cc89454623efc48063529157a25c997927fa7ab79ea533',
+            'assets/lora-practice.css': '311080a084bcbee49a6abd412945491e18875cb80b38ada16bced86ce2ce5095',
             'index.html': '4b950c7adf9095e8ccd42a6b9a0fca8acefb8270c94f7ec9d79330ca573e1086',
             'notes/index.html': '2c67dc47eac483d9c7b53a6ca19ce6033ab9d0be9ce97a2e403730d569139e1b',
             'notes/lora/index.html': '9f407648913df9f19690f716d310e86ff5398400846716aa562b7b0c58c44348'
