@@ -3,10 +3,15 @@
     "slug": "lora",
     "label": "LoRA",
     "title": "大模型 LoRA 与微调显存面试复习手册",
-    "summary": "从低秩矩阵的底层原理，到微调显存估算与部署。用两个模块，串起六道高频面试题。",
+    "summary": "核心原理、显存估算与六道面试问答，补充 LoRA 配置、梯度自检和 AdamW 源码纠错。",
     "date": "2026-09-29",
-    "tags": ["LoRA", "PEFT", "显存优化"],
-    "modules": 2,
-    "questions": 6
+    "tags": [
+      "LoRA",
+      "PEFT",
+      "显存优化"
+    ],
+    "modules": 3,
+    "questions": 6,
+    "updated": "2026-10-05"
   }
 ]

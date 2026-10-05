@@ -112,6 +112,8 @@ def shell(path: str, title: str, main: str, section: str = '', toc: str | None =
         result = result.replace('{{' + key + '}}', value)
     if re.search(r'\{\{[a-z_]+\}\}', result):
         raise RuntimeError(f'页面模板存在未替换字段：{path}')
+    if path == 'notes/lora/index.html':
+        result = result.replace('</head>', '<link rel="stylesheet" href="../../assets/lora-practice.css">\n</head>')
     output = ROOT / path
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(result, encoding='utf-8')
@@ -131,8 +133,9 @@ def note_card(note: dict, prefix: str, index: bool = False) -> str:
     heading = note['label'] if index else note['title'].replace('面试复习手册', '')
     desc = note['summary'] if index else f"核心原理 · 显存估算 · {note['questions']} 道面试问答"
     attrs = f' data-note-card data-slug="{slug}"' if index else ''
-    date = note['date'].replace('-', '.')
-    meta = f'<b class="note-category">大模型 · 微调</b><span></span><time datetime="{note["date"]}">{date}</time>'
+    display_date = note.get('updated', note['date'])
+    date = display_date.replace('-', '.')
+    meta = f'<b class="note-category">大模型 · 微调</b><span></span><time datetime="{display_date}">{date}</time>'
     return f'''<a class="note-card{' index-note' if index else ''}" href="{target}"{attrs} aria-label="阅读 {ESC(note['title'])}">
 {note_art(note)}<div class="note-card-body"><div class="note-meta">{meta}</div><h3>{ESC(heading)}</h3><p>{ESC(desc)}</p>{tags(note)}</div>{icon('arrow','end-arrow')}</a>'''
 
@@ -243,7 +246,7 @@ def article(note: dict) -> None:
             modules += 1
             anchor = f'module-{modules}'
             cleaned = re.sub(r'^模块[一二三四五六七八九十\d]+[：:]\s*', '', contents)
-            short = ['核心知识与底层原理', '高频面试问答'][modules-1] if slug == 'lora' and modules <= 2 else text
+            short = ['核心知识与底层原理', '高频面试问答', '实操速记与源码追问'][modules-1] if slug == 'lora' and modules <= 3 else text
             headings.append((anchor, f'{modules:02d} · {short}', level))
             return f'<h2 id="{anchor}"><span class="module-number" aria-hidden="true">{modules:02d}</span><span>{cleaned}</span></h2>'
         sections += 1
@@ -253,18 +256,23 @@ def article(note: dict) -> None:
         headings.append((anchor, short, level))
         return f'<h3 id="{anchor}">{contents}</h3>'
     body = re.sub(r'<h([23])>(.*?)</h\1>', heading, body, flags=re.S)
+    body = body.replace('<pre>', '<pre tabindex="0" aria-label="代码示例；窄屏可横向滚动">')
     body = body.replace('<p><strong>参考答案</strong>：</p>', '<p class="answer-label"><strong>参考答案</strong></p>')
     toc_links = ''.join(f'<a href="#{anchor}" class="{"toc-module" if level == 2 else "toc-section"}">{ESC(title)}</a>' for anchor, title, level in headings)
     toc = f'''<aside class="toc-sidebar" aria-label="文章目录"><a class="back-link" href="../index.html">{icon('left')} 返回八股文</a><p class="toc-heading">本页目录</p><nav class="toc" aria-label="章节导航">{toc_links}</nav><div class="toc-hint">先看核心原理，<br>再用问答检查：<br>能否不看笔记，独立讲清楚？</div></aside>'''
     title = ESC(note['title'])
     if slug == 'lora':
         title = '<span>大模型 LoRA 与微调显存</span><span>面试复习手册</span>'
-    y, m, d = note['date'].split('-')
-    main = f'''<main class="article-main" id="main"><article><header class="article-header">{breadcrumb('../../', note['label'], True)}<p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>大模型 · 参数高效微调</p><h1 tabindex="-1">{title}</h1><div class="article-meta">{icon('calendar')}<time datetime="{note['date']}">{y} 年 {int(m)} 月 {int(d)} 日</time><span>·</span><span>{note['modules']} 个模块</span><span>·</span><span>{note['questions']} 道面试问答</span></div><div class="article-toolbar">{tags(note)}<div class="article-actions"><a class="button" href="../../content/notes/{slug}.md" download>{icon('download')} 原文</a><button class="button" data-copy-link type="button">{icon('link')} 复制链接</button><button class="button" data-print type="button">{icon('print')} 打印</button></div></div></header>
+    display_date = note.get('updated', note['date'])
+    date_label = '更新于 ' if note.get('updated') else ''
+    y, m, d = display_date.split('-')
+    main = f'''<main class="article-main" id="main"><article><header class="article-header">{breadcrumb('../../', note['label'], True)}<p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>大模型 · 参数高效微调</p><h1 tabindex="-1">{title}</h1><div class="article-meta">{icon('calendar')}<time datetime="{display_date}">{date_label}{y} 年 {int(m)} 月 {int(d)} 日</time><span>·</span><span>{note['modules']} 个模块</span><span>·</span><span>{note['questions']} 道面试问答</span></div><div class="article-toolbar">{tags(note)}<div class="article-actions"><a class="button" href="../../content/notes/{slug}.md" download>{icon('download')} 原文</a><button class="button" data-copy-link type="button">{icon('link')} 复制链接</button><button class="button" data-print type="button">{icon('print')} 打印</button></div></div></header>
 <aside class="original-notice" aria-label="笔记口径说明"><strong>原文收录</strong> · 正文保留个人复习笔记的原有表述，未作为逐条核验后的技术结论。显存数值为特定假设下的估算，实际占用取决于训练配置与实现。</aside>
 <details class="mobile-toc"><summary>本页目录 · {note['modules']} 个模块 / {note['questions']} 道问答</summary><nav class="toc" aria-label="移动端章节导航">{toc_links}</nav></details>
 <div class="article-body">{body}</div>
 <footer class="article-end"><span>读到这里，不妨合上笔记，再讲一遍。</span><a class="button" href="../index.html">{icon('left')} 返回八股文</a></footer></article></main>'''
+    if slug == 'lora':
+        main = re.sub(r'<aside class="original-notice".*?</aside>', '<aside class="original-notice" aria-label="笔记口径说明"><strong>复习提示</strong> · 参数建议是起点，显存估算须注明精度与实现；代码为核心片段，不是实测结果。<a href="#module-3">新增：LoRA 实操速记与源码追问 →</a></aside>', main, count=1, flags=re.S)
     shell(f'notes/{slug}/index.html', note['title'], main, 'notes', toc, note['summary'])
 
 

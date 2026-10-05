@@ -6,10 +6,10 @@
 <meta name="color-scheme" content="light dark">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>大模型 LoRA 与微调显存面试复习手册 · 896729202</title>
-<meta name="description" content="从低秩矩阵的底层原理，到微调显存估算与部署。用两个模块，串起六道高频面试题。">
+<meta name="description" content="核心原理、显存估算与六道面试问答，补充 LoRA 配置、梯度自检和 AdamW 源码纠错。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="大模型 LoRA 与微调显存面试复习手册 · 896729202">
-<meta property="og:description" content="从低秩矩阵的底层原理，到微调显存估算与部署。用两个模块，串起六道高频面试题。">
+<meta property="og:description" content="核心原理、显存估算与六道面试问答，补充 LoRA 配置、梯度自检和 AdamW 源码纠错。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:url" content="https://896729202.github.io/notes/lora/">
 <link rel="canonical" href="https://896729202.github.io/notes/lora/">
@@ -17,6 +17,7 @@
 <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="stylesheet" href="../../assets/site.css">
 <script src="../../assets/site.js" defer></script>
+<link rel="stylesheet" href="../../assets/lora-practice.css">
 </head>
 <body>
 <a class="skip-link" href="#main">跳到主要内容</a>
@@ -26,10 +27,10 @@
 <nav class="header-nav" aria-label="主导航"><a href="../../thesis/index.html">内窥镜三维重建</a><a href="../../notes/index.html" aria-current="page">八股文</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
 </div></header>
 <div class="layout article-layout">
-<aside class="toc-sidebar" aria-label="文章目录"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回八股文</a><p class="toc-heading">本页目录</p><nav class="toc" aria-label="章节导航"><a href="#module-1" class="toc-module">01 · 核心知识与底层原理</a><a href="#section-1" class="toc-section">1. 显存由哪四部分构成？</a><a href="#section-2" class="toc-section">2. LoRA 的数学原理与维度推导</a><a href="#module-2" class="toc-module">02 · 高频面试问答</a><a href="#q1" class="toc-section">Q1 · 原理与初始化</a><a href="#q2" class="toc-section">Q2 · Rank 与 α 的选择</a><a href="#q3" class="toc-section">Q3 · 为什么节约显存</a><a href="#q4" class="toc-section">Q4 · 单卡 24G 能否微调</a><a href="#q5" class="toc-section">Q5 · OOM 的调整顺序</a><a href="#q6" class="toc-section">Q6 · 合并与多业务部署</a></nav><div class="toc-hint">先看核心原理，<br>再用问答检查：<br>能否不看笔记，独立讲清楚？</div></aside>
-<main class="article-main" id="main"><article><header class="article-header"><nav class="breadcrumb" aria-label="面包屑"><a href="../../index.html">首页</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../notes/index.html">八股文</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">LoRA</span></nav><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>大模型 · 参数高效微调</p><h1 tabindex="-1"><span>大模型 LoRA 与微调显存</span><span>面试复习手册</span></h1><div class="article-meta"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><time datetime="2026-09-29">2026 年 9 月 29 日</time><span>·</span><span>2 个模块</span><span>·</span><span>6 道面试问答</span></div><div class="article-toolbar"><div class="note-tags"><span class="tag">LoRA</span><span class="tag">PEFT</span><span class="tag">显存优化</span></div><div class="article-actions"><a class="button" href="../../content/notes/lora.md" download><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 10l5 5 5-5M4 15v5h16v-5"/></svg> 原文</a><button class="button" data-copy-link type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m4 2 1-1a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0" transform="translate(0 1) scale(.94)"/></svg> 复制链接</button><button class="button" data-print type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7zM16 11h1"/></svg> 打印</button></div></div></header>
-<aside class="original-notice" aria-label="笔记口径说明"><strong>原文收录</strong> · 正文保留个人复习笔记的原有表述，未作为逐条核验后的技术结论。显存数值为特定假设下的估算，实际占用取决于训练配置与实现。</aside>
-<details class="mobile-toc"><summary>本页目录 · 2 个模块 / 6 道问答</summary><nav class="toc" aria-label="移动端章节导航"><a href="#module-1" class="toc-module">01 · 核心知识与底层原理</a><a href="#section-1" class="toc-section">1. 显存由哪四部分构成？</a><a href="#section-2" class="toc-section">2. LoRA 的数学原理与维度推导</a><a href="#module-2" class="toc-module">02 · 高频面试问答</a><a href="#q1" class="toc-section">Q1 · 原理与初始化</a><a href="#q2" class="toc-section">Q2 · Rank 与 α 的选择</a><a href="#q3" class="toc-section">Q3 · 为什么节约显存</a><a href="#q4" class="toc-section">Q4 · 单卡 24G 能否微调</a><a href="#q5" class="toc-section">Q5 · OOM 的调整顺序</a><a href="#q6" class="toc-section">Q6 · 合并与多业务部署</a></nav></details>
+<aside class="toc-sidebar" aria-label="文章目录"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回八股文</a><p class="toc-heading">本页目录</p><nav class="toc" aria-label="章节导航"><a href="#module-1" class="toc-module">01 · 核心知识与底层原理</a><a href="#section-1" class="toc-section">1. 显存由哪四部分构成？</a><a href="#section-2" class="toc-section">2. LoRA 的数学原理与维度推导</a><a href="#module-2" class="toc-module">02 · 高频面试问答</a><a href="#q1" class="toc-section">Q1 · 原理与初始化</a><a href="#q2" class="toc-section">Q2 · Rank 与 α 的选择</a><a href="#q3" class="toc-section">Q3 · 为什么节约显存</a><a href="#q4" class="toc-section">Q4 · 单卡 24G 能否微调</a><a href="#q5" class="toc-section">Q5 · OOM 的调整顺序</a><a href="#q6" class="toc-section">Q6 · 合并与多业务部署</a><a href="#module-3" class="toc-module">03 · 实操速记与源码追问</a><a href="#section-9" class="toc-section">1. 配置速记：哪些是开关，哪些是经验值？</a><a href="#section-10" class="toc-section">2. 注入 LoRA，再创建优化器</a><a href="#section-11" class="toc-section">3. 怎么确认真的在训练，而不是只看 loss？</a><a href="#section-12" class="toc-section">4. AdamW 源码纠错：不过滤就白占 56GB？</a></nav><div class="toc-hint">先看核心原理，<br>再用问答检查：<br>能否不看笔记，独立讲清楚？</div></aside>
+<main class="article-main" id="main"><article><header class="article-header"><nav class="breadcrumb" aria-label="面包屑"><a href="../../index.html">首页</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../notes/index.html">八股文</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">LoRA</span></nav><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>大模型 · 参数高效微调</p><h1 tabindex="-1"><span>大模型 LoRA 与微调显存</span><span>面试复习手册</span></h1><div class="article-meta"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><time datetime="2026-10-05">更新于 2026 年 10 月 5 日</time><span>·</span><span>3 个模块</span><span>·</span><span>6 道面试问答</span></div><div class="article-toolbar"><div class="note-tags"><span class="tag">LoRA</span><span class="tag">PEFT</span><span class="tag">显存优化</span></div><div class="article-actions"><a class="button" href="../../content/notes/lora.md" download><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 10l5 5 5-5M4 15v5h16v-5"/></svg> 原文</a><button class="button" data-copy-link type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m4 2 1-1a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0" transform="translate(0 1) scale(.94)"/></svg> 复制链接</button><button class="button" data-print type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7zM16 11h1"/></svg> 打印</button></div></div></header>
+<aside class="original-notice" aria-label="笔记口径说明"><strong>复习提示</strong> · 参数建议是起点，显存估算须注明精度与实现；代码为核心片段，不是实测结果。<a href="#module-3">新增：LoRA 实操速记与源码追问 →</a></aside>
+<details class="mobile-toc"><summary>本页目录 · 3 个模块 / 6 道问答</summary><nav class="toc" aria-label="移动端章节导航"><a href="#module-1" class="toc-module">01 · 核心知识与底层原理</a><a href="#section-1" class="toc-section">1. 显存由哪四部分构成？</a><a href="#section-2" class="toc-section">2. LoRA 的数学原理与维度推导</a><a href="#module-2" class="toc-module">02 · 高频面试问答</a><a href="#q1" class="toc-section">Q1 · 原理与初始化</a><a href="#q2" class="toc-section">Q2 · Rank 与 α 的选择</a><a href="#q3" class="toc-section">Q3 · 为什么节约显存</a><a href="#q4" class="toc-section">Q4 · 单卡 24G 能否微调</a><a href="#q5" class="toc-section">Q5 · OOM 的调整顺序</a><a href="#q6" class="toc-section">Q6 · 合并与多业务部署</a><a href="#module-3" class="toc-module">03 · 实操速记与源码追问</a><a href="#section-9" class="toc-section">1. 配置速记：哪些是开关，哪些是经验值？</a><a href="#section-10" class="toc-section">2. 注入 LoRA，再创建优化器</a><a href="#section-11" class="toc-section">3. 怎么确认真的在训练，而不是只看 loss？</a><a href="#section-12" class="toc-section">4. AdamW 源码纠错：不过滤就白占 56GB？</a></nav></details>
 <div class="article-body"><h2 id="module-1"><span class="module-number" aria-hidden="true">01</span><span>核心知识点与底层原理速记</span></h2>
 <h3 id="section-1">1. 显存由哪四部分构成？</h3>
 <ul>
@@ -37,16 +38,16 @@
 <p><strong>模型权重（Weights）</strong>：前向计算底座。FP16/BF16 下，每个参数吃 <strong>2 字节</strong>。</p>
 </li>
 <li>
-<p><strong>梯度（Gradients）</strong>：反向传播导数。FP16/BF16 下，每个参数吃 <strong>2 字节</strong>。</p>
+<p><strong>梯度（Gradients）</strong>：可训练参数的反向传播导数。按 FP16/BF16 存储时每个参数 <strong>2 字节</strong>；实际 dtype 不一定等于底座权重 dtype。</p>
 </li>
 <li>
-<p><strong>优化器状态（Optimizer States）</strong>：AdamW 需要保存 <strong>FP32 权重备份、一阶动量、二阶动量</strong>，每个参数吃 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>4</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>4</mn><mo>=</mo><mrow data-mjx-texclass="ORD"><mn mathvariant="bold">12</mn><mtext> 字节</mtext></mrow></math></span>。</p>
+<p><strong>优化器状态（Optimizer States）</strong>：两份 FP32 动量合计 <strong>8 字节/可训练参数</strong>；若训练框架另存 FP32 主权重，再加 4 字节，此时合计 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>4</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>4</mn><mo>=</mo><mrow data-mjx-texclass="ORD"><mn mathvariant="bold">12</mn><mtext> 字节</mtext></mrow></math></span>。并非所有 AdamW 实现都额外保存主权重。</p>
 </li>
 <li>
-<p><strong>激活值（Activations）+ 碎屑缓存</strong>：每一层前向传播算出的中间特征图，随 Batch Size 和序列长度平方级暴涨；可通过梯度检查点（Gradient Checkpointing）压到极低。</p>
+<p><strong>激活值（Activations）+ 碎屑缓存</strong>：前向中间结果及分配器开销。激活通常随 Batch Size 近似线性增加；朴素注意力矩阵随序列长度平方增长，但 FlashAttention 避免完整存储它。梯度检查点用重计算换空间，不会消除所有激活。</p>
 </li>
 <li>
-<p><strong>静态显存计算公式（全量微调，16-bit + AdamW）</strong>：</p>
+<p><strong>静态显存示例（全量微调：16-bit 权重和梯度、FP32 双动量及主权重）</strong>：</p>
 <div class="math-block" role="region" aria-label="公式；较长时可横向滚动" tabindex="0"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtext>&#x6BCF;&#x4E2A;&#x53C2;&#x6570;&#x603B;&#x5F00;&#x9500;</mtext><mo>=</mo><mn>2</mn><mo stretchy="false">(</mo><mtext>&#x6743;&#x91CD;</mtext><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mo stretchy="false">(</mo><mtext>&#x68AF;&#x5EA6;</mtext><mo stretchy="false">)</mo><mo>+</mo><mn>12</mn><mo stretchy="false">(</mo><mtext>&#x4F18;&#x5316;&#x5668;</mtext><mo stretchy="false">)</mo><mo>=</mo><mrow data-mjx-texclass="ORD"><mn mathvariant="bold">16</mn><mtext>&#xA0;&#x5B57;&#x8282;</mtext></mrow></math></div>
 <ul>
 <li>7B 模型静态占用：<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>7</mn><mo>×</mo><mn>16</mn><mo>=</mo><mrow data-mjx-texclass="ORD"><mn mathvariant="bold">112</mn><mtext> GB</mtext></mrow></math></span></li>
@@ -82,7 +83,7 @@
 <li>
 <p><strong>初始化设计机制</strong>：</p>
 <ul>
-<li><strong><span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 设为高斯分布随机数</strong>：保留高维数据降维投影的多样性，打破反向传播的梯度对称性死锁。</li>
+<li><strong><span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 随机初始化</strong>：原论文使用高斯随机；PEFT 默认使用 Kaiming-uniform。关键是不能将 A、B 同时设零，否则两者的损失梯度都会为零。</li>
 <li><strong><span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span> 设为全 0</strong>：充当阀门，使初始时刻 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">Δ</mi><mi>W</mi><mo>=</mo><mi>B</mi><mo>×</mo><mi>A</mi><mo>=</mo><mn>0</mn></math></span>，<strong>保证 Step 0 模型输出完全等于原预训练底座</strong>，不冲击原有能力。</li>
 </ul>
 </li>
@@ -93,7 +94,7 @@
 <blockquote>
 <p>“LoRA 是一种参数高效微调方法（PEFT）。它的核心假设是<strong>模型在特定下游任务上的参数更新矩阵具有很低的本征秩</strong>。</p>
 <p>具体实现上，它完全冻结原始权重 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mn>0</mn></msub></math></span>，旁路引入低秩矩阵 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 和 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span>（维度分别为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>×</mo><mi>k</mi></math></span> 与 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mo>×</mo><mi>r</mi></math></span>），用两者的乘积 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mo>⋅</mo><mi>A</mi></math></span> 来模拟参数增量 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">Δ</mi><mi>W</mi></math></span>。</p>
-<p>初始化时，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 采用高斯随机初始化，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span> 采用全 0 初始化。这样在初始步（Step 0）时，增量 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mo>×</mo><mi>A</mi><mo>=</mo><mn>0</mn></math></span>，使模型输出完全与原预训练模型对齐，保证平滑微调。训练第 1 步时，因为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 非零，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span> 优先获取非零梯度脱离 0，随后两者协同自激更新。”</p>
+<p>常规初始化时，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 随机、<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span> 全零；原论文使用高斯随机 A，PEFT 默认使用 Kaiming-uniform。这样在初始步（Step 0）时，增量 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mo>×</mo><mi>A</mi><mo>=</mo><mn>0</mn></math></span>，使模型输出完全与原预训练模型对齐，保证平滑微调。训练第 1 步时，因为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span> 非零，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></span> 优先获取非零梯度脱离 0，随后两者共同学习。”</p>
 </blockquote>
 <h3 id="q2">Q2：微调时 Rank（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math></span>）和 Scaling Factor（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>α</mi></math></span>）怎么选？有什么考量？</h3>
 <p class="answer-label"><strong>参考答案</strong></p>
@@ -101,37 +102,37 @@
 <p>“1. <strong>关于 Rank（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math></span>）</strong>：</p>
 <ul>
 <li>不是盲目越大越好，而是由任务复杂度决定。</li>
-<li>格式对齐、分类、简单问答等通用任务，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mn>8</mn><mo>∼</mo><mn>16</mn></math></span> 足够好；复杂推理、代码或大规模领域垂直注入，通常尝试 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mn>32</mn><mo>∼</mo><mn>64</mn></math></span>。</li>
-<li>无脑设置过大的 rank 会导致在小样本上严重<strong>过拟合</strong>，并且削弱低秩约束，引发原模型的<strong>灾难性遗忘</strong>。</li>
+<li>格式对齐、分类、简单问答等任务可从 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mn>8</mn><mo>∼</mo><mn>16</mn></math></span> 起步；复杂任务可再尝试 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mn>32</mn><mo>∼</mo><mn>64</mn></math></span>，最终由验证集决定。</li>
+<li>增大 rank 会增加容量、参数量和训练开销；是否过拟合或遗忘，还取决于数据、学习率和训练时长，不能只由 rank 判定。</li>
 </ul>
 <ol start="2">
 <li><strong>关于 Scaling Factor（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>α</mi></math></span>）</strong>：</li>
 </ol>
 <ul>
 <li>它在前向计算中以系数 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mi>α</mi><mi>r</mi></mfrac></math></span> 缩放增量 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mi>A</mi></math></span>。</li>
-<li>其核心作用有两点：第一是控制微调知识对原模型的<strong>介入强度</strong>；第二是<strong>解耦 Rank 与学习率（尺度不变性）</strong>，让不同 rank 尝试时无需重新精细搜索学习率。</li>
+<li>它控制低秩分支的缩放幅度，也影响梯度尺度；固定比例便于对比，但<strong>不保证换 rank 后学习率无需重调</strong>。</li>
 <li>工程上通常保持 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>α</mi><mo>=</mo><mi>r</mi></math></span> 或 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>α</mi><mo>=</mo><mn>2</mn><mi>r</mi></math></span>（即比例保持为 1 或 2）。”</li>
 </ul>
 </blockquote>
 <h3 id="q3">Q3：为什么说 LoRA 能极大节约显存？参数量不是还有原模型加上 B 和 A 吗？</h3>
 <p class="answer-label"><strong>参考答案</strong></p>
 <blockquote>
-<p>“训练显存开销的最大头不是静态模型文件本身，而是 <strong>AdamW 优化器状态（占 12 字节/参数）与梯度（占 2 字节/参数）</strong>。</p>
-<p>全量微调时，原模型所有参数都要分配梯度和优化器状态（比如 8B 模型仅静态就需要 128GB）。而 LoRA <strong>完全冻结了原模型的全部参数</strong>，原权重不计算、不保存任何梯度与动量。LoRA 仅引入了 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mi>d</mi><mo>×</mo><mi>r</mi><mo>+</mo><mi>r</mi><mo>×</mo><mi>k</mi><mo stretchy="false">)</mo></math></span> 的低秩矩阵，可训参数占比通常低于 0.5%，因此原本极其庞大的优化器与梯度显存被砍掉了 99% 以上。”</p>
+<p>“全量训练除了权重，还要为可训练参数保存梯度和优化器状态；这些是显著开销，但长序列下激活也可能成为主要开销。</p>
+<p>全量微调时，原模型所有参数都要分配梯度和优化器状态（按模块一的示例口径，8B 静态开销约 128GB）。而 LoRA <strong>完全冻结了原模型的全部参数</strong>，从训练开始就冻结且梯度为 None 的底座参数，不累积权重梯度，也不为其新建 AdamW 动量；但反向传播仍可能穿过冻结层，传向可训练的 LoRA。LoRA 仅引入了 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mi>d</mi><mo>×</mo><mi>r</mi><mo>+</mo><mi>r</mi><mo>×</mo><mi>k</mi><mo stretchy="false">)</mo></math></span> 的低秩矩阵，将梯度和状态的主要开销缩小到适配器规模；具体占比取决于 rank、挂载层和额外可训练模块，不是固定低于 0.5%。”</p>
 </blockquote>
 <h3 id="q4">Q4：手头只有单张 24G 显存的 RTX 4090，要跑 Llama-3-8B（FP16/BF16），全量微调行不行？LoRA 能不能行？</h3>
 <p class="answer-label"><strong>参考答案</strong></p>
 <blockquote>
-<p>“1. <strong>全量微调绝对不行</strong>：</p>
+<p>“1. <strong>标准 AdamW、训练状态全部驻卡：不行</strong>：</p>
 <ul>
 <li>8B 模型静态显存为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>8</mn><mo>×</mo><mo stretchy="false">(</mo><mn>2</mn><mtext>权重</mtext><mo>+</mo><mn>2</mn><mtext>梯度</mtext><mo>+</mo><mn>12</mn><mtext>优化器</mtext><mo stretchy="false">)</mo><mo>=</mo><mn>128</mn><mtext> GB</mtext></math></span>。</li>
-<li>加上激活值直接突破 140GB，24G 单卡会立即 OOM，至少需要两张 80G A100/H100。</li>
+<li>这一示例静态预算已超过 24GB，尚未计入激活；卸载、分片或其他优化器是另外的方案，不能据此固定推断至少需要几张卡。</li>
 </ul>
 <ol start="2">
-<li><strong>LoRA 微调可以胜任</strong>：</li>
+<li><strong>LoRA：合适配置下可能可行，要实测峰值</strong>：</li>
 </ol>
 <ul>
-<li>原模型冻结仅占 16GB 权重，LoRA 的梯度与优化器只需几百 MB，加上开启重计算后的激活值（约 2～3GB），总显存可稳定在 <strong>18～20 GB</strong> 左右，正好放进 24G 显存内。”</li>
+<li>按约 8B 参数估算，16-bit 底座权重约 16GB；剩余空间要容纳适配器、梯度、状态、激活和缓存。小 batch、短序列与检查点有助于放入 24GB，<strong>18～20GB 不是通用保证</strong>。”</li>
 </ul>
 </blockquote>
 <h3 id="q5">Q5：微调过程中即使开了 LoRA 依然爆显存（OOM），训练参数里优先调整哪些？</h3>
@@ -143,10 +144,10 @@
 <p><strong>压低单卡 Batch Size + 增大梯度累加步数（Gradient Accumulation Steps）</strong>：设 <code>per_device_train_batch_size=1</code>，通过增大累加步数维持整体等效 Batch Size。</p>
 </li>
 <li>
-<p><strong>截断最大序列长度（cutoff_len / max_seq_length）</strong>：Self-Attention 显存是序列长度的平方阶（<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>O</mi><mo stretchy="false">(</mo><msup><mi>L</mi><mn>2</mn></msup><mo stretchy="false">)</mo></math></span>），截短上下文能立竿见影释放显存。</p>
+<p><strong>截断最大序列长度（cutoff_len / max_seq_length）</strong>：朴素注意力矩阵占用为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>O</mi><mo stretchy="false">(</mo><msup><mi>L</mi><mn>2</mn></msup><mo stretchy="false">)</mo></math></span>；采用 FlashAttention 等实现后不能把全部激活一概按平方估算。缩短上下文仍通常可以降低显存。</p>
 </li>
 <li>
-<p><strong>升级为 QLoRA（4-bit 量化微调）</strong>：用 bitsandbytes 将原模型权重压到 4-bit，8B 基础权重直接从 16GB 缩减到 5GB 左右，整套训练能直接压到 10GB 显存以内。”</p>
+<p><strong>升级为 QLoRA（4-bit 量化微调）</strong>：用 bitsandbytes 将原模型权重压到 4-bit，8B 的纯 4-bit 编码约 4GB，另有量化元数据及未量化层；总训练显存仍取决于激活与配置，不能保证低于 10GB。”</p>
 </li>
 </ol>
 </blockquote>
@@ -166,6 +167,74 @@
 <li>各业务的小型 LoRA Adapter 权重常驻内存或显存缓存池中，推理引擎在 Batch 处理请求时根据任务路由动态挂载对应的 LoRA 算子，实现一份大底座支持上百种异构业务的高并发请求。”</li>
 </ul>
 </blockquote>
+<h2 id="module-3"><span class="module-number" aria-hidden="true">03</span><span>LoRA 实操速记与源码追问</span></h2>
+<p><strong>顺序记忆：加载底座 → 注入 LoRA → 检查可训练参数 → 创建优化器 → 反向传播 → 检查更新 → 保存适配器。</strong></p>
+<h3 id="section-9">1. 配置速记：哪些是开关，哪些是经验值？</h3>
+<ul>
+<li><strong>冻结</strong>：<code>p.requires_grad = False</code> 不再为该参数累积新梯度；<code>True</code> 只是允许求梯度，真正更新还需要参与 loss、进入优化器并执行 <code>step()</code>。<code>model.eval()</code> 不等于冻结；也不要用 <code>torch.no_grad()</code> 包住整个 LoRA 训练前向。</li>
+<li><strong>秩 <code>r</code></strong>：8 / 16 / 32 / 64 是常见候选；单个矩阵新增 <code>r × (d + k)</code> 个参数，效果看验证集，不是越大越好。</li>
+<li><strong>缩放 <code>lora_alpha</code></strong>：普通 LoRA 使用 <code>alpha / r</code>；<code>alpha=r</code> 或 <code>2r</code> 可作起点，不是固定最优值。</li>
+<li><strong>挂载层 <code>target_modules</code></strong>：<code>&quot;all-linear&quot;</code> 可覆盖 Attention + MLP 的线性层；PEFT 对 <code>PreTrainedModel</code> 会排除输出层。显存紧时也可只选 <code>q_proj</code>、<code>v_proj</code>，具体名字先查 <code>model.named_modules()</code>。</li>
+<li><strong>学习率</strong>：LoRA <strong>SFT</strong> 可从 <code>1e-4</code>～<code>2e-4</code> 尝试；“比全量高约 10 倍”是经验起点，不是定律，也不直接照搬给 DPO / GRPO。</li>
+</ul>
+<p>依据：<a href="https://docs.pytorch.org/docs/main/notes/autograd.html#setting-requires-grad">PyTorch 梯度控制</a>、<a href="https://huggingface.co/docs/peft/package_reference/lora">PEFT LoRA 配置</a>、<a href="https://huggingface.co/docs/trl/peft_integration">TRL 参数建议</a>。</p>
+<h3 id="section-10">2. 注入 LoRA，再创建优化器</h3>
+<p>以下是<strong>普通 LoRA 的核心片段</strong>，假定 <code>base_model</code> 已加载到训练设备；不是完整训练脚本或个人实测结果。</p>
+<pre tabindex="0" aria-label="代码示例；窄屏可横向滚动"><code class="language-python">import torch
+from peft import LoraConfig, get_peft_model
+
+base_model.requires_grad_(False)  # 展示冻结；PEFT 也会处理底座冻结
+config = LoraConfig(
+    task_type=&quot;CAUSAL_LM&quot;,
+    r=16,
+    lora_alpha=32,               # 本例 alpha/r = 2
+    target_modules=&quot;all-linear&quot;,
+    lora_dropout=0.05,
+    bias=&quot;none&quot;,                # 不额外训练原模型 bias
+)
+model = get_peft_model(base_model, config)
+model.print_trainable_parameters()
+
+trainable = [p for p in model.parameters() if p.requires_grad]
+assert trainable, &quot;没有可训练参数，请检查 LoRA 是否正确注入&quot;
+optimizer = torch.optim.AdamW(trainable, lr=1e-4)
+</code></pre>
+<p><strong>自检不只看比例</strong>：确认可训练参数名称包含 <code>lora_A</code> / <code>lora_B</code>。0.1%～1% 仅是常见范围；全线性层、高 rank 或额外训练 embedding / lm_head 都可能超出。不要在注入 LoRA <strong>之前</strong>创建优化器，也不要在注入之后再次冻结整个 <code>model</code>。</p>
+<p><strong>初始化追问</strong>：原论文可用 A 高斯随机、B 全零；PEFT 默认是 <strong>A：Kaiming-uniform，B：全零</strong>。显式设 <code>init_lora_weights=&quot;gaussian&quot;</code> 才选择高斯方式。<a href="https://huggingface.co/docs/peft/package_reference/lora">配置与初始化说明</a></p>
+<h3 id="section-11">3. 怎么确认真的在训练，而不是只看 loss？</h3>
+<p>检查一个可训练的 B 矩阵：<strong>有梯度吗？执行 <code>step()</code> 后数值变了吗？</strong> 假定 <code>batch</code> 已放到同一设备，包含 <code>input_ids</code>、<code>attention_mask</code>、<code>labels</code>；答案监督时，提示词及 padding 的 <code>labels</code> 设为 <code>-100</code>。</p>
+<pre tabindex="0" aria-label="代码示例；窄屏可横向滚动"><code class="language-python">model.train()
+model.config.use_cache = False
+optimizer.zero_grad(set_to_none=True)
+b = next(p for n, p in model.named_parameters()
+         if &quot;lora_B&quot; in n and p.requires_grad)
+before = b.detach().clone()
+
+loss = model(**batch).loss
+loss.backward()
+assert b.grad is not None, &quot;B 没收到梯度，请检查计算图&quot;
+print(&quot;B 梯度范数:&quot;, b.grad.float().norm().item())
+optimizer.step()
+print(&quot;B 是否更新:&quot;, not torch.equal(before, b.detach()))
+</code></pre>
+<p><strong>首步易误判</strong>：默认 B=0 时，A 的<strong>损失梯度</strong>为 0 是正常的；B 通常先获得非零梯度。<code>grad is None</code> 与“梯度张量全零”不同；不要要求首步所有 LoRA 梯度都非零。</p>
+<p>训练结束用 <code>model.save_pretrained(&quot;lora_adapter&quot;)</code> 保存适配器；加载仍需对应底座。继续训练已有适配器时，检查 <code>PeftModel.from_pretrained(..., is_trainable=True)</code>。<a href="https://huggingface.co/docs/peft/developer_guides/troubleshooting">自检说明</a> · <a href="https://huggingface.co/docs/peft/quicktour">保存与加载</a></p>
+<h3 id="section-12">4. AdamW 源码纠错：不过滤就白占 56GB？</h3>
+<p><strong>不是。显式过滤值得保留，但不是为了阻止 AdamW 给所有传入参数预分配状态。</strong> 标准 PyTorch AdamW 对 <code>grad is None</code> 的参数跳过更新；状态是在首次有梯度的 <code>step()</code> 中按需创建的。<a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/adam.py">源码中的惰性初始化</a></p>
+<pre tabindex="0" aria-label="代码示例；窄屏可横向滚动"><code class="language-python"># AdamW/Adam 状态初始化的简化逻辑，省略 step 等字段与更新公式
+for p in group[&quot;params&quot;]:
+    if p.grad is None:
+        continue
+    if not state[p]:
+        state[p][&quot;exp_avg&quot;] = torch.zeros_like(p)
+        state[p][&quot;exp_avg_sq&quot;] = torch.zeros_like(p)
+</code></pre>
+<p><strong>显存记法</strong>：两份 <strong>FP32</strong> 动量共 <code>8 × N</code> 字节，N 是实际建立状态的参数量。7B 全部建立 FP32 动量才约 <strong>56GB</strong>；并不是“把冻结参数传进去就增加 56GB”。1000 万可训练参数对应约 <strong>80MB</strong> 动量，不含权重、梯度和激活；实际还要看状态 dtype、优化器实现与配置。FP32 主权重副本是另一项，不能默认所有 AdamW 都额外保存。</p>
+<p><strong>为什么仍建议过滤？</strong> 明确优化范围，便于排查漏冻、误训与参数分组。训练中途才冻结时，旧梯度和已分配状态不会自动消失；需清理旧 <code>grad</code>，必要时安全移除对应状态或重建优化器。梯度全零时，动量或 weight decay 仍可能更新参数，不能用“清零梯度”替代冻结。<a href="https://docs.pytorch.org/docs/main/generated/torch.optim.AdamW.html#torch.optim.AdamW.zero_grad"><code>None</code> 与零梯度的区别</a></p>
+<blockquote>
+<p><strong>面试收尾句</strong>：我会先检查冻结与 LoRA 挂载，再过滤可训练参数创建优化器；除了看 loss，还检查梯度、参数是否更新和适配器能否正确加载。显存节省主要来自底座不再建立训练所需的梯度与优化器状态，而不是过滤列表本身产生了几十 GB 的魔法收益。</p>
+</blockquote>
+<p>补充核对：<a href="https://arxiv.org/abs/2205.14135">FlashAttention 的显存机制</a>。以上显存按十进制 GB / MB 估算，不等同于 GiB / MiB。</p>
 </div>
 <footer class="article-end"><span>读到这里，不妨合上笔记，再讲一遍。</span><a class="button" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回八股文</a></footer></article></main>
 </div>
