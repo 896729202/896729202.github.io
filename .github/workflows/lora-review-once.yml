@@ -1,0 +1,76 @@
+name: Build verified LoRA practical review
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lora-review-once.yml'
+      - '.github/lora-review/**'
+permissions:
+  contents: write
+concurrency:
+  group: lora-review-maintenance
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact reviewed source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - name: Guard source and record unaffected files
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,subprocess
+          from pathlib import Path
+          assert subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip() == 'f1da8747d86650d9a856a5a1a732d828661b95ab'
+          files = subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
+          before = {n: hashlib.sha256(Path(n).read_bytes()).hexdigest() for n in files if n}
+          (Path(os.environ['RUNNER_TEMP'])/'lora-before.json').write_text(json.dumps(before))
+          PY
+          python3 .github/lora-review/apply.py
+      - name: Build all pages using the existing generator
+        run: |
+          python3 -m venv "$RUNNER_TEMP/lora-site-env"
+          "$RUNNER_TEMP/lora-site-env/bin/python" -m pip install -q -r requirements.txt
+          "$RUNNER_TEMP/lora-site-env/bin/python" scripts/build.py
+      - name: Verify reviewed output and preserve research pages
+        run: |
+          python3 - <<'PY'
+          import ast,hashlib,html,json,os,re,subprocess
+          from pathlib import Path
+          expected = {
+            'content/notes/lora.md': '9d8e46329fd491a7eca81c1cf363701e36f967a4fba67b3d83c8b896dc7f1293',
+            'content/notes/index.json': '44d5b2c4de6f94404c5b8f50906d70485975063407dccad8be15a7777323b61f',
+            'scripts/build_core.py': 'b5b20c576a8ffe48b711dddf7ee15ffd09a059ac02fd336fae82cb7bbd436a5a',
+            'assets/lora-practice.css': '01989f52f752a97836cc89454623efc48063529157a25c997927fa7ab79ea533',
+            'index.html': '4b950c7adf9095e8ccd42a6b9a0fca8acefb8270c94f7ec9d79330ca573e1086',
+            'notes/index.html': '2c67dc47eac483d9c7b53a6ca19ce6033ab9d0be9ce97a2e403730d569139e1b',
+            'notes/lora/index.html': '9f407648913df9f19690f716d310e86ff5398400846716aa562b7b0c58c44348'
+          }
+          before = json.loads((Path(os.environ['RUNNER_TEMP'])/'lora-before.json').read_text())
+          for n,want in (before | expected).items():
+            assert hashlib.sha256(Path(n).read_bytes()).hexdigest()==want, 'Unexpected content: '+n
+          untracked=set(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],text=True).splitlines())
+          assert untracked <= set(expected), untracked
+          page=Path('notes/lora/index.html').read_text()
+          assert 'id="module-3"' in page and '3 个模块' in page
+          assert all(f'id="q{i}"' in page for i in range(1,7))
+          blocks=re.findall(r'<pre[^>]*><code class="language-python">(.*?)</code></pre>',page,re.S)
+          assert len(blocks)==3
+          for code in blocks: ast.parse(html.unescape(code))
+          assert 'data-note-search' in Path('notes/index.html').read_text()
+          subprocess.run(['git','add','--',*expected],check=True)
+          changed=set(subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines())
+          assert changed==set(expected), changed
+          print('PASS: all seven reviewed files match; research, datasets, workbook and unrelated assets unchanged.')
+          PY
+      - name: Commit and push without overwriting concurrent edits
+        run: |
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'docs: add concise LoRA practical review and correct optimizer memory myths'
+          git push origin HEAD:main
