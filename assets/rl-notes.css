@@ -1,0 +1,28 @@
+/* Scoped RL directory and topic pages; reuse the notebook palette. */
+.rl-art{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.rl-art-caption{font-size:12px;letter-spacing:.16em;color:var(--accent)}
+.rl-collection .note-card-body p{line-height:1.9}
+.rl-main .page-heading{padding-bottom:24px}
+.rl-topline{display:flex;justify-content:space-between;gap:12px;margin:2px 0 16px;color:var(--muted);font-size:12px}
+.rl-topics{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
+.rl-topic{display:flex;align-items:center;gap:18px;padding:23px 24px;border-bottom:1px solid var(--line);transition:background .15s ease}
+.rl-topic:last-child{border-bottom:0}
+.rl-topic:hover{background:var(--soft)}
+.rl-topic:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.rl-number{font:italic 14px Georgia,serif;color:var(--muted);min-width:22px}
+.rl-topic h2{margin:0;font-size:20px;font-weight:600;letter-spacing:.02em}
+.rl-state{margin-left:auto;border:1px solid var(--line);border-radius:20px;padding:3px 10px;font-size:11px;color:var(--muted);white-space:nowrap}
+.rl-topic>.icon{width:18px;color:var(--accent);flex-shrink:0}
+.rl-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.rl-tabs a{padding:7px 13px;border:1px solid var(--line);border-radius:20px;font-size:12px;color:var(--muted)}
+.rl-tabs a:hover,.rl-tabs a[aria-current="page"]{color:var(--accent-ink);background:var(--soft);border-color:var(--accent)}
+.rl-empty{border:1px dashed var(--line);border-radius:14px;padding:64px 20px;text-align:center;background:var(--paper)}
+.rl-empty-icon{display:inline-flex;padding:13px;border-radius:14px;background:var(--soft);color:var(--accent);margin-bottom:13px}
+.rl-empty-icon .icon{width:25px;height:25px}
+.rl-empty h2{font-size:20px;font-weight:500;margin:0 0 12px}
+.rl-empty p{font-size:13px;line-height:1.8;margin:0;color:var(--muted)}
+.rl-back{display:inline-flex;margin-top:26px}
+.rl-body{padding-top:12px}
+@media(max-width:640px){.rl-topic{padding:20px 16px;gap:12px}.rl-topic h2{font-size:18px}.rl-state{font-size:10px;padding:3px 8px}.rl-empty{padding:48px 16px}.rl-tabs{gap:6px}.rl-tabs a{padding:6px 11px}}
+@media(prefers-reduced-motion:reduce){.rl-topic{transition:none}}
+@media print{.rl-tabs,.rl-back{display:none}.rl-topic{break-inside:avoid}}
