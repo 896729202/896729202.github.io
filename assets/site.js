@@ -62,7 +62,12 @@
     const empty = document.querySelector('[data-no-results]');
     if (empty) empty.hidden = found > 0;
     const status = document.querySelector('[data-search-status]');
-    if (status) status.textContent = term ? `找到 ${found} 篇相关笔记` : `已收录 ${cards.length} 篇笔记`;
+    if (status) {
+      const grouped = cards.some(card => card.dataset.noteKind === 'topic');
+      status.textContent = term
+        ? (grouped ? `找到 ${found} 个相关条目` : `找到 ${found} 篇相关笔记`)
+        : (grouped ? `共 ${cards.length} 个条目（笔记与专题）` : `已收录 ${cards.length} 篇笔记`);
+    }
     if (clearSearch) clearSearch.hidden = !term;
   };
   search?.addEventListener('input', applySearch);
