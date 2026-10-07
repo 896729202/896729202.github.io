@@ -1,0 +1,112 @@
+name: Build RL paper links and submodules
+on:
+  push:
+    branches: ['site/rl-paper-modules-20261008']
+    paths: ['.github/workflows/rl-paper-modules-once.yml', 'scripts/rl_notes.py', 'content/notes/rl/**', 'assets/rl-sections.css']
+permissions:
+  contents: write
+concurrency:
+  group: rl-paper-modules-maintenance
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout isolated source revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - name: Check reviewed sources and record unchanged files
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          expected = {'scripts/rl_notes.py':'3c7ce40649e3966738c81d0e5a23e7201dcc01d3','assets/rl-sections.css':'00a9e3bf044e804ff6dbdb054b23d6bcd59c837e'}
+          for name, want in expected.items():
+              assert subprocess.check_output(['git','hash-object',name],text=True).strip() == want, name
+          files = [p for p in subprocess.check_output(['git','ls-files','-z']).decode().split('\0') if p]
+          before = {p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in files}
+          (Path(os.environ['RUNNER_TEMP'])/'rl-modules-before.json').write_text(json.dumps(before))
+          PY
+      - name: Build with existing site entrypoint
+        run: |
+          python3 -m venv "$RUNNER_TEMP/rl-modules-env"
+          "$RUNNER_TEMP/rl-modules-env/bin/python" -m pip install -q -r requirements.txt
+          "$RUNNER_TEMP/rl-modules-env/bin/python" scripts/build.py
+      - name: Verify all paper-first pages and preserve unrelated content
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, re, subprocess
+          from pathlib import Path
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit, unquote
+          expected = {
+            'notes/rl/dapo/index.html':'a6834e2acaff2d50122f9c31a76bbed26486f40889afa57e59b0c57d02ab903a',
+            'notes/rl/dapo/interview/index.html':'6dd80d8816f0721b52716e62a8ce86c84c29dfb036427468b3cea1d089744606',
+            'notes/rl/dapo/principles/index.html':'b950bbb6229c5d03853a4c36abf847efad46ea33325042c78c7e5d980b526235',
+            'notes/rl/dpo/index.html':'08ba102a3c8f346ed32f73792924bfe650f669e0e6534e7e64306e88e7cef6c8',
+            'notes/rl/dpo/interview/index.html':'bd794788bc2c9137ea5afb435e1fb9d352ab9490eb282379906e735b829dc872',
+            'notes/rl/dpo/principles/index.html':'742950ad8acadd549d7e5f9525becc8d5e4e246d793fffb67c0f7cd788708a76',
+            'notes/rl/grpo/index.html':'8f6ac0729fb70fbda532d375e94083cddf2117e2e077c9ddf58c018cee1e96fa',
+            'notes/rl/grpo/interview/index.html':'00d8cd3716dbe923f096fee445d268d2631d31da76e21298cdeab252c4e43fa3',
+            'notes/rl/grpo/principles/index.html':'1c507d20d51b382dcfa9cf517df72b982a0a9eda0a473e5a7a34fddbf09b9b30',
+            'notes/rl/gspo/index.html':'390b0a9741fdb6dd5a743c9cd0894fbdf1fd97b59938bd4fc73942ac04a8eda5',
+            'notes/rl/gspo/interview/index.html':'e1773ea4406420863a002fd92c89aec6e04f02e919fec3b5dd37b4b3072abd00',
+            'notes/rl/gspo/principles/index.html':'d1500e51865167bbc1def29a13399ecc3a1ea062432f704aa7cb326fe3898aec',
+            'notes/rl/index.html':'89ec44d5683faed6a69ec6ef3b501bda8f5f7b6ec2a2582a18a9b99120ea90b8',
+            'notes/rl/ppo/index.html':'920b15eb2d3d71753df23e55dda4905ba5a50ee828ddae03d5547ec0ed1414d8',
+            'notes/rl/ppo/interview/index.html':'50f867983fc7565e6d95f71c77bfa96ee63c7535c3df317a6c7177a5d466c590',
+            'notes/rl/ppo/principles/index.html':'155910b7f44b50ca6f19cd9eff1cef55102c05568998486c1fa132ebf0d60508'
+          }
+          for name, want in expected.items():
+              actual=hashlib.sha256(Path(name).read_bytes()).hexdigest()
+              assert actual == want, (name, actual, want)
+          before=json.loads((Path(os.environ['RUNNER_TEMP'])/'rl-modules-before.json').read_text())
+          allowed=set(expected)|{'notes/index.html'}
+          for name,want in before.items():
+              if name not in allowed:
+                  assert hashlib.sha256(Path(name).read_bytes()).hexdigest()==want, 'Unrelated content changed: '+name
+          untracked=set(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],text=True).splitlines())
+          assert untracked <= allowed, untracked
+          papers={'ppo':'1707.06347','dpo':'2305.18290','grpo':'2402.03300','gspo':'2507.18071','dapo':'2503.14476'}
+          for slug,identifier in papers.items():
+              hub=Path(f'notes/rl/{slug}/index.html').read_text()
+              main=re.search(r'<main\b[^>]*>(.*?)</main>',hub,re.S).group(1)
+              assert main.startswith('<p class="rl-paper-line">')
+              assert f'href="https://arxiv.org/pdf/{identifier}"' in main
+              assert main.count('class="rl-module-card"')==2
+              for module in ('interview','principles'):
+                  assert f'href="{module}/index.html"' in main
+                  child=Path(f'notes/rl/{slug}/{module}/index.html').read_text()
+                  assert '内容待补充' in child and 'class="article-body rl-body"' not in child
+          class Links(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.urls=[]
+              def handle_starttag(self,tag,attrs):
+                  for key,value in attrs:
+                      if key in ('href','src') and value:
+                          self.urls.append(value)
+          count=0
+          for name in allowed:
+              p=Path(name); parser=Links(); parser.feed(p.read_text())
+              for value in parser.urls:
+                  link=urlsplit(value)
+                  if link.scheme or link.netloc or not link.path: continue
+                  target=(Path.cwd()/unquote(link.path).lstrip('/')) if link.path.startswith('/') else p.parent/unquote(link.path)
+                  if target.is_dir(): target=target/'index.html'
+                  assert target.is_file(), (name,value)
+                  count+=1
+          print('PASS: five paper-first hubs, ten pending submodules, 16 exact reviewed pages and',count,'local links.')
+          print('PASS: LoRA, research, datasets, original attachments and all other tracked files are unchanged.')
+          subprocess.run(['git','add','--',*sorted(allowed)],check=True)
+          PY
+      - name: Save generated pages and remove temporary build workflow
+        run: |
+          test "$(git ls-remote origin refs/heads/site/rl-paper-modules-20261008 | cut -f1)" = "$GITHUB_SHA"
+          git rm -- .github/workflows/rl-paper-modules-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat: publish paper-first RL hubs with interview and principles subpages'
+          git push origin HEAD:site/rl-paper-modules-20261008
