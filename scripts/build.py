@@ -5,6 +5,7 @@ import build_experiments
 import experiment_summaries
 import dataset_inventory
 import rl_notes
+import reproduction_rankings
 
 
 def main():
@@ -13,6 +14,7 @@ def main():
     experiment_summaries.build(build_core)
     dataset_inventory.build(build_core)
     rl_notes.build(build_core)
+    reproduction_rankings.build(build_core)
 
 
 if __name__ == "__main__":
