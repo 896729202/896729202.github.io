@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-08",
+  "source_note": "依据作者已核对并提供的数据整理；本次未访问实验服务器，未重新运行实验。更新时间不是原始实验或下载日期。",
+  "coverage": [
+    [
+      "SCARED",
+      3,
+      34,
+      "三条动态序列：12 / 12 / 10 个目标",
+      "提供的标定/位姿"
+    ],
+    [
+      "C3VD",
+      11,
+      132,
+      "7 条注册序列 + 4 条 screening；每条 12 个目标",
+      "提供的标定/位姿；多项式相机转虚拟针孔"
+    ],
+    [
+      "StereoMIS",
+      3,
+      36,
+      "三个已处理窗口；每个 12 个目标",
+      "提供的标定/位姿"
+    ],
+    [
+      "EndoNeRF",
+      2,
+      24,
+      "两个场景；每个 12 个目标",
+      "真实固定相机；零基线时间插帧"
+    ],
+    [
+      "EndoNeRF-EC",
+      2,
+      24,
+      "两个对应曝光版本；每个 12 个目标",
+      "真实固定相机；非额外独立场景"
+    ],
+    [
+      "Hamlyn",
+      1,
+      12,
+      "Hamlyn23 示例帧池",
+      "共享三帧估计相机；目标 RGB 可用于相机估计"
+    ]
+  ],
+  "totals": {
+    "methods": 3,
+    "datasets": 6,
+    "sequences": 22,
+    "targets": 262,
+    "model_target_records": 786
+  },
+  "method_status": [
+    [
+      "Deform3DGS",
+      "逐场景训练/优化",
+      "EndoNeRF、EC",
+      "已有历史及 EC noadapt_full 数值；预算、先验和评价区域按各表披露。"
+    ],
+    [
+      "SurgicalGS / EndoPrior-GS / EndoPlanar",
+      "逐场景训练/优化",
+      "EndoNeRF",
+      "保留 pulling、cutting 原有结果；不是等预算排名。"
+    ],
+    [
+      "Endo-4DGS / EndoGaussian",
+      "逐场景训练/优化",
+      "EndoNeRF、EC",
+      "保留历史；新增 EC 预算为 1000 coarse + 3000 fine。EndoGaussian pulling 新训练数值失败，无完整结果。"
+    ],
+    [
+      "Endo-4DGX",
+      "逐场景训练/优化",
+      "EndoNeRF-EC",
+      "历史与新增 EC 结果按 noadapt_full 等协议区分，不和前馈全图表混合。"
+    ],
+    [
+      "DepthSplat",
+      "预训练前馈推理",
+      "本轮六数据集",
+      "官方预训练 checkpoint；已完成前馈高斯推理与本轮图像评价。"
+    ],
+    [
+      "MVSplat",
+      "预训练前馈推理",
+      "本轮六数据集",
+      "dylanebert 第三方权重镜像；架构严格加载通过，未独立核对与官方 Google Drive 权重的字节一致性。"
+    ],
+    [
+      "OpenD4RT＋贴图渲染",
+      "预训练推理 + 外部渲染",
+      "本轮六数据集",
+      "非官方 OpenD4RT 实现及其权重。几何、相机、轨迹已有推理；RGB 来自输入纹理与外部渲染器，不是 D4RT 直接预测。"
+    ],
+    [
+      "VGGT / MoRe",
+      "预训练前馈推理",
+      "Hamlyn、EndoNeRF、SCARED",
+      "已有推理记录及小规模 SCARED 对齐深度评价；没有统一 PSNR/SSIM/LPIPS，不补造。"
+    ],
+    [
+      "Endo3R",
+      "官方预训练推理 · 工程 smoke",
+      "Hamlyn23 前 8 帧；EndoNeRF pulling 前 8 帧",
+      "在线推理 smoke 已完成：点图、深度、置信度、相机及输出有限性检查。没有完整官方 benchmark 或统一图像质量指标。"
+    ],
+    [
+      "Endo-E2E-GS",
+      "自训练 pilot",
+      "SCARED：48 / 12 / 1 对",
+      "随机初始化；stage1 1000 + stage2 1000 步；使用 stage2_final，不是作者预训练权重或论文完整复现。"
+    ],
+    [
+      "NAS3R / NoPoSplat",
+      "等待完整权重 · 尚无结果",
+      "无完成的新模型评价",
+      "NAS3R 早先下载超时，后有续传记录；本次状态仍为等待权重。DepthSplat/MVSplat 的引用旧分数不是这两个模型的结果。"
+    ]
+  ],
+  "protocol": [
+    [
+      "输入与留出目标",
+      "每个目标使用前后两张时间上下文图像；每条序列均匀选择最多 12 个留出目标。SCARED 一条序列为 10 个，合计 22 条序列、262 个目标。六个公开数据集条目中，EC 是 EndoNeRF 的关联曝光版本，不是额外独立场景。"
+    ],
+    [
+      "统一图像评价",
+      "分辨率 256×256；从保存的 PNG 统一计算全图 PSNR、SSIM、LPIPS，空洞和错误区域均计入。SSIM 使用 skimage；LPIPS 使用经过校准的 SqueezeNet v0.1。三项均已完成。"
+    ],
+    [
+      "汇总与训练条件",
+      "先对每条序列的目标帧取平均，再对同一数据集的序列等权平均。没有场景优化或内窥镜权重训练。结果仅代表本地确定性测试子集，不是全帧测试或官方 benchmark。"
+    ]
+  ],
+  "cameras": [
+    [
+      "SCARED / C3VD / StereoMIS",
+      "使用提供的标定/位姿。C3VD 按官方多项式相机标定转换为虚拟针孔图像。"
+    ],
+    [
+      "EndoNeRF / EndoNeRF-EC",
+      "保留真实固定相机，属于零基线时间插帧。DepthSplat/MVSplat 缺少三角化视差；图像分数不能解释为新视角合成或几何准确性。"
+    ],
+    [
+      "Hamlyn · 目标 RGB 的使用边界",
+      "OpenD4RT 独立三帧相机估计允许目标 RGB 仅用于相机估计，三种方法共用这些相机。上下文几何仍独立用两张输入图像编码；并非严格不使用目标 RGB 的全流程。"
+    ],
+    [
+      "OpenD4RT · 外部贴图图像流程",
+      "两张输入预测深度 + 外部网格贴图渲染；不使用目标纹理或 GT 深度。用输入预测相机基线与共享相机基线对齐尺度，再使用共享相机参数投影，保留未覆盖的黑色区域。旧同帧自重投影诊断不与本轮留出目标图评价合并。"
+    ]
+  ],
+  "depth": {
+    "headers": [
+      "样本 / 划分",
+      "方法",
+      "AbsRel ↓",
+      "RMSE ↓ / mm",
+      "δ1 ↑"
+    ],
+    "rows": [
+      [
+        "dataset1/keyframe3 · 12 对验证",
+        "VGGT",
+        "0.061982",
+        "6.7072",
+        "0.989411"
+      ],
+      [
+        "dataset1/keyframe3 · 12 对验证",
+        "MoRe",
+        "0.089464",
+        "9.4129",
+        "0.937819"
+      ],
+      [
+        "dataset4/keyframe1 · 单对测试",
+        "VGGT",
+        "0.062641",
+        "5.3460",
+        "0.979129"
+      ],
+      [
+        "dataset4/keyframe1 · 单对测试",
+        "MoRe",
+        "0.045665",
+        "3.7160",
+        "0.992579"
+      ]
+    ],
+    "note": "逐对使用 GT 中位数进行尺度对齐；只评价对齐后的深度形状，不代表原生毫米尺度恢复。验证 12 对与单对测试分开解释；不补造两者的 PSNR/SSIM/LPIPS。",
+    "conclusion": "此验证子集上 VGGT 三项指标更好；单对测试上 MoRe 三项更好。样本规模与逐对尺度对齐限制了结论，不能据此判断原生尺度或完整 benchmark 优劣。"
+  },
+  "pilot": {
+    "headers": [
+      "划分",
+      "样本数",
+      "视差 EPE ↓ / px",
+      "输入视角 PSNR ↑ / dB",
+      "SSIM ↑",
+      "有效深度 AbsRel ↓",
+      "LPIPS"
+    ],
+    "rows": [
+      [
+        "验证",
+        "12 对",
+        "1.5213",
+        "23.112",
+        "0.6506",
+        "0.08921",
+        "未提供"
+      ],
+      [
+        "测试",
+        "1 对",
+        "6.0956",
+        "19.318",
+        "0.7894",
+        "0.37892",
+        "未提供"
+      ]
+    ],
+    "setup": "SCARED 双目校正，320×256；训练 48 对、验证 12 对、测试 1 对。随机初始化，自训练 stage1 1000 步 + stage2 1000 步。此表报告 stage2_final。",
+    "note": "stage2_best 的本次最佳验证 EPE 出现在 step1，不称为完整联合训练模型。RGB 指标是输入视角重渲染，不与留出目标帧表排名；LPIPS 未提供。",
+    "conclusion": "pilot 已得到验证和单对测试数值；测试 EPE / AbsRel 高于验证。它是小规模自训练实验，不是作者预训练模型或论文完整复现。"
+  },
+  "image_csv": "three-model-dataset-metrics-20261008.csv",
+  "control_csv": "mean-input-control-20261008.csv",
+  "ec_csv": "ec-noadapt-full-20261006.csv",
+  "control_note": "对照直接逐像素平均前后两张输入 RGB，不进行三维重建，采用同一留出目标及图像评价协议。",
+  "control_conclusion": "DepthSplat 在 SCARED / C3VD 的 PSNR 高于直接平均输入约 1.26 / 0.73 dB。在其余四个数据集，本轮三种方法的 PSNR 均未超过这一简单对照。这些结果不能单独证明三维几何有效；仍需独立几何评价和更大基线的新视角实验。",
+  "ec_note": "2026-10-06 汇总；test / noadapt_full，即无适配全支持，使用有效组织块指标与 AlexNet LPIPS。新增 Endo-4DGS / EndoGaussian 预算为 1000 coarse + 3000 fine；原生预算、深度先验与条件不同，不是等预算排名。",
+  "ec_failure": "EndoGaussian pulling 的新增训练数值失败，未完成完整训练，无有效结果可填；不能称四个新增训练全部成功。历史 EndoGaussian 结果不挪用为本批结果。",
+  "ec_boundary": "无适配全支持、无适配右半、左半拟合/右半评价的适配是不同协议。本表仅列 noadapt_full；AlexNet 组织块 LPIPS 不与本轮 SqueezeNet 全图 LPIPS 混合排名。",
+  "historic_boundary": "下方保留 2026-10-03 及更早的 pulling、cutting、EndoGaussian 验证补充和 EC 历史表，原数值与历史日期不变。“不读取测试 RGB 进行适配”仅适用于相应历史 EC 实验，不概括 Hamlyn 的目标图相机估计或其他已有适配结果。"
+}

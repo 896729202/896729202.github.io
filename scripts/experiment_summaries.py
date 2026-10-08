@@ -20,6 +20,9 @@ def table(headers, rows, caption, trials=False):
 
 def build_summary(core, item, data):
     """Schema v2: one purpose, metric tables and conclusion per completed group."""
+    if item['slug'] == 'reproductions' and data.get('update_file'):
+        from research_overviews import render_reproductions
+        return render_reproductions(core, item, data)
     groups = data.get('groups', [])
     if not groups:
         raise ValueError('An experiment summary must contain completed groups')

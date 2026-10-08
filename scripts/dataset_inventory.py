@@ -16,6 +16,11 @@ def build(core: ModuleType) -> bool:
     if not source.exists():
         return False
     data = json.loads(source.read_text(encoding='utf-8'))
+    if data.get('schema_version') == 2:
+        from research_overviews import render_datasets
+        render_datasets(core, data)
+        link_catalog(ROOT / 'thesis/experiments/index.html')
+        return True
     if data.get('schema_version') != 1:
         raise ValueError('Unsupported dataset inventory schema')
     for key in ('title', 'subtitle', 'record_date', 'note', 'source_note'):
@@ -68,3 +73,17 @@ def build(core: ModuleType) -> bool:
                'thesis', toc='', description=data['subtitle'])
     catalog.write_text(catalog_html, encoding='utf-8')
     return True
+
+
+def link_catalog(catalog):
+    catalog_html = catalog.read_text(encoding='utf-8')
+    original_nav = ('<nav class="experiment-dates" aria-label="复现汇总">'
+                    '<a href="reproductions/index.html">原方法复现指标汇总 →</a></nav>')
+    updated_nav = ('<nav class="experiment-dates" aria-label="研究资料汇总">'
+                   '<a href="reproductions/index.html">原方法复现指标汇总 →</a>'
+                   '<a href="datasets/index.html">当前数据集 →</a></nav>')
+    if catalog_html.count(original_nav) == 1:
+        catalog_html = catalog_html.replace(original_nav, updated_nav, 1)
+    elif catalog_html.count(updated_nav) != 1:
+        raise ValueError('Experiment overview navigation changed; review before adding dataset link')
+    catalog.write_text(catalog_html, encoding='utf-8')

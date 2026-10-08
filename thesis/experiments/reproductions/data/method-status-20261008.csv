@@ -1,0 +1,12 @@
+方法,状态类别,已覆盖数据,说明
+Deform3DGS,逐场景训练/优化,EndoNeRF、EC,已有历史及 EC noadapt_full 数值；预算、先验和评价区域按各表披露。
+SurgicalGS / EndoPrior-GS / EndoPlanar,逐场景训练/优化,EndoNeRF,保留 pulling、cutting 原有结果；不是等预算排名。
+Endo-4DGS / EndoGaussian,逐场景训练/优化,EndoNeRF、EC,保留历史；新增 EC 预算为 1000 coarse + 3000 fine。EndoGaussian pulling 新训练数值失败，无完整结果。
+Endo-4DGX,逐场景训练/优化,EndoNeRF-EC,历史与新增 EC 结果按 noadapt_full 等协议区分，不和前馈全图表混合。
+DepthSplat,预训练前馈推理,本轮六数据集,官方预训练 checkpoint；已完成前馈高斯推理与本轮图像评价。
+MVSplat,预训练前馈推理,本轮六数据集,dylanebert 第三方权重镜像；架构严格加载通过，未独立核对与官方 Google Drive 权重的字节一致性。
+OpenD4RT＋贴图渲染,预训练推理 + 外部渲染,本轮六数据集,非官方 OpenD4RT 实现及其权重。几何、相机、轨迹已有推理；RGB 来自输入纹理与外部渲染器，不是 D4RT 直接预测。
+VGGT / MoRe,预训练前馈推理,Hamlyn、EndoNeRF、SCARED,已有推理记录及小规模 SCARED 对齐深度评价；没有统一 PSNR/SSIM/LPIPS，不补造。
+Endo3R,官方预训练推理 · 工程 smoke,Hamlyn23 前 8 帧；EndoNeRF pulling 前 8 帧,在线推理 smoke 已完成：点图、深度、置信度、相机及输出有限性检查。没有完整官方 benchmark 或统一图像质量指标。
+Endo-E2E-GS,自训练 pilot,SCARED：48 / 12 / 1 对,随机初始化；stage1 1000 + stage2 1000 步；使用 stage2_final，不是作者预训练权重或论文完整复现。
+NAS3R / NoPoSplat,等待完整权重 · 尚无结果,无完成的新模型评价,NAS3R 早先下载超时，后有续传记录；本次状态仍为等待权重。DepthSplat/MVSplat 的引用旧分数不是这两个模型的结果。

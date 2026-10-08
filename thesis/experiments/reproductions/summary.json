@@ -1,1 +1,824 @@
-{"schema_version":2,"overview":{"slug":"reproductions","date":"2026-10-03","date_kind":"汇总更新；原实验日期见历史记录","title":"原方法复现指标汇总","subtitle":"原始数据与EC分开；不含本研究改进和测试帧光照适配。","summary":"集中查看Deform3DGS、SurgicalGS、EndoPrior-GS、EndoPlanar、Endo-4DGS、EndoGaussian及Endo-4DGX的已报告指标。"},"groups":[{"title":"pulling：原始数据复现","what":"EndoNeRF测试集；汇总未加入本研究改进模块的各方法。PSNR、SSIM与LPIPS均使用既有有效组织块口径，不是全像素PSNR。","tables":[{"caption":"pulling · 测试集有效组织块","headers":["方法","训练步数","PSNR ↑ / dB","SSIM ↑","LPIPS ↓"],"rows":[["Deform3DGS","3000","35.865","0.91735","0.09144"],["SurgicalGS","3000","35.369","0.91841","0.09750"],["SurgicalGS","6000","35.597","0.9190","0.08865"],["EndoPrior-GS","4000","35.761","0.9220","0.09911"],["EndoPlanar","3000","35.972","0.9160","0.08503"],["Endo-4DGS","4000","35.602","0.9188","0.10571"],["EndoGaussian","未提供","35.889","0.92116","0.08956"]]},{"caption":"pulling · 全有效区域与覆盖率（补充）","headers":["方法","训练步数","全有效组织PSNR ↑ / dB","覆盖率 ↑"],"rows":[["Deform3DGS","3000","27.374","95.41%"],["SurgicalGS","3000","27.437","未提供"],["SurgicalGS","6000","27.596","98.88%"],["EndoPrior-GS","4000","27.767","99.92%"],["EndoPlanar","3000","25.397","92.48%"],["Endo-4DGS","4000","28.040","98.53%"],["EndoGaussian","未提供","未提供","未提供"]],"supplemental":true}],"conclusion":"EndoGaussian比Deform3DGS的块PSNR高0.024 dB，基本持平；SSIM、LPIPS小幅改善。EndoPlanar部分块指标较好，但全区域PSNR和覆盖率较低，没有全面领先的方法。","note":"各方法预算和先验不同，不作等预算排名。EndoGaussian的步数、种子数、全区域PSNR与覆盖率未提供；其余为已记录的单种子结果。"},{"title":"cutting：原始数据复现","what":"EndoNeRF测试集；汇总未加入本研究改进模块的各方法。PSNR、SSIM与LPIPS均使用既有有效组织块口径，不是全像素PSNR。","tables":[{"caption":"cutting · 测试集有效组织块","headers":["方法","训练步数","PSNR ↑ / dB","SSIM ↑","LPIPS ↓"],"rows":[["Deform3DGS","3000","34.274","0.90574","0.10694"],["SurgicalGS","3000","34.815","0.91226","0.10745"],["SurgicalGS","6000","35.335","0.9185","0.09699"],["EndoPrior-GS","4000","35.404","0.9136","0.10606"],["EndoPlanar","3000","34.556","0.9069","0.10212"],["Endo-4DGS","4000","33.030","0.8848","0.12641"],["EndoGaussian","未提供","35.423","0.91378","0.10019"]]},{"caption":"cutting · 全有效区域与覆盖率（补充）","headers":["方法","训练步数","全有效组织PSNR ↑ / dB","覆盖率 ↑"],"rows":[["Deform3DGS","3000","24.899","96.20%"],["SurgicalGS","3000","26.310","未提供"],["SurgicalGS","6000","26.672","99.09%"],["EndoPrior-GS","4000","26.401","99.94%"],["EndoPlanar","3000","23.976","90.26%"],["Endo-4DGS","4000","24.037","94.24%"],["EndoGaussian","未提供","未提供","未提供"]],"supplemental":true}],"conclusion":"EndoGaussian比Deform3DGS的块PSNR高1.149 dB，SSIM与LPIPS也改善。SurgicalGS在6000步时同样有明显收益；不同预算的点估计不能证明等预算优势或几何更准。","note":"各方法预算和先验不同，不作等预算排名。EndoGaussian的步数、种子数、全区域PSNR与覆盖率未提供；其余为已记录的单种子结果。"},{"title":"EndoGaussian：验证集补充","what":"核对EndoGaussian相对同口径Deform3DGS的验证集块PSNR变化；与上面的测试集分开。","tables":[{"caption":"验证集有效组织块 · 相对Deform3DGS的变化","headers":["场景","块PSNR变化 / dB","两方法绝对值、SSIM与LPIPS"],"rows":[["pulling","+0.168","未提供"],["cutting","+1.254","未提供"]]}],"conclusion":"两个场景的验证集块PSNR均提高，cutting增幅更大。缺少绝对值及重复性数据，不据此宣称稳定优势。","note":"本次补充记录于2026-10-03；实际执行日期未提供。"},{"title":"EC曝光数据：无适配复现","what":"EndoNeRF-EC测试集；Deform3DGS与Endo-4DGX均不读取测试RGB进行适配。与原始数据、左半拟合／右半评价严格分开。","tables":[{"caption":"EC测试集：组织块指标","headers":["场景","方法／步数","块PSNR ↑ / dB","块SSIM ↑","块LPIPS ↓"],"rows":[["pulling","Deform3DGS／3000","28.227","未提供","0.16681"],["pulling","Endo-4DGX／10000","30.129","未提供","0.08605"],["cutting","Deform3DGS／3000","23.450","未提供","0.29513"],["cutting","Endo-4DGX／10000","28.564","未提供","0.10212"]],"wrap":false}],"conclusion":"Endo-4DGX在两个场景的块PSNR与LPIPS均优于此处baseline，但预算分别为10000步与3000步，不能归为等预算优势或本研究贡献。","note":"“原方法复现”仅指未加入本研究改进模块，不代表逐行未改代码或与论文配置完全一致；已披露的依赖补全、数据接口和先验差异仍适用。"}],"source_note":"来源：9月29日同预算基准、10月2日STRONG-REPRO汇总，以及作者于10月3日补充确认的EndoGaussian结果。历史记录保留；本页是汇总，不是新训练批次。未提供指标不补造，未公开原始手术影像。","sources":[{"kind":"已有报告摘要","label":"2026-09-29-endogs-summary.json／2026-10-02-strong-baselines.json"},{"kind":"作者确认的实验汇总","label":"2026-10-03 EndoGaussian：测试组织块绝对指标与验证块PSNR差值"}]}
+{
+  "schema_version": 2,
+  "overview": {
+    "slug": "reproductions",
+    "date": "2026-10-03",
+    "date_kind": "汇总更新；原实验日期见历史记录",
+    "title": "原方法复现指标汇总",
+    "subtitle": "方法状态、六数据集前馈评价与历史逐场景指标；不同协议分开呈现。",
+    "summary": "截至 2026-10-08 的方法状态、全图图像测试、对齐深度评价、自训练 pilot 与历史逐场景复现。"
+  },
+  "groups": [
+    {
+      "title": "pulling：原始数据复现",
+      "what": "EndoNeRF测试集；汇总未加入本研究改进模块的各方法。PSNR、SSIM与LPIPS均使用既有有效组织块口径，不是全像素PSNR。",
+      "tables": [
+        {
+          "caption": "pulling · 测试集有效组织块",
+          "headers": [
+            "方法",
+            "训练步数",
+            "PSNR ↑ / dB",
+            "SSIM ↑",
+            "LPIPS ↓"
+          ],
+          "rows": [
+            [
+              "Deform3DGS",
+              "3000",
+              "35.865",
+              "0.91735",
+              "0.09144"
+            ],
+            [
+              "SurgicalGS",
+              "3000",
+              "35.369",
+              "0.91841",
+              "0.09750"
+            ],
+            [
+              "SurgicalGS",
+              "6000",
+              "35.597",
+              "0.9190",
+              "0.08865"
+            ],
+            [
+              "EndoPrior-GS",
+              "4000",
+              "35.761",
+              "0.9220",
+              "0.09911"
+            ],
+            [
+              "EndoPlanar",
+              "3000",
+              "35.972",
+              "0.9160",
+              "0.08503"
+            ],
+            [
+              "Endo-4DGS",
+              "4000",
+              "35.602",
+              "0.9188",
+              "0.10571"
+            ],
+            [
+              "EndoGaussian",
+              "未提供",
+              "35.889",
+              "0.92116",
+              "0.08956"
+            ]
+          ]
+        },
+        {
+          "caption": "pulling · 全有效区域与覆盖率（补充）",
+          "headers": [
+            "方法",
+            "训练步数",
+            "全有效组织PSNR ↑ / dB",
+            "覆盖率 ↑"
+          ],
+          "rows": [
+            [
+              "Deform3DGS",
+              "3000",
+              "27.374",
+              "95.41%"
+            ],
+            [
+              "SurgicalGS",
+              "3000",
+              "27.437",
+              "未提供"
+            ],
+            [
+              "SurgicalGS",
+              "6000",
+              "27.596",
+              "98.88%"
+            ],
+            [
+              "EndoPrior-GS",
+              "4000",
+              "27.767",
+              "99.92%"
+            ],
+            [
+              "EndoPlanar",
+              "3000",
+              "25.397",
+              "92.48%"
+            ],
+            [
+              "Endo-4DGS",
+              "4000",
+              "28.040",
+              "98.53%"
+            ],
+            [
+              "EndoGaussian",
+              "未提供",
+              "未提供",
+              "未提供"
+            ]
+          ],
+          "supplemental": true
+        }
+      ],
+      "conclusion": "EndoGaussian比Deform3DGS的块PSNR高0.024 dB，基本持平；SSIM、LPIPS小幅改善。EndoPlanar部分块指标较好，但全区域PSNR和覆盖率较低，没有全面领先的方法。",
+      "note": "各方法预算和先验不同，不作等预算排名。EndoGaussian的步数、种子数、全区域PSNR与覆盖率未提供；其余为已记录的单种子结果。"
+    },
+    {
+      "title": "cutting：原始数据复现",
+      "what": "EndoNeRF测试集；汇总未加入本研究改进模块的各方法。PSNR、SSIM与LPIPS均使用既有有效组织块口径，不是全像素PSNR。",
+      "tables": [
+        {
+          "caption": "cutting · 测试集有效组织块",
+          "headers": [
+            "方法",
+            "训练步数",
+            "PSNR ↑ / dB",
+            "SSIM ↑",
+            "LPIPS ↓"
+          ],
+          "rows": [
+            [
+              "Deform3DGS",
+              "3000",
+              "34.274",
+              "0.90574",
+              "0.10694"
+            ],
+            [
+              "SurgicalGS",
+              "3000",
+              "34.815",
+              "0.91226",
+              "0.10745"
+            ],
+            [
+              "SurgicalGS",
+              "6000",
+              "35.335",
+              "0.9185",
+              "0.09699"
+            ],
+            [
+              "EndoPrior-GS",
+              "4000",
+              "35.404",
+              "0.9136",
+              "0.10606"
+            ],
+            [
+              "EndoPlanar",
+              "3000",
+              "34.556",
+              "0.9069",
+              "0.10212"
+            ],
+            [
+              "Endo-4DGS",
+              "4000",
+              "33.030",
+              "0.8848",
+              "0.12641"
+            ],
+            [
+              "EndoGaussian",
+              "未提供",
+              "35.423",
+              "0.91378",
+              "0.10019"
+            ]
+          ]
+        },
+        {
+          "caption": "cutting · 全有效区域与覆盖率（补充）",
+          "headers": [
+            "方法",
+            "训练步数",
+            "全有效组织PSNR ↑ / dB",
+            "覆盖率 ↑"
+          ],
+          "rows": [
+            [
+              "Deform3DGS",
+              "3000",
+              "24.899",
+              "96.20%"
+            ],
+            [
+              "SurgicalGS",
+              "3000",
+              "26.310",
+              "未提供"
+            ],
+            [
+              "SurgicalGS",
+              "6000",
+              "26.672",
+              "99.09%"
+            ],
+            [
+              "EndoPrior-GS",
+              "4000",
+              "26.401",
+              "99.94%"
+            ],
+            [
+              "EndoPlanar",
+              "3000",
+              "23.976",
+              "90.26%"
+            ],
+            [
+              "Endo-4DGS",
+              "4000",
+              "24.037",
+              "94.24%"
+            ],
+            [
+              "EndoGaussian",
+              "未提供",
+              "未提供",
+              "未提供"
+            ]
+          ],
+          "supplemental": true
+        }
+      ],
+      "conclusion": "EndoGaussian比Deform3DGS的块PSNR高1.149 dB，SSIM与LPIPS也改善。SurgicalGS在6000步时同样有明显收益；不同预算的点估计不能证明等预算优势或几何更准。",
+      "note": "各方法预算和先验不同，不作等预算排名。EndoGaussian的步数、种子数、全区域PSNR与覆盖率未提供；其余为已记录的单种子结果。"
+    },
+    {
+      "title": "EndoGaussian：验证集补充",
+      "what": "核对EndoGaussian相对同口径Deform3DGS的验证集块PSNR变化；与上面的测试集分开。",
+      "tables": [
+        {
+          "caption": "验证集有效组织块 · 相对Deform3DGS的变化",
+          "headers": [
+            "场景",
+            "块PSNR变化 / dB",
+            "两方法绝对值、SSIM与LPIPS"
+          ],
+          "rows": [
+            [
+              "pulling",
+              "+0.168",
+              "未提供"
+            ],
+            [
+              "cutting",
+              "+1.254",
+              "未提供"
+            ]
+          ]
+        }
+      ],
+      "conclusion": "两个场景的验证集块PSNR均提高，cutting增幅更大。缺少绝对值及重复性数据，不据此宣称稳定优势。",
+      "note": "本次补充记录于2026-10-03；实际执行日期未提供。"
+    },
+    {
+      "title": "EC曝光数据：无适配复现",
+      "what": "EndoNeRF-EC测试集；Deform3DGS与Endo-4DGX均不读取测试RGB进行适配。与原始数据、左半拟合／右半评价严格分开。",
+      "tables": [
+        {
+          "caption": "EC测试集：组织块指标",
+          "headers": [
+            "场景",
+            "方法／步数",
+            "块PSNR ↑ / dB",
+            "块SSIM ↑",
+            "块LPIPS ↓"
+          ],
+          "rows": [
+            [
+              "pulling",
+              "Deform3DGS／3000",
+              "28.227",
+              "未提供",
+              "0.16681"
+            ],
+            [
+              "pulling",
+              "Endo-4DGX／10000",
+              "30.129",
+              "未提供",
+              "0.08605"
+            ],
+            [
+              "cutting",
+              "Deform3DGS／3000",
+              "23.450",
+              "未提供",
+              "0.29513"
+            ],
+            [
+              "cutting",
+              "Endo-4DGX／10000",
+              "28.564",
+              "未提供",
+              "0.10212"
+            ]
+          ],
+          "wrap": false
+        }
+      ],
+      "conclusion": "Endo-4DGX在两个场景的块PSNR与LPIPS均优于此处baseline，但预算分别为10000步与3000步，不能归为等预算优势或本研究贡献。",
+      "note": "“原方法复现”仅指未加入本研究改进模块，不代表逐行未改代码或与论文配置完全一致；已披露的依赖补全、数据接口和先验差异仍适用。"
+    }
+  ],
+  "source_note": "来源：9月29日同预算基准、10月2日STRONG-REPRO汇总，以及作者于10月3日补充确认的EndoGaussian结果。历史记录保留；本页是汇总，不是新训练批次。未提供指标不补造，未公开原始手术影像。",
+  "sources": [
+    {
+      "kind": "已有报告摘要",
+      "label": "2026-09-29-endogs-summary.json／2026-10-02-strong-baselines.json"
+    },
+    {
+      "kind": "作者确认的实验汇总",
+      "label": "2026-10-03 EndoGaussian：测试组织块绝对指标与验证块PSNR差值"
+    }
+  ],
+  "updated": "2026-10-08",
+  "update_file": "reproduction-update-2026-10-08.json",
+  "current_update": {
+    "schema_version": 1,
+    "updated": "2026-10-08",
+    "source_note": "依据作者已核对并提供的数据整理；本次未访问实验服务器，未重新运行实验。更新时间不是原始实验或下载日期。",
+    "coverage": [
+      [
+        "SCARED",
+        3,
+        34,
+        "三条动态序列：12 / 12 / 10 个目标",
+        "提供的标定/位姿"
+      ],
+      [
+        "C3VD",
+        11,
+        132,
+        "7 条注册序列 + 4 条 screening；每条 12 个目标",
+        "提供的标定/位姿；多项式相机转虚拟针孔"
+      ],
+      [
+        "StereoMIS",
+        3,
+        36,
+        "三个已处理窗口；每个 12 个目标",
+        "提供的标定/位姿"
+      ],
+      [
+        "EndoNeRF",
+        2,
+        24,
+        "两个场景；每个 12 个目标",
+        "真实固定相机；零基线时间插帧"
+      ],
+      [
+        "EndoNeRF-EC",
+        2,
+        24,
+        "两个对应曝光版本；每个 12 个目标",
+        "真实固定相机；非额外独立场景"
+      ],
+      [
+        "Hamlyn",
+        1,
+        12,
+        "Hamlyn23 示例帧池",
+        "共享三帧估计相机；目标 RGB 可用于相机估计"
+      ]
+    ],
+    "totals": {
+      "methods": 3,
+      "datasets": 6,
+      "sequences": 22,
+      "targets": 262,
+      "model_target_records": 786
+    },
+    "method_status": [
+      [
+        "Deform3DGS",
+        "逐场景训练/优化",
+        "EndoNeRF、EC",
+        "已有历史及 EC noadapt_full 数值；预算、先验和评价区域按各表披露。"
+      ],
+      [
+        "SurgicalGS / EndoPrior-GS / EndoPlanar",
+        "逐场景训练/优化",
+        "EndoNeRF",
+        "保留 pulling、cutting 原有结果；不是等预算排名。"
+      ],
+      [
+        "Endo-4DGS / EndoGaussian",
+        "逐场景训练/优化",
+        "EndoNeRF、EC",
+        "保留历史；新增 EC 预算为 1000 coarse + 3000 fine。EndoGaussian pulling 新训练数值失败，无完整结果。"
+      ],
+      [
+        "Endo-4DGX",
+        "逐场景训练/优化",
+        "EndoNeRF-EC",
+        "历史与新增 EC 结果按 noadapt_full 等协议区分，不和前馈全图表混合。"
+      ],
+      [
+        "DepthSplat",
+        "预训练前馈推理",
+        "本轮六数据集",
+        "官方预训练 checkpoint；已完成前馈高斯推理与本轮图像评价。"
+      ],
+      [
+        "MVSplat",
+        "预训练前馈推理",
+        "本轮六数据集",
+        "dylanebert 第三方权重镜像；架构严格加载通过，未独立核对与官方 Google Drive 权重的字节一致性。"
+      ],
+      [
+        "OpenD4RT＋贴图渲染",
+        "预训练推理 + 外部渲染",
+        "本轮六数据集",
+        "非官方 OpenD4RT 实现及其权重。几何、相机、轨迹已有推理；RGB 来自输入纹理与外部渲染器，不是 D4RT 直接预测。"
+      ],
+      [
+        "VGGT / MoRe",
+        "预训练前馈推理",
+        "Hamlyn、EndoNeRF、SCARED",
+        "已有推理记录及小规模 SCARED 对齐深度评价；没有统一 PSNR/SSIM/LPIPS，不补造。"
+      ],
+      [
+        "Endo3R",
+        "官方预训练推理 · 工程 smoke",
+        "Hamlyn23 前 8 帧；EndoNeRF pulling 前 8 帧",
+        "在线推理 smoke 已完成：点图、深度、置信度、相机及输出有限性检查。没有完整官方 benchmark 或统一图像质量指标。"
+      ],
+      [
+        "Endo-E2E-GS",
+        "自训练 pilot",
+        "SCARED：48 / 12 / 1 对",
+        "随机初始化；stage1 1000 + stage2 1000 步；使用 stage2_final，不是作者预训练权重或论文完整复现。"
+      ],
+      [
+        "NAS3R / NoPoSplat",
+        "等待完整权重 · 尚无结果",
+        "无完成的新模型评价",
+        "NAS3R 早先下载超时，后有续传记录；本次状态仍为等待权重。DepthSplat/MVSplat 的引用旧分数不是这两个模型的结果。"
+      ]
+    ],
+    "protocol": [
+      [
+        "输入与留出目标",
+        "每个目标使用前后两张时间上下文图像；每条序列均匀选择最多 12 个留出目标。SCARED 一条序列为 10 个，合计 22 条序列、262 个目标。六个公开数据集条目中，EC 是 EndoNeRF 的关联曝光版本，不是额外独立场景。"
+      ],
+      [
+        "统一图像评价",
+        "分辨率 256×256；从保存的 PNG 统一计算全图 PSNR、SSIM、LPIPS，空洞和错误区域均计入。SSIM 使用 skimage；LPIPS 使用经过校准的 SqueezeNet v0.1。三项均已完成。"
+      ],
+      [
+        "汇总与训练条件",
+        "先对每条序列的目标帧取平均，再对同一数据集的序列等权平均。没有场景优化或内窥镜权重训练。结果仅代表本地确定性测试子集，不是全帧测试或官方 benchmark。"
+      ]
+    ],
+    "cameras": [
+      [
+        "SCARED / C3VD / StereoMIS",
+        "使用提供的标定/位姿。C3VD 按官方多项式相机标定转换为虚拟针孔图像。"
+      ],
+      [
+        "EndoNeRF / EndoNeRF-EC",
+        "保留真实固定相机，属于零基线时间插帧。DepthSplat/MVSplat 缺少三角化视差；图像分数不能解释为新视角合成或几何准确性。"
+      ],
+      [
+        "Hamlyn · 目标 RGB 的使用边界",
+        "OpenD4RT 独立三帧相机估计允许目标 RGB 仅用于相机估计，三种方法共用这些相机。上下文几何仍独立用两张输入图像编码；并非严格不使用目标 RGB 的全流程。"
+      ],
+      [
+        "OpenD4RT · 外部贴图图像流程",
+        "两张输入预测深度 + 外部网格贴图渲染；不使用目标纹理或 GT 深度。用输入预测相机基线与共享相机基线对齐尺度，再使用共享相机参数投影，保留未覆盖的黑色区域。旧同帧自重投影诊断不与本轮留出目标图评价合并。"
+      ]
+    ],
+    "depth": {
+      "headers": [
+        "样本 / 划分",
+        "方法",
+        "AbsRel ↓",
+        "RMSE ↓ / mm",
+        "δ1 ↑"
+      ],
+      "rows": [
+        [
+          "dataset1/keyframe3 · 12 对验证",
+          "VGGT",
+          "0.061982",
+          "6.7072",
+          "0.989411"
+        ],
+        [
+          "dataset1/keyframe3 · 12 对验证",
+          "MoRe",
+          "0.089464",
+          "9.4129",
+          "0.937819"
+        ],
+        [
+          "dataset4/keyframe1 · 单对测试",
+          "VGGT",
+          "0.062641",
+          "5.3460",
+          "0.979129"
+        ],
+        [
+          "dataset4/keyframe1 · 单对测试",
+          "MoRe",
+          "0.045665",
+          "3.7160",
+          "0.992579"
+        ]
+      ],
+      "note": "逐对使用 GT 中位数进行尺度对齐；只评价对齐后的深度形状，不代表原生毫米尺度恢复。验证 12 对与单对测试分开解释；不补造两者的 PSNR/SSIM/LPIPS。",
+      "conclusion": "此验证子集上 VGGT 三项指标更好；单对测试上 MoRe 三项更好。样本规模与逐对尺度对齐限制了结论，不能据此判断原生尺度或完整 benchmark 优劣。"
+    },
+    "pilot": {
+      "headers": [
+        "划分",
+        "样本数",
+        "视差 EPE ↓ / px",
+        "输入视角 PSNR ↑ / dB",
+        "SSIM ↑",
+        "有效深度 AbsRel ↓",
+        "LPIPS"
+      ],
+      "rows": [
+        [
+          "验证",
+          "12 对",
+          "1.5213",
+          "23.112",
+          "0.6506",
+          "0.08921",
+          "未提供"
+        ],
+        [
+          "测试",
+          "1 对",
+          "6.0956",
+          "19.318",
+          "0.7894",
+          "0.37892",
+          "未提供"
+        ]
+      ],
+      "setup": "SCARED 双目校正，320×256；训练 48 对、验证 12 对、测试 1 对。随机初始化，自训练 stage1 1000 步 + stage2 1000 步。此表报告 stage2_final。",
+      "note": "stage2_best 的本次最佳验证 EPE 出现在 step1，不称为完整联合训练模型。RGB 指标是输入视角重渲染，不与留出目标帧表排名；LPIPS 未提供。",
+      "conclusion": "pilot 已得到验证和单对测试数值；测试 EPE / AbsRel 高于验证。它是小规模自训练实验，不是作者预训练模型或论文完整复现。"
+    },
+    "image_csv": "three-model-dataset-metrics-20261008.csv",
+    "control_csv": "mean-input-control-20261008.csv",
+    "ec_csv": "ec-noadapt-full-20261006.csv",
+    "control_note": "对照直接逐像素平均前后两张输入 RGB，不进行三维重建，采用同一留出目标及图像评价协议。",
+    "control_conclusion": "DepthSplat 在 SCARED / C3VD 的 PSNR 高于直接平均输入约 1.26 / 0.73 dB。在其余四个数据集，本轮三种方法的 PSNR 均未超过这一简单对照。这些结果不能单独证明三维几何有效；仍需独立几何评价和更大基线的新视角实验。",
+    "ec_note": "2026-10-06 汇总；test / noadapt_full，即无适配全支持，使用有效组织块指标与 AlexNet LPIPS。新增 Endo-4DGS / EndoGaussian 预算为 1000 coarse + 3000 fine；原生预算、深度先验与条件不同，不是等预算排名。",
+    "ec_failure": "EndoGaussian pulling 的新增训练数值失败，未完成完整训练，无有效结果可填；不能称四个新增训练全部成功。历史 EndoGaussian 结果不挪用为本批结果。",
+    "ec_boundary": "无适配全支持、无适配右半、左半拟合/右半评价的适配是不同协议。本表仅列 noadapt_full；AlexNet 组织块 LPIPS 不与本轮 SqueezeNet 全图 LPIPS 混合排名。",
+    "historic_boundary": "下方保留 2026-10-03 及更早的 pulling、cutting、EndoGaussian 验证补充和 EC 历史表，原数值与历史日期不变。“不读取测试 RGB 进行适配”仅适用于相应历史 EC 实验，不概括 Hamlyn 的目标图相机估计或其他已有适配结果。",
+    "image_metrics": [
+      {
+        "数据集": "SCARED",
+        "方法": "DepthSplat",
+        "目标帧数": "34",
+        "PSNR": "24.717929",
+        "SSIM": "0.714145",
+        "LPIPS": "0.077053"
+      },
+      {
+        "数据集": "SCARED",
+        "方法": "MVSplat",
+        "目标帧数": "34",
+        "PSNR": "23.754110",
+        "SSIM": "0.651316",
+        "LPIPS": "0.093605"
+      },
+      {
+        "数据集": "SCARED",
+        "方法": "OpenD4RT＋贴图渲染",
+        "目标帧数": "34",
+        "PSNR": "24.704658",
+        "SSIM": "0.692219",
+        "LPIPS": "0.119622"
+      },
+      {
+        "数据集": "C3VD",
+        "方法": "DepthSplat",
+        "目标帧数": "132",
+        "PSNR": "25.255965",
+        "SSIM": "0.727191",
+        "LPIPS": "0.147627"
+      },
+      {
+        "数据集": "C3VD",
+        "方法": "MVSplat",
+        "目标帧数": "132",
+        "PSNR": "24.300491",
+        "SSIM": "0.695549",
+        "LPIPS": "0.170843"
+      },
+      {
+        "数据集": "C3VD",
+        "方法": "OpenD4RT＋贴图渲染",
+        "目标帧数": "132",
+        "PSNR": "22.383835",
+        "SSIM": "0.651002",
+        "LPIPS": "0.205948"
+      },
+      {
+        "数据集": "StereoMIS",
+        "方法": "DepthSplat",
+        "目标帧数": "36",
+        "PSNR": "19.227290",
+        "SSIM": "0.437816",
+        "LPIPS": "0.203749"
+      },
+      {
+        "数据集": "StereoMIS",
+        "方法": "MVSplat",
+        "目标帧数": "36",
+        "PSNR": "20.095953",
+        "SSIM": "0.462671",
+        "LPIPS": "0.184549"
+      },
+      {
+        "数据集": "StereoMIS",
+        "方法": "OpenD4RT＋贴图渲染",
+        "目标帧数": "36",
+        "PSNR": "23.061752",
+        "SSIM": "0.657666",
+        "LPIPS": "0.161521"
+      },
+      {
+        "数据集": "EndoNeRF",
+        "方法": "DepthSplat",
+        "目标帧数": "24",
+        "PSNR": "23.278657",
+        "SSIM": "0.728850",
+        "LPIPS": "0.122282"
+      },
+      {
+        "数据集": "EndoNeRF",
+        "方法": "MVSplat",
+        "目标帧数": "24",
+        "PSNR": "24.004695",
+        "SSIM": "0.740065",
+        "LPIPS": "0.124365"
+      },
+      {
+        "数据集": "EndoNeRF",
+        "方法": "OpenD4RT＋贴图渲染",
+        "目标帧数": "24",
+        "PSNR": "23.206411",
+        "SSIM": "0.735277",
+        "LPIPS": "0.131095"
+      },
+      {
+        "数据集": "EndoNeRF-EC",
+        "方法": "DepthSplat",
+        "目标帧数": "24",
+        "PSNR": "12.089031",
+        "SSIM": "0.482776",
+        "LPIPS": "0.278997"
+      },
+      {
+        "数据集": "EndoNeRF-EC",
+        "方法": "MVSplat",
+        "目标帧数": "24",
+        "PSNR": "12.791279",
+        "SSIM": "0.515091",
+        "LPIPS": "0.274001"
+      },
+      {
+        "数据集": "EndoNeRF-EC",
+        "方法": "OpenD4RT＋贴图渲染",
+        "目标帧数": "24",
+        "PSNR": "13.005772",
+        "SSIM": "0.508736",
+        "LPIPS": "0.284244"
+      },
+      {
+        "数据集": "Hamlyn",
+        "方法": "DepthSplat",
+        "目标帧数": "12",
+        "PSNR": "20.412522",
+        "SSIM": "0.613745",
+        "LPIPS": "0.277385"
+      },
+      {
+        "数据集": "Hamlyn",
+        "方法": "MVSplat",
+        "目标帧数": "12",
+        "PSNR": "19.270736",
+        "SSIM": "0.581028",
+        "LPIPS": "0.291411"
+      },
+      {
+        "数据集": "Hamlyn",
+        "方法": "OpenD4RT＋贴图渲染",
+        "目标帧数": "12",
+        "PSNR": "22.864783",
+        "SSIM": "0.722508",
+        "LPIPS": "0.190884"
+      }
+    ],
+    "mean_input_control": [
+      {
+        "数据集": "SCARED",
+        "PSNR": "23.462383",
+        "SSIM": "0.558002",
+        "LPIPS": "0.101712"
+      },
+      {
+        "数据集": "C3VD",
+        "PSNR": "24.521759",
+        "SSIM": "0.657786",
+        "LPIPS": "0.155632"
+      },
+      {
+        "数据集": "StereoMIS",
+        "PSNR": "27.426777",
+        "SSIM": "0.730754",
+        "LPIPS": "0.091030"
+      },
+      {
+        "数据集": "EndoNeRF",
+        "PSNR": "24.305848",
+        "SSIM": "0.753419",
+        "LPIPS": "0.110553"
+      },
+      {
+        "数据集": "EndoNeRF-EC",
+        "PSNR": "13.393265",
+        "SSIM": "0.528824",
+        "LPIPS": "0.253558"
+      },
+      {
+        "数据集": "Hamlyn",
+        "PSNR": "23.398207",
+        "SSIM": "0.746161",
+        "LPIPS": "0.160130"
+      }
+    ],
+    "ec_noadapt_full": [
+      {
+        "场景": "pulling",
+        "方法": "Deform3DGS",
+        "块PSNR": "28.226947",
+        "块SSIM": "0.852844",
+        "块LPIPS": "0.166815"
+      },
+      {
+        "场景": "pulling",
+        "方法": "Endo-4DGS",
+        "块PSNR": "27.990796",
+        "块SSIM": "0.864931",
+        "块LPIPS": "0.208664"
+      },
+      {
+        "场景": "pulling",
+        "方法": "Endo-4DGX",
+        "块PSNR": "30.129343",
+        "块SSIM": "0.903352",
+        "块LPIPS": "0.086045"
+      },
+      {
+        "场景": "cutting",
+        "方法": "Deform3DGS",
+        "块PSNR": "23.450177",
+        "块SSIM": "0.690913",
+        "块LPIPS": "0.295129"
+      },
+      {
+        "场景": "cutting",
+        "方法": "Endo-4DGS",
+        "块PSNR": "27.659881",
+        "块SSIM": "0.815434",
+        "块LPIPS": "0.262793"
+      },
+      {
+        "场景": "cutting",
+        "方法": "EndoGaussian",
+        "块PSNR": "27.911488",
+        "块SSIM": "0.836191",
+        "块LPIPS": "0.203843"
+      },
+      {
+        "场景": "cutting",
+        "方法": "Endo-4DGX",
+        "块PSNR": "28.564226",
+        "块SSIM": "0.897850",
+        "块LPIPS": "0.102119"
+      }
+    ]
+  }
+}

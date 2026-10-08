@@ -1,0 +1,5 @@
+样本 / 划分,方法,AbsRel ↓,RMSE ↓ / mm,δ1 ↑
+dataset1/keyframe3 · 12 对验证,VGGT,0.061982,6.7072,0.989411
+dataset1/keyframe3 · 12 对验证,MoRe,0.089464,9.4129,0.937819
+dataset4/keyframe1 · 单对测试,VGGT,0.062641,5.3460,0.979129
+dataset4/keyframe1 · 单对测试,MoRe,0.045665,3.7160,0.992579
