@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "title": "模型蒸馏",
+  "description": "用教师伪标签适配重建模型，记录方法、前后指标与泛化边界。",
+  "entries": [
+    {
+      "slug": "2026-10-08-stereo-xyz-opend4rt",
+      "file": "2026-10-08-stereo-xyz-opend4rt.json"
+    }
+  ]
+}

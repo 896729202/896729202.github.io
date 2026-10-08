@@ -1,0 +1,75 @@
+name: Verify model distillation section
+on:
+  push:
+    branches: [site/model-distillation-20261008]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout isolated reviewed revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - name: Record existing files and verify prepared sources
+        run: |
+          python3 - <<'PY'
+          import json,hashlib,subprocess,os
+          from pathlib import Path
+          expected={
+            'assets/model-distillation.css':'06b3c3c93b559ccc7f0e5ec30d94ed82b09766b0',
+            'docs/model-distillation.md':'31076896db7981b8195a1e3b2d1162d4e1c93116',
+            'scripts/check_model_distillation.py':'3daaedb295fc3ab02035f2c15f772b234cf1b705',
+            'scripts/model_distillation.py':'bd0d61c7d69d4670011774a3b78ceefe6d11238b',
+            'scripts/build.py':'c0bb2f49d241e5674575d1291c30d85eea141155',
+            'content/distillation/2026-10-08-stereo-xyz-opend4rt.json':'42ad691d69caa895d90004b00a00e67b9c57645a',
+            'content/distillation/index.json':'d7a8551b70b242c8d74bc673cd9d7b3f9407063e'
+          }
+          for path,want in expected.items():
+            assert subprocess.check_output(['git','hash-object',path],text=True).strip()==want,'Prepared source mismatch: '+path
+          files=subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
+          before={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in files if p}
+          (Path(os.environ['RUNNER_TEMP'])/'distillation-before.json').write_text(json.dumps(before))
+          PY
+      - name: Build without running any models and check links and metric values
+        run: |
+          python3 -m venv "$RUNNER_TEMP/distillation-env"
+          "$RUNNER_TEMP/distillation-env/bin/python" -m pip install -q -r requirements.txt
+          "$RUNNER_TEMP/distillation-env/bin/python" scripts/build.py
+          "$RUNNER_TEMP/distillation-env/bin/python" scripts/check_model_distillation.py
+          "$RUNNER_TEMP/distillation-env/bin/python" scripts/check_reproduction_rankings.py
+      - name: Check unchanged history and deterministic repeat build
+        run: |
+          "$RUNNER_TEMP/distillation-env/bin/python" - <<'PY'
+          import json,hashlib,subprocess,os,sys,re
+          from pathlib import Path
+          before=json.loads((Path(os.environ['RUNNER_TEMP'])/'distillation-before.json').read_text())
+          for p,want in before.items():
+            if p!='thesis/index.html':
+              assert hashlib.sha256(Path(p).read_bytes()).hexdigest()==want,'Unrelated content changed: '+p
+          old=subprocess.check_output(['git','show','HEAD:thesis/index.html'],text=True)
+          current=Path('thesis/index.html').read_text()
+          stripped=re.sub(r'<a class="experiment-folder" href="distillation/index.html">.*?</a>','',current,flags=re.S)
+          assert stripped==old,'Research landing page changed beyond new card'
+          new=set(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],text=True).splitlines())
+          folder='thesis/distillation/2026-10-08-stereo-xyz-opend4rt/'
+          expected={'thesis/distillation/index.html'}|{folder+n for n in ['index.html','summary.json','metrics.csv','teacher-validation.csv','teacher-control.csv']}
+          assert new==expected,new
+          names=set(before)|new
+          snapshot={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in names}
+          subprocess.run([sys.executable,'scripts/build.py'],check=True)
+          assert snapshot=={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in names}
+          print('PASS: original data, rankings, datasets, experiments, LoRA and RL unchanged; repeat build identical.')
+          PY
+      - name: Commit pages and remove temporary workflow on the isolated branch
+        run: |
+          test "$(git ls-remote origin "refs/heads/$GITHUB_REF_NAME" | cut -f1)" = "$GITHUB_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add thesis/index.html thesis/distillation
+          git rm .github/workflows/model-distillation-once.yml
+          git commit -m 'docs: publish stereo XYZ distillation study with P1 gains and generalization limits'
+          git push origin "HEAD:$GITHUB_REF_NAME"
