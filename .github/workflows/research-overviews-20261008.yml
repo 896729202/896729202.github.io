@@ -1,0 +1,42 @@
+name: Verify research overviews 2026-10-08
+on:
+  push:
+    branches: [site/research-overviews-20261008]
+    paths:
+      - '.github/research-update/**'
+      - '.github/workflows/research-overviews-20261008.yml'
+      - 'scripts/research_overviews.py'
+      - 'assets/research-overviews.css'
+permissions:
+  contents: write
+concurrency:
+  group: research-overviews-20261008
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout isolated reviewed revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 5
+      - name: Apply author-provided data without experiment execution
+        run: python3 .github/research-update/prepare.py
+      - name: Build all pages with the normal entrypoint
+        run: |
+          python3 -m venv "$RUNNER_TEMP/research-site-env"
+          "$RUNNER_TEMP/research-site-env/bin/python" -m pip install -q -r requirements.txt
+          "$RUNNER_TEMP/research-site-env/bin/python" scripts/build.py
+      - name: Check full precision, history, downloads, links and repeat build
+        run: '"$RUNNER_TEMP/research-site-env/bin/python" .github/research-update/check.py'
+      - name: Commit reviewed sources and generated outputs on isolated branch
+        run: |
+          test "$(git ls-remote origin refs/heads/site/research-overviews-20261008 | cut -f1)" = "$GITHUB_SHA"
+          git add -- content/datasets.json content/experiments/reproductions.json content/experiments/reproduction-update-2026-10-08.json content/experiments/three-model-dataset-metrics-20261008.csv content/experiments/mean-input-control-20261008.csv content/experiments/ec-noadapt-full-20261006.csv scripts/dataset_inventory.py scripts/experiment_summaries.py thesis/experiments/datasets/index.html thesis/experiments/datasets/inventory.json thesis/experiments/datasets/inventory.csv thesis/experiments/reproductions/index.html thesis/experiments/reproductions/summary.json thesis/experiments/reproductions/data
+          git rm -- .github/research-update/prepare.py .github/research-update/check.py .github/workflows/research-overviews-20261008.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'docs: build verified 2026-10-08 research inventories and protocol-separated results'
+          git push origin HEAD:site/research-overviews-20261008
