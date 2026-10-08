@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "slug": "2026-10-08-stereo-xyz-opend4rt",
+  "record_date": "2026-10-08",
+  "experiment_date": null,
+  "title": "双目教师生成 XYZ 伪标签：微调 OpenD4RT 改善 P1 重投影",
+  "subtitle": "FoundationStereo 主教师 / RAFT-Stereo 对照 · 32 帧学生 · 240 步局部微调",
+  "summary": "双目教师生成 XYZ 伪标签，学生只看左目视频。P1 训练与验证的同视角重投影改善，但 P3 和跨数据集测试下降。",
+  "pipeline": [
+    "同一时刻的左右双目图像",
+    "教师预测视差",
+    "标定转换：深度 → XYZ 伪标签",
+    "左目视频 → 微调 OpenD4RT"
+  ],
+  "method_facts": [
+    [
+      "教师与标签",
+      "FoundationStereo ViT-L 为主教师，RAFT-Stereo 为对照。两者冻结，输出视差，再依双目标定转换为相机坐标系 XYZ；这是模型伪标签，不是真值。"
+    ],
+    [
+      "学生与数据",
+      "非官方 OpenD4RT 32 帧版本，从原始预训练权重开始；学生只输入左目视频。在 StereoMIS P1 的一个 32 帧片段训练，另一个 P1 32 帧片段验证并选择权重。"
+    ],
+    [
+      "训练方式",
+      "两个教师分别训练一个学生版本，均训练 240 步。只更新最后两个解码器块和 XYZ 输出头，其余冻结；用 XYZ 坐标损失并做深度尺度归一化，不要求学习毫米级绝对尺度。"
+    ]
+  ],
+  "filter_note": "过滤左右预测不一致、无效深度、过暗/过亮及组织掩码外像素。没有训练教师，也没有开展 GRPO。",
+  "results": [
+    {
+      "split": "StereoMIS P1 训练",
+      "scope": "训练",
+      "psnr_before": "12.44",
+      "psnr_after": "17.59",
+      "ssim_before": "0.342",
+      "ssim_after": "0.484",
+      "lpips_before": "0.277",
+      "lpips_after": "0.152"
+    },
+    {
+      "split": "StereoMIS P1 验证",
+      "scope": "同一 P1 验证",
+      "psnr_before": "13.34",
+      "psnr_after": "16.83",
+      "ssim_before": "0.394",
+      "ssim_after": "0.496",
+      "lpips_before": "0.269",
+      "lpips_after": "0.157"
+    },
+    {
+      "split": "StereoMIS P3 独立测试",
+      "scope": "独立测试",
+      "psnr_before": "14.99",
+      "psnr_after": "14.48",
+      "ssim_before": "0.234",
+      "ssim_after": "0.217",
+      "lpips_before": "0.297",
+      "lpips_after": "0.323"
+    },
+    {
+      "split": "C3VD 测试",
+      "scope": "跨数据集测试",
+      "psnr_before": "16.78",
+      "psnr_after": "15.33",
+      "ssim_before": "0.527",
+      "ssim_after": "0.512",
+      "lpips_before": "0.220",
+      "lpips_after": "0.250"
+    },
+    {
+      "split": "EndoNeRF 测试",
+      "scope": "跨数据集测试",
+      "psnr_before": "14.07",
+      "psnr_after": "13.41",
+      "ssim_before": "0.491",
+      "ssim_after": "0.437",
+      "lpips_before": "0.221",
+      "lpips_after": "0.297"
+    },
+    {
+      "split": "EndoNeRF-EC 测试",
+      "scope": "跨数据集曝光版本",
+      "psnr_before": "14.17",
+      "psnr_after": "13.98",
+      "ssim_before": "0.498",
+      "ssim_after": "0.478",
+      "lpips_before": "0.264",
+      "lpips_after": "0.310"
+    }
+  ],
+  "teacher_validation": {
+    "headers": [
+      "冻结教师",
+      "深度 AbsRel ↓",
+      "用途"
+    ],
+    "rows": [
+      [
+        "FoundationStereo ViT-L",
+        "1.39%",
+        "主教师"
+      ],
+      [
+        "RAFT-Stereo",
+        "1.48%",
+        "对照教师"
+      ]
+    ],
+    "note": "同一有效像素范围下，用 SCARED 的 5 帧真实深度校验。FoundationStereo 略好，因此选为主教师；仅是小规模选择依据。5 帧真值未用于 OpenD4RT 的训练梯度。"
+  },
+  "teacher_control": {
+    "headers": [
+      "划分",
+      "微调前",
+      "FoundationStereo 教师",
+      "RAFT-Stereo 教师"
+    ],
+    "rows": [
+      [
+        "P1 验证",
+        "13.34",
+        "16.83",
+        "16.75"
+      ],
+      [
+        "P3 独立测试",
+        "14.99",
+        "14.48",
+        "14.53"
+      ]
+    ],
+    "note": "两种教师均改善 P1 验证、损伤 P3 测试；校验误差略低的 FoundationStereo 没有解决泛化下降。RAFT 其余指标未提供，不补造。"
+  },
+  "evaluation": [
+    [
+      "测量对象",
+      "0° 同视角重投影 RGB：预测 XYZ → 用原始 RGB 给点着色 → 按相机投影 → 与原始图比较。不是留出目标图或新视角评价。"
+    ],
+    [
+      "评价范围",
+      "共 18 个片段、576 帧；渲染空洞保留为黑色并计入 PSNR、SSIM、LPIPS。各划分的片段数/帧数、LPIPS 网络和汇总权重未提供，不自行假定。"
+    ],
+    [
+      "解释边界",
+      "原始图片提供点的颜色；独立测试未测真实深度精度。不能由重投影提升推断真实几何、新视角渲染或原生毫米尺度恢复提高，也不与现有留出目标图排行榜混排。"
+    ]
+  ],
+  "conclusion": "本次伪标签蒸馏让 OpenD4RT 适应了 P1 训练片段及同一 P1 的验证片段。P3、C3VD、EndoNeRF 和 EC 的三项图像指标均变差，尚未证明跨场景重建改善；换教师也未解决这一问题。",
+  "source_note": "依据作者提供的已完成实验汇总整理；未读取服务器实验目录，未重跑训练或评价。2026-10-08 为本页记录日期，实际运行日期未提供。仅公开摘要，不上传患者图像、模型权重或伪标签文件。"
+}
