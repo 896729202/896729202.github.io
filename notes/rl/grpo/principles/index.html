@@ -40,7 +40,7 @@
 </nav><div class="sidebar-note"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 4c-10-1-16 2-15 9 1 6 8 8 12 2 2-3 3-7 3-11Z"/><path d="M4 21c2-5 5-8 11-12"/></svg><p>把学过的东西，<br>变成自己的知识。</p></div></aside>
 <main class="page-main rl-main rl-module-page" id="main"><p class="rl-paper-line"><a class="rl-paper-primary" href="https://arxiv.org/pdf/2402.03300" target="_blank" rel="noopener noreferrer" aria-label="GRPO 论文原文 PDF（新窗口）"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg> 论文原文（PDF）<svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a class="rl-paper-meta" href="https://arxiv.org/abs/2402.03300" target="_blank" rel="noopener noreferrer">arXiv:2402.03300</a></p><header class="page-heading"><nav class="breadcrumb" aria-label="面包屑"><a href="../../../../index.html">首页</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../../../notes/index.html">八股文</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../../../notes/rl/index.html">强化学习</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../index.html">GRPO</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">原理</span></nav><h1 tabindex="-1">GRPO · 原理</h1></header><nav class="rl-tabs rl-subtabs" aria-label="GRPO 内容模块"><a href="../interview/index.html">八股文</a><a href="../principles/index.html" aria-current="page">原理</a></nav><div class="article-body rl-body"><h2>实测诊断：Reward 上升，正确率为什么没有明显提高？</h2>
 <p>记录日期：2026-10-10。本文把真实实验汇总与教学数值例子分开，围绕数学回答的 GRPO 训练说明机制与诊断方法。</p>
-<p>**来源与边界：**下列实测数字依据作者提供的实验汇总，本次未独立读取服务器上的训练日志、逐题预测或权重。算法机制参考 <a href="https://arxiv.org/html/2402.03300v2#S4.SS1">DeepSeekMath 原论文第 4.1 节</a>。教学例子是人为构造的算例，不是实际训练轨迹；实现的标准差、长度归一化、KL 系数和优化器设置须以训练代码为准。</p>
+<p><strong>来源与边界：</strong>下列实测数字依据作者提供的实验汇总，本次未独立读取服务器上的训练日志、逐题预测或权重。算法机制参考 <a href="https://arxiv.org/html/2402.03300v2#S4.SS1">DeepSeekMath 原论文第 4.1 节</a>。教学例子是人为构造的算例，不是实际训练轨迹；实现的标准差、长度归一化、KL 系数和优化器设置须以训练代码为准。</p>
 <h3>统一 500 题测试的观察</h3>
 <div class="grpo-table-scroll" role="region" aria-label="数据表；可横向滚动" tabindex="0"><table><thead><tr><th scope="col">模型 / 实验</th><th scope="col">答对题数</th><th scope="col">正确率</th><th scope="col">完整格式率</th></tr></thead><tbody><tr><td>Base SFT</td><td>215/500</td><td>43.00%</td><td>0%</td></tr><tr><td>Format SFT</td><td>232/500</td><td>46.40%</td><td>99.60%</td></tr><tr><td>原始 GRPO，每题采样 4 次</td><td>234/500</td><td>46.80%</td><td>99.60%</td></tr><tr><td>B2，每题采样 8 次</td><td>234/500</td><td>46.80%</td><td>汇总未提供</td></tr></tbody></table></div>
 <p>这里的 Base SFT 是实验命名的 SFT 起点，不等同于未微调的原始 Qwen。G=4 或 G=8 是<strong>训练时每题采样数</strong>，不能把 234/500 解读为测试时 best-of-8 或 pass@8。</p>
@@ -54,7 +54,7 @@
 <p>设奖励为 R₁…R_G，组均值为 μ，标准差为 σ。常见稳定实现为：</p>
 <p><code>A_i = (R_i - μ) / (σ + δ)</code></p>
 <p>δ 是防止除零的小数。A 是 Advantage（优势）：比本组平均好为正，比平均差为负。它不是绝对正确率，也不是当前 token 的独立真实贡献。优势在反向传播中通常视为常量，不对评分器和组统计反向求导。</p>
-<p>**教学例子：**正确奖励 1，完整格式奖励 0.2。四个回答都符合格式，其中两个正确：</p>
+<p><strong>教学例子：</strong>正确奖励 1，完整格式奖励 0.2。四个回答都符合格式，其中两个正确：</p>
 <div class="grpo-table-scroll" role="region" aria-label="数据表；可横向滚动" tabindex="0"><table><thead><tr><th scope="col">回答</th><th scope="col">正确性</th><th scope="col">格式</th><th scope="col">总奖励 R</th><th scope="col">R − μ</th><th scope="col">A（忽略极小 δ）</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>0.2</td><td>1.2</td><td>0.5</td><td>1</td></tr><tr><td>2</td><td>1</td><td>0.2</td><td>1.2</td><td>0.5</td><td>1</td></tr><tr><td>3</td><td>0</td><td>0.2</td><td>0.2</td><td>−0.5</td><td>−1</td></tr><tr><td>4</td><td>0</td><td>0.2</td><td>0.2</td><td>−0.5</td><td>−1</td></tr></tbody></table></div>
 <p>逐步验算：μ=(1.2+1.2+0.2+0.2)/4=0.7；采用总体标准差，σ=√[(0.25+0.25+0.25+0.25)/4]=0.5。因此 A=(1,1,−1,−1)。若采用样本标准差，σ≈0.57735，A≈±0.86603；数值不同，方向相同。</p>
 <p>共同的格式分数 0.2 在减均值时抵消：它提高原始 Reward，却没有给这组回答增加区分信号。若格式分数在回答间不同，则会改变优势，不能一概说格式奖励不影响学习。</p>
@@ -68,7 +68,7 @@
 <p>正优势且概率已增加过多，第一类收益封顶；负优势且概率已降低过多，改善收益也封顶。负优势回答的概率反而升高时，目标仍惩罚这种变化。Clip 并不把概率或参数硬锁在区间内，也不是梯度范数裁剪。</p>
 <h3>3. Loss、梯度与更新：一步算到参数</h3>
 <p>最大化 J 等价于最小化 <code>L_policy = −J</code>。整个训练还要聚合组和 token，并可能加上 <code>β × KL</code>；下例暂不加 KL，只看单个未裁剪 token 的局部贡献。</p>
-<p>**教学例子：**用一个标量 w 表示 token 相对其他 token 的 logit，p=sigmoid(w)，固定 p_old=0.2、A=+1，当前 p=0.22。</p>
+<p><strong>教学例子：</strong>用一个标量 w 表示 token 相对其他 token 的 logit，p=sigmoid(w)，固定 p_old=0.2、A=+1，当前 p=0.22。</p>
 <ol>
 <li>w=ln(0.22/0.78)≈−1.26567；ρ=0.22/0.2=1.1；J=1.1，L=−1.1。</li>
 <li>dp/dw=p(1−p)=0.22×0.78=0.1716。</li>
@@ -83,12 +83,12 @@
 <p>用于理解的 KL 例子：当前二元分布 (0.22,0.78)，参考分布 (0.20,0.80)，则完整分布的 <code>KL(current || ref)=0.22 ln(1.1)+0.78 ln(0.975)≈0.00122035</code>。若 β=0.1，总 Loss 在该点约为 −1.1+0.00012203=−1.09987797。加 KL 后还必须对 KL 项求梯度，不能沿用上面忽略 KL 的更新数值。</p>
 <p>这是完整二元分布的教学计算；原论文使用采样估计形式，不能把此数值当作实际训练日志中的 token KL。本轮汇总没有给出 β 或 KL 曲线，不能据此断言实际 KL 强弱。</p>
 <h2>问题一：奖励方差为零，为什么训练信号可能消失？</h2>
-<p>**教学例子：**四个奖励全为 1.2，μ=1.2、σ=0，加入 δ 后每个 A 都是 0；四个奖励全为 0.2 也是同样结果。没有稳定处理时直接除零会产生未定义值，而不是自动获得有效优势。</p>
+<p><strong>教学例子：</strong>四个奖励全为 1.2，μ=1.2、σ=0，加入 δ 后每个 A 都是 0；四个奖励全为 0.2 也是同样结果。没有稳定处理时直接除零会产生未定义值，而不是自动获得有效优势。</p>
 <p>A=0 时，ρA 和裁剪项都是 0，奖励代理目标对策略参数的梯度为零。这组全对样本不再提供“谁更好”的相对信号；全错组也没有正样本可以强化。<strong>消失的是该组的奖励策略梯度，不一定是总梯度</strong>：KL、其他非零优势组、共享参数及优化器状态仍可能引起更新。</p>
-<p>**实测观察：**原始 G=4 的零方差组占 73.75%。这提示大量组缺少奖励区分，但不能直接说“73.75% 算力完全浪费”。零方差也不等于回答文字相同：不同推理都可能全对或全错；反之，固定评分器下完全相同的回答通常同分。</p>
+<p><strong>实测观察：</strong>原始 G=4 的零方差组占 73.75%。这提示大量组缺少奖励区分，但不能直接说“73.75% 算力完全浪费”。零方差也不等于回答文字相同：不同推理都可能全对或全错；反之，固定评分器下完全相同的回答通常同分。</p>
 <h2>问题二：增加采样次数，为什么不一定提高正确率？</h2>
-<p>**教学模型：**假定各次采样独立、每次答对概率固定为 p，且只有二元正确性奖励。mixed 概率为 <code>1 − p^G − (1−p)^G</code>。例如 p=0.1 时，G=4 为 34.38%，G=8 约 56.95%。这说明组数增加可以更容易遇到对错混合，<strong>没有说明训练后的 p 一定变大</strong>。实际回答相关，且有格式奖励，该公式不能直接拟合上述实测比例。</p>
-<p>**实测观察：**G=8 将 mixed 比例从 26.25% 提到 37.50%，但仍是 234/500。可用比较信号变多与学会泛化是两件事。新增样本可能只是容易题的重复正确回答，难题仍全错；也可能生成不同但都错误的推理。温度太低会重复，太高可能增加无效输出。应同时查看组内正确数、去重率、截断率和更新幅度。</p>
+<p><strong>教学模型：</strong>假定各次采样独立、每次答对概率固定为 p，且只有二元正确性奖励。mixed 概率为 <code>1 − p^G − (1−p)^G</code>。例如 p=0.1 时，G=4 为 34.38%，G=8 约 56.95%。这说明组数增加可以更容易遇到对错混合，<strong>没有说明训练后的 p 一定变大</strong>。实际回答相关，且有格式奖励，该公式不能直接拟合上述实测比例。</p>
+<p><strong>实测观察：</strong>G=8 将 mixed 比例从 26.25% 提到 37.50%，但仍是 234/500。可用比较信号变多与学会泛化是两件事。新增样本可能只是容易题的重复正确回答，难题仍全错；也可能生成不同但都错误的推理。温度太低会重复，太高可能增加无效输出。应同时查看组内正确数、去重率、截断率和更新幅度。</p>
 <p>增加 G 也增加生成成本。比较时需要报告题目数、生成 token 总量、更新次数与预算；同题目数和同计算预算是两种不同对照。现有汇总不足以判定哪种配置的训练效率更高。训练 G、测试单次正确率、pass@k 和有选择器的 best-of-k 应分别报告。</p>
 <h2>问题三：如何区分奖励、采样与上游 SFT 问题？</h2>
 <p>先固定测试集、提示词、解码参数、答案解析和评分口径，再定位问题；以下是诊断建议，不是已经执行的新实验。</p>
@@ -97,7 +97,7 @@
 <p>判断上游 SFT 是否损伤能力，需要另加未微调模型的同口径对照；215/500 的 Base SFT 本身不能证明损伤。即使某个其他测试曾发现 SFT 退化，也不能把不同题集的百分比混入本表。全错组很多同样不能单独证明模型没有能力，还可能是评分、截断或采样设置的问题。</p>
 <h2>实验结论与复核清单</h2>
 <p>Reward 是训练代理指标。共同格式分数、训练题熟悉度和采样分布变化都可能影响其均值；独立测试正确率衡量另一件事。即使只奖励正确性，训练 Reward 上升也不保证测试泛化。组内平均 A 为零也不意味着整组梯度必然为零，因为每个回答的概率梯度方向不同。</p>
-<p>本轮可报告：**Format SFT 232/500，GRPO 234/500；G=8 与格式奖励消融均未带来进一步的总正确率提高，尚无显著收益证据。**不能报告“GRPO 已显著提高数学能力”，也不能把结果推广为“GRPO 无效”。</p>
+<p>本轮可报告：<strong>Format SFT 232/500，GRPO 234/500；G=8 与格式奖励消融均未带来进一步的总正确率提高，尚无显著收益证据。</strong>不能报告“GRPO 已显著提高数学能力”，也不能把结果推广为“GRPO 无效”。</p>
 <p>后续复核应保留同一 SFT 权重起点、训练题目与随机种子、采样参数、奖励分项、组内统计、生成预算、KL/Clip/梯度日志以及逐题测试结果。用独立验证集选择设置，最终测试集报告配对差异与多种子波动，才能把观察推进为有证据的因果诊断。</p>
 </div><a class="back-link rl-back" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回 GRPO</a></main>
 </div>
