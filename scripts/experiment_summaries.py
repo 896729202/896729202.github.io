@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 from build_experiments import ROOT, E, entries, block, build_record
+from experiment_topics import load_topic, build_topic, folder
 
 
 def table(headers, rows, caption, trials=False):
@@ -54,7 +55,8 @@ def build_summary(core, item, data):
     links = f'<a class="experiment-download" href="summary.json" download>{core.icon("download")} 摘要数据</a>'
     if item.get('source_file'):
         links += f' <a class="experiment-download" href="{E(item["source_file"])}" download>{core.icon("download")} 原始 Excel</a>'
-    main = f'<main id="main" class="experiment-main"><header class="experiment-header"><a class="back-link" href="../index.html">{core.icon("left")} 返回实验</a><p class="experiment-date"><time datetime="{E(item["date"])}">{E(item["date"])}</time> · {E(item.get("date_kind", "记录日期"))}</p><h1>{E(item["title"])}</h1><p class="experiment-subtitle">{E(item["subtitle"])}</p>{links}<p class="experiment-note">窄屏可横向滑动表格查看完整指标。</p></header>{navigation}{body}<footer class="experiment-source">{E(data.get("source_note", "依据已提供的实验汇总整理。"))}</footer></main>'
+    back_href, back_label = ('../index.html', '返回实验') if item['slug'] == 'reproductions' else ('../exposure-geometry/index.html', '返回曝光变化与几何建模')
+    main = f'<main id="main" class="experiment-main"><header class="experiment-header"><a class="back-link" href="{back_href}">{core.icon("left")} {back_label}</a><p class="experiment-date"><time datetime="{E(item["date"])}">{E(item["date"])}</time> · {E(item.get("date_kind", "记录日期"))}</p><h1>{E(item["title"])}</h1><p class="experiment-subtitle">{E(item["subtitle"])}</p>{links}<p class="experiment-note">窄屏可横向滑动表格查看完整指标。</p></header>{navigation}{body}<footer class="experiment-source">{E(data.get("source_note", "依据已提供的实验汇总整理。"))}</footer></main>'
     core.shell(f'thesis/experiments/{item["slug"]}/index.html',
                f'{item["date"]} · {item["title"]}', main, 'thesis', toc='',
                description=item.get('summary', item['subtitle']))
@@ -62,9 +64,7 @@ def build_summary(core, item, data):
 
 def build(core):
     items = entries()
-    index_rows = ''
-    date_links = []
-    seen_dates = set()
+    topic = load_topic(items)
     for item in items:
         slug = item['slug']
         data_file = item.get('data_file', slug + '.json')
@@ -87,15 +87,6 @@ def build(core):
             build_record(core, item, data)
         else:
             raise ValueError('Unsupported experiment schema')
-        day = item['date']
-        anchor = ''
-        if day not in seen_dates:
-            anchor = f' id="date-{E(day)}"'
-            seen_dates.add(day)
-            date_links.append(f'<a href="#date-{E(day)}">{E(day[5:])}</a>')
-        takeaway = item.get('takeaway', item['summary'])
-        index_rows += f'<tr{anchor}><td><time datetime="{E(day)}">{E(day)}</time></td><td><a href="{slug}/index.html">{E(item["title"])}</a></td><td>{E(takeaway)}</td></tr>'
-    dates = '<nav class="experiment-dates" aria-label="按日期跳转">' + ''.join(date_links) + '</nav>'
     overview_nav = ''
     overview_file = ROOT / 'content/experiments/reproductions.json'
     if overview_file.exists():
@@ -105,7 +96,8 @@ def build(core):
             raise ValueError('Invalid reproduction overview')
         build_summary(core, overview_item, overview_data)
         overview_nav = '<nav class="experiment-dates" aria-label="复现汇总"><a href="reproductions/index.html">原方法复现指标汇总 →</a></nav>'
-    catalog = '<div class="experiment-catalog"><table><thead><tr><th scope="col">记录日期</th><th scope="col">实验主题</th><th scope="col">核心结论</th></tr></thead><tbody>' + index_rows + '</tbody></table></div>'
-    main = f'<main class="page-main" id="main"><header class="page-heading"><a class="back-link" href="../index.html">{core.icon("left")} 返回内窥镜三维重建</a><h1>实验</h1><p class="description">按日期回看目的、指标与结论；同一组对照合并展示。</p></header>{overview_nav}{dates}{catalog}<p class="experiment-note">归档截至2026-10-03已提供结果；未执行及进行中的实验不列入。缺失指标明确标注，不等于零。</p></main>'
+    build_topic(core, topic, items)
+    catalog = folder(core, topic, items)
+    main = f'<main class="page-main" id="main"><header class="page-heading"><a class="back-link" href="../index.html">{core.icon("left")} 返回内窥镜三维重建</a><h1>实验</h1><p class="description">按研究主题组织，从研究问题进入，再查看实验、指标与结论。</p></header>{overview_nav}{catalog}<p class="experiment-note">主题内按研究脉络分类，保留各项实验的记录日期与原始资料。未执行及进行中的实验不列入；缺失指标不等于零。</p></main>'
     core.shell('thesis/experiments/index.html', '实验', main, 'thesis')
     print(f'Built {len(items)} concise experiment archive(s); retained workbook verified.')

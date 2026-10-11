@@ -89,3 +89,66 @@
 .experiment-jump{font-size:11px}
 }
 @media print{.experiment-dates,.experiment-jump{display:none}.experiment-extra>summary{font-weight:600}.experiment-extra>*{display:block!important}}
+
+/* Research-topic overview; individual experiment tables keep their layout. */
+.experiment-topic-folder .experiment-topic-label{font-size:11px;color:var(--accent);letter-spacing:.08em}
+.experiment-topic-folder .experiment-topic-meta{margin-top:14px;font-size:11px;line-height:1.8}
+.experiment-topic-folder .experiment-topic-open{display:block;margin-top:16px;font-size:12px;color:var(--accent)}
+.experiment-topic-folder>.icon{flex-shrink:0}
+.experiment-topic-summary{font-size:14px;line-height:1.95;margin:20px 0 0;max-width:64em}
+.experiment-topic-intro{padding:27px 0 26px}
+.experiment-topic-intro>h2{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin:0 0 9px}
+.experiment-topic-question{font:600 20px/1.85 var(--serif);margin:0 0 22px;color:var(--accent-ink)}
+.experiment-topic-scope{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.experiment-topic-scope>div{border:1px solid var(--line);border-radius:10px;padding:17px 19px;background:var(--paper)}
+.experiment-topic-scope h3,.experiment-topic .experiment-conclusion h3{font-size:12px;font-weight:600;color:var(--accent-ink);margin:0 0 7px}
+.experiment-topic-scope p,.experiment-topic .experiment-conclusion p{font-size:13px;line-height:1.95;margin:0}
+.experiment-topic-jump{border-top:1px solid var(--line);padding:17px 0 20px;gap:9px 20px}
+.experiment-topic-stage{padding:31px 0;border-bottom:1px solid var(--line);scroll-margin-top:100px}
+.experiment-topic-stage>h2{display:flex;align-items:baseline;gap:13px;font:600 23px/1.65 var(--serif);margin:0 0 13px}
+.experiment-topic-stage>h2>span{font:italic 20px Georgia,serif;color:var(--accent);flex-shrink:0}
+.experiment-topic-stage-question{font-size:14px;line-height:1.9;margin:0 0 8px;font-weight:500}
+.experiment-topic-stage-answer{font-size:13px;line-height:1.95;color:var(--muted);margin:0 0 19px}
+.experiment-topic-records{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--paper);overflow:hidden}
+.experiment-topic-records>li+li{border-top:1px solid var(--line)}
+.experiment-topic-records a{display:block;padding:17px 20px}
+.experiment-topic-records a:hover{background:var(--soft)}
+.experiment-topic-records a:focus-visible,.experiment-topic-writing>summary:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.experiment-topic-record-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.experiment-topic-record-heading h3{font-size:14px;font-weight:600;color:var(--accent-ink);line-height:1.8;margin:0}
+.experiment-topic-record-heading time{flex-shrink:0;font-size:11px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.experiment-topic-records p{font-size:12px;line-height:1.9;margin:6px 0;color:var(--muted)}
+.experiment-topic-record-open{font-size:11px;color:var(--accent)}
+.experiment-topic-writing{margin-top:28px;border:1px solid var(--line);border-radius:10px;padding:18px 22px;background:var(--paper)}
+.experiment-topic-writing>summary{cursor:pointer;font-size:14px;font-weight:500;color:var(--accent-ink);line-height:1.8}
+.experiment-topic-writing>h2{font:600 21px/1.8 var(--serif);margin:24px 0 18px}
+.experiment-topic-writing h3{font-size:13px;font-weight:600;line-height:1.8;margin:0 0 5px}
+.experiment-topic-outline,.experiment-topic-pending{padding-left:22px;margin:0 0 20px;font-size:13px;line-height:1.95}
+.experiment-topic-outline>li{padding-left:5px;margin:0 0 13px}
+.experiment-topic-outline>li::marker{color:var(--accent);font-variant-numeric:tabular-nums}
+.experiment-topic-outline p{color:var(--muted);margin:0;font-size:12px;line-height:1.95}
+.experiment-topic-pending{margin:9px 0 0;color:var(--muted);font-size:12px}
+.experiment-topic-pending>li{margin-bottom:7px}
+@media(max-width:640px){
+.experiment-topic-summary{font-size:13px}
+.experiment-topic-intro{padding-top:23px}
+.experiment-topic-question{font-size:18px}
+.experiment-topic-scope{grid-template-columns:1fr;gap:10px}
+.experiment-topic-scope>div{padding:15px 17px}
+.experiment-topic-stage{padding:26px 0}
+.experiment-topic-stage>h2{font-size:20px;gap:10px}
+.experiment-topic-stage-question{font-size:13px}
+.experiment-topic-stage-answer{font-size:12px}
+.experiment-topic-records a{padding:15px 17px}
+.experiment-topic-record-heading{display:block}
+.experiment-topic-record-heading time{display:block;margin-top:4px}
+.experiment-topic-writing{padding:16px 17px}
+.experiment-topic-writing>h2{font-size:19px}
+}
+@media print{
+.experiment-topic-scope>div,.experiment-topic-records>li{break-inside:avoid}
+.experiment-topic-stage>h2{break-after:avoid}
+.experiment-topic-writing>*{display:block!important}
+.experiment-topic-writing .experiment-topic-outline{display:block!important}
+.experiment-topic-record-open{display:none}
+}

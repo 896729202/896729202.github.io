@@ -55,7 +55,7 @@ def configure(core):
         original_thesis()
         path = ROOT / 'thesis/index.html'
         text = path.read_text(encoding='utf-8')
-        folder = f'<a class="experiment-folder" href="experiments/index.html"><div><h2>实验</h2><p>{count:02d} 份记录 · 按日期查看实验、指标与结论</p></div>{core.icon("arrow")}</a>'
+        folder = f'<a class="experiment-folder" href="experiments/index.html"><div><h2>实验</h2><p>{count:02d} 份记录 · 按研究主题查看实验、指标与结论</p></div>{core.icon("arrow")}</a>'
         start = text.index('</header>', text.index('<main ')) + len('</header>')
         text = text[:start] + folder + text[start:]
         if not core.THESES:
@@ -136,7 +136,7 @@ def build_record(core, item, data):
         '曝光补偿能够缓解敏感性，但当前记录尚未支持一个同时保住重建质量、并有稳定迁移收益的可用方案。敏感性更低，不等于几何更准确。',
         '各项降幅相对各自对照计算，不能按百分比跨实验排名；原表缺失的质量指标不代表没有代价。')
     filename = E(item['source_file'], quote=True)
-    main = f'''<main id="main" class="experiment-main"><header class="experiment-header"><a class="back-link" href="../index.html">{core.icon('left')} 返回实验</a><p class="experiment-date"><time datetime="{E(item['date'])}">{E(item['date'])}</time> · 实验记录</p><h1>{E(item['title'])}</h1><p class="experiment-subtitle">{E(item['subtitle'])}</p><a class="experiment-download" href="{filename}" download>{core.icon('download')} 原始 Excel</a></header>{body}<footer class="experiment-source">依据原始实验表整理，未重新运行实验或核验服务器日志；日期为记录更新日期。其余台账与历史数据保留在原始 Excel 中。</footer></main>'''
+    main = f'''<main id="main" class="experiment-main"><header class="experiment-header"><a class="back-link" href="../exposure-geometry/index.html">{core.icon('left')} 返回曝光变化与几何建模</a><p class="experiment-date"><time datetime="{E(item['date'])}">{E(item['date'])}</time> · 实验记录</p><h1>{E(item['title'])}</h1><p class="experiment-subtitle">{E(item['subtitle'])}</p><a class="experiment-download" href="{filename}" download>{core.icon('download')} 原始 Excel</a></header>{body}<footer class="experiment-source">依据原始实验表整理，未重新运行实验或核验服务器日志；日期为记录更新日期。其余台账与历史数据保留在原始 Excel 中。</footer></main>'''
     core.shell(f'thesis/experiments/{item["slug"]}/index.html', f'{item["date"]} · 实验记录', main, 'thesis', toc='', description='做了什么实验、结果指标是什么、实验支持什么结论。')
 
 
