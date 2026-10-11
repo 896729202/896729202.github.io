@@ -1,0 +1,337 @@
+method,family,input_protocol,dataset,metric,display_value,global_rank,protocol_rank,status,source_note
+Deform3DGS *,endoscopic,逐场景优化,EndoNeRF,psnr,29.481,4,4,complete,24帧 / 2序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,EndoNeRF,ssim,0.841,3,3,complete,24帧 / 2序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,EndoNeRF,lpips,0.110,5,5,complete,24帧 / 2序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,EndoNeRF-EC,psnr,19.274,3,3,complete,24帧 / 2序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,EndoNeRF-EC,ssim,0.636,3,3,complete,24帧 / 2序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,EndoNeRF-EC,lpips,0.253,3,3,complete,24帧 / 2序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,SCARED,psnr,22.531,8,3,complete,34帧 / 3序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,SCARED,ssim,0.572,9,4,complete,34帧 / 3序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,SCARED,lpips,0.173,12,5,complete,34帧 / 3序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,C3VD,psnr,25.682,2,2,complete,132帧 / 11序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,C3VD,ssim,0.693,4,1,complete,132帧 / 11序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,C3VD,lpips,0.342,11,3,complete,132帧 / 11序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,StereoMIS,psnr,31.938,3,3,complete,36帧 / 3序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,StereoMIS,ssim,0.850,3,3,complete,36帧 / 3序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,StereoMIS,lpips,0.127,4,4,complete,36帧 / 3序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,Hamlyn,psnr,22.135,4,3,complete,12帧 / 1序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,Hamlyn,ssim,0.684,4,3,complete,12帧 / 1序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,Hamlyn,lpips,0.238,5,3,complete,12帧 / 1序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,EndoSLAM,psnr,17.244,2,2,complete,742帧 / 65序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,EndoSLAM,ssim,0.538,7,5,complete,742帧 / 65序列 / complete
+Deform3DGS *,endoscopic,逐场景优化,EndoSLAM,lpips,0.347,7,6,complete,742帧 / 65序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,EndoNeRF,psnr,29.237,5,5,complete,24帧 / 2序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,EndoNeRF,ssim,0.839,4,4,complete,24帧 / 2序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,EndoNeRF,lpips,0.099,4,4,complete,24帧 / 2序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,EndoNeRF-EC,psnr,19.159,4,4,complete,24帧 / 2序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,EndoNeRF-EC,ssim,0.623,5,5,complete,24帧 / 2序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,EndoNeRF-EC,lpips,0.264,4,4,complete,24帧 / 2序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,SCARED,psnr,22.211,9,4,complete,34帧 / 3序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,SCARED,ssim,0.579,8,3,complete,34帧 / 3序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,SCARED,lpips,0.167,11,4,complete,34帧 / 3序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,C3VD,psnr,24.476,5,3,complete,132帧 / 11序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,C3VD,ssim,0.681,7,4,complete,132帧 / 11序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,C3VD,lpips,0.366,12,4,complete,132帧 / 11序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,StereoMIS,psnr,25.159,6,6,complete,36帧 / 3序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,StereoMIS,ssim,0.673,6,6,complete,36帧 / 3序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,StereoMIS,lpips,0.365,13,6,complete,36帧 / 3序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,Hamlyn,psnr,20.063,8,5,complete,12帧 / 1序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,Hamlyn,ssim,0.481,13,6,complete,12帧 / 1序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,Hamlyn,lpips,0.316,12,5,complete,12帧 / 1序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,EndoSLAM,psnr,17.188,3,3,complete,742帧 / 65序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,EndoSLAM,ssim,0.541,5,3,complete,742帧 / 65序列 / complete
+SurgicalGS *,endoscopic,逐场景优化,EndoSLAM,lpips,0.346,6,5,complete,742帧 / 65序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,EndoNeRF,psnr,29.923,1,1,complete,24帧 / 2序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,EndoNeRF,ssim,0.856,2,2,complete,24帧 / 2序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,EndoNeRF,lpips,0.094,2,2,complete,24帧 / 2序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,EndoNeRF-EC,psnr,19.301,2,2,complete,24帧 / 2序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,EndoNeRF-EC,ssim,0.640,2,2,complete,24帧 / 2序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,EndoNeRF-EC,lpips,0.234,1,1,complete,24帧 / 2序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,SCARED,psnr,22.924,7,2,complete,34帧 / 3序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,SCARED,ssim,0.595,7,2,complete,34帧 / 3序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,SCARED,lpips,0.146,7,2,complete,34帧 / 3序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,C3VD,psnr,25.728,1,1,complete,132帧 / 11序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,C3VD,ssim,0.692,5,2,complete,132帧 / 11序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,C3VD,lpips,0.317,10,2,complete,132帧 / 11序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,StereoMIS,psnr,32.585,1,1,complete,36帧 / 3序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,StereoMIS,ssim,0.867,2,2,complete,36帧 / 3序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,StereoMIS,lpips,0.104,2,2,complete,36帧 / 3序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,Hamlyn,psnr,22.320,2,1,complete,12帧 / 1序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,Hamlyn,ssim,0.715,2,1,complete,12帧 / 1序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,Hamlyn,lpips,0.204,2,1,complete,12帧 / 1序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,EndoSLAM,psnr,17.571,1,1,complete,742帧 / 65序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,EndoSLAM,ssim,0.540,6,4,complete,742帧 / 65序列 / complete
+EndoPlanar *,endoscopic,逐场景优化,EndoSLAM,lpips,0.326,3,2,complete,742帧 / 65序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,EndoNeRF,psnr,29.064,6,6,complete,24帧 / 2序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,EndoNeRF,ssim,0.828,6,6,complete,24帧 / 2序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,EndoNeRF,lpips,0.130,11,6,complete,24帧 / 2序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,EndoNeRF-EC,psnr,17.867,6,6,complete,24帧 / 2序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,EndoNeRF-EC,ssim,0.624,4,4,complete,24帧 / 2序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,EndoNeRF-EC,lpips,0.311,10,5,complete,24帧 / 2序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,SCARED,psnr,20.367,11,6,complete,34帧 / 3序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,SCARED,ssim,0.495,10,5,complete,34帧 / 3序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,SCARED,lpips,0.247,13,6,complete,34帧 / 3序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,C3VD,psnr,23.118,9,6,complete,132帧 / 11序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,C3VD,ssim,0.654,8,5,complete,132帧 / 11序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,C3VD,lpips,0.448,14,6,complete,132帧 / 11序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,StereoMIS,psnr,30.817,5,5,complete,36帧 / 3序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,StereoMIS,ssim,0.824,5,5,complete,36帧 / 3序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,StereoMIS,lpips,0.181,7,5,complete,36帧 / 3序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,Hamlyn,psnr,22.215,3,2,complete,12帧 / 1序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,Hamlyn,ssim,0.695,3,2,complete,12帧 / 1序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,Hamlyn,lpips,0.275,8,4,complete,12帧 / 1序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,EndoSLAM,psnr,17.130,5,5,complete,742帧 / 65序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,EndoSLAM,ssim,0.551,4,2,complete,742帧 / 65序列 / complete
+EndoPrior-GS *,endoscopic,逐场景优化,EndoSLAM,lpips,0.327,4,3,complete,742帧 / 65序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,EndoNeRF,psnr,29.687,2,2,complete,24帧 / 2序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,EndoNeRF,ssim,0.864,1,1,complete,24帧 / 2序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,EndoNeRF,lpips,0.091,1,1,complete,24帧 / 2序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,EndoNeRF-EC,psnr,19.741,1,1,complete,24帧 / 2序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,EndoNeRF-EC,ssim,0.664,1,1,complete,24帧 / 2序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,EndoNeRF-EC,lpips,0.317,11,6,complete,24帧 / 2序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,SCARED,psnr,23.683,6,1,complete,34帧 / 3序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,SCARED,ssim,0.647,6,1,complete,34帧 / 3序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,SCARED,lpips,0.135,6,1,complete,34帧 / 3序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,C3VD,psnr,23.545,8,5,complete,132帧 / 11序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,C3VD,ssim,0.636,12,6,complete,132帧 / 11序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,C3VD,lpips,0.483,15,7,complete,132帧 / 11序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,StereoMIS,psnr,24.723,7,7,complete,36帧 / 3序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,StereoMIS,ssim,0.656,8,7,complete,36帧 / 3序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,StereoMIS,lpips,0.435,15,7,complete,36帧 / 3序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,Hamlyn,psnr,19.133,11,6,complete,12帧 / 1序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,Hamlyn,ssim,0.541,11,5,complete,12帧 / 1序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,Hamlyn,lpips,0.340,13,6,complete,12帧 / 1序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,EndoSLAM,psnr,17.186,4,4,complete,742帧 / 65序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,EndoSLAM,ssim,0.571,2,1,complete,742帧 / 65序列 / complete
+Endo-4DGS *,endoscopic,逐场景优化,EndoSLAM,lpips,0.367,8,7,complete,742帧 / 65序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,EndoNeRF,psnr,25.799,7,7,complete,24帧 / 2序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,EndoNeRF,ssim,0.753,7,7,complete,24帧 / 2序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,EndoNeRF,lpips,0.185,13,7,complete,24帧 / 2序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,EndoNeRF-EC,psnr,15.032,7,7,complete,24帧 / 2序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,EndoNeRF-EC,ssim,0.558,7,7,complete,24帧 / 2序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,EndoNeRF-EC,lpips,0.469,15,7,complete,24帧 / 2序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,SCARED,psnr,9.698,15,7,complete,34帧 / 3序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,SCARED,ssim,0.157,14,7,complete,34帧 / 3序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,SCARED,lpips,0.611,15,7,complete,34帧 / 3序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,C3VD,psnr,18.763,14,7,complete,132帧 / 11序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,C3VD,ssim,0.464,15,7,complete,132帧 / 11序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,C3VD,lpips,0.436,13,5,complete,132帧 / 11序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,StereoMIS,psnr,32.418,2,2,complete,36帧 / 3序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,StereoMIS,ssim,0.871,1,1,complete,36帧 / 3序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,StereoMIS,lpips,0.056,1,1,complete,36帧 / 3序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,Hamlyn,psnr,15.407,15,7,complete,12帧 / 1序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,Hamlyn,ssim,0.420,14,7,complete,12帧 / 1序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,Hamlyn,lpips,0.383,15,7,complete,12帧 / 1序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,EndoSLAM,psnr,16.791,7,7,complete,742帧 / 65序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,EndoSLAM,ssim,0.499,9,7,complete,742帧 / 65序列 / complete
+Endo-4DGX *,endoscopic,逐场景优化,EndoSLAM,lpips,0.334,5,4,complete,742帧 / 65序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,EndoNeRF,psnr,29.512,3,3,complete,24帧 / 2序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,EndoNeRF,ssim,0.830,5,5,complete,24帧 / 2序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,EndoNeRF,lpips,0.097,3,3,complete,24帧 / 2序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,EndoNeRF-EC,psnr,18.484,5,5,complete,24帧 / 2序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,EndoNeRF-EC,ssim,0.604,6,6,complete,24帧 / 2序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,EndoNeRF-EC,lpips,0.248,2,2,complete,24帧 / 2序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,SCARED,psnr,20.389,10,5,complete,34帧 / 3序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,SCARED,ssim,0.475,11,6,complete,34帧 / 3序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,SCARED,lpips,0.148,8,3,complete,34帧 / 3序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,C3VD,psnr,24.279,7,4,complete,132帧 / 11序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,C3VD,ssim,0.682,6,3,complete,132帧 / 11序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,C3VD,lpips,0.309,9,1,complete,132帧 / 11序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,StereoMIS,psnr,31.273,4,4,complete,36帧 / 3序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,StereoMIS,ssim,0.843,4,4,complete,36帧 / 3序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,StereoMIS,lpips,0.111,3,3,complete,36帧 / 3序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,Hamlyn,psnr,21.853,5,4,complete,12帧 / 1序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,Hamlyn,ssim,0.642,6,4,complete,12帧 / 1序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,Hamlyn,lpips,0.216,3,2,complete,12帧 / 1序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,EndoSLAM,psnr,16.976,6,6,complete,742帧 / 65序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,EndoSLAM,ssim,0.529,8,6,complete,742帧 / 65序列 / complete
+EndoGaussian *,endoscopic,逐场景优化,EndoSLAM,lpips,0.324,2,1,complete,742帧 / 65序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,EndoNeRF,psnr,22.611,13,6,complete,24帧 / 2序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,EndoNeRF,ssim,0.715,13,6,complete,24帧 / 2序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,EndoNeRF,lpips,0.123,7,2,complete,24帧 / 2序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,EndoNeRF-EC,psnr,10.483,14,7,complete,24帧 / 2序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,EndoNeRF-EC,ssim,0.437,13,6,complete,24帧 / 2序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,EndoNeRF-EC,lpips,0.346,13,7,complete,24帧 / 2序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,SCARED,psnr,19.922,12,6,complete,34帧 / 3序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,SCARED,ssim,0.433,12,6,complete,34帧 / 3序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,SCARED,lpips,0.149,9,6,complete,34帧 / 3序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,C3VD,psnr,21.219,12,6,complete,132帧 / 11序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,C3VD,ssim,0.654,9,4,complete,132帧 / 11序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,C3VD,lpips,0.208,7,7,complete,132帧 / 11序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,StereoMIS,psnr,17.445,13,6,complete,36帧 / 3序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,StereoMIS,ssim,0.424,13,6,complete,36帧 / 3序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,StereoMIS,lpips,0.265,12,7,complete,36帧 / 3序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,Hamlyn,psnr,19.481,9,4,complete,12帧 / 1序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,Hamlyn,ssim,0.603,8,4,complete,12帧 / 1序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,Hamlyn,lpips,0.247,6,3,complete,12帧 / 1序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,EndoSLAM,psnr,10.090,14,7,complete,742帧 / 65序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,EndoSLAM,ssim,0.204,14,7,complete,742帧 / 65序列 / complete
+Endo3R + 外部贴图渲染,endoscopic,两帧上下文,EndoSLAM,lpips,0.566,12,5,complete,742帧 / 65序列 / complete
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,EndoNeRF,psnr,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,EndoNeRF,ssim,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,EndoNeRF,lpips,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,EndoNeRF-EC,psnr,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,EndoNeRF-EC,ssim,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,EndoNeRF-EC,lpips,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,SCARED,psnr,31.767,,,source_view_subset,11帧 / 2序列 / source_view_subset
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,SCARED,ssim,0.942,,,source_view_subset,11帧 / 2序列 / source_view_subset
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,SCARED,lpips,0.052,,,source_view_subset,11帧 / 2序列 / source_view_subset
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,C3VD,psnr,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,C3VD,ssim,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,C3VD,lpips,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,StereoMIS,psnr,34.961,,,source_view_subset,36帧 / 3序列 / source_view_subset
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,StereoMIS,ssim,0.958,,,source_view_subset,36帧 / 3序列 / source_view_subset
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,StereoMIS,lpips,0.038,,,source_view_subset,36帧 / 3序列 / source_view_subset
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,Hamlyn,psnr,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,Hamlyn,ssim,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,Hamlyn,lpips,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,EndoSLAM,psnr,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,EndoSLAM,ssim,,,,not_applicable,N/A：无适用同步双目
+Endo-E2E-GS（自训试验权重）,endoscopic,源视图重投影,EndoSLAM,lpips,,,,not_applicable,N/A：无适用同步双目
+DepthSplat,general,两帧上下文,EndoNeRF,psnr,23.279,9,2,complete,24帧 / 2序列 / complete
+DepthSplat,general,两帧上下文,EndoNeRF,ssim,0.729,11,4,complete,24帧 / 2序列 / complete
+DepthSplat,general,两帧上下文,EndoNeRF,lpips,0.122,6,1,complete,24帧 / 2序列 / complete
+DepthSplat,general,两帧上下文,EndoNeRF-EC,psnr,12.089,12,5,complete,24帧 / 2序列 / complete
+DepthSplat,general,两帧上下文,EndoNeRF-EC,ssim,0.483,12,5,complete,24帧 / 2序列 / complete
+DepthSplat,general,两帧上下文,EndoNeRF-EC,lpips,0.279,6,2,complete,24帧 / 2序列 / complete
+DepthSplat,general,两帧上下文,SCARED,psnr,24.718,3,3,complete,34帧 / 3序列 / complete
+DepthSplat,general,两帧上下文,SCARED,ssim,0.714,3,3,complete,34帧 / 3序列 / complete
+DepthSplat,general,两帧上下文,SCARED,lpips,0.077,1,1,complete,34帧 / 3序列 / complete
+DepthSplat,general,两帧上下文,C3VD,psnr,25.256,3,1,complete,132帧 / 11序列 / complete
+DepthSplat,general,两帧上下文,C3VD,ssim,0.727,1,1,complete,132帧 / 11序列 / complete
+DepthSplat,general,两帧上下文,C3VD,lpips,0.148,1,1,complete,132帧 / 11序列 / complete
+DepthSplat,general,两帧上下文,StereoMIS,psnr,19.227,12,5,complete,36帧 / 3序列 / complete
+DepthSplat,general,两帧上下文,StereoMIS,ssim,0.438,12,5,complete,36帧 / 3序列 / complete
+DepthSplat,general,两帧上下文,StereoMIS,lpips,0.204,10,5,complete,36帧 / 3序列 / complete
+DepthSplat,general,两帧上下文,Hamlyn,psnr,20.413,7,3,complete,12帧 / 1序列 / complete
+DepthSplat,general,两帧上下文,Hamlyn,ssim,0.614,7,3,complete,12帧 / 1序列 / complete
+DepthSplat,general,两帧上下文,Hamlyn,lpips,0.277,9,5,complete,12帧 / 1序列 / complete
+DepthSplat,general,两帧上下文,EndoSLAM,psnr,16.155,9,2,complete,742帧 / 65序列 / complete
+DepthSplat,general,两帧上下文,EndoSLAM,ssim,0.602,1,1,complete,742帧 / 65序列 / complete
+DepthSplat,general,两帧上下文,EndoSLAM,lpips,0.405,9,2,complete,742帧 / 65序列 / complete
+MVSplat,general,两帧上下文,EndoNeRF,psnr,24.005,8,1,complete,24帧 / 2序列 / complete
+MVSplat,general,两帧上下文,EndoNeRF,ssim,0.740,8,1,complete,24帧 / 2序列 / complete
+MVSplat,general,两帧上下文,EndoNeRF,lpips,0.124,8,3,complete,24帧 / 2序列 / complete
+MVSplat,general,两帧上下文,EndoNeRF-EC,psnr,12.791,9,2,complete,24帧 / 2序列 / complete
+MVSplat,general,两帧上下文,EndoNeRF-EC,ssim,0.515,8,1,complete,24帧 / 2序列 / complete
+MVSplat,general,两帧上下文,EndoNeRF-EC,lpips,0.274,5,1,complete,24帧 / 2序列 / complete
+MVSplat,general,两帧上下文,SCARED,psnr,23.754,5,5,complete,34帧 / 3序列 / complete
+MVSplat,general,两帧上下文,SCARED,ssim,0.651,5,5,complete,34帧 / 3序列 / complete
+MVSplat,general,两帧上下文,SCARED,lpips,0.094,2,2,complete,34帧 / 3序列 / complete
+MVSplat,general,两帧上下文,C3VD,psnr,24.300,6,3,complete,132帧 / 11序列 / complete
+MVSplat,general,两帧上下文,C3VD,ssim,0.696,3,3,complete,132帧 / 11序列 / complete
+MVSplat,general,两帧上下文,C3VD,lpips,0.171,2,2,complete,132帧 / 11序列 / complete
+MVSplat,general,两帧上下文,StereoMIS,psnr,20.096,11,4,complete,36帧 / 3序列 / complete
+MVSplat,general,两帧上下文,StereoMIS,ssim,0.463,11,4,complete,36帧 / 3序列 / complete
+MVSplat,general,两帧上下文,StereoMIS,lpips,0.185,9,4,complete,36帧 / 3序列 / complete
+MVSplat,general,两帧上下文,Hamlyn,psnr,19.271,10,5,complete,12帧 / 1序列 / complete
+MVSplat,general,两帧上下文,Hamlyn,ssim,0.581,10,6,complete,12帧 / 1序列 / complete
+MVSplat,general,两帧上下文,Hamlyn,lpips,0.291,10,6,complete,12帧 / 1序列 / complete
+MVSplat,general,两帧上下文,EndoSLAM,psnr,11.305,11,4,complete,742帧 / 65序列 / complete
+MVSplat,general,两帧上下文,EndoSLAM,ssim,0.237,13,6,complete,742帧 / 65序列 / complete
+MVSplat,general,两帧上下文,EndoSLAM,lpips,0.567,13,6,complete,742帧 / 65序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,EndoNeRF,psnr,23.206,10,3,complete,24帧 / 2序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,EndoNeRF,ssim,0.735,9,2,complete,24帧 / 2序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,EndoNeRF,lpips,0.131,12,6,complete,24帧 / 2序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,EndoNeRF-EC,psnr,13.006,8,1,complete,24帧 / 2序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,EndoNeRF-EC,ssim,0.509,9,2,complete,24帧 / 2序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,EndoNeRF-EC,lpips,0.284,7,3,complete,24帧 / 2序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,SCARED,psnr,24.705,4,4,complete,34帧 / 3序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,SCARED,ssim,0.692,4,4,complete,34帧 / 3序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,SCARED,lpips,0.120,5,5,complete,34帧 / 3序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,C3VD,psnr,22.384,10,4,complete,132帧 / 11序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,C3VD,ssim,0.651,10,5,complete,132帧 / 11序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,C3VD,lpips,0.206,6,6,complete,132帧 / 11序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,StereoMIS,psnr,23.062,8,1,complete,36帧 / 3序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,StereoMIS,ssim,0.658,7,1,complete,36帧 / 3序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,StereoMIS,lpips,0.162,6,2,complete,36帧 / 3序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,Hamlyn,psnr,22.865,1,1,complete,12帧 / 1序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,Hamlyn,ssim,0.723,1,1,complete,12帧 / 1序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,Hamlyn,lpips,0.191,1,1,complete,12帧 / 1序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,EndoSLAM,psnr,16.742,8,1,complete,742帧 / 65序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,EndoSLAM,ssim,0.561,3,2,complete,742帧 / 65序列 / complete
+OpenD4RT（非官方）+ 外部贴图渲染,general,两帧上下文,EndoSLAM,lpips,0.292,1,1,complete,742帧 / 65序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,EndoNeRF,psnr,22.661,12,5,complete,24帧 / 2序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,EndoNeRF,ssim,0.728,12,5,complete,24帧 / 2序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,EndoNeRF,lpips,0.128,9,4,complete,24帧 / 2序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,EndoNeRF-EC,psnr,11.828,13,6,complete,24帧 / 2序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,EndoNeRF-EC,ssim,0.489,11,4,complete,24帧 / 2序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,EndoNeRF-EC,lpips,0.309,9,5,complete,24帧 / 2序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,SCARED,psnr,25.657,1,1,complete,34帧 / 3序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,SCARED,ssim,0.749,1,1,complete,34帧 / 3序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,SCARED,lpips,0.109,3,3,complete,34帧 / 3序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,C3VD,psnr,20.996,13,7,complete,132帧 / 11序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,C3VD,ssim,0.634,13,7,complete,132帧 / 11序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,C3VD,lpips,0.206,5,5,complete,132帧 / 11序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,StereoMIS,psnr,21.391,9,2,complete,36帧 / 3序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,StereoMIS,ssim,0.582,9,2,complete,36帧 / 3序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,StereoMIS,lpips,0.159,5,1,complete,36帧 / 3序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,Hamlyn,psnr,19.069,12,6,complete,12帧 / 1序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,Hamlyn,ssim,0.591,9,5,complete,12帧 / 1序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,Hamlyn,lpips,0.256,7,4,complete,12帧 / 1序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,EndoSLAM,psnr,11.121,12,5,complete,742帧 / 65序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,EndoSLAM,ssim,0.258,12,5,complete,742帧 / 65序列 / complete
+VGGT + 外部贴图渲染,general,两帧上下文,EndoSLAM,lpips,0.553,11,4,complete,742帧 / 65序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,EndoNeRF,psnr,22.936,11,4,complete,24帧 / 2序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,EndoNeRF,ssim,0.735,10,3,complete,24帧 / 2序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,EndoNeRF,lpips,0.129,10,5,complete,24帧 / 2序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,EndoNeRF-EC,psnr,12.293,10,3,complete,24帧 / 2序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,EndoNeRF-EC,ssim,0.500,10,3,complete,24帧 / 2序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,EndoNeRF-EC,lpips,0.296,8,4,complete,24帧 / 2序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,SCARED,psnr,25.407,2,2,complete,34帧 / 3序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,SCARED,ssim,0.742,2,2,complete,34帧 / 3序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,SCARED,lpips,0.112,4,4,complete,34帧 / 3序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,C3VD,psnr,21.322,11,5,complete,132帧 / 11序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,C3VD,ssim,0.649,11,6,complete,132帧 / 11序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,C3VD,lpips,0.196,4,4,complete,132帧 / 11序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,StereoMIS,psnr,20.988,10,3,complete,36帧 / 3序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,StereoMIS,ssim,0.556,10,3,complete,36帧 / 3序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,StereoMIS,lpips,0.181,8,3,complete,36帧 / 3序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,Hamlyn,psnr,20.481,6,2,complete,12帧 / 1序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,Hamlyn,ssim,0.644,5,2,complete,12帧 / 1序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,Hamlyn,lpips,0.230,4,2,complete,12帧 / 1序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,EndoSLAM,psnr,11.384,10,3,complete,742帧 / 65序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,EndoSLAM,ssim,0.266,10,3,complete,742帧 / 65序列 / complete
+MoRe + 外部贴图渲染,general,两帧上下文,EndoSLAM,lpips,0.543,10,3,complete,742帧 / 65序列 / complete
+NoPoSplat,general,两帧上下文,EndoNeRF,psnr,19.226,14,7,complete,24帧 / 2序列 / complete
+NoPoSplat,general,两帧上下文,EndoNeRF,ssim,0.528,14,7,complete,24帧 / 2序列 / complete
+NoPoSplat,general,两帧上下文,EndoNeRF,lpips,0.197,14,7,complete,24帧 / 2序列 / complete
+NoPoSplat,general,两帧上下文,EndoNeRF-EC,psnr,12.097,11,4,complete,24帧 / 2序列 / complete
+NoPoSplat,general,两帧上下文,EndoNeRF-EC,ssim,0.423,14,7,complete,24帧 / 2序列 / complete
+NoPoSplat,general,两帧上下文,EndoNeRF-EC,lpips,0.318,12,6,complete,24帧 / 2序列 / complete
+NoPoSplat,general,两帧上下文,SCARED,psnr,16.899,13,7,complete,34帧 / 3序列 / complete
+NoPoSplat,general,两帧上下文,SCARED,ssim,0.258,13,7,complete,34帧 / 3序列 / complete
+NoPoSplat,general,两帧上下文,SCARED,lpips,0.151,10,7,complete,34帧 / 3序列 / complete
+NoPoSplat,general,两帧上下文,C3VD,psnr,25.156,4,2,complete,132帧 / 11序列 / complete
+NoPoSplat,general,两帧上下文,C3VD,ssim,0.715,2,2,complete,132帧 / 11序列 / complete
+NoPoSplat,general,两帧上下文,C3VD,lpips,0.178,3,3,complete,132帧 / 11序列 / complete
+NoPoSplat,general,两帧上下文,StereoMIS,psnr,17.437,14,7,complete,36帧 / 3序列 / complete
+NoPoSplat,general,两帧上下文,StereoMIS,ssim,0.385,14,7,complete,36帧 / 3序列 / complete
+NoPoSplat,general,两帧上下文,StereoMIS,lpips,0.232,11,6,complete,36帧 / 3序列 / complete
+NoPoSplat,general,两帧上下文,Hamlyn,psnr,17.924,13,7,complete,12帧 / 1序列 / complete
+NoPoSplat,general,两帧上下文,Hamlyn,ssim,0.532,12,7,complete,12帧 / 1序列 / complete
+NoPoSplat,general,两帧上下文,Hamlyn,lpips,0.294,11,7,complete,12帧 / 1序列 / complete
+NoPoSplat,general,两帧上下文,EndoSLAM,psnr,10.651,13,6,complete,742帧 / 65序列 / complete
+NoPoSplat,general,两帧上下文,EndoSLAM,ssim,0.265,11,4,complete,742帧 / 65序列 / complete
+NoPoSplat,general,两帧上下文,EndoSLAM,lpips,0.582,14,7,complete,742帧 / 65序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,EndoNeRF,psnr,11.435,15,8,complete,24帧 / 2序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,EndoNeRF,ssim,0.353,15,8,complete,24帧 / 2序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,EndoNeRF,lpips,0.381,15,8,complete,24帧 / 2序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,EndoNeRF-EC,psnr,10.423,15,8,complete,24帧 / 2序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,EndoNeRF-EC,ssim,0.341,15,8,complete,24帧 / 2序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,EndoNeRF-EC,lpips,0.414,14,8,complete,24帧 / 2序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,SCARED,psnr,11.132,14,8,complete,34帧 / 3序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,SCARED,ssim,0.135,15,8,complete,34帧 / 3序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,SCARED,lpips,0.345,14,8,complete,34帧 / 3序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,C3VD,psnr,15.199,15,8,complete,132帧 / 11序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,C3VD,ssim,0.505,14,8,complete,132帧 / 11序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,C3VD,lpips,0.287,8,8,complete,132帧 / 11序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,StereoMIS,psnr,11.049,15,8,complete,36帧 / 3序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,StereoMIS,ssim,0.251,15,8,complete,36帧 / 3序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,StereoMIS,lpips,0.404,14,8,complete,36帧 / 3序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,Hamlyn,psnr,15.761,14,8,complete,12帧 / 1序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,Hamlyn,ssim,0.349,15,8,complete,12帧 / 1序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,Hamlyn,lpips,0.368,14,8,complete,12帧 / 1序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,EndoSLAM,psnr,8.560,15,8,complete,742帧 / 65序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,EndoSLAM,ssim,0.117,15,8,complete,742帧 / 65序列 / complete
+NAS3R（上下文独立适配）,general,两帧上下文,EndoSLAM,lpips,0.677,15,8,complete,742帧 / 65序列 / complete

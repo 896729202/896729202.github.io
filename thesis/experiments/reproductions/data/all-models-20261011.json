@@ -1,0 +1,2726 @@
+{
+  "source_file": "all-models-20261011.html",
+  "source_sha256": "67aea94314443093edb181de779f76dcf4908ad65005f29430d8223b7a9a3c0b",
+  "source_report_updated_utc": "2026-10-11T07:06:06.912515+00:00",
+  "precision_note": "Values are the supplied HTML display strings. Ranks are copied from the source attributes; full-precision CSV was not supplied and no ranking is recomputed.",
+  "verification": {
+    "source_report": "EndoSLAM 验收：通过",
+    "independently_verified": false,
+    "missing_evidence": [
+      "verification_all_models.json",
+      "dataset_metrics.csv",
+      "coverage_matrix.csv",
+      "per_sequence_metrics.csv",
+      "per_frame_metrics.csv"
+    ]
+  },
+  "datasets": [
+    "EndoNeRF",
+    "EndoNeRF-EC",
+    "SCARED",
+    "C3VD",
+    "StereoMIS",
+    "Hamlyn",
+    "EndoSLAM"
+  ],
+  "complete_heldout_combinations": 105,
+  "reported_image_records": 15107,
+  "rows": [
+    {
+      "method": "Deform3DGS *",
+      "protocol": "逐场景优化",
+      "family": "endoscopic",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "29.481",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.841",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.110",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "19.274",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.636",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.253",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "22.531",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.572",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.173",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "25.682",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.693",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.342",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "31.938",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.850",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.127",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "22.135",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.684",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.238",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "17.244",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.538",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.347",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "SurgicalGS *",
+      "protocol": "逐场景优化",
+      "family": "endoscopic",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "29.237",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.839",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.099",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "19.159",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.623",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.264",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "22.211",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.579",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.167",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "24.476",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.681",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.366",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "25.159",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.673",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.365",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "20.063",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.481",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.316",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "17.188",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.541",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.346",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "EndoPlanar *",
+      "protocol": "逐场景优化",
+      "family": "endoscopic",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "29.923",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.856",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.094",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "19.301",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.640",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.234",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "22.924",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.595",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.146",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "25.728",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.692",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.317",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "32.585",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.867",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.104",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "22.320",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.715",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.204",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "17.571",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.540",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.326",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "EndoPrior-GS *",
+      "protocol": "逐场景优化",
+      "family": "endoscopic",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "29.064",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.828",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.130",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "17.867",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.624",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.311",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "20.367",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.495",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.247",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "23.118",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.654",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.448",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "30.817",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.824",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.181",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "22.215",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.695",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.275",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "17.130",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.551",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.327",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "Endo-4DGS *",
+      "protocol": "逐场景优化",
+      "family": "endoscopic",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "29.687",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.864",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.091",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "19.741",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.664",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.317",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "23.683",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.647",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.135",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "23.545",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.636",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.483",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "24.723",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.656",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.435",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "19.133",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.541",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.340",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "17.186",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.571",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.367",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "Endo-4DGX *",
+      "protocol": "逐场景优化",
+      "family": "endoscopic",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "25.799",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.753",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.185",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "15.032",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.558",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.469",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "9.698",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.157",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.611",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "18.763",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.464",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.436",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "32.418",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.871",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.056",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "15.407",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.420",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.383",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "16.791",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.499",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.334",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "EndoGaussian *",
+      "protocol": "逐场景优化",
+      "family": "endoscopic",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "29.512",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.830",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.097",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "18.484",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.604",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.248",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "20.389",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.475",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.148",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "24.279",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.682",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.309",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "31.273",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.843",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.111",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "21.853",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.642",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.216",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "16.976",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.529",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.324",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "Endo3R + 外部贴图渲染",
+      "protocol": "两帧上下文",
+      "family": "endoscopic",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "22.611",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.715",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.123",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "10.483",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.437",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.346",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "19.922",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.433",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.149",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "21.219",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.654",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.208",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "17.445",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.424",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.265",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "19.481",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.603",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.247",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "10.090",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.204",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.566",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "Endo-E2E-GS（自训试验权重）",
+      "protocol": "源视图重投影",
+      "family": "endoscopic",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "ssim": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "lpips": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "ssim": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "lpips": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "31.767",
+            "note": "11帧 / 2序列 / source_view_subset",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "source_view_subset"
+          },
+          "ssim": {
+            "display_value": "0.942",
+            "note": "11帧 / 2序列 / source_view_subset",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "source_view_subset"
+          },
+          "lpips": {
+            "display_value": "0.052",
+            "note": "11帧 / 2序列 / source_view_subset",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "source_view_subset"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "ssim": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "lpips": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "34.961",
+            "note": "36帧 / 3序列 / source_view_subset",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "source_view_subset"
+          },
+          "ssim": {
+            "display_value": "0.958",
+            "note": "36帧 / 3序列 / source_view_subset",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "source_view_subset"
+          },
+          "lpips": {
+            "display_value": "0.038",
+            "note": "36帧 / 3序列 / source_view_subset",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "source_view_subset"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "ssim": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "lpips": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "ssim": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          },
+          "lpips": {
+            "display_value": null,
+            "note": "N/A：无适用同步双目",
+            "global_rank": null,
+            "protocol_rank": null,
+            "status": "not_applicable"
+          }
+        }
+      }
+    },
+    {
+      "method": "DepthSplat",
+      "protocol": "两帧上下文",
+      "family": "general",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "23.279",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.729",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.122",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "12.089",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.483",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.279",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "24.718",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.714",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.077",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "25.256",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.727",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.148",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "19.227",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.438",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.204",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "20.413",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.614",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.277",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "16.155",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.602",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.405",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "MVSplat",
+      "protocol": "两帧上下文",
+      "family": "general",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "24.005",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.740",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.124",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "12.791",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.515",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.274",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "23.754",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.651",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.094",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "24.300",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.696",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.171",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "20.096",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.463",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.185",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "19.271",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.581",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.291",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "11.305",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.237",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.567",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "OpenD4RT（非官方）+ 外部贴图渲染",
+      "protocol": "两帧上下文",
+      "family": "general",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "23.206",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.735",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.131",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "13.006",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.509",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.284",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "24.705",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.692",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.120",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "22.384",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.651",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.206",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "23.062",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.658",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.162",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "22.865",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.723",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.191",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "16.742",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.561",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.292",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "VGGT + 外部贴图渲染",
+      "protocol": "两帧上下文",
+      "family": "general",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "22.661",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.728",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.128",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "11.828",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.489",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.309",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "25.657",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.749",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 1,
+            "protocol_rank": 1,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.109",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "20.996",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.634",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.206",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "21.391",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.582",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.159",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 1,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "19.069",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.591",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 9,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.256",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 7,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "11.121",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.258",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.553",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "MoRe + 外部贴图渲染",
+      "protocol": "两帧上下文",
+      "family": "general",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "22.936",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.735",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.129",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 5,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "12.293",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.500",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.296",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "25.407",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.742",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.112",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "21.322",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 5,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.649",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.196",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 4,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "20.988",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.556",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.181",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "20.481",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 6,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.644",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 5,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.230",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 2,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "11.384",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.266",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 3,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.543",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "NoPoSplat",
+      "protocol": "两帧上下文",
+      "family": "general",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "19.226",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.528",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.197",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "12.097",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.423",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.318",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "16.899",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.258",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.151",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 10,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "25.156",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 4,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.715",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 2,
+            "protocol_rank": 2,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.178",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 3,
+            "protocol_rank": 3,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "17.437",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.385",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.232",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 6,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "17.924",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.532",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 12,
+            "protocol_rank": 7,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.294",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "10.651",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 13,
+            "protocol_rank": 6,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.265",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 11,
+            "protocol_rank": 4,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.582",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 7,
+            "status": "complete"
+          }
+        }
+      }
+    },
+    {
+      "method": "NAS3R（上下文独立适配）",
+      "protocol": "两帧上下文",
+      "family": "general",
+      "datasets": {
+        "EndoNeRF": {
+          "psnr": {
+            "display_value": "11.435",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.353",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.381",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          }
+        },
+        "EndoNeRF-EC": {
+          "psnr": {
+            "display_value": "10.423",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.341",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.414",
+            "note": "24帧 / 2序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 8,
+            "status": "complete"
+          }
+        },
+        "SCARED": {
+          "psnr": {
+            "display_value": "11.132",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.135",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.345",
+            "note": "34帧 / 3序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 8,
+            "status": "complete"
+          }
+        },
+        "C3VD": {
+          "psnr": {
+            "display_value": "15.199",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.505",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.287",
+            "note": "132帧 / 11序列 / complete",
+            "global_rank": 8,
+            "protocol_rank": 8,
+            "status": "complete"
+          }
+        },
+        "StereoMIS": {
+          "psnr": {
+            "display_value": "11.049",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.251",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.404",
+            "note": "36帧 / 3序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 8,
+            "status": "complete"
+          }
+        },
+        "Hamlyn": {
+          "psnr": {
+            "display_value": "15.761",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.349",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.368",
+            "note": "12帧 / 1序列 / complete",
+            "global_rank": 14,
+            "protocol_rank": 8,
+            "status": "complete"
+          }
+        },
+        "EndoSLAM": {
+          "psnr": {
+            "display_value": "8.560",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "ssim": {
+            "display_value": "0.117",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          },
+          "lpips": {
+            "display_value": "0.677",
+            "note": "742帧 / 65序列 / complete",
+            "global_rank": 15,
+            "protocol_rank": 8,
+            "status": "complete"
+          }
+        }
+      }
+    }
+  ],
+  "source_paragraphs": [
+    "完成模型×数据集组合：105/105；当前图像指标记录：15107/15107。EndoSLAM 验收：通过。更新时间 UTC：2026-10-11T07:06:06.912515+00:00。",
+    "三项均为256×256 PNG全图指标：PSNR、skimage SSIM、LPIPS-SqueezeNet v0.1。序列内帧等权，数据集内序列等权。红色①、蓝色②表示该列全部已完整评价留出方法的第一、第二；可切换为相同输入协议内排名。部分结果不参与排名。源视图重投影使用输入本身RGB，不参与留出排名。输入视图数、训练预算、相机来源不同，排序仅说明本实验图像指标。",
+    "排名范围：全部留出方法各输入协议内部",
+    "新增 EndoSLAM v1：全部64条真实相机流，加1条Olympus模体视频，共65条；同一物理轨迹的PillCam前后镜头分别统计。真实相机流共42698张图片，Olympus视频12484帧。Unity合成数据不测。每条最多12张确定性留出测试图，共742张；覆盖所有真实轨迹，不是逐原始视频帧评分。前馈模型每个目标只编码2张全局训练图；逐场景模型使用本场景全局训练图，初始化深度由这些图的OpenD4RT两帧预测生成。测试RGB不进入场景训练、深度先验或前馈几何预测；独立的目标相机估计步骤使用目标RGB。所有15个适用方法共用这些估计相机。机器人日志未直接冒充相机真值，三维扫描未用作深度监督。此结果不能称官方光学相机GT下的NVS测试。相机平移和训练预测深度同步归一化到训练深度中位数10；float数组防止深度量化。* 标记使用数值适配的模型：新增7种逐场景模型均使用场景范围内的尺度上下界，Endo-4DGS另使用分母、对数及退化梯度区域保护；配置、原生训练步数与损失项保留，边界处计算行为有变化，详见每作业stability_protocol.json与dataset_bootstrap_snapshot.py。新增图像使用中心主点127.5，与原生CUDA栅格器的NDC转像素中心约定一致。Endo-E2E-GS因无同步校准且重叠的双目输入标N/A；PillCam前后交替触发不能拼成同步双目。",
+    "旧六数据集沿用已验收的2026-10-08实验：22条序列、262张留出目标，另47张双目源视图诊断；其原始CSV和权重不在本表合并时重写。旧两帧评价按目标独立选上下文，不保证上下文不是其他评价目标；EndoSLAM采用更严格的全局训练/目标互斥划分。固定相机EndoNeRF/EC为时间插帧；Hamlyn相机是独立含目标RGB的估计。各原有方法数值适配见旧实验stability_protocol.json和FAILURE_DIAGNOSIS.md。逐场景训练保持各方法原生配置预算，不是等预算公平比较或官方论文split复现。VGGT、MoRe、OpenD4RT、Endo3R的RGB为外部两视图贴图网格渲染；NAS3R上下文独立推理后对齐公共相机。Endo-E2E-GS为自训试验权重并排除训练序列。",
+    "新增训练结束后保留位级一致的最终推理参数、渲染RGB/depth、训练日志与步数证据；为存储空间释放完成作业的优化器、梯度缓存及中间权重，不能用精简权重精确恢复Adam训练轨迹。旧非最终缓存权重无损Zstandard归档并逐文件校验SHA256，可用lossless_archive.py还原。"
+  ]
+}

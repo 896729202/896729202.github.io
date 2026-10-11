@@ -3,6 +3,25 @@
   'use strict';
   const root = document.querySelector('[data-rk-root]');
   if (!root) return;
+  const rankScope = root.querySelector('#latest-rank-scope');
+  if (rankScope) {
+    rankScope.addEventListener('change', () => {
+      const protocol = rankScope.value === 'protocol';
+      for (const cell of root.querySelectorAll('[data-latest-metric]')) {
+        // Both rank sets come from the original report; display values are rounded.
+        const rank = Number(protocol ? cell.dataset.protocolRank : cell.dataset.globalRank);
+        const value = cell.querySelector('.rk-value');
+        value.classList.toggle('rk-rank-1', rank === 1);
+        value.classList.toggle('rk-rank-2', rank === 2);
+        value.textContent = cell.dataset.displayValue + (rank === 1 ? ' ①' : rank === 2 ? ' ②' : '');
+        const label = rank === 1 || rank === 2 ? `；${protocol ? '同输入协议' : '全部留出方法'}第 ${rank} 名` : '';
+        cell.setAttribute('aria-label', cell.dataset.labelBase + label);
+      }
+      root.querySelector('#latest-rank-description').textContent = protocol
+        ? '每个数据集、每项指标，分别在逐场景优化和两帧上下文方法内部标记第一与第二；源视图诊断不参与。'
+        : '每个数据集、每项指标，在全部完整留出方法中标记第一与第二。';
+    });
+  }
   const families = [...root.querySelectorAll('[data-rk-family]')];
   const groups = [...root.querySelectorAll('[data-rk-tabs]')];
   const remembered = new Map();
@@ -59,7 +78,8 @@
     select(family.querySelector('[data-rk-tabs="dataset"]'), first);
     remembered.set(family.id, first);
   }
-  activate(families[0]);
+  // Initialize history tabs without opening their parent disclosure.
+  select(root.querySelector('[data-rk-tabs="family"]'), families[0]);
   root.dataset.enhanced = 'true';
   onHash(true);
   for (const nav of groups) {
@@ -87,5 +107,9 @@
   window.addEventListener('beforeprint', () => families.forEach(f => {
     f.hidden = false; f.querySelectorAll('[data-rk-dataset]').forEach(p => {p.hidden = false;});
   }));
-  window.addEventListener('afterprint', () => { activate(hashTarget() || families[0]); });
+  window.addEventListener('afterprint', () => {
+    const target = hashTarget();
+    if (target) activate(target);
+    else select(root.querySelector('[data-rk-tabs="family"]'), families[0]);
+  });
 })();

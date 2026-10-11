@@ -237,6 +237,8 @@ def build(core):
     summary = json.loads((output / 'summary.json').read_text(encoding='utf-8'))
     legacy = sections(original)
     body, exports = render(summary, legacy)
+    from latest_reproductions import compose
+    body = compose(core.ROOT, body)
     main_pattern = r'<main\b[^>]*>.*?</main>'
     if len(re.findall(main_pattern, original, flags=re.S)) != 1:
         raise ValueError('Expected exactly one overview main element')

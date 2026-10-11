@@ -114,19 +114,22 @@ def render_datasets(core, data):
     rows = [[r['name']+'\n'+' · '.join(r['status'])] + [r[k] for k in fields] for r in records]
     csv_export(output/'inventory.csv', heads, rows)
     main = '<main id="main" class="experiment-main research-overview">'
-    main += header(core, data['title'], data['subtitle'], data['record_date'], 'reproductions', '原方法复现指标汇总')
+    page_header = header(core, data['title'], data['subtitle'], data['record_date'], 'reproductions', '原方法复现指标汇总')
+    main += page_header.replace('>更新于 ', '>' + txt(data.get('date_label', '更新于')) + ' ', 1)
     main += navigation([('inventory','库存总览'),('supervision','数据与监督'),('coverage','实际测试覆盖'),('incomplete','未取得 / 下载不完整')])
     main += paragraph(data['counts_note'], 'ro-notice')
     main += links([('inventory.json','完整清单 JSON'),('inventory.csv','库存表 CSV')])
     body = '<div class="ro-legend"><span>本地可用 ≠ 已处理 ≠ 已测试</span><span>横向滑动查看完整列 →</span></div>'
     body += table(heads,rows,'本地库存 · 原始量、处理量与测试量分别报告','ro-inventory')
     main += section('inventory','库存总览',body,'01 / LOCAL INVENTORY')
-    body = facts([
-        ('深度文件不等于物理真值','EndoNeRF 深度的性质不一概而论；EC 的 DAM 是模型生成的相对深度参考；StereoMIS 的估计深度先验不是独立测量真值。'),
-        ('两类 C3VD 监督不同','注册序列有配准深度等真值；screening 有相机位姿和模型，不因此认定所有帧都有深度真值。'),
-        ('相关版本不当作独立样本','EndoNeRF-EC 与 EndoNeRF 对应场景相关；13 个解析合成版本之间也有关联。本页不计算跨版本“独立样本总量”。'),
-        ('示例与正式数据集有别','Hamlyn23 的 66 张示例图像不是完整 Hamlyn。EndoSLAM 和肠／胃素材的占位目录不计作可用数据。'),
-    ])
+    body = facts(data['supervision_notes'])
+    source_links = []
+    for source in data.get('source_links', []):
+        if not source['url'].startswith('https://'):
+            raise ValueError('Dataset source links must use HTTPS')
+        source_links.append(f'<a href="{escape(source["url"])}">{txt(source["label"])}</a>')
+    if source_links:
+        body += '<p class="ro-muted">公开数据源：' + ' · '.join(source_links) + '</p>'
     for item in data['sequence_breakdown']:
         if sum(r[1] for r in item['sequences']) != item['total']:
             raise ValueError('Sequence inventory total mismatch')
@@ -134,17 +137,24 @@ def render_datasets(core, data):
         body += f'<details class="ro-details"><summary>{txt(item["title"])} · {item["total"]:,} 帧明细</summary>{metrics}</details>'
     main += section('supervision','数据与监督说明',body,'02 / DATA SCOPE')
     coverage=data['coverage']
-    if sum(r[1] for r in coverage)!=22 or sum(r[2] for r in coverage)!=262:
+    totals = {
+        'datasets': len(coverage),
+        'sequences': sum(r[1] for r in coverage),
+        'targets': sum(r[2] for r in coverage),
+    }
+    if totals != data['coverage_totals']:
         raise ValueError('Coverage totals mismatch')
-    body=paragraph('2026-10-08 三模型图像评价：6 个公开数据集条目、22 条序列、262 个留出目标，三种方法合计 786 条模型—目标评价记录。EC 是关联曝光版本；合成数据未包含。')
-    body+=table(['数据集','序列数','测试目标帧','实际子集','相机条件'],coverage,'本地确定性测试子集 · 不是全帧或官方 benchmark','ro-coverage')
+    body=paragraph(data['coverage_note'])
+    body+=table(['数据集','序列 / 评价流数','留出目标帧','实际子集','相机条件'],coverage,'本地确定性测试子集 · 不是全帧或官方 benchmark','ro-coverage')
+    body+=paragraph(data['protocol_note'],'ro-notice')
     body+=paragraph('SCARED 的 Endo-E2E-GS pilot（48 / 12 / 1 对）和 VGGT / MoRe 对齐深度评价是独立实验，不混入上表的 34 个图像测试目标。','ro-muted')
-    body+='<a class="ro-text-link" href="../reproductions/index.html#latest-protocol">查看完整输入、相机与全图评价协议 →</a>'
+    body+='<a class="ro-text-link" href="../reproductions/index.html#latest-input-protocol">查看最新输入、相机与全图评价协议 →</a>'
     main+=section('coverage','实际实验覆盖',body,'03 / TESTED SUBSET')
     main+=section('incomplete','未取得与下载不完整',paragraph(data['unavailable_note'],'ro-notice'))
     main+=f'<footer class="experiment-source">{txt(data["source_note"])}</footer></main>'
     finish(core,'datasets',data['title'],main,data['subtitle'])
-    print('Built dataset overview: 9 entries, 22 tested sequences, 262 targets.')
+    print(f'Built dataset overview: {len(records)} entries, {totals["datasets"]} public datasets, '
+          f'{totals["sequences"]} tested sequences/streams, {totals["targets"]} targets.')
 
 
 def read_metrics(root, source, output):

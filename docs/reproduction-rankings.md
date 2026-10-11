@@ -1,6 +1,16 @@
 # 复现指标页面：分类与排名展示
 
-更新日期：2026-10-08。网址不变：`thesis/experiments/reproductions/index.html`。
+更新日期：2026-10-11。网址不变：`thesis/experiments/reproductions/index.html`。
+
+## 最新结果
+
+页面顶部是一张 16 个模型 × 7 个数据集 × 3 项图像指标的总表。内窥镜专用方法在上、通用三维重建方法在下，按原结果表分组。15 个适用留出方法共 105 个完整模型—数据集组合；Endo-E2E-GS 的 47 条源视图诊断保留数值但不参加排名，缺少适用双目输入的单元格为 N/A。
+
+内容源是作者提供的 `content/experiments/all-models-20261011.html`。`scripts/latest_reproductions.py` 只读取单元格、覆盖说明与段落，不执行来源脚本。源报告更新时间为 `2026-10-11T07:06:06.912515+00:00`，页面显示北京时间。HTML 内只有三位小数显示值；全局与同输入协议的两套名次直接保留 `data-global-rank` / `data-protocol-rank`，**不能根据三位显示值重排或假称已取得全精度 CSV**。排名切换仅选择来源名次。
+
+原始验收 JSON 与 CSV 尚未随附。页面将“验收通过”明确归因于来源报告，展示 JSON 同时记录 `independently_verified: false`、缺少的证据和来源 SHA256；不声称已检查原始 JSON 的 complete 状态。导出的 `all-models-display-20261011.csv` 与 `all-models-20261011.json` 只包含展示值、来源名次和覆盖信息；原始提供的 HTML 另供下载。
+
+旧版表格、下载和锚点保存在“历史指标与原始资料”折叠区。下文的四指标和旧排名逻辑只适用于该历史区，不作用于最新七数据集总表。
 
 ## 阅读结构
 
@@ -18,7 +28,7 @@
 
 ## 构建与维护
 
-继续执行 `python3 scripts/build.py`。原生成器先输出全部原始数据和旧版页面，然后 `scripts/reproduction_rankings.py` 仅重组复现页面，生成 `data/four-metric-view-20261008.csv/json`，不改写输入数据或原下载文件。
+继续执行 `python3 scripts/build.py`。原生成器先输出全部原始数据和旧版页面，然后 `scripts/reproduction_rankings.py` 重组历史展示并调用最新结果生成器，生成总表及展示导出，同时保留 `data/four-metric-view-20261008.csv/json`，不改写旧输入数据或原下载文件。
 
 只需运行 `python3 scripts/check_reproduction_rankings.py` 即可只读检查全精度来源、第一/第二名、并列、缺失值、对照、协议分组和页面内所有本地链接。新增实验/数据集后要同步审查显式分组及覆盖断言，不要把新协议自动并入旧表。
 
