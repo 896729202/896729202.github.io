@@ -1,4 +1,4 @@
-"""Build author-supplied distillation summaries; never run training or inference."""
+"""Build author-supplied adaptation studies; never run training or inference."""
 from __future__ import annotations
 import csv
 import io
@@ -70,7 +70,7 @@ def write(core, path, title, main, description, article=False):
     output.write_text(output.read_text(encoding='utf-8').replace('</head>',css+'</head>',1),encoding='utf-8')
 
 
-def article(core, data):
+def article(core, data, parent_title='模型适配与泛化'):
     slug=data['slug']
     output=core.ROOT/'thesis/distillation'/slug
     save_json(output/'summary.json',data)
@@ -82,7 +82,7 @@ def article(core, data):
     links='<nav class="md-jump" aria-label="本页目录">'+''.join(
         f'<a href="#{anchor}">{label}</a>' for anchor,label in [('method','怎么蒸馏'),('results','前后指标'),('teachers','教师对照'),('conclusion','结论与边界')])+'</nav>'
     main=(f'<main class="experiment-main md-main" id="main"><header class="experiment-header md-header">'
-          f'<a class="back-link" href="../index.html">{core.icon("left")} 返回模型蒸馏</a>'
+          f'<a class="back-link" href="../index.html">{core.icon("left")} 返回{esc(parent_title)}</a>'
           f'<p class="experiment-date"><time datetime="{data["record_date"]}">{data["record_date"]}</time> · 记录日期</p>'
           f'<h1 tabindex="-1">{esc(data["title"])}</h1><p class="experiment-subtitle">{esc(data["subtitle"])}</p>'
           f'<p class="md-answer">{esc(data["summary"])}</p></header>{links}')
@@ -123,20 +123,28 @@ def build(core):
         if item['file']!=slug+'.json':
             raise ValueError('Unexpected distillation data path')
         data=json.loads((source/item['file']).read_text(encoding='utf-8'))
-        if data.get('schema_version')!=1 or data['slug']!=slug or not data['results']:
-            raise ValueError('Invalid distillation summary')
+        if data['slug']!=slug:
+            raise ValueError('Invalid adaptation study slug')
         date.fromisoformat(data['record_date'])
-        studies.append(data);article(core,data)
+        if data.get('schema_version') == 2 and data.get('kind') == 'selector_diagnostic':
+            from selector_diagnostic import article as selector_article
+            selector_article(core,data,index['title'])
+        elif data.get('schema_version') == 1 and data.get('results'):
+            article(core,data,index['title'])
+        else:
+            raise ValueError('Unsupported adaptation study schema or kind')
+        studies.append(data)
     studies.sort(key=lambda d:d['record_date'],reverse=True)
     cards=''.join(f'<a class="experiment-folder md-study" href="{d["slug"]}/index.html">'
-                  f'<div><time datetime="{d["record_date"]}">{d["record_date"]} · 记录日期</time>'
+                  f'<div><span class="md-kind">{esc(d.get("kind_label", "教师蒸馏"))}</span>'
+                  f'<time datetime="{d["record_date"]}">{d["record_date"]} · 记录日期</time>'
                   f'<h2>{esc(d["title"])}</h2><p>{esc(d["summary"])}</p></div>{core.icon("arrow")}</a>' for d in studies)
     main=(f'<main class="page-main md-index" id="main"><header class="page-heading">'
           f'<a class="back-link" href="../index.html">{core.icon("left")} 返回内窥镜三维重建</a>'
           '<p class="eyebrow">内窥镜三维重建 / 专题实验</p>'
           f'<h1 tabindex="-1">{esc(index["title"])}</h1><p class="description">{esc(index["description"])}</p></header>'
           f'<p class="md-note">{len(studies):02d} 份记录</p>{cards}'
-          '<p class="md-note">训练适配结果单独记录，不混入原方法复现排行榜。记录日期不代替实际实验日期。</p></main>')
+          '<p class="md-note">教师蒸馏、模型适配与泛化诊断按各自协议独立记录。记录日期不代替实际实验日期；不同训练范围和预算的结果不混合排名。</p></main>')
     write(core,'thesis/distillation/index.html',index['title'],main,index['description'])
     path=core.ROOT/'thesis/index.html'
     page=path.read_text(encoding='utf-8')
@@ -144,8 +152,8 @@ def build(core):
     matches=list(re.finditer(pattern,page,re.S))
     if len(matches)!=1 or 'href="distillation/index.html"' in page:
         raise ValueError('Research landing page changed; use the normal full build before inserting')
-    folder=(f'<a class="experiment-folder" href="distillation/index.html"><div><h2>模型蒸馏</h2>'
-            f'<p>{len(studies):02d} 份记录 · 教师伪标签、学生适配与泛化结果</p></div>{core.icon("arrow")}</a>')
+    folder=(f'<a class="experiment-folder" href="distillation/index.html"><div><h2>{esc(index["title"])}</h2>'
+            f'<p>{len(studies):02d} 份记录 · 教师蒸馏、模型适配与泛化诊断</p></div>{core.icon("arrow")}</a>')
     end=matches[0].end()
     path.write_text(page[:end]+folder+page[end:],encoding='utf-8')
-    print(f'Built model distillation: {len(studies)} study; original reproduction metrics unchanged.')
+    print(f'Built model adaptation and generalization: {len(studies)} studies; original reproduction metrics unchanged.')

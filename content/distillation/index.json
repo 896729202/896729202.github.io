@@ -1,8 +1,12 @@
 {
   "schema_version": 1,
-  "title": "模型蒸馏",
-  "description": "用教师伪标签适配重建模型，记录方法、前后指标与泛化边界。",
+  "title": "模型适配与泛化",
+  "description": "分别记录教师伪标签蒸馏与冻结候选上的选择器诊断，按各自协议查看收益、取舍和泛化边界。",
   "entries": [
+    {
+      "slug": "2026-10-13-four-head-selector",
+      "file": "2026-10-13-four-head-selector.json"
+    },
     {
       "slug": "2026-10-08-stereo-xyz-opend4rt",
       "file": "2026-10-08-stereo-xyz-opend4rt.json"

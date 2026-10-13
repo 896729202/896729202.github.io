@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>模型蒸馏 · 896729202</title>
-<meta name="description" content="用教师伪标签适配重建模型，记录方法、前后指标与泛化边界。">
+<title>模型适配与泛化 · 896729202</title>
+<meta name="description" content="分别记录教师伪标签蒸馏与冻结候选上的选择器诊断，按各自协议查看收益、取舍和泛化边界。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="模型蒸馏 · 896729202">
-<meta property="og:description" content="用教师伪标签适配重建模型，记录方法、前后指标与泛化边界。">
+<meta property="og:title" content="模型适配与泛化 · 896729202">
+<meta property="og:description" content="分别记录教师伪标签蒸馏与冻结候选上的选择器诊断，按各自协议查看收益、取舍和泛化边界。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:url" content="https://896729202.github.io/thesis/distillation/">
 <link rel="canonical" href="https://896729202.github.io/thesis/distillation/">
@@ -38,7 +38,7 @@
 <a href="../../thesis/index.html" aria-current="page"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><span>内窥镜三维重建</span><span class="nav-meta">10 实验</span></a>
 <a href="../../notes/index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3" width="15" height="18" rx="2"/><path d="M9 3v18M3 7h4M3 12h4M3 17h4M12 8h5M12 12h5"/></svg><span>八股文</span><span class="nav-meta">01</span></a>
 </nav><div class="sidebar-note"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 4c-10-1-16 2-15 9 1 6 8 8 12 2 2-3 3-7 3-11Z"/><path d="M4 21c2-5 5-8 11-12"/></svg><p>把学过的东西，<br>变成自己的知识。</p></div></aside>
-<main class="page-main md-index" id="main"><header class="page-heading"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回内窥镜三维重建</a><p class="eyebrow">内窥镜三维重建 / 专题实验</p><h1 tabindex="-1">模型蒸馏</h1><p class="description">用教师伪标签适配重建模型，记录方法、前后指标与泛化边界。</p></header><p class="md-note">01 份记录</p><a class="experiment-folder md-study" href="2026-10-08-stereo-xyz-opend4rt/index.html"><div><time datetime="2026-10-08">2026-10-08 · 记录日期</time><h2>双目教师生成 XYZ 伪标签：微调 OpenD4RT 改善 P1 重投影</h2><p>双目教师生成 XYZ 伪标签，学生只看左目视频。P1 训练与验证的同视角重投影改善，但 P3 和跨数据集测试下降。</p></div><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><p class="md-note">训练适配结果单独记录，不混入原方法复现排行榜。记录日期不代替实际实验日期。</p></main>
+<main class="page-main md-index" id="main"><header class="page-heading"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回内窥镜三维重建</a><p class="eyebrow">内窥镜三维重建 / 专题实验</p><h1 tabindex="-1">模型适配与泛化</h1><p class="description">分别记录教师伪标签蒸馏与冻结候选上的选择器诊断，按各自协议查看收益、取舍和泛化边界。</p></header><p class="md-note">02 份记录</p><a class="experiment-folder md-study" href="2026-10-13-four-head-selector/index.html"><div><span class="md-kind">四头选择器诊断</span><time datetime="2026-10-13">2026-10-13 · 记录日期</time><h2>四头选择器：采样效率与泛化诊断</h2><p>固定偏好取得大部分 K1/K2 候选收益，却几乎没有保留到 K3。枚举改善 K1 奖励拟合，但 K3 几何收益不稳定；下一步更值得调查跨片段输入与奖励偏好迁移。</p></div><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="experiment-folder md-study" href="2026-10-08-stereo-xyz-opend4rt/index.html"><div><span class="md-kind">教师蒸馏</span><time datetime="2026-10-08">2026-10-08 · 记录日期</time><h2>双目教师生成 XYZ 伪标签：微调 OpenD4RT 改善 P1 重投影</h2><p>双目教师生成 XYZ 伪标签，学生只看左目视频。P1 训练与验证的同视角重投影改善，但 P3 和跨数据集测试下降。</p></div><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><p class="md-note">教师蒸馏、模型适配与泛化诊断按各自协议独立记录。记录日期不代替实际实验日期；不同训练范围和预算的结果不混合排名。</p></main>
 </div>
 <footer class="site-footer"><div class="footer-inner"><span>© 2026 <a href="https://github.com/896729202" target="_blank" rel="noopener noreferrer">896729202</a> · 知识手记</span><span>保持好奇，持续记录。</span></div></footer>
 <button type="button" class="icon-button back-top" data-back-top hidden aria-label="返回页面顶部" title="返回页面顶部"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20V4M6 10l6-6 6 6"/></svg></button>
