@@ -32,13 +32,14 @@ def facts(rows):
         f'<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k,v in rows)+'</dl>'
 
 
-def table(headers, rows, caption, cls=''):
+def table(headers, rows, caption, cls='', mobile_hint=False):
     if not rows or any(len(r)!=len(headers) for r in rows):
         raise ValueError('Invalid distillation table')
     heads=''.join(f'<th scope="col">{esc(h)}</th>' for h in headers)
     body=''.join('<tr>'+''.join(f'<td>{esc(v)}</td>' for v in row)+'</tr>' for row in rows)
+    hint='<span>左右滑动查看完整表格 →</span>' if mobile_hint else ''
     return (f'<div class="md-scroll {esc(cls)}" role="region" tabindex="0" aria-label="{esc(caption)}；可横向滚动">'
-            f'<table class="md-table"><caption>{esc(caption)}</caption><thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table></div>')
+            f'<table class="md-table"><caption>{esc(caption)}{hint}</caption><thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table></div>')
 
 
 def results_table(rows):

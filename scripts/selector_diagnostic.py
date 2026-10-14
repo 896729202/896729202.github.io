@@ -1,6 +1,7 @@
 """Render an author-supplied selector diagnosis without recomputing metrics."""
 from __future__ import annotations
 
+import json
 import re
 from datetime import date
 
@@ -41,6 +42,20 @@ def validate(data):
         date.fromisoformat(data['experiment_date'])
     if not re.fullmatch(r'[0-9a-f]{64}', data['source_sha256']):
         raise ValueError('Invalid selector report checksum')
+    related = data.get('related_studies', [])
+    if not isinstance(related, list):
+        raise ValueError('Invalid related studies list')
+    related_slugs = set()
+    for study in related:
+        if not isinstance(study, dict):
+            raise ValueError('Invalid related study')
+        slug = _text(study, 'slug')
+        if (not re.fullmatch(r'\d{4}-\d{2}-\d{2}-[a-z0-9-]+', slug)
+                or slug == data['slug'] or slug in related_slugs):
+            raise ValueError('Invalid, self-linked or duplicate related study slug')
+        related_slugs.add(slug)
+        _text(study, 'title')
+        _text(study, 'relation')
     protocol = data.get('protocol')
     if not isinstance(protocol, list) or not protocol or any(
             not isinstance(row, list) or len(row) != 2
@@ -71,7 +86,8 @@ def validate(data):
 
 
 def render_table(data):
-    rendered = layout.table(data['headers'], data['rows'], data['caption'], 'md-selector-table')
+    rendered = layout.table(data['headers'], data['rows'], data['caption'],
+                            'md-selector-table', mobile_hint=True)
     if data.get('note'):
         rendered += f'<p class="md-note">{layout.esc(data["note"])}</p>'
     if data.get('collapsible', False):
@@ -82,8 +98,31 @@ def render_table(data):
     return rendered
 
 
+def related_navigation(core, data):
+    studies = data.get('related_studies', [])
+    if not studies:
+        return ''
+    source = core.ROOT / 'content/distillation'
+    index = json.loads((source / 'index.json').read_text(encoding='utf-8'))
+    registered = {entry['slug']: entry['file'] for entry in index['entries']}
+    links = []
+    for study in studies:
+        slug = study['slug']
+        filename = slug + '.json'
+        if registered.get(slug) != filename or not (source / filename).is_file():
+            raise ValueError(f'Related study is not a buildable article: {slug}')
+        links.append(
+            f'<a href="../{layout.esc(slug)}/index.html">'
+            f'<span>{layout.esc(study["relation"])}</span>'
+            f'<strong>{layout.esc(study["title"])}</strong>'
+            '<span class="md-related-arrow" aria-hidden="true">→</span></a>'
+        )
+    return '<nav class="md-related" aria-label="相关研究">' + ''.join(links) + '</nav>'
+
+
 def article(core, data, parent_title):
     validate(data)
+    related = related_navigation(core, data)
     slug = data['slug']
     output = core.ROOT / 'thesis/distillation' / slug
     layout.save_json(output / 'summary.json', data)
@@ -107,11 +146,11 @@ def article(core, data, parent_title):
         f'{esc(data["record_date"])}</time> · 记录日期 · {date_note}</p>'
         f'<h1 tabindex="-1">{esc(data["title"])}</h1>'
         f'<p class="experiment-subtitle">{esc(data["subtitle"])}</p>'
-        f'<p class="md-answer">{esc(data["summary"])}</p></header>{navigation}'
+        f'<p class="md-answer">{esc(data["summary"])}</p>{related}</header>{navigation}'
         '<section class="md-section" id="protocol"><h2><span>01</span>训练与评价范围</h2>'
         f'{layout.facts(data["protocol"])}</section>'
         '<section class="md-section" id="results"><h2><span>02</span>当前结果</h2>'
-        '<p class="md-note">按报告中的方法顺序列出结果；结合上述训练与评价范围阅读，不作跨范围排名。</p>'
+        '<p class="md-note">根据各自信息条件列示；结合上述训练与评价范围阅读，不作跨范围排名。</p>'
         f'{render_table(primary)}<a class="md-download" href="metrics.csv" download>当前结果 CSV ↓</a></section>'
     )
     for number, section in enumerate(data['sections'], 3):
