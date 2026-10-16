@@ -82,7 +82,17 @@ def build(core):
                 '<h2>D4RT + GRPO</h2><p>光度策略、四头选择、奖励设计与完整诊断链</p>'
                 f'<p class="experiment-topic-meta">实验 {esc(data["experiment_range"])} · 整理 {esc(data["updated"])}</p>'
                 f'<span class="experiment-topic-open">查看实验、结论与下一步 →</span></div>{core.icon("arrow")}</a>')
-        insert_after_header(core.ROOT/path, card, 'data-grpo-column')
+        if path == 'thesis/experiments/index.html':
+            target = core.ROOT/path
+            page = target.read_text(encoding='utf-8')
+            page = re.sub(r'<a\b[^>]*data-grpo-column[^>]*>.*?</a>', '', page, flags=re.S)
+            exposure = re.search(r'<a\b[^>]*href="exposure-geometry/index.html"[^>]*>.*?</a>', page, re.S)
+            if exposure is None:
+                raise ValueError('Exposure topic entry missing')
+            end = exposure.end()
+            target.write_text(page[:end]+card+page[end:], encoding='utf-8')
+        else:
+            insert_after_header(core.ROOT/path, card, 'data-grpo-column')
     old_pages = [('thesis/distillation/index.html', '../experiments/grpo/index.html'),
                  ('thesis/distillation/2026-10-13-four-head-selector/index.html', '../../experiments/grpo/index.html'),
                  ('thesis/distillation/2026-10-14-four-head-routing/index.html', '../../experiments/grpo/index.html')]
