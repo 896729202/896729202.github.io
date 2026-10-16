@@ -1,0 +1,13 @@
+.grpo-protocol{font-size:12px;line-height:1.9;color:var(--muted);padding:15px 18px;background:var(--soft);border-radius:8px;margin:22px 0 0}
+.grpo-formula{padding:14px 18px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
+.grpo-detail{border-top:1px solid var(--line);padding:15px 0;font-size:13px;line-height:1.9;margin-top:16px}
+.grpo-detail summary{cursor:pointer;color:var(--accent-ink);font-weight:500}
+.grpo-detail p,.grpo-detail ul{margin:12px 0 0}
+.grpo-detail a{color:var(--accent)}
+.grpo-detail summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.grpo-steps{padding-left:24px;font-size:14px;line-height:1.95}
+.grpo-steps li{padding-left:3px;margin:12px 0}
+.grpo-main .experiment-table.trials td:first-child{width:24%}
+.grpo-main .experiment-table.trials td:nth-child(2){width:35%}
+@media(max-width:640px){.grpo-steps{font-size:13px}.grpo-detail{font-size:12px}.grpo-protocol{font-size:11px}.grpo-main .experiment-table.trials caption{display:block;width:100%;box-sizing:border-box}}
+@media print{.grpo-detail>*{display:block!important}.grpo-detail summary{font-weight:600}.grpo-formula,.grpo-protocol{break-inside:avoid}}

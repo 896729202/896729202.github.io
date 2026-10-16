@@ -7,6 +7,7 @@ import dataset_inventory
 import rl_notes
 import reproduction_rankings
 import model_distillation
+import grpo_experiments
 
 
 def main():
@@ -17,6 +18,7 @@ def main():
     rl_notes.build(build_core)
     reproduction_rankings.build(build_core)
     model_distillation.build(build_core)
+    grpo_experiments.build(build_core)
 
 
 if __name__ == "__main__":
