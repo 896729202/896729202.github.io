@@ -79,7 +79,7 @@ def build(core):
                        ('thesis/index.html', 'experiments/grpo/index.html')]:
         card = (f'<a class="experiment-folder experiment-topic-folder" data-grpo-column href="{href}">'
                 '<div><span class="experiment-topic-label">GRPO 专栏</span>'
-                '<h2>D4RT + GRPO</h2><p>光度策略、四头选择、奖励设计与完整诊断链</p>'
+                f'<h2>D4RT + GRPO</h2><p>{esc(data["card_summary"])}</p>'
                 f'<p class="experiment-topic-meta">实验 {esc(data["experiment_range"])} · 整理 {esc(data["updated"])}</p>'
                 f'<span class="experiment-topic-open">查看实验、结论与下一步 →</span></div>{core.icon("arrow")}</a>')
         if path == 'thesis/experiments/index.html':
@@ -92,7 +92,14 @@ def build(core):
             end = exposure.end()
             target.write_text(page[:end]+card+page[end:], encoding='utf-8')
         else:
-            insert_after_header(core.ROOT/path, card, 'data-grpo-column')
+            target = core.ROOT/path
+            page = target.read_text(encoding='utf-8')
+            updated, count = re.subn(r'<a\b[^>]*data-grpo-column[^>]*>.*?</a>',
+                                     lambda match: card, page, flags=re.S)
+            if count:
+                target.write_text(updated, encoding='utf-8')
+            else:
+                insert_after_header(target, card, 'data-grpo-column')
     old_pages = [('thesis/distillation/index.html', '../experiments/grpo/index.html'),
                  ('thesis/distillation/2026-10-13-four-head-selector/index.html', '../../experiments/grpo/index.html'),
                  ('thesis/distillation/2026-10-14-four-head-routing/index.html', '../../experiments/grpo/index.html')]
