@@ -1,0 +1,47 @@
+/* Agent document entrances and long-form tables; existing article UI is reused. */
+.agent-documents{display:grid;gap:16px}
+.agent-document{display:flex;align-items:center;gap:20px;width:100%;padding:27px 25px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.agent-document:hover{border-color:var(--accent);background:var(--soft)}
+.agent-document>div{min-width:0;flex:1}
+.agent-document-icon{display:grid;place-items:center;flex-shrink:0;width:50px;height:58px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--accent)}
+.agent-document-icon>.icon{width:25px;height:25px}
+.agent-document .agent-document-meta{font-size:11px;color:var(--accent);margin:0 0 7px}
+.agent-document h2{font:600 21px/1.7 var(--serif);margin:0 0 9px}
+.agent-document .agent-document-summary{font-size:12px;color:var(--muted);line-height:1.9;margin:0 0 13px}
+.agent-document-open{font-size:12px;color:var(--accent)}
+.agent-document>.icon{color:var(--accent);width:19px;flex-shrink:0}
+.agent-intro{margin-bottom:28px}
+.agent-article .breadcrumb{flex-wrap:wrap}
+.agent-article-summary{font-size:14px;line-height:1.95;color:var(--muted);margin:0 0 19px}
+.agent-article .article-body{overflow-wrap:break-word}
+.agent-article .module-number{min-width:2em;flex-shrink:0}
+.agent-article .article-body h2>span:last-child{min-width:0}
+.agent-article .math-inline{display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:.12em 0;vertical-align:middle}
+.agent-article pre{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.agent-table{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;border:1px solid var(--line);border-radius:10px;background:var(--paper);margin:20px 0}
+.agent-table:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.agent-table table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.85;text-align:left}
+.agent-table th,.agent-table td{padding:12px 15px;min-width:135px;vertical-align:top;border-bottom:1px solid var(--line)}
+.agent-table thead th{background:var(--soft);color:var(--accent-ink);font-weight:600}
+.agent-table tbody tr:last-child td{border-bottom:0}
+.agent-table .agent-table-hint{display:none}
+@media(max-width:640px){
+.agent-document{padding:21px 18px;gap:13px;align-items:flex-start}
+.agent-document-icon{width:37px;height:44px;border-radius:8px;margin-top:3px}
+.agent-document-icon>.icon{width:20px;height:20px}
+.agent-document h2{font-size:18px;line-height:1.8}
+.agent-document>.icon{width:15px;margin-top:14px}
+.agent-document .agent-document-meta{font-size:10px}
+.agent-document .agent-document-summary{font-size:11px}
+.agent-article-summary{font-size:12px}
+.agent-table table{font-size:12px}
+.agent-table th,.agent-table td{padding:10px 12px;min-width:130px}
+.agent-table .agent-table-hint{display:block;position:sticky;left:0;margin:0;padding:8px 12px;font-size:10px;color:var(--accent);border-bottom:1px solid var(--line)}
+}
+@media print{
+.agent-table{overflow:visible;border-radius:0;break-inside:auto}
+.agent-table th,.agent-table td{min-width:0;padding:6px 8px;font-size:9pt}
+.agent-table tr{break-inside:avoid}
+.agent-table .agent-table-hint{display:none}
+.agent-article .math-inline{overflow:visible}
+}

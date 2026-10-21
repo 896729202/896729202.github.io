@@ -21,6 +21,7 @@ TEMPLATE = (ROOT / 'site-src/base.html').read_text(encoding='utf-8')
 CACHE_FILE = ROOT / 'scripts/math-cache.json'
 CACHE: dict[str, str] = json.loads(CACHE_FILE.read_text(encoding='utf-8')) if CACHE_FILE.exists() else {}
 MD = MarkdownIt('commonmark', {'html': True, 'typographer': False})
+MD_TABLES = MarkdownIt('commonmark', {'html': True, 'typographer': False}).enable('table')
 ESC = html.escape
 
 ICONS = {
@@ -201,7 +202,7 @@ def math_key(tex: str, display: bool) -> str:
     return ('block:' if display else 'inline:') + tex
 
 
-def render_markdown(source: str) -> str:
+def render_markdown(source: str, tables: bool = False) -> str:
     formulas: list[dict] = []
     for match in MATH_PATTERN.finditer(source):
         tex = (match.group(1) or match.group(2)).strip()
@@ -225,7 +226,7 @@ def render_markdown(source: str) -> str:
             return f'<div class="math-block" role="region" aria-label="公式；较长时可横向滚动" tabindex="0">{rendered}</div>'
         return f'<span class="math-inline">{rendered}</span>'
     source = MATH_PATTERN.sub(replace, source)
-    rendered = MD.render(source)
+    rendered = (MD_TABLES if tables else MD).render(source)
     rendered = re.sub(r'^<h1>.*?</h1>\s*', '', rendered, count=1, flags=re.S)
     return rendered
 

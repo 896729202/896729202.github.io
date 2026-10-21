@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "title": "Agent",
+  "description": "Agent 相关的原理、实践与面试笔记。",
+  "entries": [
+    {
+      "slug": "rag-reranker",
+      "title": "RAG 检索与 Reranker 重排底层原理",
+      "summary": "用 7 个问题串起双塔检索、交叉重排、注意力矩阵、离线预计算与 Q/K/V 的训练机制。",
+      "date": "2026-10-21",
+      "tags": ["RAG", "Reranker", "Attention"],
+      "questions": [
+        "“一维”与“二维”的准确含义",
+        "从拼接序列到注意力网格",
+        "Bi-Encoder 与 Cross-Encoder",
+        "Cross-Encoder 如何实时打分",
+        "离线预计算与在线计算",
+        "文本拼接与 Q/K/V 的流向",
+        "Q/K/V 的形状与训练本质"
+      ]
+    }
+  ]
+}
