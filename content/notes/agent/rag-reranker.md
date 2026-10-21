@@ -21,7 +21,31 @@
 
 $$(T\times d_k)(d_k\times T)=T\times T.$$
 
-每一行与每一列分别对应一个 token，两者的交点就是配对分数。完整矩阵是 $T\times T$；其中“问题看文档”的区域为 $N\times M$，反方向为 $M\times N$，另外还有各自内部的交互。
+每一行与每一列分别对应一个 token，两者的交点就是配对分数。完整的 $T\times T$ 矩阵分成四块：
+
+<figure class="attention-matrix" aria-labelledby="matrix-title" aria-describedby="matrix-caption">
+  <p class="matrix-title" id="matrix-title">QK<sup>T</sup>：完整的 T × T 打分矩阵</p>
+  <p class="matrix-example">例：N = 3，M = 5，T = 8；忽略特殊 token</p>
+  <p class="matrix-axis">行 Q 发起匹配 · 列 K 被匹配</p>
+  <div class="matrix-layout">
+    <span class="matrix-corner">行 Q ↓</span>
+    <div class="matrix-columns"><span>问题 · N = 3</span><span>文档 · M = 5</span></div>
+    <div class="matrix-rows"><span>问题<br>N = 3</span><span>文档<br>M = 5</span></div>
+    <div class="matrix-grid">
+      <div class="matrix-block matrix-qq"><span><strong>N × N</strong><small>3 × 3</small></span></div>
+      <div class="matrix-block matrix-qd"><span><strong>N × M</strong><small>3 × 5</small></span></div>
+      <div class="matrix-block matrix-dq"><span><strong>M × N</strong><small>5 × 3</small></span></div>
+      <div class="matrix-block matrix-dd"><span><strong>M × M</strong><small>5 × 5</small></span></div>
+    </div>
+  </div>
+  <div class="matrix-legend">
+    <p><i class="matrix-qq" aria-hidden="true"></i><span><b>绿色 · 问题 → 问题</b>问题内部的关联</span></p>
+    <p><i class="matrix-qd" aria-hidden="true"></i><span><b>蓝色 · 问题 → 文档</b>问题 token 匹配文档 token</span></p>
+    <p><i class="matrix-dq" aria-hidden="true"></i><span><b>橙色 · 文档 → 问题</b>文档 token 匹配问题 token</span></p>
+    <p><i class="matrix-dd" aria-hidden="true"></i><span><b>紫色 · 文档 → 文档</b>文档内部的关联</span></p>
+  </div>
+  <figcaption id="matrix-caption">每个小格代表一对 token 的配对分数；颜色只区分交互区域，不表示分数大小。蓝色与橙色是跨文本交互。</figcaption>
+</figure>
 
 输入 ID 写成 $1\times T$ 时，前面的 1 表示批大小，与注意力矩阵的行数无关。
 
