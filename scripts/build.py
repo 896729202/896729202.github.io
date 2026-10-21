@@ -5,6 +5,7 @@ import build_experiments
 import experiment_summaries
 import dataset_inventory
 import rl_notes
+import agent_notes
 import reproduction_rankings
 import model_distillation
 import grpo_experiments
@@ -16,6 +17,7 @@ def main():
     experiment_summaries.build(build_core)
     dataset_inventory.build(build_core)
     rl_notes.build(build_core)
+    agent_notes.build(build_core)
     reproduction_rankings.build(build_core)
     model_distillation.build(build_core)
     grpo_experiments.build(build_core)
