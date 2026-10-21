@@ -6,7 +6,7 @@
     {
       "slug": "rag-reranker",
       "title": "RAG 检索与 Reranker 重排底层原理",
-      "summary": "用 7 个问题串起双塔检索、交叉重排、注意力矩阵、离线预计算与 Q/K/V 的训练机制。",
+      "summary": "7 个问题，直接讲清检索与重排的区别、计算流程，以及 Q/K/V 的形状与训练原理。",
       "date": "2026-10-21",
       "tags": ["RAG", "Reranker", "Attention"],
       "questions": [
