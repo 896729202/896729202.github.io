@@ -17,8 +17,8 @@
 <link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
 <link rel="stylesheet" href="../../../assets/site.css">
 <script src="../../../assets/site.js" defer></script>
-<link rel="stylesheet" href="../../../assets/rl-notes.css">
-<link rel="stylesheet" href="../../../assets/agent-notes.css">
+<link rel="stylesheet" href="../../../assets/rl-notes.css?v=0997fa205821">
+<link rel="stylesheet" href="../../../assets/agent-notes.css?v=bc09799ad2ba">
 </head>
 <body>
 <a class="skip-link" href="#main">跳到主要内容</a>
@@ -28,16 +28,15 @@
 <nav class="header-nav" aria-label="主导航"><a href="../../../thesis/index.html">内窥镜三维重建</a><a href="../../../notes/index.html" aria-current="page">八股文</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
 </div></header>
 <div class="layout article-layout">
-<aside class="toc-sidebar" aria-label="文章目录"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回 Agent</a><p class="toc-heading">本篇 7 个问题</p><nav class="toc" aria-label="问题导航"><a class="toc-module" href="#q1">Q1 · “一维”与“二维”的准确含义</a><a class="toc-module" href="#q2">Q2 · 从拼接序列到注意力网格</a><a class="toc-module" href="#q3">Q3 · Bi-Encoder 与 Cross-Encoder</a><a class="toc-module" href="#q4">Q4 · Cross-Encoder 如何实时打分</a><a class="toc-module" href="#q5">Q5 · 离线预计算与在线计算</a><a class="toc-module" href="#q6">Q6 · 文本拼接与 Q/K/V 的流向</a><a class="toc-module" href="#q7">Q7 · Q/K/V 的形状与训练本质</a></nav></aside>
-<main class="article-main agent-article" id="main"><article><header class="article-header"><nav class="breadcrumb" aria-label="面包屑"><a href="../../../index.html">首页</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../index.html">八股文</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../index.html">Agent</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">RAG 检索与 Reranker 重排底层原理</span></nav><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>Agent / 学习文档</p><h1 tabindex="-1">RAG 检索与 Reranker 重排底层原理</h1><p class="agent-article-summary">7 个问题，直接讲清检索与重排的区别、计算流程，以及 Q/K/V 的形状与训练原理。</p><div class="article-meta"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><time datetime="2026-10-21">整理于 2026-10-21</time><span>·</span><span>7 个问题 · 一篇文档</span></div><div class="article-toolbar"><div class="note-tags"><span class="tag">RAG</span><span class="tag">Reranker</span><span class="tag">Attention</span></div><div class="article-actions"><a class="button" href="../../../content/notes/agent/rag-reranker.md" download><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 10l5 5 5-5M4 15v5h16v-5"/></svg> 下载整理稿</a><button class="button" data-copy-link type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m4 2 1-1a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0" transform="translate(0 1) scale(.94)"/></svg> 复制链接</button><button class="button" data-print type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7zM16 11h1"/></svg> 打印</button></div></div></header><details class="mobile-toc"><summary>本篇目录 · 7 个问题</summary><nav class="toc" aria-label="移动端问题导航"><a class="toc-module" href="#q1">Q1 · “一维”与“二维”的准确含义</a><a class="toc-module" href="#q2">Q2 · 从拼接序列到注意力网格</a><a class="toc-module" href="#q3">Q3 · Bi-Encoder 与 Cross-Encoder</a><a class="toc-module" href="#q4">Q4 · Cross-Encoder 如何实时打分</a><a class="toc-module" href="#q5">Q5 · 离线预计算与在线计算</a><a class="toc-module" href="#q6">Q6 · 文本拼接与 Q/K/V 的流向</a><a class="toc-module" href="#q7">Q7 · Q/K/V 的形状与训练本质</a></nav></details><div class="article-body"><p>本文讨论常见的“单向量 Bi-Encoder 召回＋双向 Cross-Encoder 重排”。用户问题记为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>q</mi></math></span>，文档记为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>D</mi></math></span>；注意力中的 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi><mo>,</mo><mi>K</mi><mo>,</mo><mi>V</mi></math></span> 是模型内部的矩阵。</p>
-<h2 id="q1"><span class="module-number">Q1</span><span>为什么检索后还需要重排？“一维”和“二维”指什么？</span></h2>
-<p><strong>向量检索适合快速找候选；交叉重排让问题与文档逐 token 交互，更细致地判断候选是否回答了问题。</strong></p>
+<aside class="toc-sidebar" aria-label="文章目录"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回 Agent</a><p class="toc-heading">本篇 7 个问题</p><nav class="toc" aria-label="问题导航"><a class="toc-module" href="#q1">Q1 · 有了 RAG 为什么还要重排</a><a class="toc-module" href="#q2">Q2 · 从拼接序列到注意力网格</a><a class="toc-module" href="#q3">Q3 · RAG 中的 Bi-Encoder 与双塔</a><a class="toc-module" href="#q4">Q4 · Cross-Encoder 如何实时打分</a><a class="toc-module" href="#q5">Q5 · 离线预计算与在线计算</a><a class="toc-module" href="#q6">Q6 · 文本拼接与 Q/K/V 的流向</a><a class="toc-module" href="#q7">Q7 · Q/K/V 的形状与训练分工</a></nav></aside>
+<main class="article-main agent-article" id="main"><article><header class="article-header"><nav class="breadcrumb" aria-label="面包屑"><a href="../../../index.html">首页</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../index.html">八股文</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../index.html">Agent</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">RAG 检索与 Reranker 重排底层原理</span></nav><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>Agent / 学习文档</p><h1 tabindex="-1">RAG 检索与 Reranker 重排底层原理</h1><p class="agent-article-summary">7 个问题，直接讲清检索与重排的区别、计算流程，以及 Q/K/V 的形状与训练原理。</p><div class="article-meta"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><time datetime="2026-10-21">整理于 2026-10-21</time><span>·</span><span>7 个问题 · 一篇文档</span></div><div class="article-toolbar"><div class="note-tags"><span class="tag">RAG</span><span class="tag">Reranker</span><span class="tag">Attention</span></div><div class="article-actions"><a class="button" href="../../../content/notes/agent/rag-reranker.md" download><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12M7 10l5 5 5-5M4 15v5h16v-5"/></svg> 下载整理稿</a><button class="button" data-copy-link type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m4 2 1-1a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0" transform="translate(0 1) scale(.94)"/></svg> 复制链接</button><button class="button" data-print type="button"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7zM16 11h1"/></svg> 打印</button></div></div></header><details class="mobile-toc"><summary>本篇目录 · 7 个问题</summary><nav class="toc" aria-label="移动端问题导航"><a class="toc-module" href="#q1">Q1 · 有了 RAG 为什么还要重排</a><a class="toc-module" href="#q2">Q2 · 从拼接序列到注意力网格</a><a class="toc-module" href="#q3">Q3 · RAG 中的 Bi-Encoder 与双塔</a><a class="toc-module" href="#q4">Q4 · Cross-Encoder 如何实时打分</a><a class="toc-module" href="#q5">Q5 · 离线预计算与在线计算</a><a class="toc-module" href="#q6">Q6 · 文本拼接与 Q/K/V 的流向</a><a class="toc-module" href="#q7">Q7 · Q/K/V 的形状与训练分工</a></nav></details><div class="article-body"><p>本文讨论常见的“单向量 Bi-Encoder 召回＋双向 Cross-Encoder 重排”。用户问题记为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>q</mi></math></span>，文档记为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>D</mi></math></span>；注意力中的 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi><mo>,</mo><mi>K</mi><mo>,</mo><mi>V</mi></math></span> 是模型内部的矩阵。</p>
+<h2 id="q1"><span class="module-number">Q1</span><span>为什么有了 RAG 还需要 Reranker？</span></h2>
+<p><strong>因为常见 RAG 的向量检索用“一维向量”快速找候选，Cross-Encoder Reranker 用“二维 token 交互”进一步判断候选是否回答了问题。</strong></p>
 <ul>
-<li><strong>“一维”</strong>：每段文本被独立编码成一个向量，最后计算向量相似度。</li>
-<li><strong>“二维”</strong>：问题与文档联合编码，注意力建立 token 之间的两两关联。</li>
+<li><strong>“一维”检索</strong>：问题和文档各自压缩成一个向量，再计算相似度，适合从大量文档中快速召回。</li>
+<li><strong>“二维”重排</strong>：问题和候选文档放在一起，逐 token 建立关联，更细致地处理否定、数字和条件。</li>
 </ul>
-<p>独立编码需要把文本压缩为固定表示；联合编码则能针对当前问题处理否定、数字和条件等细节。这是使用重排的主要动机。</p>
-<p>“一维／二维”只是交互方式的比喻：一个 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi></math></span> 维向量仍有 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi></math></span> 个特征维度，双塔模型内部也有注意力矩阵。重排只调整已召回候选的顺序，无法补回未召回的文档。</p>
+<p>这里的“一维”特指 RAG 中的<strong>单向量检索</strong>，不是说 RAG 本身是一维模型；一个 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi></math></span> 维向量仍有 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi></math></span> 个特征维度。Reranker 是可选的精排步骤，只能重排已召回的候选。</p>
 <h2 id="q2"><span class="module-number">Q2</span><span>拼接是一条序列，N×M 的交互矩阵从哪里来？</span></h2>
 <p><strong>二维交互来自注意力中的 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi><msup><mi>K</mi><mrow data-mjx-texclass="ORD"><mrow data-mjx-texclass="ORD"><mi mathvariant="sans-serif">T</mi></mrow></mrow></msup></math></span>，拼接本身只增加序列长度。</strong></p>
 <p>忽略特殊 token，问题长 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math></span>、文档长 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi></math></span>，总长度 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>T</mi><mo>=</mo><mi>N</mi><mo>+</mo><mi>M</mi></math></span>。单个注意力头中，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi></math></span> 和 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>K</mi></math></span> 的形状都是 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>T</mi><mo>×</mo><msub><mi>d</mi><mi>k</mi></msub></math></span>，因此：</p>
@@ -68,34 +67,14 @@
 </figure>
 <p>输入 ID 写成 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>×</mo><mi>T</mi></math></span> 时，前面的 1 表示批大小，与注意力矩阵的行数无关。</p>
 <h2 id="q3"><span class="module-number">Q3</span><span>Bi-Encoder 是什么？与 Cross-Encoder 有何不同？</span></h2>
-<p><strong>Bi-Encoder 先分别编码再比较；Cross-Encoder 把文本对一起编码后打分。</strong></p>
-<div class="agent-table" role="region" tabindex="0" aria-label="对照表；窄屏可横向滚动"><p class="agent-table-hint">左右滑动查看完整表格 →</p><table>
-<thead>
-<tr>
-<th>比较项</th>
-<th>Bi-Encoder（双塔）</th>
-<th>Cross-Encoder（交叉编码器）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>输入处理</td>
-<td>问题与文档分别进入编码器</td>
-<td>问题与文档作为一对输入</td>
-</tr>
-<tr>
-<td>打分依据</td>
-<td>两个独立向量的相似度</td>
-<td>联合编码得到的表示</td>
-</tr>
-<tr>
-<td>常见用途</td>
-<td>大规模候选召回</td>
-<td>少量候选重排</td>
-</tr>
-</tbody>
-</table></div>
-<p>“双塔”指两条独立编码路径，参数可以共享。Reranker 是“重新排序”这一用途的名称，Cross-Encoder 是它的一种常见实现。</p>
+<p><strong>Bi-Encoder 就是常见 RAG 向量检索中，分别把问题和文档转换成向量的 Embedding 编码架构。</strong></p>
+<p>“双塔”就是两条编码路径：<strong>一条处理问题，另一条处理文档，编码时互不读取对方。</strong> 两条路径可以共用同一套模型参数，并不一定是两个不同的模型。</p>
+<pre tabindex="0" aria-label="代码示例；窄屏可横向滚动"><code class="language-text">文档 → 文档编码器 → 文档向量（提前存入向量库）
+问题 → 问题编码器 → 问题向量（用户提问时计算）
+                    ↓
+            比较两个向量，召回候选
+</code></pre>
+<p><strong>Cross-Encoder 则把“问题＋候选文档”作为一对输入，联合编码后直接输出相关性分数。</strong> 前者适合大规模召回，后者常用于候选重排。Reranker 是重排用途的名称，Cross-Encoder 是它的一种常见实现。</p>
 <h2 id="q4"><span class="module-number">Q4</span><span>Cross-Encoder 如何实时计算相关性分数？</span></h2>
 <p><strong>把问题和候选文档联合编码，再由打分头输出这一个文本对的相关性分数。</strong></p>
 <p>以 BERT 类模型为例：</p>
@@ -161,8 +140,19 @@
 </table></div>
 <p>多头注意力中，每个头都有自己的投影与交互；常见设置为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>d</mi><mi>k</mi></msub><mo>=</mo><msub><mi>d</mi><mi>v</mi></msub><mo>=</mo><msub><mi>d</mi><mrow data-mjx-texclass="ORD"><mrow data-mjx-texclass="ORD"><mi data-mjx-auto-op="false">model</mi></mrow></mrow></msub><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mi>H</mi></math></span>，其中 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>H</mi></math></span> 是头数。</p>
 <div class="math-block" role="region" aria-label="公式；较长时可横向滚动" tabindex="0"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Attention</mi><mo stretchy="false">(</mo><mi>Q</mi><mo>,</mo><mi>K</mi><mo>,</mo><mi>V</mi><mo stretchy="false">)</mo><mo>=</mo><mi>softmax</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mfrac><mrow><mi>Q</mi><msup><mi>K</mi><mrow data-mjx-texclass="ORD"><mrow data-mjx-texclass="ORD"><mi mathvariant="sans-serif">T</mi></mrow></mrow></msup></mrow><msqrt><msub><mi>d</mi><mi>k</mi></msub></msqrt></mfrac><mo data-mjx-texclass="CLOSE">)</mo></mrow><mi>V</mi><mo>.</mo></math></div>
-<p>这个公式已经规定：<strong>Q、K 决定“如何匹配”，V 提供“汇聚什么内容”。</strong> 这里省略了注意力掩码。</p>
-<p>随机初始化只提供起点，不会自动赋予参数语义。训练时，损失函数衡量预测误差，反向传播计算梯度，优化器据此更新 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mi>Q</mi></msub><mo>,</mo><msub><mi>W</mi><mi>K</mi></msub><mo>,</mo><msub><mi>W</mi><mi>V</mi></msub></math></span> 等参数，使它们逐渐学到有用的匹配与内容表示。实际使用预训练模型时，这些参数已经学过，无须在每次推理时重新学习。</p>
+<p>这个公式已经规定了分工：<strong>Q 发起匹配，K 提供被匹配的特征，两者决定注意力权重；V 提供按权重汇聚的内容。</strong> 这里省略了注意力掩码。</p>
+<h3>为什么训练后能完成这些分工？</h3>
+<p><strong>角色由计算路径规定，匹配和提取内容的能力由任务误差训练出来。真正更新的是 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mi>Q</mi></msub><mo>,</mo><msub><mi>W</mi><mi>K</mi></msub><mo>,</mo><msub><mi>W</mi><mi>V</mi></msub></math></span>；Q、K、V 是每次输入经过这些参数算出的中间结果。</strong></p>
+<p>以一个简化的相关性训练样本为例：问题是“促销商品能退吗？”，文档是“促销商品不支持退货”。这段文档回答了问题，因此相关性标签为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>y</mi><mo>=</mo><mn>1</mn></math></span>，并不是说“允许退货”。</p>
+<ol>
+<li><strong>前向计算</strong>：文本对经过投影、注意力和打分头，得到分数。假设经 sigmoid 后预测为 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi><mo>=</mo><mn>0.12</mn></math></span>。</li>
+<li><strong>计算误差</strong>：用二元交叉熵衡量预测与标签的差距。此例 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>L</mi><mo>=</mo><mo>−</mo><mi>log</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>p</mi></math></span>，把相关文档打得太低会产生较大损失。</li>
+<li><strong>反向传播</strong>：梯度从损失经过打分头和各层传回。经过 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi><msup><mi>K</mi><mrow data-mjx-texclass="ORD"><mrow data-mjx-texclass="ORD"><mi mathvariant="sans-serif">T</mi></mrow></mrow></msup></math></span> 与 softmax 的分支，告诉 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mi>Q</mi></msub><mo>,</mo><msub><mi>W</mi><mi>K</mi></msub></math></span> 怎样改变匹配；经过被加权汇聚的 V 分支，告诉 <span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mi>V</mi></msub></math></span> 怎样改变传递的内容。</li>
+<li><strong>更新参数</strong>：优化器根据各自梯度调整参数。以梯度下降为例：</li>
+</ol>
+<div class="math-block" role="region" aria-label="公式；较长时可横向滚动" tabindex="0"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>W</mi><mi>Q</mi></msub><mo stretchy="false">&#x2190;</mo><msub><mi>W</mi><mi>Q</mi></msub><mo>&#x2212;</mo><mi>&#x3B7;</mi><mfrac><mrow><mi>&#x2202;</mi><mi>L</mi></mrow><mrow><mi>&#x2202;</mi><msub><mi>W</mi><mi>Q</mi></msub></mrow></mfrac><mo>,</mo></math></div>
+<p><span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mi>K</mi></msub><mo>,</mo><msub><mi>W</mi><mi>V</mi></msub></math></span> 同理，<span class="math-inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>η</mi></math></span> 是学习率。对大量相关与不相关样本重复这个过程，模型便能逐渐学到对最终判断有用的匹配和内容表示。<a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html">反向传播的计算依据</a></p>
+<p><strong>损失监督的是最终判断，并没有给每个 Q、K、V 单独贴语义标签。</strong> 因此不能断言某一对词的注意力一定升高，或某一维固定代表“否定”。上面的数字只是训练示例；实际下载的 BGE Reranker 已有训练好的参数，重排训练通常基于已有模型继续微调。<a href="https://huggingface.co/BAAI/bge-reranker-v2-m3">BGE 模型与训练说明</a></p>
 <hr />
 <p><strong>参考资料：</strong> <a href="https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html">检索与重排流程</a> · <a href="https://sbert.net/docs/cross_encoder/usage/usage.html">Cross-Encoder 与分数</a> · <a href="https://arxiv.org/html/1706.03762v7#S3.SS2">Transformer 注意力公式</a> · <a href="https://arxiv.org/abs/1810.04805">BERT 输入与联合编码</a></p>
 </div><footer class="article-end"><span>把检索链路与模型计算过程连起来理解。</span><a class="button" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回 Agent</a></footer></article></main>

@@ -10,13 +10,13 @@
       "date": "2026-10-21",
       "tags": ["RAG", "Reranker", "Attention"],
       "questions": [
-        "“一维”与“二维”的准确含义",
+        "有了 RAG 为什么还要重排",
         "从拼接序列到注意力网格",
-        "Bi-Encoder 与 Cross-Encoder",
+        "RAG 中的 Bi-Encoder 与双塔",
         "Cross-Encoder 如何实时打分",
         "离线预计算与在线计算",
         "文本拼接与 Q/K/V 的流向",
-        "Q/K/V 的形状与训练本质"
+        "Q/K/V 的形状与训练分工"
       ]
     }
   ]

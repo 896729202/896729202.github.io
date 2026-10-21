@@ -2,6 +2,7 @@
 from __future__ import annotations
 from datetime import date
 from html import unescape
+from hashlib import sha256
 import json
 import re
 
@@ -41,8 +42,12 @@ def load_manifest(core):
 def write(core, path, title, main, description, toc=None):
     core.shell(path, title, main, 'notes', toc=toc, description=description)
     output = core.ROOT / path
-    css = ''.join(f'<link rel="stylesheet" href="{core.prefix_for(path)}assets/{name}">\n'
-                  for name in ('rl-notes.css', 'agent-notes.css'))
+    css = ''
+    for name in ('rl-notes.css', 'agent-notes.css'):
+        # Change the URL when styles change so cached CSS cannot hide new diagrams.
+        source = (core.ROOT / 'assets' / name).read_text(encoding='utf-8')
+        version = sha256(source.encode('utf-8')).hexdigest()[:12]
+        css += f'<link rel="stylesheet" href="{core.prefix_for(path)}assets/{name}?v={version}">\n'
     output.write_text(output.read_text(encoding='utf-8').replace(
         '</head>', css + '</head>', 1), encoding='utf-8')
 
