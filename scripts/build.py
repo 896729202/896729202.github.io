@@ -9,6 +9,7 @@ import agent_notes
 import reproduction_rankings
 import model_distillation
 import grpo_experiments
+import ai_search_notes
 
 
 def main():
@@ -21,6 +22,7 @@ def main():
     reproduction_rankings.build(build_core)
     model_distillation.build(build_core)
     grpo_experiments.build(build_core)
+    ai_search_notes.build(build_core)
 
 
 if __name__ == "__main__":
