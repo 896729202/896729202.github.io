@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>verl 实操：PPO、GRPO、DAPO · AI搜</title>
+<meta name="description" content="verl v0.6.0 学习笔记：算法开关、KL、DAPO 动态采样与自定义奖励接入。">
+<link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
+<link rel="stylesheet" href="../../../assets/site.css">
+<link rel="stylesheet" href="../../../assets/rl-notes.css">
+<script src="../../../assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="../../../index.html"><span class="brand-name">896729202<span class="brand-divider">/</span><span class="brand-sub">知识手记</span></span></a>
+<nav class="header-nav" aria-label="主导航"><a href="../../../thesis/index.html">内窥镜三维重建</a><a href="../../index.html" aria-current="page">八股文</a></nav>
+</div></header>
+<div class="layout"><aside class="sidebar"><div class="profile-avatar"><span>89.</span></div><h2 class="profile-name">896729202</h2><p class="profile-caption">一份个人知识手记</p><nav class="sidebar-nav"><p class="section-eyebrow">内容板块</p><a href="../../../thesis/index.html">内窥镜三维重建</a><a href="../../index.html" aria-current="page">八股文</a></nav></aside>
+<main class="page-main rl-main" id="main">
+<nav class="breadcrumb" aria-label="面包屑"><a href="../../../index.html">首页</a> / <a href="../../index.html">八股文</a> / <a href="../index.html">AI搜</a> / <span>verl 实操</span></nav>
+<p class="eyebrow">AI搜 / 实操文档</p><h1 tabindex="-1">verl 实操：PPO、GRPO、DAPO 配置与奖励接入</h1>
+<p class="description">固定版本，核对算法开关，最后把自定义奖励接入训练。</p>
+<p class="note-tags"><span class="tag">verl v0.6.0</span> <span class="tag">PPO</span> <span class="tag">GRPO</span> <span class="tag">DAPO</span></p>
+<p><a class="button" href="../../../content/notes/ai-search/verl.md" download>下载完整 Markdown 原稿</a> <button class="button" data-copy-link type="button">复制链接</button></p>
+<div class="article-body">
+<p><strong>版本说明：</strong>以下为 verl v0.6.0 学习示例，不代表当前项目已使用此版本。数值是练习起点，不是唯一正确配置。</p>
+<h2>1. 三种算法的关键开关</h2>
+<div class="agent-table" role="region" tabindex="0" aria-label="算法配置表；窄屏可横向滚动"><p class="agent-table-hint">左右滑动查看完整表格 →</p><table><thead><tr><th>配置项</th><th>PPO + GAE</th><th>GRPO</th><th>DAPO</th></tr></thead><tbody>
+<tr><td>入口</td><td>verl.trainer.main_ppo</td><td>verl.trainer.main_ppo</td><td>recipe.dapo.main_dapo</td></tr>
+<tr><td>adv_estimator</td><td>gae</td><td>grpo</td><td>grpo</td></tr><tr><td>critic.enable</td><td>True</td><td>False</td><td>False</td></tr>
+<tr><td>rollout.n</td><td>可从 1 开始</td><td>示例 4</td><td>示例 4</td></tr><tr><td>clip_ratio_low</td><td>0.2</td><td>0.2</td><td>0.2</td></tr>
+<tr><td>clip_ratio_high</td><td>0.2</td><td>0.2</td><td>0.28</td></tr><tr><td>loss_agg_mode</td><td>token-mean 示例</td><td>token-mean 示例</td><td>token-mean</td></tr></tbody></table></div>
+<ul><li><strong>adv_estimator：</strong>优势估计方式。</li><li><strong>critic.enable：</strong>PPO + GAE 通常需要 Critic；GRPO 用组内相对奖励构造优势，通常不需要。</li><li><strong>rollout.n：</strong>每个问题生成几条回答，增加采样通常也增加成本。</li><li><strong>clip_ratio_low/high：</strong>限制新旧策略概率比更新范围，不是裁剪奖励。</li><li><strong>loss_agg_mode：</strong>控制 token 损失汇总，不能仅凭它区分算法。</li></ul>
+<p>PPO 还需配置 Critic 模型和优化器；gamma、lambda 控制回报与 GAE。请按锁定版本核对字段和默认值。</p>
+<p><a href="https://verl.readthedocs.io/en/latest/algo/grpo.html">GRPO 文档</a> · <a href="https://github.com/verl-project/verl/blob/v0.6.0/verl/trainer/config/ppo_trainer.yaml">PPO 配置</a> · <a href="https://github.com/verl-project/verl/blob/v0.6.0/verl/trainer/config/critic/critic.yaml">Critic 配置</a></p>
+<h2>2. KL 的两种接入位置</h2>
+<ul><li><strong>奖励端 KL：</strong>algorithm.use_kl_in_reward，把惩罚合并到奖励。</li><li><strong>损失端 KL：</strong>actor.use_kl_loss，在策略损失中加入 KL 项。</li></ul>
+<p>这是可选组合，不是算法强制规定。不要无意中两处都打开而重复惩罚；PPO 也可以关闭 KL。GRPO 示例里的 kl_loss_coef=0.001 只是参考起点。<a href="https://github.com/verl-project/verl/blob/v0.6.0/examples/grpo_trainer/run_qwen3-8b.sh">GRPO 示例</a></p>
+<h2>3. DAPO 动态采样与超长输出</h2>
+<pre tabindex="0"><code>data.train_batch_size=64
+data.gen_batch_size=128
+algorithm.filter_groups.enable=True
+algorithm.filter_groups.metric=seq_reward
+algorithm.filter_groups.max_num_gen_batches=10
+reward_model.reward_manager=dapo</code></pre>
+<p>按序列奖励过滤训练组。如果同一问题的回答奖励相同，组内可能缺少相对优劣信号，于是继续采样，直到样本够用或达到上限。</p>
+<p>视频任务若以 F1 为奖励，可考虑 seq_reward，但需核对奖励返回值和过滤字段；不能不检查就照搬数学任务里的 acc 字段。超长输出字段包括 reward_model.overlong_buffer.enable、len、penalty_factor，是否启用要看输出长度分布。<a href="https://verl.readthedocs.io/en/latest/algo/dapo.html">DAPO 配置说明</a></p>
+<h2>4. 其他训练参数</h2>
+<div class="agent-table" role="region" tabindex="0" aria-label="训练参数表；窄屏可横向滚动"><p class="agent-table-hint">左右滑动查看完整表格 →</p><table><thead><tr><th>参数</th><th>示例</th><th>作用</th></tr></thead><tbody><tr><td>actor.optim.lr</td><td>全参数可试 1e-6</td><td>Actor 学习率</td></tr><tr><td>critic.optim.lr</td><td>PPO 可试 1e-5</td><td>Critic 学习率</td></tr><tr><td>train_batch_size</td><td>64</td><td>每轮输入问题数</td></tr><tr><td>ppo_mini_batch_size</td><td>16</td><td>更新 mini-batch</td></tr><tr><td>ppo_micro_batch_size_per_gpu</td><td>1</td><td>单 GPU 一次处理量</td></tr><tr><td>ppo_epochs</td><td>1</td><td>同批数据重复更新轮数</td></tr><tr><td>rollout.temperature</td><td>1.0</td><td>采样随机性</td></tr><tr><td>max_prompt_length / max_response_length</td><td>按数据统计</td><td>输入／输出长度上限</td></tr><tr><td>trainer.test_freq</td><td>10</td><td>按训练步间隔评测</td></tr></tbody></table></div>
+<p><strong>ppo_epochs 不等于 total_epochs：</strong>前者重复利用同一批生成数据；后者遍历训练集。test_freq=10 也不代表每十个 epoch 评测。不要只凭 GPU 数量推导 batch size 或学习率，应观察显存、吞吐、梯度、KL、奖励分布和独立验证指标。</p>
+<h2>5. 奖励函数接入</h2>
+<pre tabindex="0"><code>custom_reward_function.path=/实际路径/video_reward.py
+custom_reward_function.name=compute_score</code></pre>
+<p>实现需解析预测 ID、获取参考 ID、计算 F1；按需调用文本评分服务，并明确奖励归一化、权重、缺失值处理与融合规则。返回结构必须兼容对应版本的 reward manager。</p>
+<p><strong>预测 ID 的 4B 模型不能直接当作输出标量分数的奖励模型配置进去就结束。</strong> 必须有调用和结果转换逻辑。<a href="https://github.com/verl-project/verl/blob/v0.6.0/verl/workers/reward_manager/dapo.py">DAPO 奖励管理器</a></p>
+<h2>面试与实操自检</h2><ul><li>为什么 PPO + GAE 需要 Critic，而 GRPO 通常不需要？</li><li>能否区分奖励端 KL 与损失端 KL？</li><li>rollout.n、clip 区间和 loss 聚合分别影响什么？</li><li>为什么不能不检查就把 acc 换成 F1？</li><li>能否展示自定义奖励函数怎样解析输出、计算 F1 并返回正确结构？</li><li>是否保存版本、配置、日志和独立评测结果？</li></ul>
+<p><strong>复习重点：</strong>比背住 0.2 或 0.28 更重要的是解释为什么改参数、观察什么日志、如何判断有效，以及独立评测是否改善。本文不代表这些参数已在你的项目中实际运行或验证。</p>
+</div>
+<footer class="article-end"><a class="button" href="../index.html">返回 AI搜</a></footer>
+</main></div>
+<footer class="site-footer"><div class="footer-inner"><span>© 2026 <a href="https://github.com/896729202">896729202</a> · 知识手记</span><span>保持好奇，持续记录。</span></div></footer>
+<button type="button" class="icon-button back-top" data-back-top hidden aria-label="返回页面顶部"><span>↑</span></button>
+</body></html>
