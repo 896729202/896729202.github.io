@@ -1,4 +1,4 @@
-"""RL topic hubs: original paper first, then interview and principles modules."""
+"""LLM interview collection containing the RL topic hubs and modules."""
 from __future__ import annotations
 import json
 import re
@@ -51,7 +51,8 @@ def build(core):
                 published_sources.append(source)
 
     def crumb(prefix, topic=None, module=None):
-        parts = [f'<a href="{prefix}index.html">首页</a>', f'<a href="{prefix}notes/index.html">八股文</a>']
+        parts = [f'<a href="{prefix}index.html">首页</a>', f'<a href="{prefix}notes/index.html">八股文</a>',
+                 f'<a href="{prefix}notes/llm-interview/index.html">大模型面经</a>']
         if topic:
             parts.append(f'<a href="{prefix}notes/rl/index.html">{E(data["title"])}</a>')
             if module:
@@ -97,13 +98,32 @@ def build(core):
         write(f'notes/rl/{slug}/index.html', f'{name} · 强化学习', main)
 
     labels = ' · '.join(t['title'] for t in topics)
-    main = f'<main class="page-main rl-main" id="main"><header class="page-heading">{crumb("../../")}<p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>八股文 / 复习专题</p><h1 tabindex="-1">{E(data["title"])}</h1><p class="description">{E(labels)}</p></header><div class="rl-topline"><span>{len(topics):02d} 个主题 · 八股文 / 原理</span><span>{published} 个模块已整理</span></div><div class="rl-topics">{"".join(rows)}</div><a class="back-link rl-back" href="../index.html">{core.icon("left")} 返回八股文</a></main>'
+    main = f'<main class="page-main rl-main" id="main"><header class="page-heading">{crumb("../../")}<p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>大模型面经 / 强化学习</p><h1 tabindex="-1">{E(data["title"])}</h1><p class="description">{E(labels)}</p></header><div class="rl-topline"><span>{len(topics):02d} 个主题 · 八股文 / 原理</span><span>{published} 个模块已整理</span></div><div class="rl-topics">{"".join(rows)}</div><a class="back-link rl-back" href="../llm-interview/index.html">{core.icon("left")} 返回大模型面经</a></main>'
     write('notes/rl/index.html', '强化学习', main)
+
+    # Keep existing RL URLs working while placing the whole collection under its parent.
+    parent_main = (
+        '<main class="page-main rl-main" id="main"><header class="page-heading">'
+        + core.breadcrumb('../../', '大模型面经', article=True)
+        + '<p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>八股文 / 面试专题</p>'
+        '<h1 tabindex="-1">大模型面经</h1><p class="description">按主题整理大模型面试中的核心原理与常见追问。</p></header>'
+        '<div class="rl-topline"><span>01 个专题</span><span>原理 · 面试问答</span></div>'
+        '<div class="rl-topics"><a class="rl-topic" href="../rl/index.html" aria-label="进入强化学习专题">'
+        f'<span class="rl-number">01</span><h2>强化学习</h2><span class="rl-state">{len(topics)} 个主题</span>'
+        + core.icon('arrow') + '</a></div>'
+        f'<p class="description">{E(labels)}</p>'
+        '<a class="back-link rl-back" href="../index.html">' + core.icon('left') + ' 返回八股文</a></main>'
+    )
+    core.shell('notes/llm-interview/index.html', '大模型面经', parent_main, 'notes',
+               description='大模型面经：强化学习专题，涵盖 PPO、DPO、GRPO、GSPO、DAPO 的原理与面试问答。')
+    parent = root / 'notes/llm-interview/index.html'
+    parent.write_text(parent.read_text(encoding='utf-8').replace(
+        '</head>', '<link rel="stylesheet" href="../../assets/rl-notes.css">\n</head>', 1), encoding='utf-8')
 
     # The core builder has just generated notes/index.html; retain its LoRA card.
     path = root / 'notes/index.html'
     page = path.read_text(encoding='utf-8')
-    card = f'<a class="note-card index-note rl-collection" href="../notes/rl/index.html" data-note-card data-slug="rl" data-note-kind="topic" aria-label="进入强化学习专题"><div class="note-art rl-art" aria-hidden="true"><span class="note-art-title">RL</span><span class="rl-art-caption">强化学习</span></div><div class="note-card-body"><div class="note-meta"><b class="note-category">复习专题</b><span></span><span>{len(topics)} 个主题</span></div><h3>{E(data["title"])}</h3><p>{E(labels)}</p><div class="note-tags"><span class="tag tag-neutral">八股文 / 原理 · {published} 个模块已整理</span></div></div>{core.icon("arrow", "end-arrow")}</a>'
+    card = f'<a class="note-card index-note rl-collection" href="llm-interview/index.html" data-note-card data-slug="llm-interview" data-note-kind="topic" aria-label="进入大模型面经板块"><div class="note-art rl-art" aria-hidden="true"><span class="note-art-title">LLM</span><span class="rl-art-caption">大模型面经</span></div><div class="note-card-body"><div class="note-meta"><b class="note-category">面试专题</b><span></span><span>1 个专题</span></div><h3>大模型面经</h3><p>强化学习：{E(labels)}</p><div class="note-tags"><span class="tag">大模型</span><span class="tag tag-neutral">原理 · 面试问答</span></div></div>{core.icon("arrow", "end-arrow")}</a>'
     marker = '</div>\n<div class="zero-results"'
     if page.count(marker) != 1:
         raise ValueError('Notes layout changed; refusing an ambiguous insertion')
@@ -114,11 +134,11 @@ def build(core):
         raise ValueError('Missing or ambiguous note search index')
     found = matches[0]
     search = json.loads(found.group(2))
-    if any(row['slug'] == 'rl' for row in search):
-        raise ValueError('Duplicate RL search entry; rebuild notes first')
-    text = data['title'] + ' reinforcement learning RL 八股文 原理 论文原文 ' + labels
+    if any(row['slug'] in ('rl', 'llm-interview') for row in search):
+        raise ValueError('Duplicate LLM interview search entry; rebuild notes first')
+    text = '大模型面经 LLM 面试问答 ' + data['title'] + ' reinforcement learning RL 八股文 原理 论文原文 ' + labels
     text += ' ' + ' '.join(t['paper']['title'] for t in topics) + ' ' + ' '.join(published_sources)
-    search.append({'slug': 'rl', 'text': text})
+    search.append({'slug': 'llm-interview', 'text': text})
     serialized = json.dumps(search, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     page = page[:found.start(2)] + serialized + page[found.end(2):]
     page = page.replace('</head>', '<link rel="stylesheet" href="../assets/rl-notes.css">\n</head>', 1)
