@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import re
+import llm_interview_notes
 from urllib.parse import urlparse
 
 
@@ -12,6 +13,7 @@ def build(core):
     topics, modules = data['topics'], data['modules']
     if data.get('schema_version') != 2:
         raise ValueError('RL notes require schema_version 2')
+    questions = llm_interview_notes.build_questions(core)
     for records in (topics, modules):
         slugs = [r['slug'] for r in records]
         if not records or len(slugs) != len(set(slugs)):
@@ -107,15 +109,18 @@ def build(core):
         + core.breadcrumb('../../', '大模型面经', article=True)
         + '<p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>八股文 / 面试专题</p>'
         '<h1 tabindex="-1">大模型面经</h1><p class="description">按主题整理大模型面试中的核心原理与常见追问。</p></header>'
-        '<div class="rl-topline"><span>01 个专题</span><span>原理 · 面试问答</span></div>'
-        '<div class="rl-topics"><a class="rl-topic" href="../rl/index.html" aria-label="进入强化学习专题">'
-        f'<span class="rl-number">01</span><h2>强化学习</h2><span class="rl-state">{len(topics)} 个主题</span>'
+        '<div class="rl-topline"><span>01 篇文档 · 01 个专题</span><span>原理 · 面试问答</span></div>'
+        '<div class="rl-topics"><a class="rl-topic" href="questions-1/index.html" aria-label="阅读大模型面经 考题1">'
+        f'<span class="rl-number">01</span><h2>{E(questions["title"])}</h2><span class="rl-state">{questions["count"]} 道题 · 含回答</span>'
+        + core.icon('arrow') + '</a>'
+        '<a class="rl-topic" href="../rl/index.html" aria-label="进入强化学习专题">'
+        f'<span class="rl-number">02</span><h2>强化学习</h2><span class="rl-state">{len(topics)} 个主题</span>'
         + core.icon('arrow') + '</a></div>'
         f'<p class="description">{E(labels)}</p>'
         '<a class="back-link rl-back" href="../index.html">' + core.icon('left') + ' 返回八股文</a></main>'
     )
     core.shell('notes/llm-interview/index.html', '大模型面经', parent_main, 'notes',
-               description='大模型面经：强化学习专题，涵盖 PPO、DPO、GRPO、GSPO、DAPO 的原理与面试问答。')
+               description=f'大模型面经：考题1 的 {questions["count"]} 道问答，以及 PPO、DPO、GRPO、GSPO、DAPO 强化学习专题。')
     parent = root / 'notes/llm-interview/index.html'
     parent.write_text(parent.read_text(encoding='utf-8').replace(
         '</head>', '<link rel="stylesheet" href="../../assets/rl-notes.css">\n</head>', 1), encoding='utf-8')
@@ -123,7 +128,7 @@ def build(core):
     # The core builder has just generated notes/index.html; retain its LoRA card.
     path = root / 'notes/index.html'
     page = path.read_text(encoding='utf-8')
-    card = f'<a class="note-card index-note rl-collection" href="llm-interview/index.html" data-note-card data-slug="llm-interview" data-note-kind="topic" aria-label="进入大模型面经板块"><div class="note-art rl-art" aria-hidden="true"><span class="note-art-title">LLM</span><span class="rl-art-caption">大模型面经</span></div><div class="note-card-body"><div class="note-meta"><b class="note-category">面试专题</b><span></span><span>1 个专题</span></div><h3>大模型面经</h3><p>强化学习：{E(labels)}</p><div class="note-tags"><span class="tag">大模型</span><span class="tag tag-neutral">原理 · 面试问答</span></div></div>{core.icon("arrow", "end-arrow")}</a>'
+    card = f'<a class="note-card index-note rl-collection" href="llm-interview/index.html" data-note-card data-slug="llm-interview" data-note-kind="topic" aria-label="进入大模型面经板块"><div class="note-art rl-art" aria-hidden="true"><span class="note-art-title">LLM</span><span class="rl-art-caption">大模型面经</span></div><div class="note-card-body"><div class="note-meta"><b class="note-category">面试专题</b><span></span><span>1 篇文档 · 1 个专题</span></div><h3>大模型面经</h3><p>考题1（{questions["count"]} 道问答）与强化学习专题。</p><div class="note-tags"><span class="tag">大模型</span><span class="tag tag-neutral">原理 · 面试问答</span></div></div>{core.icon("arrow", "end-arrow")}</a>'
     marker = '</div>\n<div class="zero-results"'
     if page.count(marker) != 1:
         raise ValueError('Notes layout changed; refusing an ambiguous insertion')
@@ -138,6 +143,7 @@ def build(core):
         raise ValueError('Duplicate LLM interview search entry; rebuild notes first')
     text = '大模型面经 LLM 面试问答 ' + data['title'] + ' reinforcement learning RL 八股文 原理 论文原文 ' + labels
     text += ' ' + ' '.join(t['paper']['title'] for t in topics) + ' ' + ' '.join(published_sources)
+    text += ' ' + questions['source']
     search.append({'slug': 'llm-interview', 'text': text})
     serialized = json.dumps(search, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     page = page[:found.start(2)] + serialized + page[found.end(2):]

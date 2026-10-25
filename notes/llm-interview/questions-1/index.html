@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>大模型面经 考题1 · 896729202</title>
+<meta name="description" content="大模型面经 考题1：39 道编号问答，涵盖 SFT、RL、数据质量、Agent、评测与模型基础。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大模型面经 考题1 · 896729202">
+<meta property="og:description" content="大模型面经 考题1：39 道编号问答，涵盖 SFT、RL、数据质量、Agent、评测与模型基础。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://896729202.github.io/notes/llm-interview/questions-1/">
+<link rel="canonical" href="https://896729202.github.io/notes/llm-interview/questions-1/">
+<script>try{var t=localStorage.getItem('notebook-theme');document.documentElement.dataset.theme=(t==='dark'||t==='light')?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}</script>
+<link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script src="../../../assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="../../../index.html" aria-label="896729202 知识手记首页"><span class="brand-mark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h5c2.4 0 4 1.4 4 3v14c0-2-1.6-3-4-3H3zM21 4h-5c-2.4 0-4 1.4-4 3v14c0-2 1.6-3 4-3h5z"/></svg></span><span class="brand-name">896729202<span class="brand-divider">/</span><span class="brand-sub">知识手记</span></span></a>
+<nav class="header-nav" aria-label="主导航"><a href="../../../thesis/index.html">内窥镜三维重建</a><a href="../../../notes/index.html" aria-current="page">八股文</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
+</div></header>
+<div class="layout article-layout">
+<aside class="toc-sidebar" aria-label="文章目录"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回大模型面经</a><p class="toc-heading">考题1 · 39 道题</p><nav class="toc" aria-label="题目导航"><a href="#q1">1. 如何判断 SFT 已经到位，可以继续 RL？</a><a href="#q2">2. 继续预训练、SFT、偏好优化、RLHF／RLVR 分别优化什么？</a><a href="#q3">3. 新业务怎么选 Prompt、RAG、SFT、DPO、RL？</a><a href="#q4">4. 为什么 RL 前通常先做 SFT？能直接从 Base 做 RL 吗？</a><a href="#q5">5. 如何根据 pass@1、pass@k、格式和可验证性判断是否值得 RL？</a><a href="#q6">6. 后训练应该选 Base、Instruct 还是 Thinking 模型？</a><a href="#q7">7. 新增视觉分支或 Adapter 后，为什么常先对齐，再端到端 SFT？</a><a href="#q8">8. 如何判断 Alignment 或 SFT 达到下一阶段标准？</a><a href="#q9">9. 长样本训练怎样处理 Packing、截断和 Label Mask？</a><a href="#q10">10. 专项 Benchmark 上升、通用能力下降，怎么定位？</a><a href="#q11">11. 同样的 QA 数据，继续预训练和全参 SFT 有什么区别？</a><a href="#q12">12. 怎么判断一批数据值得用于训练？</a><a href="#q13">13. 人工标注、业务日志、开源数据、合成数据各有什么问题？</a><a href="#q14">14. Teacher、Refine、人工抽检都可能错，怎么建立质量闭环？</a><a href="#q15">15. 怎么做难度分层，保留 hard negative 和失败轨迹？</a><a href="#q16">16. 怎么避免重复、近重复和训练评测泄漏？</a><a href="#q17">17. SFT 数据与 RL rollout 分布不一致会怎样？</a><a href="#q18">18. SFT 与 RL 能复用同一批数据吗？</a><a href="#q19">19. SAPO 等策略优化变体有什么区别？</a><a href="#q20">20. PPO、DPO、GRPO 的优化方式、数据和适用场景有什么区别？</a><a href="#q21">21. DPO 为什么不需要显式训练 Reward Model？依赖什么假设？</a><a href="#q22">22. GRPO 同组奖励全相同，或者整体很低，怎么办？</a><a href="#q23">23. PPO 的 Clip、KL Penalty、Reference Model 与 Trust Region 是什么关系？</a><a href="#q24">24. 怎么区分 Entropy Collapse 和 Reward Hacking？</a><a href="#q25">25. On-policy 长期采不到正样本，怎么办？</a><a href="#q26">26. 使用 LLM Judge 前，怎么验证可靠性？</a><a href="#q27">27. 每条 rollout 都调用 Judge 太贵，哪些信号可以替代？</a><a href="#q28">28. 复杂任务一定要拆成 Plan、Trace、Answer 吗？</a><a href="#q29">29. 怎么证明结构化 CoT 提升了推理，而非只学会格式？</a><a href="#q30">30. 长任务只有最终成败奖励，怎么分配到各步？</a><a href="#q31">31. 分层 GAE 相比普通 GAE 解决什么问题？如何消融？</a><a href="#q32">32. POMDP 中 State 和 Observation 怎么区分？如何避免信息泄漏？</a><a href="#q33">33. pass@1 与 pass@k 分别说明什么？</a><a href="#q34">34. Benchmark、自动 Judge、人工评测和线上指标冲突怎么办？</a><a href="#q35">35. 怎么把一次 bad case 变成持续改进闭环？</a><a href="#q36">36. 多个等价写法，除了规则匹配还能怎么验证？</a><a href="#q37">37. BatchNorm 与 LayerNorm 的归一化维度有什么区别？</a><a href="#q38">38. Temperature、Top-p、Top-k 如何影响采样？推理和 rollout 怎么设？</a><a href="#q39">39. BPE 如何构造词表？怎样影响效率和多语言？</a></nav></aside>
+<main class="article-main" id="main"><article><header class="article-header"><nav class="breadcrumb" aria-label="面包屑"><a href="../../../index.html">首页</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../index.html">八股文</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../index.html">大模型面经</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">考题1</span></nav><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>大模型面经 / 问答整理</p><h1 tabindex="-1">大模型面经 考题1</h1><p class="description">后训练与数据、策略优化、Agent、评测及基础原理。</p><div class="article-meta"><span>39 道题</span><span>·</span><span>含参考回答</span></div><div class="article-toolbar"><div class="note-tags"><span class="tag">大模型</span><span class="tag">面试问答</span></div><div class="article-actions"><a class="button" href="../../../content/notes/llm-interview/questions-1.md" download>下载题目与回答</a><button class="button" data-copy-link type="button">复制链接</button><button class="button" data-print type="button">打印</button></div></div></header><details class="mobile-toc"><summary>本篇目录 · 39 道题</summary><nav class="toc" aria-label="移动端题目导航"><a href="#q1">1. 如何判断 SFT 已经到位，可以继续 RL？</a><a href="#q2">2. 继续预训练、SFT、偏好优化、RLHF／RLVR 分别优化什么？</a><a href="#q3">3. 新业务怎么选 Prompt、RAG、SFT、DPO、RL？</a><a href="#q4">4. 为什么 RL 前通常先做 SFT？能直接从 Base 做 RL 吗？</a><a href="#q5">5. 如何根据 pass@1、pass@k、格式和可验证性判断是否值得 RL？</a><a href="#q6">6. 后训练应该选 Base、Instruct 还是 Thinking 模型？</a><a href="#q7">7. 新增视觉分支或 Adapter 后，为什么常先对齐，再端到端 SFT？</a><a href="#q8">8. 如何判断 Alignment 或 SFT 达到下一阶段标准？</a><a href="#q9">9. 长样本训练怎样处理 Packing、截断和 Label Mask？</a><a href="#q10">10. 专项 Benchmark 上升、通用能力下降，怎么定位？</a><a href="#q11">11. 同样的 QA 数据，继续预训练和全参 SFT 有什么区别？</a><a href="#q12">12. 怎么判断一批数据值得用于训练？</a><a href="#q13">13. 人工标注、业务日志、开源数据、合成数据各有什么问题？</a><a href="#q14">14. Teacher、Refine、人工抽检都可能错，怎么建立质量闭环？</a><a href="#q15">15. 怎么做难度分层，保留 hard negative 和失败轨迹？</a><a href="#q16">16. 怎么避免重复、近重复和训练评测泄漏？</a><a href="#q17">17. SFT 数据与 RL rollout 分布不一致会怎样？</a><a href="#q18">18. SFT 与 RL 能复用同一批数据吗？</a><a href="#q19">19. SAPO 等策略优化变体有什么区别？</a><a href="#q20">20. PPO、DPO、GRPO 的优化方式、数据和适用场景有什么区别？</a><a href="#q21">21. DPO 为什么不需要显式训练 Reward Model？依赖什么假设？</a><a href="#q22">22. GRPO 同组奖励全相同，或者整体很低，怎么办？</a><a href="#q23">23. PPO 的 Clip、KL Penalty、Reference Model 与 Trust Region 是什么关系？</a><a href="#q24">24. 怎么区分 Entropy Collapse 和 Reward Hacking？</a><a href="#q25">25. On-policy 长期采不到正样本，怎么办？</a><a href="#q26">26. 使用 LLM Judge 前，怎么验证可靠性？</a><a href="#q27">27. 每条 rollout 都调用 Judge 太贵，哪些信号可以替代？</a><a href="#q28">28. 复杂任务一定要拆成 Plan、Trace、Answer 吗？</a><a href="#q29">29. 怎么证明结构化 CoT 提升了推理，而非只学会格式？</a><a href="#q30">30. 长任务只有最终成败奖励，怎么分配到各步？</a><a href="#q31">31. 分层 GAE 相比普通 GAE 解决什么问题？如何消融？</a><a href="#q32">32. POMDP 中 State 和 Observation 怎么区分？如何避免信息泄漏？</a><a href="#q33">33. pass@1 与 pass@k 分别说明什么？</a><a href="#q34">34. Benchmark、自动 Judge、人工评测和线上指标冲突怎么办？</a><a href="#q35">35. 怎么把一次 bad case 变成持续改进闭环？</a><a href="#q36">36. 多个等价写法，除了规则匹配还能怎么验证？</a><a href="#q37">37. BatchNorm 与 LayerNorm 的归一化维度有什么区别？</a><a href="#q38">38. Temperature、Top-p、Top-k 如何影响采样？推理和 rollout 怎么设？</a><a href="#q39">39. BPE 如何构造词表？怎样影响效率和多语言？</a></nav></details><div class="article-body"><h2 id="q1">1. 如何判断 SFT 已经到位，可以继续 RL？</h2>
+<p>看独立验证集上的任务表现、格式合规率、通用能力，以及模型能否采样出正确答案。继续增加 SFT 数据或训练步数，收益已明显减小，同时 RL 已具备可靠奖励和有效探索空间，就可以尝试切换。训练 loss 收敛不能单独作为标准。</p>
+<h2 id="q2">2. 继续预训练、SFT、偏好优化、RLHF／RLVR 分别优化什么？</h2>
+<p>继续预训练学习领域文本分布；SFT 提高示范回答的概率；偏好优化让输出更符合偏好排序；RLHF、RLVR 分别利用人类偏好反馈、可验证反馈优化期望奖励。反馈来源与优化算法是两个维度，RLHF 不等于 PPO。</p>
+<h2 id="q3">3. 新业务怎么选 Prompt、RAG、SFT、DPO、RL？</h2>
+<p>指令表达不清先改 Prompt；缺少外部或实时知识用 RAG；需要稳定的输出行为、格式和技能用 SFT；有可靠偏好对可以考虑 DPO；需要在线探索，且有可靠奖励或环境反馈时考虑 RL。这些方法可以组合。</p>
+<h2 id="q4">4. 为什么 RL 前通常先做 SFT？能直接从 Base 做 RL 吗？</h2>
+<p>SFT 能建立格式、指令遵循和基本解题行为，降低探索成本。直接从 Base 做 RL 也可以，前提是模型已有一定基础能力，能采到有价值的结果，奖励也足够可靠；R1-Zero 就是实例。SFT 是常见工程选择，并非硬性前提。 R1 报告</p>
+<h2 id="q5">5. 如何根据 pass@1、pass@k、格式和可验证性判断是否值得 RL？</h2>
+<p>pass@1 低、pass@k 较高，说明模型能生成正确解，但单次成功不稳定，可能适合 RL。两者都低时，先检查能力、题目难度和探索方式，可能需要补充示范。还要确保输出能解析、奖励能可信地评估结果。</p>
+<h2 id="q6">6. 后训练应该选 Base、Instruct 还是 Thinking 模型？</h2>
+<p>Base 可塑性较强，但冷启动成本可能更高；Instruct 已有指令遵循能力，通常更容易起步；Thinking 已有推理行为，但可能更长、更贵或过度思考。最终比较目标任务效果、遗忘风险和训练成本，并统一推理预算。</p>
+<h2 id="q7">7. 新增视觉分支或 Adapter 后，为什么常先对齐，再端到端 SFT？</h2>
+<p>新模块的输出分布可能与语言模型不匹配。先冻结大部分已有参数、训练连接模块，让视觉信息变得可用，再联合优化，可以降低不稳定更新和破坏语言能力的风险。是否必须分阶段，需要做对照实验。</p>
+<h2 id="q8">8. 如何判断 Alignment 或 SFT 达到下一阶段标准？</h2>
+<p>表征对齐阶段看新模态信息是否真正被使用、接口是否稳定；SFT 阶段看任务效果、格式、泛化和通用能力保留。若下一阶段是 RL，还要检查 rollout 的有效率、奖励可信度和成功样本比例。</p>
+<h2 id="q9">9. 长样本训练怎样处理 Packing、截断和 Label Mask？</h2>
+<p>优先按轮次或完整样本裁剪，避免留下残缺答案；Packing 独立样本时，用支持样本隔离的注意力机制，防止跨样本读取。Label Mask 通常只保留目标回答的损失。Loss Mask 不等于 Attention Mask，单独加 EOS 也不保证隔离。</p>
+<h2 id="q10">10. 专项 Benchmark 上升、通用能力下降，怎么定位？</h2>
+<p>先固定评测数据、Judge 和解码设置，确认下降真实存在；再分别控制数据配比、学习率、训练量和架构改动做消融。如果混入通用数据或降低训练强度能恢复能力，通常说明分布过窄或训练过强。</p>
+<h2 id="q11">11. 同样的 QA 数据，继续预训练和全参 SFT 有什么区别？</h2>
+<p>两者都可能使用下一 token 交叉熵。继续预训练通常把 QA 当连续文本，对更多位置计算损失；SFT 通常使用对话模板，重点监督回答部分。“全参”只说明更新哪些参数。数据组织、Mask 等配置相同，两者的训练目标可以相同。 SFT 文档</p>
+<h2 id="q12">12. 怎么判断一批数据值得用于训练？</h2>
+<p>先建立 Prompt、规则或 RAG 基线，确认剩余问题来自稳定的行为或能力缺口。再用小规模训练验证这批数据能否改善独立样本，并评估收益、成本和遗忘风险。数据量大不等于值得训练。</p>
+<h2 id="q13">13. 人工标注、业务日志、开源数据、合成数据各有什么问题？</h2>
+<p>人工标注可能标准不一致；业务日志有噪声和选择偏差；开源数据可能分布不匹配、重复或污染评测；合成数据可能幻觉、同质化并继承教师偏差。应按来源分层抽检，再决定清洗方式和采样权重。</p>
+<h2 id="q14">14. Teacher、Refine、人工抽检都可能错，怎么建立质量闭环？</h2>
+<p>建立有证据支撑的校准集，结合规则检查、执行验证、独立评审和专家复核。对分歧样本重点审核，记录错误类型并反向更新生成、清洗和标注规则。多个模型一致通过，也可能是共同偏差。</p>
+<h2 id="q15">15. 怎么做难度分层，保留 hard negative 和失败轨迹？</h2>
+<p>根据当前模型成功率、错误类型和任务复杂度分层，保持足够的可学习样本。难负例可用于偏好训练或验证器训练；失败轨迹可用于定位错误、构造修正示范。错误答案不能直接当作正确 SFT 标签。</p>
+<h2 id="q16">16. 怎么避免重复、近重复和训练评测泄漏？</h2>
+<p>用规范化与哈希去完全重复，用 MinHash、文本相似度或向量相似度识别近重复。按题目家族、原始文档、用户或时间划分数据，并跨训练、验证、测试集检查；同一道题的改写也可能造成泄漏。</p>
+<h2 id="q17">17. SFT 数据与 RL rollout 分布不一致会怎样？</h2>
+<p>可能出现输出格式失效、奖励稀疏、模型进入不熟悉的状态，以及 Judge 在新分布上失准。可补充贴近真实环境的桥接 SFT 数据，逐步调整题目难度，持续利用当前策略生成的数据检查分布变化。</p>
+<h2 id="q18">18. SFT 与 RL 能复用同一批数据吗？</h2>
+<p>可以复用训练问题：SFT 学习示范，RL 在这些问题上重新采样并获取奖励。但要防止反复训练导致记忆化，并用独立问题检验泛化。训练问题复用与评测数据泄漏是两回事。</p>
+<h2 id="q19">19. SAPO 等策略优化变体有什么区别？</h2>
+<p>若指 SAPO：Soft Adaptive Policy Optimization，核心是用温度控制的平滑门控代替硬裁剪，柔和地衰减偏离采样策略较大的更新。SAPO</p>
+<p>DAPO 包括解耦裁剪、动态采样等改动，处理探索和无效样本等问题；GSPO 使用长度归一化的序列级概率比进行优化。DAPO、GSPO</p>
+<h2 id="q20">20. PPO、DPO、GRPO 的优化方式、数据和适用场景有什么区别？</h2>
+<p>PPO：通常在线采样，利用奖励和价值模型估计优势，适合需要较细信用分配的任务，但训练组件较多。</p>
+<p>DPO：标准形式直接训练“问题—优选回答—劣选回答”偏好对，流程较简单，依赖数据质量和覆盖。</p>
+<p>GRPO：同题采样多个回答，用组内相对奖励估计优势，省去单独训练的价值模型，但需要承担组内采样成本。GRPO 原论文</p>
+<h2 id="q21">21. DPO 为什么不需要显式训练 Reward Model？依赖什么假设？</h2>
+<p>它利用 KL 正则奖励优化的最优策略关系，把奖励重写为策略与参考模型的对数概率比，再代入 Bradley–Terry 偏好模型。它依赖偏好建模、模型表达能力和数据覆盖等条件；标注噪声、偏好冲突或严重分布外输入都可能影响效果。没有显式 RM，不代表不依赖偏好反馈。 DPO 原论文</p>
+<h2 id="q22">22. GRPO 同组奖励全相同，或者整体很低，怎么办？</h2>
+<p>全相同时，组内中心化后的奖励优势为零，该项不提供学习信号；KL 等其他项可能仍有梯度。可以过滤无效组、调整难度、改善探索或补充示范。奖励整体低但存在差异，仍然可以学习；加 ε 只解决除零问题。</p>
+<h2 id="q23">23. PPO 的 Clip、KL Penalty、Reference Model 与 Trust Region 是什么关系？</h2>
+<p>Clip 限制部分新旧策略概率比更新的激励，旧策略通常指采样策略；LLM 后训练中的参考模型通常是固定基准，KL 用于约束长期偏离。它们都帮助控制更新，但 PPO Clip 不是对实际 KL 的严格硬约束，也不等同于 TRPO。PPO 原论文</p>
+<h2 id="q24">24. 怎么区分 Entropy Collapse 和 Reward Hacking？</h2>
+<p>熵坍塌通常伴随策略熵明显下降、输出多样性减少和探索不足；奖励作弊表现为训练奖励上涨，但独立任务正确率或真实业务效果没有提升甚至下降。两者可能同时发生。KL 只反映偏离程度，不能单独诊断原因。</p>
+<h2 id="q25">25. On-policy 长期采不到正样本，怎么办？</h2>
+<p>先检查奖励是否判错，再用简单任务课程、任务分解、更多合理探索或可验证的教师示范建立成功起点。拒绝采样只能筛出已经生成的成功样本，不能凭空创造成功。Teacher rollout 是 off-policy 数据，可先用于 SFT；直接用于 RL 则需匹配相应算法处理。</p>
+<h2 id="q26">26. 使用 LLM Judge 前，怎么验证可靠性？</h2>
+<p>在专家标注或可验证的校准集上，检查判断准确率、误报漏报和分任务表现；通过交换答案顺序、改变长度和风格，测试位置与冗长偏差。还要测试回答中的提示注入，并持续抽检当前模型的新输出。Judge 研究</p>
+<h2 id="q27">27. 每条 rollout 都调用 Judge 太贵，哪些信号可以替代？</h2>
+<p>格式与字段用解析器、Schema；数学结果用符号计算或答案验证；代码用测试与执行；Agent 用环境状态、工具返回和任务完成信号。采用低成本检查优先的分级流程，把主观、复杂或不确定样本交给 Judge，并抽检漏判。</p>
+<h2 id="q28">28. 复杂任务一定要拆成 Plan、Trace、Answer 吗？</h2>
+<p>不一定。拆分有利于区分规划错误、执行错误和最终答案错误，也方便过程监督与奖励设计；但会增加 token、标注和格式维护成本。是否采用，要看它能否在相同预算下提高实际任务成功率。</p>
+<h2 id="q29">29. 怎么证明结构化 CoT 提升了推理，而非只学会格式？</h2>
+<p>对比无结构、仅要求格式、结构化推理等设置，控制数据、训练量和推理预算。在新题型、格式变化和需要真实执行的任务上检查提升，并单独统计格式分与任务正确率。格式合规率上涨不能证明推理能力上涨。</p>
+<h2 id="q30">30. 长任务只有最终成败奖励，怎么分配到各步？</h2>
+<p>可以用累计回报及价值函数，通过 TD／GAE 估计动作优势；有可靠中间反馈时，再加入过程奖励或子目标奖励。只有终局信号时，无法准确知道每一步的因果贡献，不能简单认为成功轨迹里的每一步都值得鼓励。</p>
+<h2 id="q31">31. 分层 GAE 相比普通 GAE 解决什么问题？如何消融？</h2>
+<p>普通 GAE 可以定义在 token 或动作尺度。以 VAGEN 的双层 GAE 为例，先估计轮次优势，再传播到轮内 token，以区分跨轮决策和轮内生成。消融应固定奖励与预算，对比普通 GAE、双层 GAE，并分别去掉新增过程奖励，避免混淆贡献。VAGEN</p>
+<h2 id="q32">32. POMDP 中 State 和 Observation 怎么区分？如何避免信息泄漏？</h2>
+<p>State 是环境真实状态；Observation 是 Agent 实际能看到的信息，通常不完整，因此要利用历史或信念状态决策。Judge 或训练用 Critic 可以有特权信息，但这些信息不能进入 Actor 的提示、记忆、工具返回或推理输入。</p>
+<h2 id="q33">33. pass@1 与 pass@k 分别说明什么？</h2>
+<p>pass@1 是单次采样成功率；pass@k 是 k 次采样中至少一次成功的概率。两者差距大，说明重复采样能覆盖更多正确结果，单次成功仍有提升空间。pass@k 不是严格能力上限，也不等于上线 best-of-k 效果，后者还需要选对答案。 pass@k 来源</p>
+<h2 id="q34">34. Benchmark、自动 Judge、人工评测和线上指标冲突怎么办？</h2>
+<p>先统一样本、版本、解码和指标定义，再按任务分桶人工盲审。检查分布差异、Judge 偏差、统计波动，以及线上延迟和交互体验等因素。依据事先确定的业务主指标和质量底线决策，不能只挑上涨的指标。</p>
+<h2 id="q35">35. 怎么把一次 bad case 变成持续改进闭环？</h2>
+<p>先复现并归因到知识、能力、工具、数据或奖励；针对原因修复数据、系统或评分逻辑。保留原例验证修复，再用未参与训练的同类变体检验泛化，并加入长期回归集。若原例已经入训，原例通过只能证明修复，不能证明泛化。</p>
+<h2 id="q36">36. 多个等价写法，除了规则匹配还能怎么验证？</h2>
+<p>数学用符号化简或证明检查，代码用单测、属性测试和差分测试，结构化答案先规范化再比较，开放回答结合证据与校准后的语义评审。字符串不同不代表错误；有限测试通过也不等于严格证明。</p>
+<h2 id="q37">37. BatchNorm 与 LayerNorm 的归一化维度有什么区别？</h2>
+<p>BatchNorm 对每个通道跨批次、以及适用的空间或序列位置统计；Transformer 中的 LayerNorm 通常对每个 token 的隐藏维度统计。LayerNorm 不依赖批次统计，更适合变长序列、小批次和自回归推理。BatchNorm、LayerNorm</p>
+<h2 id="q38">38. Temperature、Top-p、Top-k 如何影响采样？推理和 rollout 怎么设？</h2>
+<p>Temperature 调整概率分布尖锐程度；Top-k 保留概率最高的 k 个候选；Top-p 保留累计概率达到阈值的候选。确定性推理通常用贪心解码；rollout 需要在正确率与探索之间权衡，并记录真实采样策略及对应概率。低温不保证正确，高温也不等于有效探索。</p>
+<h2 id="q39">39. BPE 如何构造词表？怎样影响效率和多语言？</h2>
+<p>从字符或字节等基本单位开始，反复合并训练语料中高频的相邻 token 对，直到达到目标词表规模；分词时应用学到的合并规则。切分过碎会增加序列长度、计算和上下文消耗；词表过大则增加嵌入与输出层成本。多语言覆盖不足还会导致某些语言被切得特别碎</p>
+</div><footer class="article-end"><span>大模型面经 考题1</span><a class="button" href="../index.html">返回大模型面经</a></footer></article></main>
+</div>
+<footer class="site-footer"><div class="footer-inner"><span>© 2026 <a href="https://github.com/896729202" target="_blank" rel="noopener noreferrer">896729202</a> · 知识手记</span><span>保持好奇，持续记录。</span></div></footer>
+<button type="button" class="icon-button back-top" data-back-top hidden aria-label="返回页面顶部" title="返回页面顶部"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20V4M6 10l6-6 6 6"/></svg></button>
+<div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+</body>
+</html>
