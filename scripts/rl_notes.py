@@ -45,7 +45,7 @@ def build(core):
             if status not in ('pending', 'published'):
                 raise ValueError(f'Invalid publication status: {slug}/{key}')
             source = (source_root / slug / (key + '.md')).read_text(encoding='utf-8')
-            body = core.render_markdown(source) if status == 'published' else ''
+            body = core.render_markdown(source, tables=True) if status == 'published' else ''
             if status == 'published' and not body.strip():
                 raise ValueError(f'Published module has no text: {slug}/{key}')
             bodies[(slug, key)] = body

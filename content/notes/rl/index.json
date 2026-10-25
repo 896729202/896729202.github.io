@@ -31,7 +31,7 @@
         "url": "https://arxiv.org/abs/2402.03300",
         "pdf": "https://arxiv.org/pdf/2402.03300"
       },
-      "sections": {"interview": "pending", "principles": "pending"}
+      "sections": {"interview": "pending", "principles": "published"}
     },
     {
       "slug": "gspo", "title": "GSPO",
@@ -49,7 +49,7 @@
         "url": "https://arxiv.org/abs/2503.14476",
         "pdf": "https://arxiv.org/pdf/2503.14476"
       },
-      "sections": {"interview": "pending", "principles": "pending"}
+      "sections": {"interview": "pending", "principles": "published"}
     }
   ]
 }
