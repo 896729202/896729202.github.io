@@ -1,0 +1,5 @@
+.interview-table{width:100%;border-collapse:collapse;margin:24px 0;background:var(--paper);font-size:.95em}
+.interview-table th,.interview-table td{padding:12px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+.interview-table th{background:var(--soft);font-weight:600}
+.interview-table th:nth-child(-n+2),.interview-table td:nth-child(-n+2){white-space:nowrap}
+@media(max-width:600px){.interview-table th,.interview-table td{padding:8px 10px}}

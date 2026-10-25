@@ -20,7 +20,8 @@ def build_questions(core):
         sections.append((anchor, label))
         return f'<h2 id="{anchor}">{match.group(1)}</h2>'
 
-    body = re.sub(r'<h2>(.*?)</h2>', heading, core.render_markdown(source), flags=re.S)
+    body = re.sub(r'<h2>(.*?)</h2>', heading, core.render_markdown(source, tables=True), flags=re.S)
+    body = body.replace('<table>', '<table class="interview-table">')
     if len(sections) != count:
         raise ValueError('Question heading count changed during rendering')
     links = ''.join(f'<a href="#{anchor}">{core.ESC(label)}</a>' for anchor, label in sections)
@@ -53,4 +54,7 @@ def build_questions(core):
     )
     core.shell('notes/llm-interview/questions-1/index.html', title, main, 'notes', toc=toc,
                description=f'{title}：{count} 道编号问答，涵盖 SFT、RL、数据质量、Agent、评测与模型基础。')
+    output = core.ROOT / 'notes/llm-interview/questions-1/index.html'
+    output.write_text(output.read_text(encoding='utf-8').replace(
+        '</head>', '<link rel="stylesheet" href="../../../assets/llm-interview.css">\n</head>', 1), encoding='utf-8')
     return {'title': title, 'count': count, 'source': source}
