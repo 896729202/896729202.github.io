@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>线上 Badcase 提炼 · 896729202</title>
+<meta name="description" content="多智能体 Agent 线上 Badcase 提炼：零召回、连续重搜与短点击的诊断方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线上 Badcase 提炼 · 896729202">
+<meta property="og:description" content="多智能体 Agent 线上 Badcase 提炼：零召回、连续重搜与短点击的诊断方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://896729202.github.io/notes/multi-agent/online-badcase/">
+<link rel="canonical" href="https://896729202.github.io/notes/multi-agent/online-badcase/">
+<script>try{var t=localStorage.getItem('notebook-theme');document.documentElement.dataset.theme=(t==='dark'||t==='light')?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}</script>
+<link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script src="../../../assets/site.js" defer></script>
+<link rel="stylesheet" href="../../../assets/rl-notes.css?v=0997fa205821">
+<link rel="stylesheet" href="../../../assets/agent-notes.css?v=bc09799ad2ba">
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="../../../index.html" aria-label="896729202 知识手记首页"><span class="brand-mark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h5c2.4 0 4 1.4 4 3v14c0-2-1.6-3-4-3H3zM21 4h-5c-2.4 0-4 1.4-4 3v14c0-2 1.6-3 4-3h5z"/></svg></span><span class="brand-name">896729202<span class="brand-divider">/</span><span class="brand-sub">知识手记</span></span></a>
+<nav class="header-nav" aria-label="主导航"><a href="../../../thesis/index.html">内窥镜三维重建</a><a href="../../../notes/index.html" aria-current="page">八股文</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
+</div></header>
+<div class="layout article-layout">
+<aside class="toc-sidebar" aria-label="文章目录"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回多智能体 Agent</a><p class="toc-heading">本篇 3 个问题</p><nav class="toc" aria-label="问题导航"><a class="toc-module" href="#q1">Q1 · 召回不出来东西的（零召回），全都进入 Badcase 吗？</a><a class="toc-module" href="#q2">Q2 · 死循环重搜（Re-query / Reformulation）怎么检测？</a><a class="toc-module" href="#q3">Q3 · “点进商品卡 3 秒内秒退”能直接算 Badcase 吗？</a></nav></aside>
+<main class="article-main agent-article" id="main"><article><header class="article-header"><nav class="breadcrumb" aria-label="面包屑"><a href="../../../index.html">首页</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../index.html">八股文</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../index.html">多智能体 Agent</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">线上 Badcase 提炼</span></nav><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>多智能体 Agent / 线上诊断</p><h1 tabindex="-1">线上 Badcase 提炼</h1><p class="agent-article-summary">从零召回、连续重搜和短点击等线上信号中，筛出可归因、可复现、可评测的 Agent 问题。</p><div class="article-meta"><span>3 个问题</span><span>·</span><span>线上诊断与评测</span></div><div class="article-toolbar"><div class="note-tags"><span class="tag">Multi-Agent</span><span class="tag">Badcase</span><span class="tag">线上诊断</span></div><div class="article-actions"><a class="button" href="../../../content/notes/multi-agent/online-badcase.md" download>下载整理稿</a><button class="button" data-copy-link type="button">复制链接</button><button class="button" data-print type="button">打印</button></div></div></header><details class="mobile-toc"><summary>本篇目录 · 3 个问题</summary><nav class="toc" aria-label="移动端问题导航"><a class="toc-module" href="#q1">Q1 · 召回不出来东西的（零召回），全都进入 Badcase 吗？</a><a class="toc-module" href="#q2">Q2 · 死循环重搜（Re-query / Reformulation）怎么检测？</a><a class="toc-module" href="#q3">Q3 · “点进商品卡 3 秒内秒退”能直接算 Badcase 吗？</a></nav></details><div class="article-body"><p>线上信号只能做初筛，不能直接等同于 Agent 错误。可靠的 Badcase 流程应先扩大召回，再用数据探针归因，最后只把职责范围内、可复现的问题沉淀进黄金测评集。</p>
+<h2 id="q1"><span class="module-number">Q1</span><span>召回不出来东西的（零召回），全都进入 Badcase 吗？</span></h2>
+<p><strong>绝对不是。</strong> <code>recall_count == 0</code> 可能是“真没货”，也可能是“有货但 Agent 没搜出来”。应使用后置分流漏斗，把 Agent 能力问题抓进测评集，把供给问题反馈给招商或搜索团队。</p>
+<h3>1. 用放宽条件的探针区分原因</h3>
+<p>例如查询为 <code>{&quot;category&quot;: &quot;T恤&quot;, &quot;material&quot;: &quot;冰丝&quot;, &quot;price_max&quot;: 200}</code>，但召回为空，可以做一次逐步放宽的重放：</p>
+<ol>
+<li><strong>去掉属性</strong>：暂时删除 <code>material</code>，只用品类和价格召回 Top 100 商品，取标题和详情。</li>
+<li><strong>文本反查</strong>：用正则或向量检索检查这些文本中是否出现“冰丝”或近义词，如“凉感”“莫代尔”“粘胶纤维”。</li>
+<li><strong>按证据分流</strong>：
+<ul>
+<li><strong>词表未对齐：进 Agent Badcase。</strong> 商品标题写着“冰丝凉感 T 恤”，结构化属性却填成“粘胶纤维”。Agent 把口语词硬塞进严格的 <code>material</code> 字段，没做实体链接或同义词归一化。</li>
+<li><strong>约束过严：进 Agent 策略 Badcase。</strong> “50 元以内的纯羊绒大衣”可能确实没有符合条件的商品；但 Agent 只回复“未找到”，没有触发降级策略，也属于交互 Badcase。更好的回复是说明没有完全匹配项，再推荐价格内的仿羊绒或羊毛混纺商品。</li>
+<li><strong>供给缺失：剔除。</strong> 女装店铺里询问 RTX 4090，Agent 礼貌拒绝是正常拦截，不应进入 Agent 测评集。</li>
+</ul>
+</li>
+</ol>
+<p>结论是：零召回先做放宽条件和文本反查，再决定是词表、检索策略、交互降级，还是供给问题。</p>
+<h2 id="q2"><span class="module-number">Q2</span><span>死循环重搜（Re-query / Reformulation）怎么检测？</span></h2>
+<p>短时间内反复换词询问同一件事，通常说明 Agent 没听懂，或检索结果一直不符合需求。工程上可以用<strong>滑动时间窗口、语义相似度、槽位差分</strong>联合检测。</p>
+<h3>1. 触发前置条件</h3>
+<p>同一 <code>session_id</code> 下连续至少 3 轮，相邻间隔小于 60 秒，且中间没有点击商品卡、加购或深入询问某个 SKU 等有效转化行为。</p>
+<h3>2. 三个检测算子</h3>
+<ul>
+<li>
+<p><strong>语义相似但句式改写</strong>：相邻 Query 的句向量余弦相似度较高，例如 <code>Cosine(E(Q_t), E(Q_{t-1})) &gt; 0.85</code>，同时编辑距离超过阈值，说明用户在刻意换说法。</p>
+</li>
+<li>
+<p><strong>核心槽位不变，外围槽位反复修改</strong>：连续三轮的 <code>category</code> 都是“跑步鞋”，但价格、品牌等条件不断微调，说明用户在迁就 Agent 的检索能力。</p>
+</li>
+<li>
+<p><strong>结果集合高度重叠</strong>：即使用户增加“换一批”“不要黑色”等条件，前后两轮返回的商品 ID 仍高度相同：</p>
+<div class="math-block" role="region" aria-label="公式；较长时可横向滚动" tabindex="0"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Jaccard</mi><mo stretchy="false">(</mo><mi>I</mi><mi>t</mi><mi>e</mi><mi>m</mi><msub><mi>s</mi><mi>t</mi></msub><mo>,</mo><mi>I</mi><mi>t</mi><mi>e</mi><mi>m</mi><msub><mi>s</mi><mrow data-mjx-texclass="ORD"><mi>t</mi><mo>&#x2212;</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mo data-mjx-texclass="ORD" stretchy="false">|</mo><mi>I</mi><mi>t</mi><mi>e</mi><mi>m</mi><msub><mi>s</mi><mi>t</mi></msub><mo>&#x2229;</mo><mi>I</mi><mi>t</mi><mi>e</mi><mi>m</mi><msub><mi>s</mi><mrow data-mjx-texclass="ORD"><mi>t</mi><mo>&#x2212;</mo><mn>1</mn></mrow></msub><mo data-mjx-texclass="ORD" stretchy="false">|</mo></mrow><mrow><mo data-mjx-texclass="ORD" stretchy="false">|</mo><mi>I</mi><mi>t</mi><mi>e</mi><mi>m</mi><msub><mi>s</mi><mi>t</mi></msub><mo>&#x222A;</mo><mi>I</mi><mi>t</mi><mi>e</mi><mi>m</mi><msub><mi>s</mi><mrow data-mjx-texclass="ORD"><mi>t</mi><mo>&#x2212;</mo><mn>1</mn></mrow></msub><mo data-mjx-texclass="ORD" stretchy="false">|</mo></mrow></mfrac><mo>&gt;</mo><mn>0.7</mn><mo>.</mo></math></div>
+<p>高重叠且用户继续追问，通常指向多轮状态追踪（DST）或去重过滤失效，是优先级较高的 Badcase。</p>
+</li>
+</ul>
+<p>满足前置条件并命中任一算子时报警，再抽取对话、槽位和工具结果复核，避免把正常比较行为误判成死循环。</p>
+<h2 id="q3"><span class="module-number">Q3</span><span>“点进商品卡 3 秒内秒退”能直接算 Badcase 吗？</span></h2>
+<p><strong>不能用固定 3 秒一刀切。</strong> 短点击可能暴露价格、库存或推荐文案错误，也可能只是页面加载慢，或老客快速确认款式后返回。</p>
+<h3>1. 先排除误判</h3>
+<ul>
+<li><strong>可能是真问题</strong>：推荐语写 99 元，详情页显示 299 元；或者点开后发现已售罄、下架。</li>
+<li><strong>可能不是 Agent 问题</strong>：H5 首屏加载慢、白屏；用户本来就知道商品，只想快速确认图片或款式。</li>
+</ul>
+<h3>2. 用页面生命周期记录真实停留</h3>
+<p>起点应是商详页首屏核心元素渲染完成（FMP 或 <code>onPageShow</code>），而不是点击卡片的时间；终点是页面离开或销毁（<code>onPageHide</code>、<code>visibilitychange</code> 或返回手势）：</p>
+<div class="math-block" role="region" aria-label="公式；较长时可横向滚动" tabindex="0"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>T</mi><mrow data-mjx-texclass="ORD"><mrow data-mjx-texclass="ORD"><mi data-mjx-auto-op="false">dwell</mi></mrow></mrow></msub><mo>=</mo><msub><mi>T</mi><mrow data-mjx-texclass="ORD"><mrow data-mjx-texclass="ORD"><mi data-mjx-auto-op="false">leave</mi></mrow></mrow></msub><mo>&#x2212;</mo><msub><mi>T</mi><mrow data-mjx-texclass="ORD"><mrow data-mjx-texclass="ORD"><mi data-mjx-auto-op="false">render</mi></mrow></mrow></msub><mo>.</mo></math></div>
+<h3>3. 用组合条件提纯</h3>
+<p>离线捞取时，至少同时满足以下条件，才把它标为 Agent 秒退 Badcase：</p>
+<ol>
+<li><strong>短停留且零交互</strong>：<code>T_dwell &lt; 3</code> 秒，或低于该类目停留时长 P10；同时 <code>scroll_depth == 0</code>，没有查看尺码或规格。</li>
+<li><strong>退回后的负向行为</strong>：返回 Agent 后立即关闭会话，或紧接着质疑“怎么是原价？”“没货啊”等。</li>
+<li><strong>群体统计异常</strong>：同一商品被多个不同用户反复点击后秒退，例如连续 10 人出现该行为，再核对 Agent 缓存价格与实时商详页是否脱节。</li>
+</ol>
+<h2>总结：把线上信号变成可用测评集</h2>
+<p>零召回、连续重搜和 3 秒秒退都只是<strong>初筛信号</strong>。工程上应采用“埋点信号做召回，数据比对和探针做归因提纯”：先识别供给、性能和正常交互，再确认是否属于 Agent 职责范围内的错误。只有经过复核、可复现、能定位原因的问题，才进入 Badcase 库和黄金测评集。</p>
+</div><footer class="article-end"><span>先提纯信号，再把问题沉淀为评测。</span><a class="button" href="../index.html">返回多智能体 Agent</a></footer></article></main>
+</div>
+<footer class="site-footer"><div class="footer-inner"><span>© 2026 <a href="https://github.com/896729202" target="_blank" rel="noopener noreferrer">896729202</a> · 知识手记</span><span>保持好奇，持续记录。</span></div></footer>
+<button type="button" class="icon-button back-top" data-back-top hidden aria-label="返回页面顶部" title="返回页面顶部"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20V4M6 10l6-6 6 6"/></svg></button>
+<div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+</body>
+</html>
