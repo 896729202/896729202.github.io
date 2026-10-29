@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Langfuse 使用 · 896729202</title>
+<meta name="description" content="多智能体 Agent 的 Langfuse 可观测、Badcase 定位与离线评测流程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Langfuse 使用 · 896729202">
+<meta property="og:description" content="多智能体 Agent 的 Langfuse 可观测、Badcase 定位与离线评测流程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://896729202.github.io/notes/multi-agent/langfuse/">
+<link rel="canonical" href="https://896729202.github.io/notes/multi-agent/langfuse/">
+<script>try{var t=localStorage.getItem('notebook-theme');document.documentElement.dataset.theme=(t==='dark'||t==='light')?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}</script>
+<link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script src="../../../assets/site.js" defer></script>
+<link rel="stylesheet" href="../../../assets/rl-notes.css?v=0997fa205821">
+<link rel="stylesheet" href="../../../assets/agent-notes.css?v=bc09799ad2ba">
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="../../../index.html" aria-label="896729202 知识手记首页"><span class="brand-mark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h5c2.4 0 4 1.4 4 3v14c0-2-1.6-3-4-3H3zM21 4h-5c-2.4 0-4 1.4-4 3v14c0-2 1.6-3 4-3h5z"/></svg></span><span class="brand-name">896729202<span class="brand-divider">/</span><span class="brand-sub">知识手记</span></span></a>
+<nav class="header-nav" aria-label="主导航"><a href="../../../thesis/index.html">内窥镜三维重建</a><a href="../../../notes/index.html" aria-current="page">八股文</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
+</div></header>
+<div class="layout article-layout">
+<aside class="toc-sidebar" aria-label="文章目录"><a class="back-link" href="../index.html"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> 返回多智能体 Agent</a><p class="toc-heading">本篇 2 个问题</p><nav class="toc" aria-label="问题导航"><a class="toc-module" href="#q1">Q1 · Langfuse 的 Trace 视图是什么？怎么用？</a><a class="toc-module" href="#q2">Q2 · Think 识别出“便宜”，但没传 max_price，怎么解决？</a></nav></aside>
+<main class="article-main agent-article" id="main"><article><header class="article-header"><nav class="breadcrumb" aria-label="面包屑"><a href="../../../index.html">首页</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../../index.html">八股文</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><a href="../index.html">多智能体 Agent</a><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">Langfuse 使用</span></nav><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>多智能体 Agent / 可观测与评测</p><h1 tabindex="-1">Langfuse 使用</h1><p class="agent-article-summary">从 Trace 展开链路，定位工具参数漏传，并把可复现问题沉淀为 Dataset。</p><div class="article-meta"><span>2 个问题</span><span>·</span><span>多智能体学习专题</span></div><div class="article-toolbar"><div class="note-tags"><span class="tag">Multi-Agent</span><span class="tag">Langfuse</span><span class="tag">可观测</span></div><div class="article-actions"><a class="button" href="../../../content/notes/multi-agent/langfuse.md" download>下载整理稿</a><button class="button" data-copy-link type="button">复制链接</button><button class="button" data-print type="button">打印</button></div></div></header><details class="mobile-toc"><summary>本篇目录 · 2 个问题</summary><nav class="toc" aria-label="移动端问题导航"><a class="toc-module" href="#q1">Q1 · Langfuse 的 Trace 视图是什么？怎么用？</a><a class="toc-module" href="#q2">Q2 · Think 识别出“便宜”，但没传 max_price，怎么解决？</a></nav></details><div class="article-body"><p>Langfuse 是 LLM/Agent 的可观测与评测平台。它把一次请求中的模型调用、工具调用、检索和错误标记串成一条可展开的链路，便于回答“错在哪一步、怎么复现、改完是否变好”。下面的代码和页面示例是本地可复现演示；没有线上生产使用经历时，不应把它表述成线上维护经验。</p>
+<h2 id="q1"><span class="module-number">Q1</span><span>Langfuse 的 Trace 视图是什么？怎么用？</span></h2>
+<p>用户只说一句“帮我挑双便宜点的透气跑步鞋”，后台可能依次执行意图识别、抽槽、搜索、重排和答案生成。<strong>Trace 是这一轮请求的完整链路；Observation 是链路中的节点。</strong> 页面通常以树和时间轴展示它们：</p>
+<ul>
+<li><strong>Session</strong>：同一用户的一段多轮会话；一个 Session 可以包含多个 Trace。</li>
+<li><strong>Trace</strong>：一轮请求的生命周期。它把共享的 <code>trace_id</code>、<code>session_id</code> 等信息关联起来。</li>
+<li><strong>Observation</strong>：Trace 中的观测节点。<code>Span</code> 记录业务步骤，<code>Generation</code> 记录一次 LLM 调用，<code>Event</code> 记录瞬时事件；工具调用和检索也可以作为节点记录。</li>
+</ul>
+<p>Generation 里能看到哪些字段取决于 SDK、模型适配器和脱敏配置。常见字段包括模型名、输入摘要、结构化输出、token 用量、延迟和费用；不要默认记录或展示原始 Chain-of-Thought，线上更适合记录<strong>结构化决策摘要、工具参数和错误类型</strong>。</p>
+<h3>用 Trace 定位一个工具参数 Badcase</h3>
+<p>例如 Trace 展开后是：</p>
+<pre><code class="language-text">product-search
+├─ planner (generation)
+│  └─ decision_summary: &quot;用户偏好低价、透气；类别=跑步鞋&quot;
+│     tool_call: {category: &quot;跑步鞋&quot;, max_price: null}
+├─ search_product_api (span)
+│  └─ input: {category: &quot;跑步鞋&quot;, max_price: null}
+│     output: {items: [...], returned_count: 8}
+└─ answer (generation)
+   └─ output: &quot;为你找到几双跑步鞋……&quot;
+</code></pre>
+<p>先看 <code>planner</code> 的结构化摘要和工具参数，再看 <code>search_product_api</code> 的输入输出：如果“低价”被识别了，但 <code>max_price</code> 没传，搜索接口只是按收到的参数工作，责任边界就落在<strong>意图到工具 Schema 的映射</strong>，而不是搜索接口或最终话术。</p>
+<h3>一个最小可复现示例</h3>
+<p>当前 Python SDK 的基本流程是：设置环境变量、用 <code>start_as_current_observation</code> 创建嵌套观察、运行请求、<code>flush()</code> 发送短进程中的缓存。下面故意制造一个 <code>max_price: None</code> 的 Badcase：</p>
+<pre><code class="language-python">from langfuse import get_client, propagate_attributes
+
+langfuse = get_client()  # 读取 LANGFUSE_* 环境变量
+
+with langfuse.start_as_current_observation(
+    as_type=&quot;span&quot;,
+    name=&quot;product-search&quot;,
+    input={&quot;query&quot;: &quot;帮我挑双便宜点的透气跑步鞋&quot;},
+) as root:
+    with propagate_attributes(session_id=&quot;demo-session-001&quot;, user_id=&quot;demo-user&quot;):
+        with langfuse.start_as_current_observation(
+            as_type=&quot;generation&quot;, name=&quot;planner&quot;, model=&quot;demo-planner&quot;
+        ) as planner:
+            planner.update(output={
+                &quot;decision_summary&quot;: &quot;低价 + 透气 + 跑步鞋&quot;,
+                &quot;tool_call&quot;: {&quot;category&quot;: &quot;跑步鞋&quot;, &quot;max_price&quot;: None},
+            })
+
+        with langfuse.start_as_current_observation(
+            as_type=&quot;span&quot;,
+            name=&quot;search_product_api&quot;,
+            input={&quot;category&quot;: &quot;跑步鞋&quot;, &quot;max_price&quot;: None},
+        ) as search:
+            search.update(output={
+                &quot;items&quot;: [{&quot;id&quot;: &quot;shoe-101&quot;, &quot;price&quot;: 999}],
+                &quot;returned_count&quot;: 1,
+            })
+
+        root.update(output={&quot;status&quot;: &quot;slot_missing&quot;})
+        langfuse.score_current_trace(
+            name=&quot;error_type&quot;,
+            value=&quot;slot_missing&quot;,
+            data_type=&quot;CATEGORICAL&quot;,
+            comment=&quot;低价意图未映射到工具参数&quot;,
+        )
+
+langfuse.flush()
+</code></pre>
+<p>运行后，Langfuse 中会出现一条 Trace 和三个嵌套 Observation；每条记录都有可关联的 ID、输入/输出、父子关系和时间信息。Generation 是否包含 token、费用等 usage 字段，取决于实际 LLM 集成是否上报。<code>score_current_trace</code> 会把 <code>error_type=slot_missing</code> 挂到这条 Trace 上。</p>
+<p>接下来在界面里给这条 Trace 加标签或 Score，使用 <strong>Add to Dataset</strong> 保存输入、上下文和期望结果；修正 Schema 或 Prompt 后，用同一 Dataset 跑一次 Experiment，对比 <code>slot_missing</code> 比例、工具参数命中率和答案质量。Dataset/Experiment 的核心就是“测试样本 + 一次应用变体 + 评估器”，而不是把 Trace 当成模型训练数据直接喂进去。</p>
+<h2 id="q2"><span class="module-number">Q2</span><span>Think 识别出“便宜”，但没传 <code>max_price</code>，怎么解决？</span></h2>
+<p>这不是简单加一句 Prompt 的问题，而是<strong>模糊偏好到精确 Schema 的映射失败</strong>，还可能有“决策摘要到工具调用”的信息丢失。用户说“便宜”没有给出金额，模型若把 <code>max_price</code> 定义成必填数字，就可能选择留空，也可能猜一个错误数字。</p>
+<h3>第一层：先改 Schema，让表达能力匹配用户语言</h3>
+<p>保留明确数字使用的 <code>max_price: number</code>，另加模糊偏好字段，例如：</p>
+<pre><code class="language-json">{
+  &quot;price_preference&quot;: &quot;low_budget&quot;,
+  &quot;sort_by&quot;: &quot;price_asc&quot;,
+  &quot;max_price&quot;: null
+}
+</code></pre>
+<p>后端再根据“跑步鞋”“羽绒服”等类目的价格分位规则，把 <code>low_budget</code> 转成可解释的价格带。明确说“300 元以内”时，才填 <code>max_price=300</code>。这样既避免瞎编数字，也保留了搜索策略。</p>
+<h3>第二层：把 Schema 说明和参数自检放在一起</h3>
+<p>在字段描述中写清楚：有明确数字就提取；只有“便宜、平价、学生党”等模糊偏好时，填 <code>price_preference</code>，不要猜金额。调用工具前，让模型输出一行结构化检查：</p>
+<pre><code class="language-text">价格原话：便宜点 → price_preference=low_budget, max_price=null
+类别原话：跑步鞋 → category=跑步鞋
+</code></pre>
+<p>这里记录的是可审计的决策摘要，不需要保存原始思维链。这样可以直接检查“识别到的约束”和“实际发出的参数”是否一致。</p>
+<h3>第三层：用 Trace 数据做后训练和回归评测</h3>
+<p>从 Langfuse 中筛出“摘要里有低价意图、工具参数却为空”的轨迹：</p>
+<ol>
+<li>把原错误 Tool Call 作为 rejected；用规则、人工或独立模型补全后的调用作为 chosen，构造 DPO 样本。</li>
+<li>或在 GRPO 中增加一致性奖励：低价词命中且 <code>price_preference</code>、<code>max_price</code>、<code>sort_by</code> 全为空时惩罚；正确映射时奖励。</li>
+<li>每次改 Prompt、Schema 或模型，都在固定 Dataset 上对比参数命中率、零召回率和最终答案质量，避免只看总奖励上涨。</li>
+</ol>
+<h2>面试时怎么描述这段经历？</h2>
+<p>如果没有在线生产使用经历，可以这样说：</p>
+<blockquote>
+<p>“我没有把自己包装成线上 Langfuse 维护者，但我做过一个本地演示：每次请求创建 Trace，给 planner、搜索工具和回答生成分别记录 Generation/Span，记录输入摘要、工具参数、返回条数和耗时；再给 Trace 加 <code>slot_missing</code> Score，加入 Dataset，跑一次回归评测。我能解释 Trace、Observation、Score、Dataset 的关系；线上字段和 SDK 版本要以团队配置为准。”</p>
+</blockquote>
+<p>这比声称“维护过线上 Langfuse”更稳。面试官继续追问时，直接展示上面的链路：<strong>创建 Trace → 展开节点 → 找到漏传参数 → 打分 → 加入 Dataset → 对比修复前后指标</strong>。</p>
+<h2>参考</h2>
+<ul>
+<li><a href="https://langfuse.com/docs/observability/sdk/overview">Langfuse Python/JS SDK 概览</a></li>
+<li><a href="https://langfuse.com/docs/evaluation/evaluation-methods/scores-via-sdk">Scores via SDK/API</a></li>
+<li><a href="https://langfuse.com/docs/evaluation/get-started/offline">使用 Dataset 做离线评测</a></li>
+</ul>
+</div><footer class="article-end"><span>先看链路定位责任，再用数据验证修复。</span><a class="button" href="../index.html">返回多智能体 Agent</a></footer></article></main>
+</div>
+<footer class="site-footer"><div class="footer-inner"><span>© 2026 <a href="https://github.com/896729202" target="_blank" rel="noopener noreferrer">896729202</a> · 知识手记</span><span>保持好奇，持续记录。</span></div></footer>
+<button type="button" class="icon-button back-top" data-back-top hidden aria-label="返回页面顶部" title="返回页面顶部"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20V4M6 10l6-6 6 6"/></svg></button>
+<div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+</body>
+</html>
