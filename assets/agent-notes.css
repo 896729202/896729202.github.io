@@ -14,6 +14,10 @@
 .agent-article .breadcrumb{flex-wrap:wrap}
 .agent-article-summary{font-size:14px;line-height:1.95;color:var(--muted);margin:0 0 19px}
 .agent-article .article-body{overflow-wrap:break-word}
+.langfuse-screenshot{margin:28px 0;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.langfuse-screenshot img{display:block;width:100%;height:auto;border-radius:8px}
+.langfuse-screenshot figcaption{margin:12px 2px 0;font-size:12px;line-height:1.8;color:var(--muted)}
+.langfuse-screenshot figcaption a{color:var(--accent)}
 .agent-article .module-number{min-width:2em;flex-shrink:0}
 .agent-article .article-body h2>span:last-child{min-width:0}
 .agent-article .math-inline{display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:.12em 0;vertical-align:middle}
@@ -71,6 +75,8 @@
 .matrix-legend{gap:10px 8px}
 .matrix-legend b{font-size:11px}
 .attention-matrix .matrix-legend p{gap:6px;font-size:11px}
+.langfuse-screenshot{padding:9px;margin:20px 0}
+.langfuse-screenshot figcaption{font-size:11px}
 }
 @media print{
 .agent-table{overflow:visible;border-radius:0;break-inside:auto}
@@ -79,4 +85,6 @@
 .agent-table .agent-table-hint{display:none}
 .agent-article .math-inline{overflow:visible}
 .attention-matrix{break-inside:avoid;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.langfuse-screenshot{break-inside:avoid}
 }
+
