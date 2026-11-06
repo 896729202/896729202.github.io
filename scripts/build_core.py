@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parent.parent
 CONFIG = json.loads((ROOT / 'site.config.json').read_text(encoding='utf-8'))
 NOTES = json.loads((ROOT / 'content/notes/index.json').read_text(encoding='utf-8'))
 THESES = json.loads((ROOT / 'content/theses.json').read_text(encoding='utf-8'))
+INTERVIEWS = [
+    ('dji-image-algorithms.html', '大疆图像算法 · 逐题复习清单', '练习项目追问、图像基础与模型部署，展开每道题查看自查要点。'),
+]
 TEMPLATE = (ROOT / 'site-src/base.html').read_text(encoding='utf-8')
 CACHE_FILE = ROOT / 'scripts/math-cache.json'
 CACHE: dict[str, str] = json.loads(CACHE_FILE.read_text(encoding='utf-8')) if CACHE_FILE.exists() else {}
@@ -63,7 +66,8 @@ def href_is_safe(value: str) -> bool:
 
 def header(prefix: str, section: str) -> str:
     nav = ''
-    for key, label, target in [('thesis', '内窥镜三维重建', 'thesis/index.html'), ('notes', '八股文', 'notes/index.html')]:
+    for key, label, target in [('thesis', '内窥镜三维重建', 'thesis/index.html'), ('notes', '八股文', 'notes/index.html'),
+                               ('interviews', '面试', 'interviews/index.html')]:
         current = ' aria-current="page"' if key == section else ''
         nav += f'<a href="{prefix}{target}"{current}>{label}</a>'
     return f'''<header class="site-header"><div class="header-inner">
@@ -74,6 +78,7 @@ def header(prefix: str, section: str) -> str:
 def sidebar(prefix: str, section: str) -> str:
     thesis_current = ' aria-current="page"' if section == 'thesis' else ''
     notes_current = ' aria-current="page"' if section == 'notes' else ''
+    interviews_current = ' aria-current="page"' if section == 'interviews' else ''
     thesis_count = f'{len(THESES):02d}' if THESES else '待补充'
     return f'''<aside class="sidebar" aria-label="个人简介">
 <div class="profile-avatar" aria-hidden="true"><span>89.</span></div>
@@ -84,6 +89,7 @@ def sidebar(prefix: str, section: str) -> str:
 <nav class="sidebar-nav" aria-label="内容板块"><p class="section-eyebrow">内容板块</p>
 <a href="{prefix}thesis/index.html"{thesis_current}>{icon('paper')}<span>内窥镜三维重建</span><span class="nav-meta">{thesis_count}</span></a>
 <a href="{prefix}notes/index.html"{notes_current}>{icon('note')}<span>八股文</span><span class="nav-meta">{len(NOTES):02d}</span></a>
+<a href="{prefix}interviews/index.html"{interviews_current}>{icon('book')}<span>面试</span><span class="nav-meta">{len(INTERVIEWS):02d}</span></a>
 </nav><div class="sidebar-note">{icon('leaf')}<p>把学过的东西，<br>变成自己的知识。</p></div></aside>'''
 
 def footer() -> str:
@@ -151,17 +157,31 @@ def home() -> None:
     cards = ''
     for idx, (key, title, desc, status, ico) in enumerate([
         ('thesis', '内窥镜三维重建', '研究过程、写作整理与最终成果。<br>按自己的节奏，慢慢完成。', f'{len(THESES):02d} 篇论文' if THESES else '内容待补充', 'paper'),
-        ('notes', '八股文', '从基本原理到面试表达，<br>把每个知识点真正弄明白。', f'{len(NOTES):02d} 篇笔记', 'note')
+        ('notes', '八股文', '从基本原理到面试表达，<br>把每个知识点真正弄明白。', f'{len(NOTES):02d} 篇笔记', 'note'),
+        ('interviews', '面试', '按岗位整理面试题目与复习资料。', f'{len(INTERVIEWS):02d} 份清单', 'book'),
     ], 1):
         cards += f'''<a href="./{key}/index.html" class="collection-card{' notes-card' if key == 'notes' else ''}"><div class="collection-top"><span class="collection-icon">{icon(ico)}</span><span class="collection-number">0{idx}</span></div><h2>{title}</h2><p>{desc}</p><div class="collection-bottom"><span class="collection-state">{status}</span><span class="card-arrow">{icon('arrow')}</span></div></a>'''
     recent = ''.join(note_card(n, './') for n in sorted(NOTES, key=lambda n: n['date'], reverse=True)[:3])
     main = f'''<main class="page-main" id="main"><section class="hero" aria-labelledby="home-title"><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>一份持续生长的学习档案</p>
 <h1 id="home-title" tabindex="-1"><span>把知识写下来，</span><span>让理解<em>更进一步。</em></span></h1>
 <p class="hero-description">这里收藏我的内窥镜三维重建与技术学习笔记。<br>不止记录答案，也记录思考的过程。</p>
-<div class="hero-bottom"><a class="browse-link" href="#collections">浏览两个板块 {icon('down')}</a><span class="edition">个人知识手记 / {CONFIG['year']}</span></div></section>
-<section class="collection-grid" id="collections" aria-label="内窥镜三维重建与八股文">{cards}</section>
+<div class="hero-bottom"><a class="browse-link" href="#collections">浏览各个板块 {icon('down')}</a><span class="edition">个人知识手记 / {CONFIG['year']}</span></div></section>
+<section class="collection-grid" id="collections" aria-label="内容板块">{cards}</section>
 <section class="latest" aria-labelledby="latest-title"><div class="section-heading"><h2 id="latest-title">最近整理</h2><a href="./notes/index.html">全部笔记 {icon('external')}</a></div><div class="note-list">{recent}</div></section></main>'''
     shell('index.html', '', main)
+
+
+def interview_index() -> None:
+    cards = ''.join(
+        f'<a class="thesis-item" href="{ESC(filename, quote=True)}"><h2>{ESC(title)}</h2>'
+        f'<p>{ESC(summary)}</p></a>'
+        for filename, title, summary in INTERVIEWS
+    )
+    description = '按岗位查看面试复习清单。'
+    main = f'''<main class="page-main" id="main"><header class="page-heading">{breadcrumb('../', '面试')}
+<h1 tabindex="-1">面试</h1><p class="description">{description}</p></header>
+<div class="thesis-list">{cards}</div></main>'''
+    shell('interviews/index.html', '面试', main, 'interviews', description=description)
 
 
 def note_index() -> None:
@@ -278,7 +298,7 @@ def article(note: dict) -> None:
 
 
 def not_found() -> None:
-    main = f'''<main class="page-main not-found" id="main"><p class="big-number">404</p><h1 tabindex="-1">这页笔记还没有写到。</h1><p>页面可能已移动，也可能是地址写错了。<br>回到首页，从两个板块重新开始吧。</p><a class="button button-primary" href="/">{icon('left')} 回到首页</a></main>'''
+    main = f'''<main class="page-main not-found" id="main"><p class="big-number">404</p><h1 tabindex="-1">这页笔记还没有写到。</h1><p>页面可能已移动，也可能是地址写错了。<br>回到首页，浏览内容板块。</p><a class="button button-primary" href="/">{icon('left')} 回到首页</a></main>'''
     shell('404.html', '页面未找到', main)
     # 404 is served at the requested URL on GitHub Pages, so its assets must be root-relative.
     path = ROOT / '404.html'
@@ -294,9 +314,10 @@ def main() -> None:
         article(note)
     home()
     note_index()
+    interview_index()
     thesis_index()
     not_found()
-    print(f'已构建：主页、内窥镜三维重建、八股文、{len(NOTES)} 篇文章与 404 页面。公式缓存：{len(CACHE)} 条。')
+    print(f'已构建：主页、内窥镜三维重建、八股文、面试、{len(NOTES)} 篇文章与 404 页面。公式缓存：{len(CACHE)} 条。')
 
 if __name__ == '__main__':
     main()
