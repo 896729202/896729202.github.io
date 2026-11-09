@@ -1,0 +1,8 @@
+dataset,data_group,frames,sequences,historical_original_D4RT_PSNR,current_baseline_D4RT_renderer_PSNR,frozen_new_renderer_PSNR,native_parameters_new_renderer_PSNR,appearance_memory_PSNR,scope
+C3VD,Public,132,11,22.38383505276279,22.38383505276279,24.538510917038504,24.538510917038504,31.19876190282664,same case names as original 1004-target protocol; sequence means then dataset mean
+EndoNeRF,Public,24,2,23.206411227435442,23.206411227435442,24.313523572621463,24.426815322788585,30.29882397358667,same case names as original 1004-target protocol; sequence means then dataset mean
+EndoNeRF-EC,Public,24,2,13.005772410919306,13.005772410919306,13.393123737851289,13.35663006250195,30.953793944620553,same case names as original 1004-target protocol; sequence means then dataset mean
+Hamlyn,Public,12,1,22.86478291731552,22.858310475059763,23.403054482595895,26.066575072995636,32.35980801448381,same case names as original 1004-target protocol; sequence means then dataset mean
+SCARED,Public,34,3,24.704657887016783,24.70633886806897,23.490165738152474,21.297961976267242,28.75790768139072,same case names as original 1004-target protocol; sequence means then dataset mean
+StereoMIS,Public,36,3,23.061752447179412,23.06025062422948,27.443469154975016,27.57785039919146,31.55281316891703,same case names as original 1004-target protocol; sequence means then dataset mean
+EndoSLAM,Public,742,65,16.741629424770974,16.741629424770974,20.719369750197874,20.719369750197874,29.165407666177142,same case names as original 1004-target protocol; sequence means then dataset mean

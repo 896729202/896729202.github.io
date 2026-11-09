@@ -57,6 +57,8 @@ LoRA 正文保留作者提供的复习笔记，仅调整 Markdown 标记与网�
 
 **修改网站名称：** 编辑 `site.config.json`，重新构建。布局和首页文案在 `scripts/build.py` / `site-src/base.html`，样式在 `assets/site.css`。
 
+**更新 D4RT 实验：** 来源在 `content/d4rt/`，页面由 `scripts/d4rt_experiments.py` 生成，完整构建会自动调用。已有站点只更新此专题时，可运行 `python3 scripts/d4rt_experiments.py`。保留冻结网格、冻结新渲染器、测试目标微调和外观记忆四组口径；下载文件与摘要中的 SHA-256 需同步。运行 `python3 scripts/check_d4rt_experiments.py` 可从逐目标数据核对序列聚合、汇总指标和公开页面。公开结果不包含原始影像、权重或工作区路径。
+
 ## 本地构建与预览
 
 需要 Python 3.10+；新增数学公式时还需要 Node.js 20+。建议用虚拟环境安装 Python 依赖。

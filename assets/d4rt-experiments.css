@@ -1,0 +1,24 @@
+/* D4RT evidence pages inherit the notebook's light/dark palette. */
+.d4rt-status{display:grid;gap:8px;padding:18px 20px;margin-top:24px;background:var(--soft);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-size:14px;line-height:1.85}
+.d4rt-status strong{color:var(--accent-ink)}
+.d4rt-status span{color:var(--muted)}
+.d4rt-methods,.d4rt-pipelines{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:22px 0}
+.d4rt-methods article,.d4rt-pipelines article{padding:19px 21px;border:1px solid var(--line);border-radius:10px;background:var(--paper);min-width:0}
+.d4rt-main .d4rt-methods h3,.d4rt-main .d4rt-pipelines h3{font-size:14px;color:var(--accent-ink);margin:0 0 12px;line-height:1.7;letter-spacing:0}
+.d4rt-letter{display:inline-flex;justify-content:center;align-items:center;width:25px;height:25px;background:var(--soft);border-radius:6px;margin-right:7px;font-size:12px}
+.d4rt-main .d4rt-methods p{font-size:13px;margin-bottom:12px}
+.d4rt-main .d4rt-methods .d4rt-label{font-size:11px;color:var(--accent);margin:0;padding-top:10px;border-top:1px solid var(--line)}
+.d4rt-pipelines ol{padding-left:20px;margin:0;font-size:13px;line-height:1.9}
+.d4rt-pipelines li+li{margin-top:7px}
+.d4rt-detail{border-top:1px solid var(--line);padding:17px 0;margin-top:17px;font-size:13px;line-height:1.9}
+.d4rt-detail summary{cursor:pointer;color:var(--accent-ink);font-weight:500;list-style-position:outside;margin-left:16px}
+.d4rt-detail summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+.d4rt-detail[open] summary{margin-bottom:18px}
+.d4rt-main a{color:var(--accent)}
+.d4rt-downloads{display:flex;flex-wrap:wrap;gap:12px 22px;margin:22px 0}
+.d4rt-main .experiment-table:not(.trials) table{min-width:790px}
+.d4rt-main .experiment-table.trials td:first-child{width:18%}
+.d4rt-main .experiment-table.trials td:nth-child(2){width:42%}
+.d4rt-main .experiment-table caption{font-size:12px}
+@media(max-width:640px){.d4rt-methods,.d4rt-pipelines{grid-template-columns:1fr}.d4rt-status{font-size:13px;padding:15px}.d4rt-methods article,.d4rt-pipelines article{padding:17px}.d4rt-downloads{gap:15px}.d4rt-main .experiment-header h1{font-size:26px}.d4rt-main .experiment-table.trials td:first-child,.d4rt-main .experiment-table.trials td:nth-child(2){width:auto}}
+@media print{.d4rt-methods article,.d4rt-pipelines article{break-inside:avoid}.d4rt-detail>*{display:block!important}.d4rt-status{break-inside:avoid}.d4rt-main .experiment-table{overflow:visible}.d4rt-main .experiment-table:not(.trials) table{min-width:0;font-size:10px}}
