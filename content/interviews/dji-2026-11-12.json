@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-12",
+  "title": "大疆 AI 模型岗 · 真实面试复盘",
+  "description": "12 组真实面试回忆：高斯几何、检测分割提速、量化、注意力、Mamba、DiT 与 PointNet++。每题附精简口述、追问原理和原始资料。",
+  "questions": [
+    {
+      "id": "alpha-fog", "group": "高斯与几何",
+      "title": "3DGS 渲染为什么像蒙了一层雾？",
+      "original": "DGS 如果处理的图像雾化是什么原因？（记忆中的提示：a-blending 参数）",
+      "answer": "我会先检查 alpha 合成。像素颜色由沿视线排序的高斯按透明度和透射率累积得到。如果前方存在大量颜色不正确、半透明且覆盖范围大的高斯，它们会反复混入颜色、降低对比度；如果表面累计不透明度不足，背景也会透出来。我会先查看累计 alpha、深度和高斯尺度，区分背景泄漏与漂浮高斯，再检查 opacity、投影协方差和合成实现。",
+      "detail": "**公式抓住两层含义。** 高斯在像素 p 的有效透明度为 `αᵢ(p) = oᵢ · exp[−½(p−μᵢ)ᵀΣᵢ⁻¹(p−μᵢ)]`，这里 μ、Σ 是投影到屏幕后的参数，o 是基元的不透明度。\n\n`Tᵢ = ∏ⱼ<ᵢ(1−αⱼ)`，`C = Σᵢ Tᵢαᵢcᵢ + Tₙ₊₁c_bg`，累计不透明度为 `A = 1−Tₙ₊₁`。颜色既取决于自己的 alpha，也取决于前面还剩多少透射率。\n\n**为什么很透明的点也会形成雾？** 100 个有效 α 都为 0.01 的前景高斯，累计 A 约为 0.634，叠加作用并不小。雾化是否发白还取决于这些点和背景的颜色，低 alpha 本身不是充分条件。\n\n**排查顺序：** 渲染累计 alpha / 深度 → 切换黑白背景查看泄漏 → 检查漂浮点、大尺度高斯与 opacity 分布 → 核对深度顺序、预乘 alpha、线性颜色空间和曝光。最后才调透明度正则、尺度约束或剪枝；单纯把所有 alpha 调大或调小都可能恶化结果。\n\n**边界：** alpha-blending 是重点线索，位姿误差、曝光不一致和错误几何也会造成相似观感。",
+      "sources": [["3DGS 原论文与项目", "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/"], ["官方 rasterizer：检查 alpha 与透射率实现", "https://github.com/graphdeco-inria/diff-gaussian-rasterization/blob/main/cuda_rasterizer/forward.cu"]]
+    },
+    {
+      "id": "2dgs-3dgs", "group": "高斯与几何",
+      "title": "2DGS 与 3DGS 的区别，尤其是几何表示",
+      "original": "2DGS 了解不了解？2DGS 和 3DGS 在几何信息上有什么区别？",
+      "answer": "3DGS 用有三个尺度的空间椭球表示体分布；2DGS 用位于三维空间中的有向二维高斯面片表示局部表面。2DGS 的基元只有两个切向尺度，法向由面片朝向确定，沿视线做射线与面片求交，再结合深度畸变和法向一致性约束，因此更适合恢复一致的薄表面。这里的“2D”指基元的内在维度，模型仍然是三维场景。",
+      "detail": "| 比较 | 原始 3DGS | 原始 2DGS |\n| --- | --- | --- |\n| 基元 | 三维椭球，位置＋旋转＋三个尺度 | 三维空间中的二维面片，位置＋朝向＋两个尺度 |\n| 几何 | 协方差通常满秩，基元有厚度，没有唯一表面 | 可用两个切向量描述，天然有切平面与法向 |\n| 渲染 | 将三维高斯近似投影为屏幕椭圆后合成 | 射线与有向面片求交，做透视正确的 splatting |\n| 重点 | 高质量新视角外观 | 更一致的表面、深度与网格重建 |\n\n把面片嵌入三维，协方差可写成 `Σ = sᵤ² tᵤtᵤᵀ + sᵥ² tᵥtᵥᵀ`，秩为 2，法向 `n = tᵤ × tᵥ`。这是几何直觉；实现是在面片局部二维坐标中计算高斯，不是直接求这个奇异 3×3 矩阵的逆。\n\n**追问：把 3DGS 的一个尺度压小就等于 2DGS 吗？** 不完全等价，还要考虑原论文的射线求交、透视处理和几何正则。2DGS 也不保证所有场景都更准，位姿、观测覆盖、材质和掠射角仍会影响结果。",
+      "sources": [["2DGS 原论文、方法与代码", "https://surfsplatting.github.io/"], ["3DGS 原论文", "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/"]]
+    },
+    {
+      "id": "1dgs", "group": "高斯与几何",
+      "title": "一维高斯 / 1DGS 应该怎么理解？",
+      "original": "1DGS。补充确认：面试官说的是一维高斯，未记录具体论文名。",
+      "answer": "一维高斯可以写成 g(x)=a·exp[−(x−μ)²/(2σ²)]，分别用中心、宽度和幅值控制一个平滑峰。多个一维高斯可以拟合一维信号，通过重建损失优化参数。如果讨论的是嵌入三维空间的一维基元，则它主要沿一个方向变化，可理解为线状结构；还必须明确如何给它有限宽度并渲染。具体“1DGS”方法需要结合论文定义，不能仅凭名称假设它是某个统一标准模型。",
+      "detail": "**两种语境要分开。**\n\n- **一维信号拟合：** `f̂(x)=Σᵢ aᵢ exp[−(x−μᵢ)²/(2σᵢ²)]`。对一维采样点最小化重建误差；一般的加权高斯和不自动包含三维渲染中的深度排序和 alpha 合成。\n- **三维中的一维基元（概念推导）：** 用 `p(u)=μ+sut` 描述沿方向 t 的线，轴向协方差为 `s²ttᵀ`、秩为 1。若要渲染成可见像素，还要处理径向宽度、像素滤波或专门积分，不能把退化协方差直接塞进标准 3DGS 求逆。\n\n**面试接法：**“一维高斯的中心、方差和权重我能解释；您这里指一维信号上的高斯表示，还是三维里的线状基元？两者的投影和遮挡处理不同。”\n\n**记录边界：** 一维已由本人确认；以下参考是讲解一维信号高斯表示的资料，不据此认定它就是面试官指的论文。",
+      "sources": [["Gaussian Splatting: An Introduction（含 1D / 2D / 3D 示例）", "https://www.ipol.im/pub/art/2025/566/"]]
+    },
+    {
+      "id": "speed", "group": "部署与量化",
+      "title": "检测、分割太慢，提出 4–5 个优化方案",
+      "original": "如果让你做一个检测分割的任务，但是速度过慢，请提出 4–5 个优化方案。",
+      "answer": "我会先在目标设备上 profile，拆开预处理、模型、后处理和数据拷贝，再做五类优化：减少输入与冗余帧；精简骨干和解码头；通过结构化剪枝并配合蒸馏缩小模型；使用硬件支持的低精度；优化算子融合、访存和后处理。每一步都比较端到端 P95 延迟、内存、功耗和精度，尤其检查小目标与分割边界，不能只看参数量和 FLOPs。",
+      "detail": "1. **输入与调度：** 合理降分辨率、ROI 裁剪、视频中隔帧检测＋轻量跟踪。代价是小目标和快速变化可能漏检，需要保留全图重检测机制。\n2. **结构与算子：** 轻量骨干，减少高分辨率分支、解码层和通道；选择目标芯片高效支持的卷积/注意力结构。深度可分离卷积 FLOPs 少，也可能受访存限制而不快。\n3. **结构化剪枝＋蒸馏：** 按通道/层删除并微调，以教师 logits、特征或边界监督补精度。非结构化置零若没有稀疏内核，通常不会自动加速。\n4. **数值精度：** 先测 FP16/BF16；后端支持时用 INT8 PTQ，精度掉得多再考虑 QAT 或敏感层保留高精度。\n5. **执行链路：** Conv-BN 融合、合适布局、内存复用，减少 CPU↔GPU 拷贝；检查 NMS、mask 上采样和输出传输是否才是瓶颈。\n\n**怎么证明有效：** 固定输入、batch、设备、预热和精度口径，GPU 计时处理异步执行；同时记录纯模型与端到端时间。提高 batch 可能改善吞吐但增加单请求等待，视频实时任务不能只报 FPS。",
+      "sources": [["NVIDIA TensorRT 性能实践", "https://docs.nvidia.com/deeplearning/tensorrt/latest/performance/best-practices.html"], ["ONNX Runtime 量化与性能边界", "https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html"]]
+    },
+    {
+      "id": "quantization", "group": "部署与量化",
+      "title": "量化怎么做？动态量化是什么？怎样加入模型层？",
+      "original": "量化怎么做，怎么动态量化，怎么把量化加入模型层。",
+      "answer": "量化用 scale 和 zero-point 把浮点值映射到有限整数。PTQ 在训练后转换，静态量化用代表性样本提前校准激活范围；动态量化通常提前量化权重，在推理时按当前激活计算量化参数。QAT 则在训练图中插入 fake-quant，前向模拟舍入和截断，反向用 STE 近似梯度。部署时还需要把图转换为后端支持的低精度算子，才能真正减少存储或计算开销。",
+      "detail": "**基本公式：** `q=clip(round(x/s)+z, qmin, qmax)`，`x̂=s(q−z)`。s 是量化步长，z 使实数 0 能正确映射。范围太小会截断，太大则量化步长过粗。权重常按输出通道或组设 scale，激活粒度由算子和硬件决定。\n\n**静态 PTQ：** 准备可推理模型 → 合法的层融合 → observer 收集代表性输入的激活统计 → 选范围和量化粒度 → 转换、编译 → 精度和延迟回归。校准数据要覆盖实际照度、分辨率与目标分布，通常不要求标签。\n\n**动态量化：** 动态的是激活的 scale / zero-point，未必动态改 bit 数，更不是在线训练权重。运行时统计有额外开销；常见 Linear/MatMul 适配较多，CNN 检测分割通常先评估静态 INT8，最终看后端支持。\n\n**量化“加到层里”分三件事：** observer 只收统计；fake-quant 模拟量化误差但训练主权重通常仍是浮点；部署图中的 Q/DQ 描述量化边界，编译器再按支持情况融合成低精度算子。并非插入 Q/DQ 就一定更快。\n\n**QAT 层示意（伪代码）：**\n```text\nx̂ = FakeQuantActivation(x)\nŵ = FakeQuantWeight(w)\ny = Conv(x̂, ŵ, bias)\nŷ = FakeQuantOutput(y)   # 具体位置由图与后端决定\n```\n\nround 的真实导数几乎处处为 0，STE 用近似梯度支持训练；它不是舍入函数的精确导数。INT8 乘法常用更宽累加器，例如 INT32，之后再 requantize。应避免逐层反复 Q/DQ 造成访存与转换开销。\n\n**边界：** PTQ/QAT 区分训练流程，动态/静态区分激活参数的计算时机，它们不是同一条分类轴。量化后的首尾层、归一化、Softmax 或回归头是否保留高精度，应由敏感度与后端测试决定。",
+      "sources": [["ONNX Runtime：动态/静态、QDQ 与校准", "https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html"], ["PyTorch：QAT 与 fake quantization", "https://pytorch.org/blog/quantization-aware-training/"]]
+    },
+    {
+      "id": "black-box", "group": "部署与量化",
+      "title": "黑盒模型如何量化？先区分能访问什么",
+      "original": "黑盒模型的量化该怎么做？",
+      "answer": "我会先确认黑盒的边界。如果拿得到 ONNX 等计算图和权重，只是没有训练源码，可以用运行时做 PTQ 校准与转换。如果只有远程 API 输入输出，既拿不到权重也无法改变内部执行，就不能直接量化原模型；可以让提供方导出低精度版本，或用它的输出蒸馏一个可控学生模型，再量化学生。",
+      "detail": "| 可访问内容 | 可做什么 | 限制 |\n| --- | --- | --- |\n| 图＋权重，没有训练代码 | 常规 PTQ，插入统计节点、校准、转换 | 后端需要支持对应算子 |\n| 权重可读写，内部激活不可访问 | 某些 weight-only 方法，依据可用图和内核决定 | 激活校准和层级诊断受限 |\n| 只有输入输出 API | 查询教师、训练替代学生，或申请供应商导出 | 不能更改远端权重、计算类型或其运行延迟 |\n\n**追问：可以零阶优化或数据无关量化吗？** 零阶优化不需要梯度，但仍需能修改被优化参数；数据无关量化通常仍需模型权重/结构或统计信息。仅有 API 不会因此获得内部量化能力。\n\n**蒸馏怎么落地：** 用实际业务样本查询教师，依据输出能力学习 logits、概率或硬标签；检测分割则利用框、mask 等输出监督学生。先验证学生与业务精度，再做学生的 PTQ/QAT。只压缩传输的输入输出张量，也不等于量化了服务端模型。\n\n本题结论是由访问权限与量化操作所需条件推导，不将“蒸馏替代模型”称为“直接量化原黑盒”。",
+      "sources": [["ONNX Runtime：量化可访问的模型图", "https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html"], ["知识蒸馏原论文", "https://arxiv.org/abs/1503.02531"]]
+    },
+    {
+      "id": "rlfn-unet", "group": "网络原理",
+      "title": "RLFN 与 U-Net 的区别，以及如何用于超分",
+      "original": "说一下“拉夫 net”和 U-Net 的区别，在超分时它们如何？回忆：可能是 RLFN。",
+      "status": "名称待确认：暂按 RLFN，不将听音推测写成确定题名。",
+      "answer": "如果这里指 RLFN，它是面向高效单图超分的残差局部特征网络，主要在低分辨率空间提取特征，最后通过 PixelShuffle 放大。U-Net 则通过编码器下采样、解码器上采样和跨层跳连融合多尺度信息。RLFN 重视简化局部特征聚合与实际运行速度；U-Net 更容易获得大范围上下文，但用于超分时要设计输出倍率，并控制下采样造成的细节损失和解码开销。",
+      "detail": "**RLFN 主线：** LR 图像 → 浅层卷积 → 多个残差局部特征块 RLFB → 特征整合与长残差 → 卷积＋PixelShuffle → HR 图像。RLFB 用三层卷积学习局部残差特征，并结合 ESA 注意力细化；减少繁杂分支和特征拼接，有利于实际硬件执行。\n\n**U-Net 主线：** 编码端逐级降采样获得上下文，解码端逐级恢复分辨率，并拼接对应层的浅层特征。原始 U-Net 是分割架构；用于超分通常调整输入方式、输出头或在扩散模型中担当去噪器，不能直接说原版 U-Net 天生输出 ×4 超分。\n\n**怎么选：** 资源受限的确定性超分，先测 RLFN 一类轻量模型；需要多尺度恢复或条件扩散时，再考虑 U-Net 变体。公平比较要固定倍率、输入尺寸、精度、设备和 batch，记录 PSNR/SSIM、延迟及峰值内存。架构名称本身不能决定谁更快或更清晰。\n\n**辨名：** 若后续确认是 RAFT，它主要做光流估计，可服务多帧超分的对齐；若是 RRDBNet，则要讲残差密集块。两者都不能直接套用本题的 RLFN 答案。",
+      "sources": [["RLFN 原论文", "https://arxiv.org/abs/2205.07514"], ["RLFN 作者代码", "https://github.com/bytedance/RLFN"], ["U-Net 原论文", "https://arxiv.org/abs/1505.04597"]]
+    },
+    {
+      "id": "attention", "group": "网络原理",
+      "title": "Self-attention 与 cross-attention 的 Q、K、V 区别",
+      "original": "Transformer 的 cross attention 和 self attention 区别，具体是 QKV 什么矩阵不一致？",
+      "answer": "核心区别是 Q、K、V 的输入来源。Self-attention 中三者都由同一组 token 投影得到，但 WQ、WK、WV 通常是不同参数；cross-attention 中 Q 来自需要更新的一组 token，K、V 来自被查询的另一组特征。Q 决定我要找什么，K 用于计算匹配权重，V 提供实际聚合的内容。",
+      "detail": "```text\nSelf:  Q = XWQ,  K = XWK,  V = XWV\nCross: Q = XWQ,  K = YWK,  V = YWV\nAttention(Q,K,V) = softmax(QKᵀ / √dₖ)V\n```\n\n设 `X∈R^(N×dₓ)`、`Y∈R^(M×dᵧ)`，则 `WQ∈R^(dₓ×dₖ)`、`WK∈R^(dᵧ×dₖ)`、`WV∈R^(dᵧ×dᵥ)`。cross-attention 的权重矩阵为 `N×M`，输出为 `N×dᵥ`，因此输出保留 Query 的 token 数。Self-attention 是 `N×N`。\n\n**视觉例子：** 人脸模板点作为 Q，图像 patch 特征作为 K、V，让每个模板点读取相关外观信息。图像 token 自己互相交流则是 self-attention。\n\n**常见说错：** self-attention 并不要求 Q=K=V，也不要求三个投影矩阵共享参数；cross-attention 的区别也不是“只换了 WQ”，而是信息来自两个 token 集合。是否加 causal mask 是另一维设计。",
+      "sources": [["Attention Is All You Need", "https://arxiv.org/abs/1706.03762"]]
+    },
+    {
+      "id": "mamba", "group": "网络原理",
+      "title": "Mamba 怎样实现 SSM？与 Transformer 根本区别是什么？",
+      "original": "说一下 Mamba 的架构和原理，怎么做到 SSM 的，和 Transformer 根本上什么区别？",
+      "answer": "以原始 Mamba 为例，它用选择性状态空间模型沿序列更新隐状态。输入决定写入、读出和更新步长，让模型选择保留或遗忘信息；再用硬件友好的 selective scan 实现高效计算。Transformer 通过注意力显式查询其他 token，Mamba 把历史压缩进状态并递推更新。固定模型尺寸下，它对序列长度是线性计算，流式推理的状态大小也不随历史长度增长，但信息压缩会带来取舍。",
+      "detail": "**从连续到离散：** 连续 SSM 是 `h′(t)=Ah(t)+Bx(t)`、`y(t)=Ch(t)+Dx(t)`。离散后为 `hₜ=Āₜhₜ₋₁+B̄ₜxₜ`、`yₜ=Cₜhₜ+Dxₜ`；其中 `Āₜ=exp(ΔₜA)`，B̄ 也由 B 与步长 Δ 离散化得到。A 控制状态如何演化，B 控制写入，C 控制读出，D 是直接通路。\n\n**选择性在哪里：** 原始 Mamba 让 `Bₜ、Cₜ、Δₜ` 依赖当前输入；A 是学习得到的共享参数，不能笼统说所有 A/B/C 都由每个 token 动态生成。\n\n**一个 block：** 归一化与输入投影后分两支；主支经过深度卷积、SiLU、选择性 SSM，另一支产生门控；两支逐元素结合，再输出投影与残差。局部卷积处理邻近信息，SSM 承担沿序列的状态传播。\n\n**为什么递推也能并行训练：** 状态更新对 h 是仿射变换，变换复合满足结合律，可用 parallel scan；融合内核和重计算减少庞大中间状态的访存。它不是只能逐 token 串行训练。\n\n| 比较 | 标准全注意力 Transformer | 原始 Mamba |\n| --- | --- | --- |\n| 信息访问 | 内容相关的 token 两两交互 | 内容相关的状态写入/遗忘/读出 |\n| 序列长度 L 的计算增长 | 常规全注意力约 O(L²) | 固定宽度与状态维数时 O(L) |\n| 自回归历史保存 | KV cache 随历史增长 | SSM 与卷积缓存大小固定 |\n| 工程取舍 | 灵活检索历史，长序列成本高 | 状态压缩高效，但不能保证保留全部细节 |\n\n以上针对原始 Mamba；FlashAttention 能减少注意力内存流量，但并未消除标准全注意力的两两计算。视觉任务还需设计二维扫描顺序或多方向扫描。",
+      "sources": [["Mamba 原论文 §2–3", "https://arxiv.org/html/2312.00752v2"], ["Mamba 作者实现", "https://github.com/state-spaces/mamba"]]
+    },
+    {
+      "id": "dit-vit", "group": "网络原理",
+      "title": "DiT 与 ViT 有什么区别？视觉信息如何注入？",
+      "original": "说一下 DiT、ViT 的区别，视觉信息分别是怎么注入的？",
+      "answer": "ViT 把图像切成 patch，线性投影并加入位置编码，再用 Transformer 提取表示；原始任务是分类。原始 DiT 在扩散过程中处理带噪的图像潜变量 patch，预测噪声及相关输出，用于逐步生成图像。两者都通过 patch embedding 引入视觉内容；DiT 额外需要时间步和条件，原论文效果最好的方案用 adaLN-Zero 注入时间步与类别条件。",
+      "detail": "| 环节 | 原始 ViT | 原始 latent DiT |\n| --- | --- | --- |\n| 视觉输入 | RGB 图像 patch | VAE 潜变量加噪后的 zₜ patch |\n| 注入方式 | Patch embedding＋位置编码 | Patch embedding＋位置编码 |\n| 额外条件 | 分类通常不需要扩散条件 | 时间步 t、类别 y 的 embedding |\n| 输出 | CLS/聚合特征与分类头 | 每个 patch 的去噪预测，重组回 latent 网格 |\n| 使用方式 | 一次前向提取表示/分类 | 配合采样器迭代去噪，最后 VAE 解码 |\n\n**adaLN-Zero：** 由条件 embedding 生成归一化后的缩放、偏移与残差门控，形式类似 `γ(c)⊙LN(x)+β(c)`；残差分支的调制以零初始化使初始 block 接近恒等映射。\n\n**追问“视觉条件如何加”：** 原始 DiT 的带噪视觉 latent 已在主干 token 中，时间/类别是条件。若另外给参考图，可用图像编码器提特征后做 cross-attention、拼接 token 或条件调制，属于具体变体；文生图 DiT 也可能采用文本 cross-attention 或联合注意力。不能把某个变体当成全部 DiT 的定义。\n\n**一句区别：** ViT 是视觉 Transformer 架构；DiT 是把 Transformer 用作扩散去噪器，任务、输入噪声状态、条件注入和输出头不同。",
+      "sources": [["ViT 原论文", "https://arxiv.org/abs/2010.11929"], ["DiT 作者项目：条件注入对比", "https://www.wpeebles.com/DiT"], ["DiT 原论文 §3", "https://arxiv.org/html/2212.09748v2"]]
+    },
+    {
+      "id": "pointnet", "group": "网络原理",
+      "title": "PointNet++ 如何做点云分割？",
+      "original": "点云分割 PointNet++ 讲一下怎么做，架构是什么？",
+      "answer": "PointNet++ 用分层局部学习补足 PointNet 对邻域几何建模不足的问题。编码端反复做采样、分组、局部 PointNet：用 FPS 选中心，球邻域查询收集附近点，用共享 MLP 和最大池化聚合局部特征。分割时再用 Feature Propagation 把稀疏特征逐级插值回原始点，并与跳连特征融合，最后为每个点预测类别。",
+      "detail": "**输入：** `N×(3+C)`，XYZ 是坐标，C 可以是颜色、法向或其他特征。Set Abstraction（SA）模块依次进行：\n\n1. **Sampling：** 最远点采样 FPS，选出覆盖较均匀的中心点。\n2. **Grouping：** 以中心作 ball query；使用相对坐标及已有特征。球查询限定空间尺度，但邻域点数会变化，实际实现通常截断或补齐到固定上限。\n3. **Local PointNet：** 共享 MLP 编码邻域中的点，再对邻域做对称的 max pooling，得到中心点特征。多层 SA 逐步减少点数、扩大上下文。\n\n**恢复逐点输出：** Feature Propagation（FP）用邻近点反距离加权插值，原论文默认 3 个近邻、权重与距离平方成反比；拼接编码端同尺度特征，再用共享 MLP 细化。最终输出 `N×类别数`，用逐点分类损失训练。\n\n**密度不均如何处理：** MSG 在多个半径上提特征后融合；MRG 融合不同层级的信息。二者是可选设计，不是所有版本同时使用。\n\n**追问边界：** max pooling 让局部聚合不依赖点的排列；FPS、近邻查询和不规则访存可能成为瓶颈，不能仅凭 MLP 的 FLOPs 判断速度。",
+      "sources": [["PointNet++ 原论文 §3.2–3.4", "https://arxiv.org/html/1706.02413v1"], ["作者代码", "https://github.com/charlesq34/pointnet2"]]
+    },
+    {
+      "id": "densify", "group": "高斯与几何",
+      "title": "为什么复制高斯？一万个长成一百万个，怎样剪枝？",
+      "original": "3DGS 的复制是为什么？比如你要一万个，但是生成了一百万个，剪枝又怎么做？",
+      "answer": "初始高斯数量通常只是起点。原始 3DGS 根据一段时间内屏幕空间位置梯度判断哪里需要更多表示能力：小且梯度高的高斯做 clone，较大且梯度高的高斯做 split，并移除被拆分的父高斯。所以从一万增到百万不必然是 bug，但默认增密也不保证最终只有一万个。要控制预算，应限制增长、按多视角贡献剪枝，再微调并检查画质和实际速度。",
+      "detail": "**clone 与 split 的目的：** clone 在小基元覆盖不足的位置补充表示能力；split 把覆盖过大的基元拆成多个更小基元，拟合细节。高梯度是增密启发式，不代表每一个高梯度点都重要，错误位姿、曝光或动态干扰也可能造成持续增密。\n\n**核对原始代码：** clone 直接拷贝选中高斯的参数，并非必然“沿梯度平移副本”；split 从父高斯分布采样子位置、缩小尺度并删除父点。增密是在优化过程中离散改变基元数，不是每次前向固定输出 N 个点。\n\n**原始剪枝：** 低 opacity 删除；配置启用时，也会删除屏幕投影过大或世界尺度过大的基元。opacity reset 是训练调度手段，不能和剪枝混为一谈，也不能保证点数预算。\n\n**如果上线预算确实只有一万：**\n\n1. 设增密上限与停止时刻，按梯度和贡献选候选点，避免无上限复制。\n2. 跨代表性视角统计贡献，例如 `Σ Tᵢαᵢ`、可见次数或删除后图像损失增量；不能只按某一帧或 opacity 排序。\n3. 渐进删除低贡献、长期被遮挡或冗余点，必要时对位置、尺度、颜色兼容的邻近基元做谨慎合并。\n4. 每轮剪后微调，检查轮廓、薄结构、PSNR/SSIM/感知质量、模型体积与实际 FPS。\n\n**预算不等于无损保证：** 一万是否足够取决于场景复杂度。过少会丢细节；同样点数下，投影面积、重叠与排序开销也会影响渲染速度。",
+      "sources": [["3DGS 原论文与密度控制", "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/"], ["官方代码：densify_and_clone / split / prune", "https://github.com/graphdeco-inria/gaussian-splatting/blob/main/scene/gaussian_model.py"], ["LightGaussian：全局重要性剪枝与压缩", "https://lightgaussian.github.io/"]]
+    }
+  ]
+}

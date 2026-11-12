@@ -12,6 +12,7 @@ import grpo_experiments
 import ai_search_notes
 import multi_agent_notes
 import d4rt_experiments
+import interview_recap
 
 
 def main():
@@ -27,6 +28,7 @@ def main():
     ai_search_notes.build(build_core)
     multi_agent_notes.build(build_core)
     d4rt_experiments.build(build_core)
+    interview_recap.build(build_core)
 
 
 if __name__ == "__main__":

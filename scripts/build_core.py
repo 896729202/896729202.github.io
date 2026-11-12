@@ -18,6 +18,7 @@ CONFIG = json.loads((ROOT / 'site.config.json').read_text(encoding='utf-8'))
 NOTES = json.loads((ROOT / 'content/notes/index.json').read_text(encoding='utf-8'))
 THESES = json.loads((ROOT / 'content/theses.json').read_text(encoding='utf-8'))
 INTERVIEWS = [
+    ('dji-2026-11-12.html', '2026.11.12 · 大疆 AI 模型岗真实面试复盘', '12 组亲历问题：高斯几何、量化提速和模型原理。每题附精简口述、追问与原始资料。'),
     ('dji-image-algorithms.html', '大疆图像算法 · 逐题复习清单', '练习项目追问、图像基础与模型部署，展开每道题查看自查要点。'),
 ]
 TEMPLATE = (ROOT / 'site-src/base.html').read_text(encoding='utf-8')
@@ -158,7 +159,7 @@ def home() -> None:
     for idx, (key, title, desc, status, ico) in enumerate([
         ('thesis', '内窥镜三维重建', '研究过程、写作整理与最终成果。<br>按自己的节奏，慢慢完成。', f'{len(THESES):02d} 篇论文' if THESES else '内容待补充', 'paper'),
         ('notes', '八股文', '从基本原理到面试表达，<br>把每个知识点真正弄明白。', f'{len(NOTES):02d} 篇笔记', 'note'),
-        ('interviews', '面试', '按岗位整理面试题目与复习资料。', f'{len(INTERVIEWS):02d} 份清单', 'book'),
+        ('interviews', '面试', '按岗位整理面试题目与复习资料。', f'{len(INTERVIEWS):02d} 份面试笔记', 'book'),
     ], 1):
         cards += f'''<a href="./{key}/index.html" class="collection-card{' notes-card' if key == 'notes' else ''}"><div class="collection-top"><span class="collection-icon">{icon(ico)}</span><span class="collection-number">0{idx}</span></div><h2>{title}</h2><p>{desc}</p><div class="collection-bottom"><span class="collection-state">{status}</span><span class="card-arrow">{icon('arrow')}</span></div></a>'''
     recent = ''.join(note_card(n, './') for n in sorted(NOTES, key=lambda n: n['date'], reverse=True)[:3])
@@ -177,7 +178,7 @@ def interview_index() -> None:
         f'<p>{ESC(summary)}</p></a>'
         for filename, title, summary in INTERVIEWS
     )
-    description = '按岗位查看面试复习清单。'
+    description = '按岗位整理真实面试复盘与逐题复习清单。'
     main = f'''<main class="page-main" id="main"><header class="page-heading">{breadcrumb('../', '面试')}
 <h1 tabindex="-1">面试</h1><p class="description">{description}</p></header>
 <div class="thesis-list">{cards}</div></main>'''

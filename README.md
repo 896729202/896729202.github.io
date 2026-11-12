@@ -21,6 +21,8 @@ LoRA 正文保留作者提供的复习笔记，仅调整 Markdown 标记与网�
 
 ## 修改内容
 
+**大疆真实面试复盘（2026-11-12）：** 编辑 `content/interviews/dji-2026-11-12.json`，运行 `python scripts/interview_recap.py` 只重建该专题；完整构建也会生成它。目录条目在 `scripts/build_core.py` 的 `INTERVIEWS`。保留原题回忆与名称待确认标记，答案附原论文或官方资料。考前清单 `interviews/dji-image-algorithms.html` 是直接维护的独立页面。
+
 **更新 LoRA：** 编辑 `content/notes/lora.md`。需要时更新 `content/notes/index.json` 的日期与摘要，然后重新构建并提交生成页面。
 
 **新增八股文：** 在 `content/notes/` 新建 Markdown 文件，并在 `content/notes/index.json` 添加条目。字段格式如下，示例不会自动发布：
