@@ -1334,5 +1334,34 @@
       "source_name": "generated-image-20261113-ab9e8e.png",
       "source_sha256": "5799eeecd3aff13015c57bb424ece5a4f3811804efff27fd0066c1cfb102f4ae"
     }
-  ]
+  ],
+  "no_error_estimate": {
+    "method": "wall-clock minus union of measured failed-tool intervals; successful retries and replanning retained",
+    "failed_calls": 3,
+    "timed_failed_calls": 3,
+    "unmeasured_failed_calls": 0,
+    "failed_seconds": 50.798,
+    "failed_agent_seconds": 50.798,
+    "observed_net_seconds": 684.019,
+    "agent_net_seconds": 680.219,
+    "cancelled": false,
+    "complete_run": true,
+    "windows": [
+      {
+        "start": "2026-11-13T09:03:46.295Z",
+        "end": "2026-11-13T09:03:46.348Z",
+        "seconds": 0.053
+      },
+      {
+        "start": "2026-11-13T09:08:59.473Z",
+        "end": "2026-11-13T09:09:48.486Z",
+        "seconds": 49.013
+      },
+      {
+        "start": "2026-11-13T09:10:50.903Z",
+        "end": "2026-11-13T09:10:52.635Z",
+        "seconds": 1.732
+      }
+    ]
+  }
 }

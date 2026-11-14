@@ -1567,5 +1567,49 @@
       "source_name": "edited-image-20261113-d337e5.png",
       "source_sha256": "9f99db53b745d7f4c1ca09de8ffb78d782bd9edb9d7b626cdc46fb2d3dc2c5e0"
     }
-  ]
+  ],
+  "no_error_estimate": {
+    "method": "wall-clock minus union of measured failed-tool intervals; successful retries and replanning retained",
+    "failed_calls": 6,
+    "timed_failed_calls": 6,
+    "unmeasured_failed_calls": 0,
+    "failed_seconds": 371.322,
+    "failed_agent_seconds": 371.322,
+    "observed_net_seconds": 546.558,
+    "agent_net_seconds": 459.555,
+    "cancelled": false,
+    "complete_run": true,
+    "windows": [
+      {
+        "start": "2026-11-13T09:18:48.220Z",
+        "end": "2026-11-13T09:20:16.903Z",
+        "seconds": 88.683
+      },
+      {
+        "start": "2026-11-13T09:20:22.908Z",
+        "end": "2026-11-13T09:21:56.921Z",
+        "seconds": 94.013
+      },
+      {
+        "start": "2026-11-13T09:22:03.482Z",
+        "end": "2026-11-13T09:23:08.221Z",
+        "seconds": 64.739
+      },
+      {
+        "start": "2026-11-13T09:24:11.806Z",
+        "end": "2026-11-13T09:25:42.320Z",
+        "seconds": 90.514
+      },
+      {
+        "start": "2026-11-13T09:25:50.610Z",
+        "end": "2026-11-13T09:26:22.196Z",
+        "seconds": 31.586
+      },
+      {
+        "start": "2026-11-13T09:28:28.517Z",
+        "end": "2026-11-13T09:28:30.304Z",
+        "seconds": 1.787
+      }
+    ]
+  }
 }

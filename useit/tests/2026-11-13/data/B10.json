@@ -197,5 +197,18 @@
       "error": "No canvas3d entries returned; no model screenshot could be verified."
     }
   ],
-  "images": []
+  "images": [],
+  "no_error_estimate": {
+    "method": "wall-clock minus union of measured failed-tool intervals; successful retries and replanning retained",
+    "failed_calls": 0,
+    "timed_failed_calls": 0,
+    "unmeasured_failed_calls": 0,
+    "failed_seconds": 0,
+    "failed_agent_seconds": 0,
+    "observed_net_seconds": 13454.01,
+    "agent_net_seconds": null,
+    "cancelled": true,
+    "complete_run": false,
+    "windows": []
+  }
 }

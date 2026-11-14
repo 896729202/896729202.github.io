@@ -704,5 +704,18 @@
       "source_name": "edited-image-20261114-00315a.png",
       "source_sha256": "09a506c1b9c02826a4755ba8ebb2c83e79382511bfcd518a13fdca32189a9a83"
     }
-  ]
+  ],
+  "no_error_estimate": {
+    "method": "wall-clock minus union of measured failed-tool intervals; successful retries and replanning retained",
+    "failed_calls": 0,
+    "timed_failed_calls": 0,
+    "unmeasured_failed_calls": 0,
+    "failed_seconds": 0,
+    "failed_agent_seconds": 0,
+    "observed_net_seconds": 247.098,
+    "agent_net_seconds": 243.11,
+    "cancelled": false,
+    "complete_run": true,
+    "windows": []
+  }
 }
