@@ -75,7 +75,9 @@
       "duration_seconds": 125.998,
       "start": "2026-11-14T06:28:59.835Z",
       "end": "2026-11-14T06:31:05.833Z",
-      "observation_id": "148facfd6b8d5e8f"
+      "observation_id": "148facfd6b8d5e8f",
+      "diagnosis_title": "后台等待超时；前端随后保存成功",
+      "diagnosis_reason": "后台等待约 120 秒后清除了等待记录，前端没有停止，随后完成保存。迟到的成功通知被拒收，已保存画稿未因此撤销。A、B 面各发生一次重复装配，背面无重试。详见下方专项分析。"
     },
     {
       "tool_call_id": "call_6768887459301539665",
@@ -85,7 +87,9 @@
       "duration_seconds": 122.314,
       "start": "2026-11-14T06:33:18.505Z",
       "end": "2026-11-14T06:35:20.819Z",
-      "observation_id": "b9c90ff779e108da"
+      "observation_id": "b9c90ff779e108da",
+      "diagnosis_title": "后台等待超时；前端随后保存成功",
+      "diagnosis_reason": "后台等待约 120 秒后清除了等待记录，前端没有停止，随后完成保存。迟到的成功通知被拒收，已保存画稿未因此撤销。A、B 面各发生一次重复装配，背面无重试。详见下方专项分析。"
     },
     {
       "tool_call_id": "call_13111585461626942245",
@@ -95,7 +99,9 @@
       "duration_seconds": 126.704,
       "start": "2026-11-14T06:37:56.873Z",
       "end": "2026-11-14T06:40:03.577Z",
-      "observation_id": "b35c457ff54491e4"
+      "observation_id": "b35c457ff54491e4",
+      "diagnosis_title": "后台等待超时；前端随后保存成功",
+      "diagnosis_reason": "后台等待约 120 秒后清除了等待记录，前端没有停止，随后完成保存。迟到的成功通知被拒收，已保存画稿未因此撤销。A、B 面各发生一次重复装配，背面无重试。详见下方专项分析。"
     },
     {
       "tool_call_id": "call_7560513992926117013",
@@ -194,7 +200,7 @@
   ],
   "assessment": {
     "status": "三面画稿已装配，3D未核验",
-    "detail": "A、B 与背面三幅画面均已生成并装配，每个印刷面第一次装配都超时，检查后重试成功。canvas3d_render 返回无独立渲染入口；尚无实际多视角截图证明 A/B 变图效果，Agent 自述可交互查看不作为视觉验收。"
+    "detail": "A、B 与背面原调用均在前端完成并保存，但后台约 120 秒已报超时；A、B 各重复装配一次，背面没有重试。三次迟到成功回执被拒收，不等于已保存画稿被撤销。三维截图尚未核验。"
   },
   "observations": [
     {
@@ -1043,38 +1049,43 @@
       "source_sha256": "65a1d5b956fec2322ee961e9835ce0c3eef1dcae74024853e2c1256b44a23ca2"
     }
   ],
+  "estimate_invalid_reason": "三次超时区间包含仍在执行的必要工作，不能全部扣除。撤回此前约 8 分 55 秒的无报错估算；下方另列修复后实测，范围仅为生图与装配。",
+  "placement_investigation": {
+    "date": "2026-11-14",
+    "original_frontend_seconds": [
+      {
+        "face": "A 面",
+        "load_source": 189.661,
+        "total": 199.962,
+        "calls": 2,
+        "call_id": "call_16964341892171282002"
+      },
+      {
+        "face": "B 面",
+        "load_source": 166.075,
+        "total": 185.174,
+        "calls": 2,
+        "call_id": "call_6768887459301539665"
+      },
+      {
+        "face": "背面",
+        "load_source": 131.842,
+        "total": 151.221,
+        "calls": 1,
+        "call_id": "call_13111585461626942245"
+      }
+    ],
+    "fix_status": "2026-11-14 17:42–17:48 完成 B10-R2 真实复测：三面批量装配成功，没有重复写入；生图与装配流程无错误记录。复测未包含三维渲染。"
+  },
   "no_error_estimate": {
-    "method": "wall-clock minus union of measured failed-tool intervals; successful retries and replanning retained",
     "failed_calls": 4,
     "timed_failed_calls": 4,
     "unmeasured_failed_calls": 0,
     "failed_seconds": 377.946,
-    "failed_agent_seconds": 377.946,
-    "observed_net_seconds": 534.53,
-    "agent_net_seconds": 522.754,
-    "cancelled": false,
-    "complete_run": true,
-    "windows": [
-      {
-        "start": "2026-11-14T06:28:59.835Z",
-        "end": "2026-11-14T06:31:05.833Z",
-        "seconds": 125.998
-      },
-      {
-        "start": "2026-11-14T06:33:18.505Z",
-        "end": "2026-11-14T06:35:20.819Z",
-        "seconds": 122.314
-      },
-      {
-        "start": "2026-11-14T06:37:56.873Z",
-        "end": "2026-11-14T06:40:03.577Z",
-        "seconds": 126.704
-      },
-      {
-        "start": "2026-11-14T06:40:32.939Z",
-        "end": "2026-11-14T06:40:35.869Z",
-        "seconds": 2.93
-      }
-    ]
+    "observed_net_seconds": null,
+    "agent_net_seconds": null,
+    "complete_run": false,
+    "invalid_reason": "三次超时区间包含仍在执行的必要工作，不能全部扣除。撤回此前约 8 分 55 秒的无报错估算；下方另列修复后实测，范围仅为生图与装配。",
+    "windows": []
   }
 }
