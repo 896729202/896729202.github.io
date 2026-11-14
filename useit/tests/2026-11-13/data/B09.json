@@ -1,0 +1,265 @@
+{
+  "case": "B09",
+  "category": "马克杯",
+  "spec": "默认模型及规格",
+  "project_id": "337d78d6-be4a-4e46-a410-e9e3f6948cbe",
+  "session_id": "627e4186-de8d-4fce-92ec-33744f13d5d0",
+  "sent_at": "2026-11-14T06:03:46.751581+08:00",
+  "finished_at": "2026-11-13T22:04:34.153000+00:00",
+  "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/627e4186-de8d-4fce-92ec-33744f13d5d0",
+  "cloud_finished_at": "2026-11-13T22:04:34.123000+00:00",
+  "cloud_terminal_at": "2026-11-13T22:04:34.153000+00:00",
+  "local_finished_at": "2026-11-14T06:04:34+08:00",
+  "root_seconds": 43.343,
+  "submitted_to_finish_seconds": 47.401,
+  "agent_seconds": 43.343,
+  "agent_time_source": "Langfuse agent.run sum",
+  "outside_agent_seconds": 4.058,
+  "between_run_seconds": 0,
+  "llm_seconds": 38.5,
+  "image_seconds": 0,
+  "tool_seconds": 0.065,
+  "local_seconds": 42.8,
+  "groups": {
+    "llm.plan": {
+      "count": 5,
+      "seconds": 38.5
+    },
+    "tool.read": {
+      "count": 2,
+      "seconds": 0.037
+    },
+    "tool.list_packs": {
+      "count": 1,
+      "seconds": 0.012
+    },
+    "tool.load_pack": {
+      "count": 1,
+      "seconds": 0.016
+    }
+  },
+  "failures": [],
+  "local_phases": {
+    "orch.http.parse_request": {
+      "count": 1,
+      "milliseconds": 33
+    },
+    "orch.compact.tool_results": {
+      "count": 5,
+      "milliseconds": 4
+    },
+    "orch.plan.build_tools": {
+      "count": 5,
+      "milliseconds": 4
+    },
+    "orch.plan.build_prompt": {
+      "count": 5,
+      "milliseconds": 5
+    },
+    "llm.prefix_chain": {
+      "count": 5,
+      "milliseconds": 0
+    },
+    "orch.plan.llm_call": {
+      "count": 4,
+      "milliseconds": 24610
+    },
+    "orch.plan.run_action": {
+      "count": 4,
+      "milliseconds": 28
+    }
+  },
+  "local_runs": [
+    {
+      "task_id": "988b9c86-f56b-4374-92f3-a64b783dcffb",
+      "elapsed_seconds": 42.8,
+      "final_state": "cancelled",
+      "completed_at": "2026-11-14T06:04:34+08:00"
+    }
+  ],
+  "image_calls": [],
+  "trace_count": 1,
+  "observation_count": 11,
+  "root_timing_anomaly": false,
+  "outside_agent_intervals": [
+    {
+      "name": "首次 query 提交至首轮 Agent 启动",
+      "seconds": 4.028
+    },
+    {
+      "name": "最后云端根结束至本地任务终止记录（含中断）",
+      "seconds": 0.03
+    }
+  ],
+  "assessment": {
+    "status": "连接中断：仅完成规格读取",
+    "detail": "读取马克杯目录与规格后，对话提示连接中断；本地任务标记 cancelled，Agent elapsed 为 42.800 秒。未进入生图与三维制作。时间截止取消，不代表完成马克杯所需时间。"
+  },
+  "observations": [
+    {
+      "id": "2f3e28fca15ea401",
+      "parentObservationId": null,
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "AGENT",
+      "name": "agent.run",
+      "startTime": "2026-11-13T22:03:50.780Z",
+      "endTime": "2026-11-13T22:04:34.123Z",
+      "duration_ms": 43343,
+      "level": "WARNING",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "ecdd729bb2917369",
+      "parentObservationId": "2f3e28fca15ea401",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T22:03:52.256Z",
+      "endTime": "2026-11-13T22:04:34.153Z",
+      "duration_ms": 41897,
+      "level": "WARNING",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "50d296c8062c7454",
+      "parentObservationId": "ecdd729bb2917369",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T22:03:53.026Z",
+      "endTime": "2026-11-13T22:04:00.589Z",
+      "duration_ms": 7563,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "d60ca4606a3cc051",
+      "parentObservationId": "ecdd729bb2917369",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-13T22:04:00.590Z",
+      "endTime": "2026-11-13T22:04:00.607Z",
+      "duration_ms": 17,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "e44498f2b5abc993",
+      "parentObservationId": "ecdd729bb2917369",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T22:04:01.248Z",
+      "endTime": "2026-11-13T22:04:08.718Z",
+      "duration_ms": 7470,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "35d14cd46814ebf4",
+      "parentObservationId": "ecdd729bb2917369",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-13T22:04:08.720Z",
+      "endTime": "2026-11-13T22:04:08.740Z",
+      "duration_ms": 20,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "fcf4f0d11abe1fb5",
+      "parentObservationId": "ecdd729bb2917369",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T22:04:09.391Z",
+      "endTime": "2026-11-13T22:04:12.416Z",
+      "duration_ms": 3025,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "d7cf04f4a32bddf0",
+      "parentObservationId": "ecdd729bb2917369",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "TOOL",
+      "name": "tool.list_packs",
+      "startTime": "2026-11-13T22:04:12.416Z",
+      "endTime": "2026-11-13T22:04:12.428Z",
+      "duration_ms": 12,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "d33f6ed4fe9e1023",
+      "parentObservationId": "ecdd729bb2917369",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T22:04:13.059Z",
+      "endTime": "2026-11-13T22:04:19.695Z",
+      "duration_ms": 6636,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "6d306fdde1e954cf",
+      "parentObservationId": "ecdd729bb2917369",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "TOOL",
+      "name": "tool.load_pack",
+      "startTime": "2026-11-13T22:04:19.695Z",
+      "endTime": "2026-11-13T22:04:19.711Z",
+      "duration_ms": 16,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "d34d910a57e57ff5",
+      "parentObservationId": "ecdd729bb2917369",
+      "traceId": "45a80cba0fdd16182d7c4b2908efa097",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T22:04:20.347Z",
+      "endTime": "2026-11-13T22:04:34.153Z",
+      "duration_ms": 13806,
+      "level": "WARNING",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    }
+  ],
+  "stages": [],
+  "verifications": [
+    {
+      "started_at": "2026-11-14T14:44:12.640729+08:00",
+      "ended_at": "2026-11-14T14:44:12.640729+08:00",
+      "seconds": 0,
+      "success": false,
+      "error": "No canvas3d entries returned; no model screenshot could be verified."
+    }
+  ],
+  "images": []
+}

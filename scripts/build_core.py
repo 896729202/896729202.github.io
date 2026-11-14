@@ -68,7 +68,7 @@ def href_is_safe(value: str) -> bool:
 def header(prefix: str, section: str) -> str:
     nav = ''
     for key, label, target in [('thesis', '内窥镜三维重建', 'thesis/index.html'), ('notes', '八股文', 'notes/index.html'),
-                               ('interviews', '面试', 'interviews/index.html')]:
+                               ('interviews', '面试', 'interviews/index.html'), ('useit', 'USEIT', 'useit/index.html')]:
         current = ' aria-current="page"' if key == section else ''
         nav += f'<a href="{prefix}{target}"{current}>{label}</a>'
     return f'''<header class="site-header"><div class="header-inner">
@@ -91,6 +91,7 @@ def sidebar(prefix: str, section: str) -> str:
 <a href="{prefix}thesis/index.html"{thesis_current}>{icon('paper')}<span>内窥镜三维重建</span><span class="nav-meta">{thesis_count}</span></a>
 <a href="{prefix}notes/index.html"{notes_current}>{icon('note')}<span>八股文</span><span class="nav-meta">{len(NOTES):02d}</span></a>
 <a href="{prefix}interviews/index.html"{interviews_current}>{icon('book')}<span>面试</span><span class="nav-meta">{len(INTERVIEWS):02d}</span></a>
+<a href="{prefix}useit/index.html">{icon('paper')}<span>USEIT</span><span class="nav-meta">12 品类</span></a>
 </nav><div class="sidebar-note">{icon('leaf')}<p>把学过的东西，<br>变成自己的知识。</p></div></aside>'''
 
 def footer() -> str:
@@ -160,6 +161,7 @@ def home() -> None:
         ('thesis', '内窥镜三维重建', '研究过程、写作整理与最终成果。<br>按自己的节奏，慢慢完成。', f'{len(THESES):02d} 篇论文' if THESES else '内容待补充', 'paper'),
         ('notes', '八股文', '从基本原理到面试表达，<br>把每个知识点真正弄明白。', f'{len(NOTES):02d} 篇笔记', 'note'),
         ('interviews', '面试', '按岗位整理面试题目与复习资料。', f'{len(INTERVIEWS):02d} 份面试笔记', 'book'),
+        ('useit', 'USEIT', '全品类生成测试、真实效果与 Langfuse 链路。', '12 品类 · 2026.11.13–14', 'paper'),
     ], 1):
         cards += f'''<a href="./{key}/index.html" class="collection-card{' notes-card' if key == 'notes' else ''}"><div class="collection-top"><span class="collection-icon">{icon(ico)}</span><span class="collection-number">0{idx}</span></div><h2>{title}</h2><p>{desc}</p><div class="collection-bottom"><span class="collection-state">{status}</span><span class="card-arrow">{icon('arrow')}</span></div></a>'''
     recent = ''.join(note_card(n, './') for n in sorted(NOTES, key=lambda n: n['date'], reverse=True)[:3])

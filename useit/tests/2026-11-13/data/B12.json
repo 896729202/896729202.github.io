@@ -1,0 +1,757 @@
+{
+  "case": "B12",
+  "category": "立体折叠纸卡",
+  "spec": "当前可用的默认模板",
+  "project_id": "1ea806cd-b582-4378-9d55-3499d6b47602",
+  "session_id": "3c522c62-5923-4a3c-b68a-8f76118a8f21",
+  "sent_at": "2026-11-14T13:57:36.148297+08:00",
+  "finished_at": "2026-11-14T06:02:43.481000+00:00",
+  "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/3c522c62-5923-4a3c-b68a-8f76118a8f21",
+  "cloud_finished_at": "2026-11-14T06:02:42.367000+00:00",
+  "cloud_terminal_at": "2026-11-14T06:02:43.481000+00:00",
+  "local_finished_at": "2026-11-14T14:02:43+08:00",
+  "root_seconds": 302.667,
+  "submitted_to_finish_seconds": 307.333,
+  "agent_seconds": 302.667,
+  "agent_time_source": "Langfuse agent.run sum",
+  "outside_agent_seconds": 4.666,
+  "between_run_seconds": 0,
+  "llm_seconds": 119.024,
+  "image_seconds": 32.468,
+  "tool_seconds": 171.496,
+  "local_seconds": 303.22,
+  "groups": {
+    "llm.plan": {
+      "count": 15,
+      "seconds": 119.024
+    },
+    "tool.read": {
+      "count": 2,
+      "seconds": 0.037
+    },
+    "tool.list_packs": {
+      "count": 1,
+      "seconds": 0.024
+    },
+    "tool.load_pack": {
+      "count": 1,
+      "seconds": 0.009
+    },
+    "tool.plan_write": {
+      "count": 4,
+      "seconds": 0.042
+    },
+    "tool.project_plan_write": {
+      "count": 1,
+      "seconds": 0.018
+    },
+    "tool.tool_product_image_gen": {
+      "count": 1,
+      "seconds": 0.011
+    },
+    "tool.tool_image_gen": {
+      "count": 1,
+      "seconds": 32.457
+    },
+    "tool.canvas_product_add": {
+      "count": 2,
+      "seconds": 135.307
+    },
+    "tool.canvas3d_read": {
+      "count": 1,
+      "seconds": 1.689
+    },
+    "tool.canvas3d_render": {
+      "count": 1,
+      "seconds": 1.902
+    }
+  },
+  "failures": [
+    {
+      "tool_call_id": "call_17477164240315531960",
+      "tool": "tool_product_image_gen",
+      "error": "Paper card artwork requires a readable saved master with valid unfolded paper sheetPattern dimensions. No generation was requested.",
+      "duration_seconds": 0.011,
+      "start": "2026-11-14T05:58:54.554Z",
+      "end": "2026-11-14T05:58:54.565Z",
+      "observation_id": "179c22b58b8c347a"
+    },
+    {
+      "tool_call_id": "call_841188426707556594",
+      "tool": "canvas_product_add",
+      "error": "timeout",
+      "at": "2026-11-14T14:01:51+08:00",
+      "duration_seconds": 122.151,
+      "start": "2026-11-14T05:59:49.009Z",
+      "end": "2026-11-14T06:01:51.160Z",
+      "observation_id": "dcfb138e91aff00f"
+    }
+  ],
+  "local_phases": {
+    "orch.http.parse_request": {
+      "count": 5,
+      "milliseconds": 25
+    },
+    "orch.compact.tool_results": {
+      "count": 15,
+      "milliseconds": 5
+    },
+    "orch.plan.build_tools": {
+      "count": 15,
+      "milliseconds": 42
+    },
+    "orch.plan.build_prompt": {
+      "count": 15,
+      "milliseconds": 63
+    },
+    "llm.prefix_chain": {
+      "count": 16,
+      "milliseconds": 0
+    },
+    "orch.plan.llm_call": {
+      "count": 14,
+      "milliseconds": 108661
+    },
+    "orch.plan.run_action": {
+      "count": 14,
+      "milliseconds": 32506
+    },
+    "orch.inline_tool.run": {
+      "count": 2,
+      "milliseconds": 31630
+    },
+    "orch.action.frontend_roundtrip": {
+      "count": 4,
+      "milliseconds": 138841
+    },
+    "orch.callback.disk_write": {
+      "count": 4,
+      "milliseconds": 1
+    },
+    "orch.callback.snapshot_route": {
+      "count": 4,
+      "milliseconds": 0
+    },
+    "orch.callback.observation_emit": {
+      "count": 4,
+      "milliseconds": 6
+    }
+  },
+  "local_runs": [
+    {
+      "task_id": "f90c46d1-d468-4735-8223-3a69421ed2ac",
+      "elapsed_seconds": 303.22,
+      "final_state": "cancelled",
+      "completed_at": "2026-11-14T14:02:43+08:00"
+    }
+  ],
+  "image_calls": [
+    {
+      "tool": "tool_product_image_gen",
+      "ok": false,
+      "summary": "Paper card artwork requires a readable saved master with valid unfolded paper sheetPattern dimensions. No generation was requested."
+    },
+    {
+      "tool": "tool_image_gen",
+      "ok": true,
+      "summary": "generate OK — 1 image(s) with gpt-image-2.6-flare (1024x1536, quality=auto, format=png)."
+    }
+  ],
+  "trace_count": 1,
+  "observation_count": 36,
+  "root_timing_anomaly": false,
+  "outside_agent_intervals": [
+    {
+      "name": "首次 query 提交至首轮 Agent 启动",
+      "seconds": 3.552
+    },
+    {
+      "name": "最后云端根结束至本地任务终止记录（含中断）",
+      "seconds": 1.114
+    }
+  ],
+  "assessment": {
+    "status": "已产出3D图，视觉未通过",
+    "detail": "实际 canvas3d_render 成功并保存 PNG，随后会话 cancelled。原图中人物主要以裁切局部出现在底面，竖起面在该视角大面积无画面；尚未形成清晰完整的主题立体纸卡效果。应优先核验画稿到面片的分配、裁切与正反方向，而不能仅凭渲染返回成功通过验收。",
+    "image_note": "原始 Agent 三维截图：保留原貌，未另行生图或修改渲染效果。"
+  },
+  "observations": [
+    {
+      "id": "7ffb048006826d9b",
+      "parentObservationId": null,
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "AGENT",
+      "name": "agent.run",
+      "startTime": "2026-11-14T05:57:39.700Z",
+      "endTime": "2026-11-14T06:02:42.367Z",
+      "duration_ms": 302667,
+      "level": "WARNING",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "e9d2469bf9f3cf55",
+      "parentObservationId": "7ffb048006826d9b",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T05:57:41.103Z",
+      "endTime": "2026-11-14T05:59:49.023Z",
+      "duration_ms": 127920,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "193477141479daec",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:57:41.764Z",
+      "endTime": "2026-11-14T05:57:49.927Z",
+      "duration_ms": 8163,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 1,
+      "tool_call_id": null
+    },
+    {
+      "id": "9fc42b60d6b03cd7",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-14T05:57:49.927Z",
+      "endTime": "2026-11-14T05:57:49.947Z",
+      "duration_ms": 20,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 1,
+      "tool_call_id": "call_17991528354508319303"
+    },
+    {
+      "id": "03dc12c816b7a2b2",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.list_packs",
+      "startTime": "2026-11-14T05:57:49.928Z",
+      "endTime": "2026-11-14T05:57:49.952Z",
+      "duration_ms": 24,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 1,
+      "tool_call_id": "call_17991528354508318850"
+    },
+    {
+      "id": "520401689275ca39",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:57:50.627Z",
+      "endTime": "2026-11-14T05:57:55.018Z",
+      "duration_ms": 4391,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 2,
+      "tool_call_id": null
+    },
+    {
+      "id": "94ff39937febae16",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-14T05:57:55.019Z",
+      "endTime": "2026-11-14T05:57:55.036Z",
+      "duration_ms": 17,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 2,
+      "tool_call_id": "call_1575389073736130971"
+    },
+    {
+      "id": "86f4e4a4d48e42d0",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:57:55.895Z",
+      "endTime": "2026-11-14T05:58:15.827Z",
+      "duration_ms": 19932,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 3,
+      "tool_call_id": null
+    },
+    {
+      "id": "95cebc0c8948b122",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.load_pack",
+      "startTime": "2026-11-14T05:58:15.828Z",
+      "endTime": "2026-11-14T05:58:15.837Z",
+      "duration_ms": 9,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 3,
+      "tool_call_id": "call_1126249155270484934"
+    },
+    {
+      "id": "f093b0e96f00096d",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:58:16.561Z",
+      "endTime": "2026-11-14T05:58:27.371Z",
+      "duration_ms": 10810,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 4,
+      "tool_call_id": null
+    },
+    {
+      "id": "f79f0536516fdb3e",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-14T05:58:27.371Z",
+      "endTime": "2026-11-14T05:58:27.380Z",
+      "duration_ms": 9,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 4,
+      "tool_call_id": "call_8737676585196205366"
+    },
+    {
+      "id": "a87804ebae789929",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:58:28.073Z",
+      "endTime": "2026-11-14T05:58:34.896Z",
+      "duration_ms": 6823,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 5,
+      "tool_call_id": null
+    },
+    {
+      "id": "1ee0733214bba55e",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.project_plan_write",
+      "startTime": "2026-11-14T05:58:34.897Z",
+      "endTime": "2026-11-14T05:58:34.915Z",
+      "duration_ms": 18,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 5,
+      "tool_call_id": "call_14364381809296365287"
+    },
+    {
+      "id": "fbed2294abe63ad3",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:58:35.807Z",
+      "endTime": "2026-11-14T05:58:44.599Z",
+      "duration_ms": 8792,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 6,
+      "tool_call_id": null
+    },
+    {
+      "id": "f32b9b108ee0ece6",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-14T05:58:44.599Z",
+      "endTime": "2026-11-14T05:58:44.608Z",
+      "duration_ms": 9,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 6,
+      "tool_call_id": "call_13749723803806276359"
+    },
+    {
+      "id": "bd7fc46c52eb7683",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:58:45.441Z",
+      "endTime": "2026-11-14T05:58:54.554Z",
+      "duration_ms": 9113,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 7,
+      "tool_call_id": null
+    },
+    {
+      "id": "179c22b58b8c347a",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.tool_product_image_gen",
+      "startTime": "2026-11-14T05:58:54.554Z",
+      "endTime": "2026-11-14T05:58:54.565Z",
+      "duration_ms": 11,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 7,
+      "tool_call_id": "call_17477164240315531960"
+    },
+    {
+      "id": "2badffda833db156",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:58:55.478Z",
+      "endTime": "2026-11-14T05:59:03.912Z",
+      "duration_ms": 8434,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 8,
+      "tool_call_id": null
+    },
+    {
+      "id": "d9225a56f8e99731",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.tool_image_gen",
+      "startTime": "2026-11-14T05:59:03.912Z",
+      "endTime": "2026-11-14T05:59:36.369Z",
+      "duration_ms": 32457,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 8,
+      "tool_call_id": "call_12935199669136210896"
+    },
+    {
+      "id": "486673e0f914abfa",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:59:37.110Z",
+      "endTime": "2026-11-14T05:59:43.320Z",
+      "duration_ms": 6210,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 9,
+      "tool_call_id": null
+    },
+    {
+      "id": "42306c8f043c1d34",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-14T05:59:43.320Z",
+      "endTime": "2026-11-14T05:59:43.333Z",
+      "duration_ms": 13,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 9,
+      "tool_call_id": "call_5661609048599738783"
+    },
+    {
+      "id": "910ca74ef83c9933",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T05:59:44.029Z",
+      "endTime": "2026-11-14T05:59:49.008Z",
+      "duration_ms": 4979,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 10,
+      "tool_call_id": null
+    },
+    {
+      "id": "dcfb138e91aff00f",
+      "parentObservationId": "e9d2469bf9f3cf55",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.canvas_product_add",
+      "startTime": "2026-11-14T05:59:49.009Z",
+      "endTime": "2026-11-14T06:01:51.160Z",
+      "duration_ms": 122151,
+      "level": "ERROR",
+      "statusMessage": "timeout",
+      "step": 10,
+      "tool_call_id": "call_841188426707556594"
+    },
+    {
+      "id": "0fbcf44f8dea6604",
+      "parentObservationId": "7ffb048006826d9b",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T06:01:51.154Z",
+      "endTime": "2026-11-14T06:01:58.122Z",
+      "duration_ms": 6968,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "2aa64ca433391be4",
+      "parentObservationId": "0fbcf44f8dea6604",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:01:51.889Z",
+      "endTime": "2026-11-14T06:01:58.101Z",
+      "duration_ms": 6212,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 11,
+      "tool_call_id": null
+    },
+    {
+      "id": "703dac42247a21cc",
+      "parentObservationId": "0fbcf44f8dea6604",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.canvas_product_add",
+      "startTime": "2026-11-14T06:01:58.101Z",
+      "endTime": "2026-11-14T06:02:11.257Z",
+      "duration_ms": 13156,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 11,
+      "tool_call_id": "call_7978766214183643454"
+    },
+    {
+      "id": "0c65c762783496f7",
+      "parentObservationId": "7ffb048006826d9b",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T06:02:11.255Z",
+      "endTime": "2026-11-14T06:02:16.639Z",
+      "duration_ms": 5384,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "d84e2587c9e337a9",
+      "parentObservationId": "0c65c762783496f7",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:02:11.978Z",
+      "endTime": "2026-11-14T06:02:16.627Z",
+      "duration_ms": 4649,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 12,
+      "tool_call_id": null
+    },
+    {
+      "id": "3559677e34ddf7a3",
+      "parentObservationId": "0c65c762783496f7",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.canvas3d_read",
+      "startTime": "2026-11-14T06:02:16.627Z",
+      "endTime": "2026-11-14T06:02:18.316Z",
+      "duration_ms": 1689,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 12,
+      "tool_call_id": "call_5121991656763026082"
+    },
+    {
+      "id": "f95e955fc5a87739",
+      "parentObservationId": "7ffb048006826d9b",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T06:02:18.314Z",
+      "endTime": "2026-11-14T06:02:23.532Z",
+      "duration_ms": 5218,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "6265edc626249ad4",
+      "parentObservationId": "f95e955fc5a87739",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:02:19.182Z",
+      "endTime": "2026-11-14T06:02:23.519Z",
+      "duration_ms": 4337,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 13,
+      "tool_call_id": null
+    },
+    {
+      "id": "a857e48f41001f8b",
+      "parentObservationId": "f95e955fc5a87739",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.canvas3d_render",
+      "startTime": "2026-11-14T06:02:23.521Z",
+      "endTime": "2026-11-14T06:02:25.423Z",
+      "duration_ms": 1902,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 13,
+      "tool_call_id": "call_9646575195704318226"
+    },
+    {
+      "id": "ebabac815b49be19",
+      "parentObservationId": "7ffb048006826d9b",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T06:02:25.420Z",
+      "endTime": "2026-11-14T06:02:43.481Z",
+      "duration_ms": 18061,
+      "level": "WARNING",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "c8a25e5df68d6978",
+      "parentObservationId": "ebabac815b49be19",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:02:26.566Z",
+      "endTime": "2026-11-14T06:02:32.796Z",
+      "duration_ms": 6230,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 14,
+      "tool_call_id": null
+    },
+    {
+      "id": "06d6f00c8cd85919",
+      "parentObservationId": "ebabac815b49be19",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-14T06:02:32.796Z",
+      "endTime": "2026-11-14T06:02:32.807Z",
+      "duration_ms": 11,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 14,
+      "tool_call_id": "call_14685494848273648063"
+    },
+    {
+      "id": "25322977dc762271",
+      "parentObservationId": "ebabac815b49be19",
+      "traceId": "0fb422e2a27c9f63b5e7dc4a6dcfbc77",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:02:33.532Z",
+      "endTime": "2026-11-14T06:02:43.481Z",
+      "duration_ms": 9949,
+      "level": "WARNING",
+      "statusMessage": null,
+      "step": 15,
+      "tool_call_id": null
+    }
+  ],
+  "stages": [
+    {
+      "tool": "canvas_product_add",
+      "at": "2026-11-14T14:02:11+08:00",
+      "tool_call_id": "call_7978766214183643454",
+      "timing": {
+        "total_ms": 12558,
+        "stages": {
+          "prepare_master": 0,
+          "load_source": 10927,
+          "open_doc": 0,
+          "save": 760,
+          "record_version": 761
+        },
+        "hidden_ms": 0,
+        "main_thread": {
+          "max_gap_ms": 220,
+          "long_tasks": 7,
+          "long_task_ms": 775,
+          "max_long_task_ms": 319
+        }
+      }
+    }
+  ],
+  "verifications": [
+    {
+      "started_at": "2026-11-14T14:44:29.326169+08:00",
+      "ended_at": "2026-11-14T14:44:32.555657+08:00",
+      "seconds": 3.083,
+      "success": true,
+      "error": null
+    },
+    {
+      "started_at": "2026-11-14T14:47:27.913129+08:00",
+      "ended_at": "2026-11-14T14:47:28.813213+08:00",
+      "seconds": 0.89,
+      "success": true,
+      "error": null
+    },
+    {
+      "started_at": "2026-11-14T14:47:28.814215+08:00",
+      "ended_at": "2026-11-14T14:47:29.739046+08:00",
+      "seconds": 0.924,
+      "success": true,
+      "error": null
+    }
+  ],
+  "images": [
+    {
+      "src": "images/B12-1.webp",
+      "caption": "原始运行三维截图",
+      "source_name": "agent-3d-preview.png",
+      "source_sha256": "9560a1db4559df3d3233b1e5579c4e78359889a229ac69f1e27439ae177e0f58"
+    },
+    {
+      "src": "images/B12-2.webp",
+      "caption": "测试后的补充三维核验 · 背面",
+      "source_name": "verified-back.png",
+      "source_sha256": "f03c85f69de2d8ac0cbfa9b1adc0daddab082c3634761583e4e269a74ef0c1e7"
+    },
+    {
+      "src": "images/B12-3.webp",
+      "caption": "测试后的补充三维核验 · 正面",
+      "source_name": "verified-front.png",
+      "source_sha256": "ee35d3d0e504a3f8be8c7b52ac25bb6ad991c10388b3378df3bb064900b890e9"
+    },
+    {
+      "src": "images/B12-4.webp",
+      "caption": "本次生成的二维画稿 · 不代表三维验收通过",
+      "source_name": "generated-image-20261114-41256c.png",
+      "source_sha256": "430106bdea259ed66567f45cf626cf20af782a53a644807af33b458d464082d0"
+    }
+  ]
+}

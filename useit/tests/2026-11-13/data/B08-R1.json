@@ -1,0 +1,708 @@
+{
+  "case": "B08-R1",
+  "category": "圆形徽章",
+  "spec": "默认规格",
+  "project_id": "037f5f51-2933-441f-8b40-6d545207bfe5",
+  "session_id": "7ccc3c8b-3f9c-415a-9302-c5ffe0fdf331",
+  "sent_at": "2026-11-14T14:09:28.783804+08:00",
+  "finished_at": "2026-11-14T06:13:35.882000+00:00",
+  "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/7ccc3c8b-3f9c-415a-9302-c5ffe0fdf331",
+  "cloud_finished_at": "2026-11-14T06:13:35.882000+00:00",
+  "cloud_terminal_at": "2026-11-14T06:13:35.882000+00:00",
+  "local_finished_at": "2026-11-14T14:13:34+08:00",
+  "root_seconds": 243.11,
+  "submitted_to_finish_seconds": 247.098,
+  "agent_seconds": 243.11,
+  "agent_time_source": "Langfuse agent.run sum",
+  "outside_agent_seconds": 3.988,
+  "between_run_seconds": 0,
+  "llm_seconds": 132.625,
+  "image_seconds": 14.403,
+  "tool_seconds": 97.993,
+  "local_seconds": 241.54,
+  "groups": {
+    "llm.plan": {
+      "count": 15,
+      "seconds": 132.625
+    },
+    "tool.read": {
+      "count": 2,
+      "seconds": 0.033
+    },
+    "tool.list_packs": {
+      "count": 1,
+      "seconds": 0.036
+    },
+    "tool.load_pack": {
+      "count": 1,
+      "seconds": 0.01
+    },
+    "tool.plan_write": {
+      "count": 5,
+      "seconds": 0.057
+    },
+    "tool.project_plan_write": {
+      "count": 1,
+      "seconds": 0.016
+    },
+    "tool.tool_product_image_gen": {
+      "count": 1,
+      "seconds": 14.403
+    },
+    "tool.canvas_product_add": {
+      "count": 1,
+      "seconds": 78.456
+    },
+    "tool.canvas3d_read": {
+      "count": 1,
+      "seconds": 3.094
+    },
+    "tool.canvas3d_render": {
+      "count": 1,
+      "seconds": 1.878
+    },
+    "tool.respond_to_user": {
+      "count": 1,
+      "seconds": 0.01
+    }
+  },
+  "failures": [],
+  "local_phases": {
+    "orch.http.parse_request": {
+      "count": 4,
+      "milliseconds": 43
+    },
+    "orch.compact.tool_results": {
+      "count": 15,
+      "milliseconds": 14
+    },
+    "orch.plan.build_tools": {
+      "count": 15,
+      "milliseconds": 36
+    },
+    "orch.plan.build_prompt": {
+      "count": 15,
+      "milliseconds": 67
+    },
+    "llm.prefix_chain": {
+      "count": 16,
+      "milliseconds": 0
+    },
+    "orch.plan.llm_call": {
+      "count": 15,
+      "milliseconds": 132274
+    },
+    "orch.plan.run_action": {
+      "count": 15,
+      "milliseconds": 14442
+    },
+    "orch.inline_tool.run": {
+      "count": 1,
+      "milliseconds": 13230
+    },
+    "orch.action.frontend_roundtrip": {
+      "count": 3,
+      "milliseconds": 83398
+    },
+    "orch.callback.disk_write": {
+      "count": 3,
+      "milliseconds": 0
+    },
+    "orch.callback.snapshot_route": {
+      "count": 3,
+      "milliseconds": 0
+    },
+    "orch.callback.observation_emit": {
+      "count": 3,
+      "milliseconds": 3
+    }
+  },
+  "local_runs": [
+    {
+      "task_id": "42203be3-b6c3-41f8-99c4-3b63c447f8b2",
+      "elapsed_seconds": 241.54,
+      "final_state": "done",
+      "completed_at": "2026-11-14T14:13:34+08:00"
+    }
+  ],
+  "image_calls": [
+    {
+      "tool": "tool_product_image_gen",
+      "ok": true,
+      "summary": "edit OK — 1 image(s) with gpt-image-2.6-flare (864x864, quality=auto, format=png)."
+    }
+  ],
+  "trace_count": 1,
+  "observation_count": 36,
+  "root_timing_anomaly": false,
+  "outside_agent_intervals": [
+    {
+      "name": "首次 query 提交至首轮 Agent 启动",
+      "seconds": 3.988
+    }
+  ],
+  "assessment": {
+    "status": "三维已核验，主题待加强",
+    "detail": "58mm 徽章画面已装配，原始三维 PNG 已检查：人物、黑皮衣与简历清晰，徽章表面与轮廓可见；当前构图中 NVIDIA 标识明显，华为面试场景识别度不足。此次流程正常结束，没有记录到失败工具调用。",
+    "image_note": "原始 Agent 三维截图：主体清晰，但主题场景仍需加强。"
+  },
+  "observations": [
+    {
+      "id": "49c925e4d1ce1d1f",
+      "parentObservationId": null,
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "AGENT",
+      "name": "agent.run",
+      "startTime": "2026-11-14T06:09:32.772Z",
+      "endTime": "2026-11-14T06:13:35.882Z",
+      "duration_ms": 243110,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "3b9e511b62482470",
+      "parentObservationId": "49c925e4d1ce1d1f",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T06:09:34.164Z",
+      "endTime": "2026-11-14T06:11:31.074Z",
+      "duration_ms": 116910,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "bd95320bd215163f",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:09:34.931Z",
+      "endTime": "2026-11-14T06:09:44.718Z",
+      "duration_ms": 9787,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 1,
+      "tool_call_id": null
+    },
+    {
+      "id": "e7d2b95d5d7b087b",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-14T06:09:44.718Z",
+      "endTime": "2026-11-14T06:09:44.738Z",
+      "duration_ms": 20,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 1,
+      "tool_call_id": "call_14774689330670731452"
+    },
+    {
+      "id": "9918ad55b8cc07e0",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:09:45.414Z",
+      "endTime": "2026-11-14T06:10:05.107Z",
+      "duration_ms": 19693,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 2,
+      "tool_call_id": null
+    },
+    {
+      "id": "f7a602cb61657611",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-14T06:10:05.107Z",
+      "endTime": "2026-11-14T06:10:05.120Z",
+      "duration_ms": 13,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 2,
+      "tool_call_id": "call_5100991938172532615"
+    },
+    {
+      "id": "93939b269fac01f5",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:10:05.772Z",
+      "endTime": "2026-11-14T06:10:15.238Z",
+      "duration_ms": 9466,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 3,
+      "tool_call_id": null
+    },
+    {
+      "id": "e9902372d2a9485b",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.list_packs",
+      "startTime": "2026-11-14T06:10:15.238Z",
+      "endTime": "2026-11-14T06:10:15.274Z",
+      "duration_ms": 36,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 3,
+      "tool_call_id": "call_17125460007977243663"
+    },
+    {
+      "id": "116c40acced42eca",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:10:15.920Z",
+      "endTime": "2026-11-14T06:10:20.349Z",
+      "duration_ms": 4429,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 4,
+      "tool_call_id": null
+    },
+    {
+      "id": "0c5a3afad16678bd",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.load_pack",
+      "startTime": "2026-11-14T06:10:20.349Z",
+      "endTime": "2026-11-14T06:10:20.359Z",
+      "duration_ms": 10,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 4,
+      "tool_call_id": "call_8142731648067717238"
+    },
+    {
+      "id": "66d1c07fb225436c",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:10:20.985Z",
+      "endTime": "2026-11-14T06:10:36.249Z",
+      "duration_ms": 15264,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 5,
+      "tool_call_id": null
+    },
+    {
+      "id": "7af10e7288da9ef0",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-14T06:10:36.249Z",
+      "endTime": "2026-11-14T06:10:36.258Z",
+      "duration_ms": 9,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 5,
+      "tool_call_id": "call_17471991832608411395"
+    },
+    {
+      "id": "cf7557b12ac34468",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:10:36.909Z",
+      "endTime": "2026-11-14T06:10:43.012Z",
+      "duration_ms": 6103,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 6,
+      "tool_call_id": null
+    },
+    {
+      "id": "6a47a64b788b05c6",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.project_plan_write",
+      "startTime": "2026-11-14T06:10:43.013Z",
+      "endTime": "2026-11-14T06:10:43.029Z",
+      "duration_ms": 16,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 6,
+      "tool_call_id": "call_18408754637676808736"
+    },
+    {
+      "id": "71e77feac6215f18",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:10:43.682Z",
+      "endTime": "2026-11-14T06:10:55.024Z",
+      "duration_ms": 11342,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 7,
+      "tool_call_id": null
+    },
+    {
+      "id": "3131dd984c41614c",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-14T06:10:55.024Z",
+      "endTime": "2026-11-14T06:10:55.034Z",
+      "duration_ms": 10,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 7,
+      "tool_call_id": "call_291344061042454111"
+    },
+    {
+      "id": "dcc13a59b62004ae",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:10:55.695Z",
+      "endTime": "2026-11-14T06:11:04.090Z",
+      "duration_ms": 8395,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 8,
+      "tool_call_id": null
+    },
+    {
+      "id": "062208b0005e05f1",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.tool_product_image_gen",
+      "startTime": "2026-11-14T06:11:04.090Z",
+      "endTime": "2026-11-14T06:11:18.493Z",
+      "duration_ms": 14403,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 8,
+      "tool_call_id": "call_5935543389410452370"
+    },
+    {
+      "id": "0e3ba152d580833f",
+      "parentObservationId": "062208b0005e05f1",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "SPAN",
+      "name": "stage.product_image_request",
+      "startTime": "2026-11-14T06:11:04.112Z",
+      "endTime": "2026-11-14T06:11:17.329Z",
+      "duration_ms": 13217,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "2e8ef4b5f306c31a",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:11:19.123Z",
+      "endTime": "2026-11-14T06:11:25.887Z",
+      "duration_ms": 6764,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 9,
+      "tool_call_id": null
+    },
+    {
+      "id": "bb5fd9746f7c1f6c",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-14T06:11:25.887Z",
+      "endTime": "2026-11-14T06:11:25.898Z",
+      "duration_ms": 11,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 9,
+      "tool_call_id": "call_1309647748732016490"
+    },
+    {
+      "id": "6a99a0967556a0d0",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:11:26.645Z",
+      "endTime": "2026-11-14T06:11:31.061Z",
+      "duration_ms": 4416,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 10,
+      "tool_call_id": null
+    },
+    {
+      "id": "6f98b06fe0f161fe",
+      "parentObservationId": "3b9e511b62482470",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.canvas_product_add",
+      "startTime": "2026-11-14T06:11:31.061Z",
+      "endTime": "2026-11-14T06:12:49.517Z",
+      "duration_ms": 78456,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 10,
+      "tool_call_id": "call_11502921532909931026"
+    },
+    {
+      "id": "f54316c443352f7c",
+      "parentObservationId": "49c925e4d1ce1d1f",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T06:12:49.513Z",
+      "endTime": "2026-11-14T06:13:04.324Z",
+      "duration_ms": 14811,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "251848dbeb2c4974",
+      "parentObservationId": "f54316c443352f7c",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:12:50.150Z",
+      "endTime": "2026-11-14T06:12:57.863Z",
+      "duration_ms": 7713,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 11,
+      "tool_call_id": null
+    },
+    {
+      "id": "2b7652a577db59e0",
+      "parentObservationId": "f54316c443352f7c",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-14T06:12:57.863Z",
+      "endTime": "2026-11-14T06:12:57.882Z",
+      "duration_ms": 19,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 11,
+      "tool_call_id": "call_18352656574454746635"
+    },
+    {
+      "id": "01fd80d4b4252763",
+      "parentObservationId": "f54316c443352f7c",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:12:58.542Z",
+      "endTime": "2026-11-14T06:13:04.311Z",
+      "duration_ms": 5769,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 12,
+      "tool_call_id": null
+    },
+    {
+      "id": "329158e96373f80f",
+      "parentObservationId": "f54316c443352f7c",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.canvas3d_read",
+      "startTime": "2026-11-14T06:13:04.311Z",
+      "endTime": "2026-11-14T06:13:07.405Z",
+      "duration_ms": 3094,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 12,
+      "tool_call_id": "call_14748796969792328500"
+    },
+    {
+      "id": "a7c632e77d49fc82",
+      "parentObservationId": "49c925e4d1ce1d1f",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T06:13:07.404Z",
+      "endTime": "2026-11-14T06:13:12.381Z",
+      "duration_ms": 4977,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "48848734a39200cf",
+      "parentObservationId": "a7c632e77d49fc82",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:13:08.036Z",
+      "endTime": "2026-11-14T06:13:12.371Z",
+      "duration_ms": 4335,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 13,
+      "tool_call_id": null
+    },
+    {
+      "id": "ac7943325d39af37",
+      "parentObservationId": "a7c632e77d49fc82",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.canvas3d_render",
+      "startTime": "2026-11-14T06:13:12.371Z",
+      "endTime": "2026-11-14T06:13:14.249Z",
+      "duration_ms": 1878,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 13,
+      "tool_call_id": "call_15831947316276638481"
+    },
+    {
+      "id": "9b09798a5979f50d",
+      "parentObservationId": "49c925e4d1ce1d1f",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T06:13:14.247Z",
+      "endTime": "2026-11-14T06:13:34.885Z",
+      "duration_ms": 20638,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "3c4e9b46ed0219a1",
+      "parentObservationId": "9b09798a5979f50d",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:13:15.040Z",
+      "endTime": "2026-11-14T06:13:22.584Z",
+      "duration_ms": 7544,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 14,
+      "tool_call_id": null
+    },
+    {
+      "id": "d70be0690b31ac42",
+      "parentObservationId": "9b09798a5979f50d",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-14T06:13:22.584Z",
+      "endTime": "2026-11-14T06:13:22.592Z",
+      "duration_ms": 8,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 14,
+      "tool_call_id": "call_5907501874248291026"
+    },
+    {
+      "id": "1dace516ee23ab2f",
+      "parentObservationId": "9b09798a5979f50d",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T06:13:23.250Z",
+      "endTime": "2026-11-14T06:13:34.855Z",
+      "duration_ms": 11605,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 15,
+      "tool_call_id": null
+    },
+    {
+      "id": "7f0b2df1ba776f96",
+      "parentObservationId": "9b09798a5979f50d",
+      "traceId": "b20fb1a250902c1c7b8e211a0e649df5",
+      "type": "TOOL",
+      "name": "tool.respond_to_user",
+      "startTime": "2026-11-14T06:13:34.855Z",
+      "endTime": "2026-11-14T06:13:34.865Z",
+      "duration_ms": 10,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 15,
+      "tool_call_id": "call_5309009350740234755"
+    }
+  ],
+  "stages": [
+    {
+      "tool": "canvas_product_add",
+      "at": "2026-11-14T14:12:49+08:00",
+      "tool_call_id": "call_11502921532909931026",
+      "timing": {
+        "total_ms": 75782,
+        "stages": {
+          "prepare_master": 0,
+          "load_source": 73086,
+          "open_doc": 0,
+          "save": 103,
+          "record_version": 2524
+        },
+        "hidden_ms": 0,
+        "main_thread": {
+          "max_gap_ms": 13,
+          "long_tasks": 2,
+          "long_task_ms": 156,
+          "max_long_task_ms": 83
+        }
+      }
+    }
+  ],
+  "verifications": [
+    {
+      "started_at": "2026-11-14T14:44:39.831192+08:00",
+      "ended_at": "2026-11-14T14:44:44.090346+08:00",
+      "seconds": 4.221,
+      "success": true,
+      "error": null
+    }
+  ],
+  "images": [
+    {
+      "src": "images/B08-R1-1.webp",
+      "caption": "原始运行三维截图",
+      "source_name": "agent-3d-preview.png",
+      "source_sha256": "49c6e0597c9b5a79b1b2d1eabd89987ed558755e792d4b6db570e0dffc2038f7"
+    },
+    {
+      "src": "images/B08-R1-2.webp",
+      "caption": "测试后的补充三维核验",
+      "source_name": "verified-3d-1.png",
+      "source_sha256": "c07669e85d2f73ae1c1b51d9fe0a4f560872ecd075220daea8afe0c9364c7d1a"
+    },
+    {
+      "src": "images/B08-R1-3.webp",
+      "caption": "本次生成的二维画稿 · 不代表三维验收通过",
+      "source_name": "edited-image-20261114-00315a.png",
+      "source_sha256": "09a506c1b9c02826a4755ba8ebb2c83e79382511bfcd518a13fdca32189a9a83"
+    }
+  ]
+}

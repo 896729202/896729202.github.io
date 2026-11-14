@@ -1,0 +1,756 @@
+{
+  "case": "B01",
+  "category": "插盖盒",
+  "spec": "65×65×65毫米",
+  "project_id": "2a52e66d-90bc-48a1-b730-2b29fa582ccf",
+  "session_id": "56f93d58-ac69-4f8f-a598-01d4ed53b0b3",
+  "sent_at": "2026-11-13T15:56:13.121951+08:00",
+  "finished_at": "2026-11-13T08:19:21.482000+00:00",
+  "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/56f93d58-ac69-4f8f-a598-01d4ed53b0b3",
+  "cloud_finished_at": "2026-11-13T08:19:21.482000+00:00",
+  "cloud_terminal_at": "2026-11-13T08:19:21.482000+00:00",
+  "local_finished_at": "2026-11-13T16:19:20+08:00",
+  "root_seconds": 555.966,
+  "submitted_to_finish_seconds": 1388.36,
+  "agent_seconds": 676,
+  "agent_time_source": "local elapsed (Langfuse missing first run)",
+  "outside_agent_seconds": 712.36,
+  "between_run_seconds": 0,
+  "llm_seconds": 219.261,
+  "image_seconds": 32.192,
+  "tool_seconds": 305.526,
+  "local_seconds": 676,
+  "groups": {
+    "llm.plan": {
+      "count": 15,
+      "seconds": 219.261
+    },
+    "tool.plan_write": {
+      "count": 4,
+      "seconds": 0.04
+    },
+    "tool.project_plan_write": {
+      "count": 1,
+      "seconds": 0.021
+    },
+    "tool.tool_image_gen": {
+      "count": 1,
+      "seconds": 0.035
+    },
+    "tool.tool_product_image_gen": {
+      "count": 1,
+      "seconds": 32.157
+    },
+    "tool.canvas_product_add": {
+      "count": 3,
+      "seconds": 267.65
+    },
+    "tool.list_packs": {
+      "count": 1,
+      "seconds": 0.045
+    },
+    "tool.ls": {
+      "count": 1,
+      "seconds": 1.873
+    },
+    "tool.canvas_product_inspect": {
+      "count": 1,
+      "seconds": 3.677
+    },
+    "tool.respond_to_user": {
+      "count": 2,
+      "seconds": 0.028
+    }
+  },
+  "failures": [
+    {
+      "tool_call_id": "call_16454665448025849380",
+      "tool": "tool_image_gen",
+      "error": "Complete configured-product artwork requires tool_product_image_gen; use explicit usage='asset' or 'concept' only for those purposes. No generation was requested.",
+      "duration_seconds": 0.035,
+      "start": "2026-11-13T08:11:15.355Z",
+      "end": "2026-11-13T08:11:15.390Z",
+      "observation_id": "3ab4f92e7577407d"
+    },
+    {
+      "tool_call_id": "call_8293215886809217576",
+      "tool": "canvas_product_add",
+      "error": "timeout",
+      "at": "2026-11-13T16:14:24+08:00",
+      "duration_seconds": 123.848,
+      "start": "2026-11-13T08:12:20.843Z",
+      "end": "2026-11-13T08:14:24.691Z",
+      "observation_id": "ba15643ae7849517"
+    },
+    {
+      "tool_call_id": "call_12433199558733158374",
+      "tool": "canvas_product_add",
+      "error": "timeout",
+      "at": "2026-11-13T16:16:36+08:00",
+      "duration_seconds": 122.391,
+      "start": "2026-11-13T08:14:33.919Z",
+      "end": "2026-11-13T08:16:36.310Z",
+      "observation_id": "85576e918c3533ef"
+    },
+    {
+      "tool_call_id": "call_14730333246483927013",
+      "tool": "canvas_product_add",
+      "error": "The flat spread did not line up with the dieline for back（正面）, glue（粘口）, top-lid-front（顶面）, bottom-tongue（下插舌）, bottom-dust-right（下防尘翼）; nothing was placed",
+      "at": "2026-11-13T16:18:11+08:00",
+      "duration_seconds": 21.411,
+      "start": "2026-11-13T08:17:49.784Z",
+      "end": "2026-11-13T08:18:11.195Z",
+      "observation_id": "6d6603191d7f8cdb"
+    }
+  ],
+  "local_phases": {
+    "orch.http.parse_request": {
+      "count": 6,
+      "milliseconds": 47
+    },
+    "orch.compact.tool_results": {
+      "count": 20,
+      "milliseconds": 21
+    },
+    "orch.plan.build_tools": {
+      "count": 20,
+      "milliseconds": 81
+    },
+    "orch.plan.build_prompt": {
+      "count": 20,
+      "milliseconds": 307
+    },
+    "llm.prefix_chain": {
+      "count": 21,
+      "milliseconds": 0
+    },
+    "orch.plan.llm_call": {
+      "count": 20,
+      "milliseconds": 301490
+    },
+    "orch.plan.run_action": {
+      "count": 20,
+      "milliseconds": 34214
+    },
+    "orch.inline_tool.run": {
+      "count": 2,
+      "milliseconds": 30795
+    },
+    "orch.action.frontend_roundtrip": {
+      "count": 4,
+      "milliseconds": 271229
+    },
+    "orch.callback.disk_write": {
+      "count": 4,
+      "milliseconds": 11
+    },
+    "orch.callback.snapshot_route": {
+      "count": 4,
+      "milliseconds": 0
+    },
+    "orch.callback.observation_emit": {
+      "count": 4,
+      "milliseconds": 18
+    }
+  },
+  "local_runs": [
+    {
+      "task_id": "7cf8e40a-8600-48db-9355-0c32447b9dc0",
+      "elapsed_seconds": 121.9,
+      "final_state": "done",
+      "completed_at": "2026-11-13T15:58:37+08:00"
+    },
+    {
+      "task_id": "d262ce18-7278-4001-8f44-ebe793e4d955",
+      "elapsed_seconds": 554.1,
+      "final_state": "done",
+      "completed_at": "2026-11-13T16:19:20+08:00"
+    }
+  ],
+  "image_calls": [
+    {
+      "tool": "tool_image_gen",
+      "ok": false,
+      "summary": "Complete configured-product artwork requires tool_product_image_gen; use explicit usage='asset' or 'concept' only for those purposes. No generation was requested."
+    },
+    {
+      "tool": "tool_product_image_gen",
+      "ok": true,
+      "summary": "edit OK — 1 image(s) with gpt-image-2.6-flare (3104x2608, quality=auto, format=png)."
+    }
+  ],
+  "trace_count": 1,
+  "observation_count": 37,
+  "root_timing_anomaly": false,
+  "outside_agent_intervals": [],
+  "assessment": {
+    "status": "失败：画面未装配",
+    "detail": "生成了盒型和展开插画；两次装配回调超时，第三次刀版配准失败。没有取得带画面的三维成品。B01 初次规划未启用 Langfuse；根调用时间仅覆盖制作轮。",
+    "image_note": "补充核验的真实三维：仅有编号占位面，没有主题画稿。"
+  },
+  "observations": [
+    {
+      "id": "ffee0c2e92be6605",
+      "parentObservationId": null,
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "AGENT",
+      "name": "agent.run",
+      "startTime": "2026-11-13T08:10:05.516Z",
+      "endTime": "2026-11-13T08:19:21.482Z",
+      "duration_ms": 555966,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "014f6051ea927c6b",
+      "parentObservationId": "ffee0c2e92be6605",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T08:10:09.383Z",
+      "endTime": "2026-11-13T08:12:20.867Z",
+      "duration_ms": 131484,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "db7e9816c7aba9a7",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:10:13.724Z",
+      "endTime": "2026-11-13T08:10:30.472Z",
+      "duration_ms": 16748,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 1,
+      "tool_call_id": null
+    },
+    {
+      "id": "875d0a9c58469fd0",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-13T08:10:30.472Z",
+      "endTime": "2026-11-13T08:10:30.487Z",
+      "duration_ms": 15,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 1,
+      "tool_call_id": "call_10709671255215793726"
+    },
+    {
+      "id": "3ba2e3eefa1f1c4e",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:10:31.133Z",
+      "endTime": "2026-11-13T08:10:41.496Z",
+      "duration_ms": 10363,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 2,
+      "tool_call_id": null
+    },
+    {
+      "id": "8e4ccc8781b8be07",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.project_plan_write",
+      "startTime": "2026-11-13T08:10:41.496Z",
+      "endTime": "2026-11-13T08:10:41.517Z",
+      "duration_ms": 21,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 2,
+      "tool_call_id": "call_683720087172851948"
+    },
+    {
+      "id": "cb2a2ab0a203c42c",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:10:42.166Z",
+      "endTime": "2026-11-13T08:10:53.108Z",
+      "duration_ms": 10942,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 3,
+      "tool_call_id": null
+    },
+    {
+      "id": "90600557edb0b959",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-13T08:10:53.108Z",
+      "endTime": "2026-11-13T08:10:53.117Z",
+      "duration_ms": 9,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 3,
+      "tool_call_id": "call_8113864314037941481"
+    },
+    {
+      "id": "959e6de85d7811cb",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:10:53.752Z",
+      "endTime": "2026-11-13T08:11:15.355Z",
+      "duration_ms": 21603,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 4,
+      "tool_call_id": null
+    },
+    {
+      "id": "3ab4f92e7577407d",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.tool_image_gen",
+      "startTime": "2026-11-13T08:11:15.355Z",
+      "endTime": "2026-11-13T08:11:15.390Z",
+      "duration_ms": 35,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 4,
+      "tool_call_id": "call_16454665448025849380"
+    },
+    {
+      "id": "d80d885a2e2d42b4",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:11:16.017Z",
+      "endTime": "2026-11-13T08:11:33.803Z",
+      "duration_ms": 17786,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 5,
+      "tool_call_id": null
+    },
+    {
+      "id": "5d2d3261611c98e6",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.tool_product_image_gen",
+      "startTime": "2026-11-13T08:11:33.805Z",
+      "endTime": "2026-11-13T08:12:05.962Z",
+      "duration_ms": 32156.999999999996,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 5,
+      "tool_call_id": "call_12615783171892802643"
+    },
+    {
+      "id": "355e52ac4a60a2f0",
+      "parentObservationId": "5d2d3261611c98e6",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "SPAN",
+      "name": "stage.product_image_request",
+      "startTime": "2026-11-13T08:11:33.827Z",
+      "endTime": "2026-11-13T08:12:04.610Z",
+      "duration_ms": 30783,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "a3e6c3acd22467f1",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:12:06.612Z",
+      "endTime": "2026-11-13T08:12:15.129Z",
+      "duration_ms": 8517,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 6,
+      "tool_call_id": null
+    },
+    {
+      "id": "ac8405c3b64eeddb",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-13T08:12:15.129Z",
+      "endTime": "2026-11-13T08:12:15.138Z",
+      "duration_ms": 9,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 6,
+      "tool_call_id": "call_5584494271843665609"
+    },
+    {
+      "id": "5540ae8104019bfd",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:12:15.861Z",
+      "endTime": "2026-11-13T08:12:20.843Z",
+      "duration_ms": 4982,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 7,
+      "tool_call_id": null
+    },
+    {
+      "id": "ba15643ae7849517",
+      "parentObservationId": "014f6051ea927c6b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.canvas_product_add",
+      "startTime": "2026-11-13T08:12:20.843Z",
+      "endTime": "2026-11-13T08:14:24.691Z",
+      "duration_ms": 123848,
+      "level": "ERROR",
+      "statusMessage": "timeout",
+      "step": 7,
+      "tool_call_id": "call_8293215886809217576"
+    },
+    {
+      "id": "ee2a8875de9ed966",
+      "parentObservationId": "ffee0c2e92be6605",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T08:14:24.688Z",
+      "endTime": "2026-11-13T08:14:33.939Z",
+      "duration_ms": 9251,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "caa3f79cdb700097",
+      "parentObservationId": "ee2a8875de9ed966",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:14:25.432Z",
+      "endTime": "2026-11-13T08:14:33.919Z",
+      "duration_ms": 8487,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 8,
+      "tool_call_id": null
+    },
+    {
+      "id": "85576e918c3533ef",
+      "parentObservationId": "ee2a8875de9ed966",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.canvas_product_add",
+      "startTime": "2026-11-13T08:14:33.919Z",
+      "endTime": "2026-11-13T08:16:36.310Z",
+      "duration_ms": 122391,
+      "level": "ERROR",
+      "statusMessage": "timeout",
+      "step": 8,
+      "tool_call_id": "call_12433199558733158374"
+    },
+    {
+      "id": "90b60bb3740ad27b",
+      "parentObservationId": "ffee0c2e92be6605",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T08:16:36.287Z",
+      "endTime": "2026-11-13T08:17:49.832Z",
+      "duration_ms": 73545,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "0a03553db17e87b1",
+      "parentObservationId": "90b60bb3740ad27b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:16:41.968Z",
+      "endTime": "2026-11-13T08:17:03.347Z",
+      "duration_ms": 21379,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 9,
+      "tool_call_id": null
+    },
+    {
+      "id": "0a00a6ce40241641",
+      "parentObservationId": "90b60bb3740ad27b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.list_packs",
+      "startTime": "2026-11-13T08:17:03.348Z",
+      "endTime": "2026-11-13T08:17:03.393Z",
+      "duration_ms": 45,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 9,
+      "tool_call_id": "call_9631532029846893431"
+    },
+    {
+      "id": "bc730f2637012486",
+      "parentObservationId": "90b60bb3740ad27b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:17:07.897Z",
+      "endTime": "2026-11-13T08:17:31.483Z",
+      "duration_ms": 23586,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 10,
+      "tool_call_id": null
+    },
+    {
+      "id": "fcd39de260c1831a",
+      "parentObservationId": "90b60bb3740ad27b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.ls",
+      "startTime": "2026-11-13T08:17:31.484Z",
+      "endTime": "2026-11-13T08:17:33.357Z",
+      "duration_ms": 1873,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 10,
+      "tool_call_id": "call_14543216500942434321"
+    },
+    {
+      "id": "b75c9851cd874b42",
+      "parentObservationId": "90b60bb3740ad27b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:17:37.488Z",
+      "endTime": "2026-11-13T08:17:49.783Z",
+      "duration_ms": 12295,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 11,
+      "tool_call_id": null
+    },
+    {
+      "id": "6d6603191d7f8cdb",
+      "parentObservationId": "90b60bb3740ad27b",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.canvas_product_add",
+      "startTime": "2026-11-13T08:17:49.784Z",
+      "endTime": "2026-11-13T08:18:11.195Z",
+      "duration_ms": 21411,
+      "level": "ERROR",
+      "statusMessage": "The flat spread did not line up with the dieline for back（正面）, glue（粘口）, top-lid-front（顶面）, bottom-tongue（下插舌）, bottom-dust-right（下防尘翼）; nothing was placed",
+      "step": 11,
+      "tool_call_id": "call_14730333246483927013"
+    },
+    {
+      "id": "d11fc6dfa6184ea5",
+      "parentObservationId": "ffee0c2e92be6605",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T08:18:11.193Z",
+      "endTime": "2026-11-13T08:18:26.091Z",
+      "duration_ms": 14898,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "f29dbf1d4ff0166c",
+      "parentObservationId": "d11fc6dfa6184ea5",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:18:11.847Z",
+      "endTime": "2026-11-13T08:18:26.070Z",
+      "duration_ms": 14223,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 12,
+      "tool_call_id": null
+    },
+    {
+      "id": "5e549cb7471b8291",
+      "parentObservationId": "d11fc6dfa6184ea5",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.canvas_product_inspect",
+      "startTime": "2026-11-13T08:18:26.071Z",
+      "endTime": "2026-11-13T08:18:29.748Z",
+      "duration_ms": 3677,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 12,
+      "tool_call_id": "call_7239603331267213720"
+    },
+    {
+      "id": "2048c0e41a53a6e8",
+      "parentObservationId": "ffee0c2e92be6605",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T08:18:29.746Z",
+      "endTime": "2026-11-13T08:19:20.237Z",
+      "duration_ms": 50491,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "276d519702c641fa",
+      "parentObservationId": "2048c0e41a53a6e8",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:18:30.504Z",
+      "endTime": "2026-11-13T08:18:50.696Z",
+      "duration_ms": 20192,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 13,
+      "tool_call_id": null
+    },
+    {
+      "id": "7ef1545812e39a58",
+      "parentObservationId": "2048c0e41a53a6e8",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.plan_write",
+      "startTime": "2026-11-13T08:18:50.696Z",
+      "endTime": "2026-11-13T08:18:50.703Z",
+      "duration_ms": 7,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 13,
+      "tool_call_id": "call_7500674192206404931"
+    },
+    {
+      "id": "117ddc6adeb12ee4",
+      "parentObservationId": "2048c0e41a53a6e8",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:18:51.368Z",
+      "endTime": "2026-11-13T08:19:05.641Z",
+      "duration_ms": 14273,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 14,
+      "tool_call_id": null
+    },
+    {
+      "id": "4ded76660b97e7f4",
+      "parentObservationId": "2048c0e41a53a6e8",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.respond_to_user",
+      "startTime": "2026-11-13T08:19:05.641Z",
+      "endTime": "2026-11-13T08:19:05.657Z",
+      "duration_ms": 16,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 14,
+      "tool_call_id": "call_16730650025150532445"
+    },
+    {
+      "id": "8c9800134f90f3f0",
+      "parentObservationId": "2048c0e41a53a6e8",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T08:19:06.327Z",
+      "endTime": "2026-11-13T08:19:20.212Z",
+      "duration_ms": 13885,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 15,
+      "tool_call_id": null
+    },
+    {
+      "id": "e7d04c2e95709267",
+      "parentObservationId": "2048c0e41a53a6e8",
+      "traceId": "d64079342297bb70ab6c292228c66485",
+      "type": "TOOL",
+      "name": "tool.respond_to_user",
+      "startTime": "2026-11-13T08:19:20.212Z",
+      "endTime": "2026-11-13T08:19:20.224Z",
+      "duration_ms": 12,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 15,
+      "tool_call_id": "call_7184294049250224851"
+    }
+  ],
+  "stages": [
+    {
+      "tool": "canvas_product_add",
+      "at": "2026-11-13T16:18:11+08:00",
+      "tool_call_id": "call_14730333246483927013",
+      "timing": {
+        "total_ms": 20787,
+        "stages": {
+          "prepare_master": 2,
+          "load_source": 416,
+          "open_doc": 0
+        },
+        "hidden_ms": 0,
+        "main_thread": {
+          "max_gap_ms": 4,
+          "long_tasks": 0,
+          "long_task_ms": 0,
+          "max_long_task_ms": 0
+        }
+      }
+    }
+  ],
+  "verifications": [
+    {
+      "started_at": "2026-11-14T14:42:05.377001+08:00",
+      "ended_at": "2026-11-14T14:42:09.950786+08:00",
+      "seconds": 3.99,
+      "success": true,
+      "error": null
+    }
+  ],
+  "images": [
+    {
+      "src": "images/B01-1.webp",
+      "caption": "测试后的补充三维核验",
+      "source_name": "verified-3d-1.png",
+      "source_sha256": "e6a270b65600e334c62c399a430b86cae48cac6ba764762ece10f171ae5c8b41"
+    },
+    {
+      "src": "images/B01-2.webp",
+      "caption": "本次生成的二维画稿 · 不代表三维验收通过",
+      "source_name": "edited-image-20261113-512d09.png",
+      "source_sha256": "80ad20cdd193861f67a8576cadac13b1470341a4dd0645b10b7732e2e8de03f6"
+    }
+  ]
+}

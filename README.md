@@ -85,3 +85,11 @@ python3 -m http.server 4173 --bind 127.0.0.1
 GitHub 官方发布说明：
 - https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
 - https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+
+## USEIT 全品类测试
+
+入口：`useit/index.html`；测试日期 2026-11-13 至 14 日，12 品类、15 次尝试。
+公开数据维护于 `content/useit/2026-11-13.json`，图片位于 `useit/tests/2026-11-13/images/`。
+运行 `node scripts/build-useit.cjs` 重建专题，再运行 `python scripts/check-useit.py` 校验覆盖、时间异常和本地链接。完整构建也会调用该专题构建器。
+原始失败、取消和补测独立保留；B01 云端缺失规划轮，B10 父子计时异常。图片中的二维画稿和补充三维核验明确标注，不代表制造验收。
+公开快照仅保留必要的调用 ID、起止时间、失败回执及内部阶段耗时，不包含凭据、完整模型输入输出或本机目录。

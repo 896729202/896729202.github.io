@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Build the notebook, experiment summaries, datasets and RL topics."""
+import subprocess
+from pathlib import Path
 import build_core
 import build_experiments
 import experiment_summaries
@@ -29,6 +31,7 @@ def main():
     multi_agent_notes.build(build_core)
     d4rt_experiments.build(build_core)
     interview_recap.build(build_core)
+    subprocess.run(["node", str(Path(__file__).with_name("build-useit.cjs"))], check=True)
 
 
 if __name__ == "__main__":

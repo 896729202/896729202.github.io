@@ -1,0 +1,201 @@
+{
+  "case": "B10",
+  "category": "光栅变图卡",
+  "spec": "正面A、B两幅画面加背面",
+  "project_id": "3a11a0dd-f485-465b-9eae-712bd5fab7f6",
+  "session_id": "c7fa3ec7-7251-47d0-95fc-ace8bcfe2d6a",
+  "sent_at": "2026-11-14T10:05:16.400982+08:00",
+  "finished_at": "2026-11-14T05:49:30.411000+00:00",
+  "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/c7fa3ec7-7251-47d0-95fc-ace8bcfe2d6a",
+  "cloud_finished_at": "2026-11-14T02:06:21.978000+00:00",
+  "cloud_terminal_at": "2026-11-14T05:49:30.411000+00:00",
+  "local_finished_at": "2026-11-14T13:49:30+08:00",
+  "root_seconds": 60.505,
+  "submitted_to_finish_seconds": 13454.01,
+  "agent_seconds": null,
+  "agent_time_source": "Unreliable root timing: child spans continue after root ends; raw root and local elapsed retained",
+  "outside_agent_seconds": null,
+  "between_run_seconds": 0,
+  "llm_seconds": 13445.555,
+  "image_seconds": 0,
+  "tool_seconds": 0.021,
+  "local_seconds": 13448.36,
+  "groups": {
+    "llm.plan": {
+      "count": 3,
+      "seconds": 13445.555
+    },
+    "tool.read": {
+      "count": 2,
+      "seconds": 0.021
+    }
+  },
+  "failures": [],
+  "local_phases": {
+    "orch.http.parse_request": {
+      "count": 1,
+      "milliseconds": 22
+    },
+    "orch.compact.tool_results": {
+      "count": 3,
+      "milliseconds": 0
+    },
+    "orch.plan.build_tools": {
+      "count": 3,
+      "milliseconds": 0
+    },
+    "orch.plan.build_prompt": {
+      "count": 3,
+      "milliseconds": 3
+    },
+    "llm.prefix_chain": {
+      "count": 3,
+      "milliseconds": 0
+    },
+    "orch.plan.llm_call": {
+      "count": 2,
+      "milliseconds": 17820
+    },
+    "orch.plan.run_action": {
+      "count": 2,
+      "milliseconds": 10
+    }
+  },
+  "local_runs": [
+    {
+      "task_id": "bd23f68f-3c5f-47ec-97fd-d9fbfe1d5709",
+      "elapsed_seconds": 13448.36,
+      "final_state": "cancelled",
+      "completed_at": "2026-11-14T13:49:30+08:00"
+    }
+  ],
+  "image_calls": [],
+  "trace_count": 1,
+  "observation_count": 7,
+  "root_timing_anomaly": true,
+  "outside_agent_intervals": [
+    {
+      "name": "首次 query 提交至首轮 Agent 启动",
+      "seconds": 5.072
+    },
+    {
+      "name": "最后云端根结束至本地任务终止记录（含中断）",
+      "seconds": 13388.433
+    }
+  ],
+  "assessment": {
+    "status": "环境中断：运行后取消",
+    "detail": "只完成光栅卡目录与规格读取，任务最终 cancelled。用户确认期间发生过休眠、断网或关闭应用；本次跨小时墙钟和 Agent span 均保留，但不作为正常生成速度。已以 B10-R1 独立补测，不覆盖此记录。"
+  },
+  "observations": [
+    {
+      "id": "b14082bccf2b2349",
+      "parentObservationId": null,
+      "traceId": "1c5150b75d59cba84b41292229094ce9",
+      "type": "AGENT",
+      "name": "agent.run",
+      "startTime": "2026-11-14T02:05:21.473Z",
+      "endTime": "2026-11-14T02:06:21.978Z",
+      "duration_ms": 60505,
+      "level": "WARNING",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "150a2693c0c2bf5d",
+      "parentObservationId": "b14082bccf2b2349",
+      "traceId": "1c5150b75d59cba84b41292229094ce9",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-14T02:05:22.882Z",
+      "endTime": "2026-11-14T05:49:30.411Z",
+      "duration_ms": 13447529,
+      "level": "WARNING",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "c735c29a8f8779a0",
+      "parentObservationId": "150a2693c0c2bf5d",
+      "traceId": "1c5150b75d59cba84b41292229094ce9",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T02:05:23.521Z",
+      "endTime": "2026-11-14T02:05:33.141Z",
+      "duration_ms": 9620,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "c5dd6811e958e7c6",
+      "parentObservationId": "150a2693c0c2bf5d",
+      "traceId": "1c5150b75d59cba84b41292229094ce9",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-14T02:05:33.142Z",
+      "endTime": "2026-11-14T02:05:33.153Z",
+      "duration_ms": 11,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "aeb0e6dba16efad9",
+      "parentObservationId": "150a2693c0c2bf5d",
+      "traceId": "1c5150b75d59cba84b41292229094ce9",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T02:05:33.804Z",
+      "endTime": "2026-11-14T02:05:42.414Z",
+      "duration_ms": 8610,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "49ca6bc547b1b5b4",
+      "parentObservationId": "150a2693c0c2bf5d",
+      "traceId": "1c5150b75d59cba84b41292229094ce9",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-14T02:05:42.414Z",
+      "endTime": "2026-11-14T02:05:42.424Z",
+      "duration_ms": 10,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "40a905dddc717ef9",
+      "parentObservationId": "150a2693c0c2bf5d",
+      "traceId": "1c5150b75d59cba84b41292229094ce9",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-14T02:05:43.086Z",
+      "endTime": "2026-11-14T05:49:30.411Z",
+      "duration_ms": 13427325,
+      "level": "WARNING",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    }
+  ],
+  "stages": [],
+  "verifications": [
+    {
+      "started_at": "2026-11-14T14:44:16.616188+08:00",
+      "ended_at": "2026-11-14T14:44:16.616188+08:00",
+      "seconds": 0,
+      "success": false,
+      "error": "No canvas3d entries returned; no model screenshot could be verified."
+    }
+  ],
+  "images": []
+}

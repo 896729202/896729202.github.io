@@ -1,0 +1,797 @@
+{
+  "case": "B07",
+  "category": "普通双面卡牌",
+  "spec": "默认规格",
+  "project_id": "a4f99eb1-422a-47c1-a05d-0f5a18e28462",
+  "session_id": "ad6c815d-33b2-45d7-ae52-137b43d2d905",
+  "sent_at": "2026-11-13T17:30:07.916245+08:00",
+  "finished_at": "2026-11-13T09:37:39.505000+00:00",
+  "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/ad6c815d-33b2-45d7-ae52-137b43d2d905",
+  "cloud_finished_at": "2026-11-13T09:37:39.505000+00:00",
+  "cloud_terminal_at": "2026-11-13T09:37:39.505000+00:00",
+  "local_finished_at": "2026-11-13T17:37:38+08:00",
+  "root_seconds": 447.109,
+  "submitted_to_finish_seconds": 451.589,
+  "agent_seconds": 447.109,
+  "agent_time_source": "Langfuse agent.run sum",
+  "outside_agent_seconds": 4.48,
+  "between_run_seconds": 0,
+  "llm_seconds": 156.182,
+  "image_seconds": 59.595,
+  "tool_seconds": 277.749,
+  "local_seconds": 445.34,
+  "groups": {
+    "llm.plan": {
+      "count": 15,
+      "seconds": 156.182
+    },
+    "tool.read": {
+      "count": 2,
+      "seconds": 0.036
+    },
+    "tool.project_plan_write": {
+      "count": 1,
+      "seconds": 0.013
+    },
+    "tool.load_pack": {
+      "count": 1,
+      "seconds": 0.011
+    },
+    "tool.tool_product_image_gen": {
+      "count": 3,
+      "seconds": 59.595
+    },
+    "tool.canvas_product_add": {
+      "count": 3,
+      "seconds": 210.62
+    },
+    "tool.canvas_product_inspect": {
+      "count": 1,
+      "seconds": 1.604
+    },
+    "tool.canvas3d_read": {
+      "count": 1,
+      "seconds": 2.941
+    },
+    "tool.canvas3d_render": {
+      "count": 1,
+      "seconds": 2.929
+    }
+  },
+  "failures": [
+    {
+      "tool_call_id": "call_12547002344373102432",
+      "tool": "tool_product_image_gen",
+      "error": "OpenAI call failed: Request timed out.",
+      "duration_seconds": 17.166,
+      "start": "2026-11-13T09:33:28.594Z",
+      "end": "2026-11-13T09:33:45.760Z",
+      "observation_id": "26d3fae2a33e8562"
+    },
+    {
+      "tool_call_id": "call_3164690444550167213",
+      "tool": "canvas_product_add",
+      "error": "timeout",
+      "at": "2026-11-13T17:36:27+08:00",
+      "duration_seconds": 122.281,
+      "start": "2026-11-13T09:34:25.247Z",
+      "end": "2026-11-13T09:36:27.528Z",
+      "observation_id": "27e7d543486975f4"
+    },
+    {
+      "tool_call_id": "call_1459420647869905393",
+      "tool": "canvas3d_render",
+      "error": "This product has no standalone 3D renderer; open it in 3D and request view=\"current\"",
+      "at": "2026-11-13T17:36:58+08:00",
+      "duration_seconds": 2.929,
+      "start": "2026-11-13T09:36:56.063Z",
+      "end": "2026-11-13T09:36:58.992Z",
+      "observation_id": "ca69f11e8f18a716"
+    }
+  ],
+  "local_phases": {
+    "orch.http.parse_request": {
+      "count": 7,
+      "milliseconds": 27
+    },
+    "orch.compact.tool_results": {
+      "count": 15,
+      "milliseconds": 4
+    },
+    "orch.plan.build_tools": {
+      "count": 15,
+      "milliseconds": 43
+    },
+    "orch.plan.build_prompt": {
+      "count": 15,
+      "milliseconds": 65
+    },
+    "llm.prefix_chain": {
+      "count": 18,
+      "milliseconds": 0
+    },
+    "orch.plan.llm_call": {
+      "count": 15,
+      "milliseconds": 155772
+    },
+    "orch.plan.run_action": {
+      "count": 15,
+      "milliseconds": 59625
+    },
+    "orch.inline_tool.run": {
+      "count": 3,
+      "milliseconds": 56312
+    },
+    "orch.action.frontend_roundtrip": {
+      "count": 6,
+      "milliseconds": 218004
+    },
+    "orch.callback.disk_write": {
+      "count": 6,
+      "milliseconds": 1
+    },
+    "orch.callback.snapshot_route": {
+      "count": 6,
+      "milliseconds": 0
+    },
+    "orch.callback.observation_emit": {
+      "count": 6,
+      "milliseconds": 7
+    }
+  },
+  "local_runs": [
+    {
+      "task_id": "78b12486-9b3e-4547-9205-1af53e7e9d6b",
+      "elapsed_seconds": 445.34,
+      "final_state": "done",
+      "completed_at": "2026-11-13T17:37:38+08:00"
+    }
+  ],
+  "image_calls": [
+    {
+      "tool": "tool_product_image_gen",
+      "ok": true,
+      "summary": "generate OK — 1 image(s) with gpt-image-2.6-flare (1008x1408, quality=high, format=png)."
+    },
+    {
+      "tool": "tool_product_image_gen",
+      "ok": false,
+      "summary": "OpenAI call failed: Request timed out."
+    },
+    {
+      "tool": "tool_product_image_gen",
+      "ok": true,
+      "summary": "generate OK — 1 image(s) with gpt-image-2.6-flare (1008x1408, quality=medium, format=png)."
+    }
+  ],
+  "trace_count": 1,
+  "observation_count": 39,
+  "root_timing_anomaly": false,
+  "outside_agent_intervals": [
+    {
+      "name": "首次 query 提交至首轮 Agent 启动",
+      "seconds": 4.48
+    }
+  ],
+  "assessment": {
+    "status": "双面母版已生成，3D未核验",
+    "detail": "正面生图成功；背面生图超时后降低质量至 medium 重试成功。背面装配发生回调超时，重新装配后成功。canvas3d_render 返回无独立渲染入口，未取得实际三维截图。"
+  },
+  "observations": [
+    {
+      "id": "6d6d4fa2c5ea3f55",
+      "parentObservationId": null,
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "AGENT",
+      "name": "agent.run",
+      "startTime": "2026-11-13T09:30:12.396Z",
+      "endTime": "2026-11-13T09:37:39.505Z",
+      "duration_ms": 447109,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "d07c3f97c9151389",
+      "parentObservationId": "6d6d4fa2c5ea3f55",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T09:30:14.010Z",
+      "endTime": "2026-11-13T09:31:51.308Z",
+      "duration_ms": 97298,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "5b9f86b4978a4da2",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:30:14.698Z",
+      "endTime": "2026-11-13T09:30:24.457Z",
+      "duration_ms": 9759,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 1,
+      "tool_call_id": null
+    },
+    {
+      "id": "a91bbe6422385dd3",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-13T09:30:24.457Z",
+      "endTime": "2026-11-13T09:30:24.481Z",
+      "duration_ms": 24,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 1,
+      "tool_call_id": "call_7186987777593329938"
+    },
+    {
+      "id": "53692f564faf39f4",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:30:25.190Z",
+      "endTime": "2026-11-13T09:30:36.344Z",
+      "duration_ms": 11154,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 2,
+      "tool_call_id": null
+    },
+    {
+      "id": "aa6185fece78114c",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.read",
+      "startTime": "2026-11-13T09:30:36.344Z",
+      "endTime": "2026-11-13T09:30:36.356Z",
+      "duration_ms": 12,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 2,
+      "tool_call_id": "call_11691791462515769022"
+    },
+    {
+      "id": "331a23b5be139935",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:30:37.049Z",
+      "endTime": "2026-11-13T09:30:51.023Z",
+      "duration_ms": 13974,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 3,
+      "tool_call_id": null
+    },
+    {
+      "id": "77faff031f4dc6be",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.project_plan_write",
+      "startTime": "2026-11-13T09:30:51.023Z",
+      "endTime": "2026-11-13T09:30:51.036Z",
+      "duration_ms": 13,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 3,
+      "tool_call_id": "call_13098897904669028676"
+    },
+    {
+      "id": "59b980eae96d4b45",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:30:51.769Z",
+      "endTime": "2026-11-13T09:31:02.928Z",
+      "duration_ms": 11159,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 4,
+      "tool_call_id": null
+    },
+    {
+      "id": "ebbc45ac910f3d3d",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.load_pack",
+      "startTime": "2026-11-13T09:31:02.928Z",
+      "endTime": "2026-11-13T09:31:02.939Z",
+      "duration_ms": 11,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 4,
+      "tool_call_id": "call_16772176731103990329"
+    },
+    {
+      "id": "ad4e9f4507d02382",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:31:03.673Z",
+      "endTime": "2026-11-13T09:31:22.533Z",
+      "duration_ms": 18860,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 5,
+      "tool_call_id": null
+    },
+    {
+      "id": "20b1f8ae5cf78c58",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.tool_product_image_gen",
+      "startTime": "2026-11-13T09:31:22.534Z",
+      "endTime": "2026-11-13T09:31:41.829Z",
+      "duration_ms": 19295,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 5,
+      "tool_call_id": "call_5923432120196577175"
+    },
+    {
+      "id": "f026cb8c58666b83",
+      "parentObservationId": "20b1f8ae5cf78c58",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "SPAN",
+      "name": "stage.product_image_request",
+      "startTime": "2026-11-13T09:31:22.554Z",
+      "endTime": "2026-11-13T09:31:41.030Z",
+      "duration_ms": 18476,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "dacef93539910e65",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:31:42.482Z",
+      "endTime": "2026-11-13T09:31:51.290Z",
+      "duration_ms": 8808,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 6,
+      "tool_call_id": null
+    },
+    {
+      "id": "237597aedf0c54b4",
+      "parentObservationId": "d07c3f97c9151389",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.canvas_product_add",
+      "startTime": "2026-11-13T09:31:51.290Z",
+      "endTime": "2026-11-13T09:33:17.590Z",
+      "duration_ms": 86300,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 6,
+      "tool_call_id": "call_9161854784691871728"
+    },
+    {
+      "id": "c51493c6af45329a",
+      "parentObservationId": "6d6d4fa2c5ea3f55",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T09:33:17.587Z",
+      "endTime": "2026-11-13T09:34:25.260Z",
+      "duration_ms": 67673,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "d8f13a439ef8dcde",
+      "parentObservationId": "c51493c6af45329a",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:33:18.257Z",
+      "endTime": "2026-11-13T09:33:28.594Z",
+      "duration_ms": 10337,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 7,
+      "tool_call_id": null
+    },
+    {
+      "id": "26d3fae2a33e8562",
+      "parentObservationId": "c51493c6af45329a",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.tool_product_image_gen",
+      "startTime": "2026-11-13T09:33:28.594Z",
+      "endTime": "2026-11-13T09:33:45.760Z",
+      "duration_ms": 17166,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 7,
+      "tool_call_id": "call_12547002344373102432"
+    },
+    {
+      "id": "9ae15b5acf25c6d5",
+      "parentObservationId": "26d3fae2a33e8562",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "SPAN",
+      "name": "stage.product_image_request",
+      "startTime": "2026-11-13T09:33:28.605Z",
+      "endTime": "2026-11-13T09:33:45.759Z",
+      "duration_ms": 17154,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "1bb602148788c087",
+      "parentObservationId": "c51493c6af45329a",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:33:46.421Z",
+      "endTime": "2026-11-13T09:33:55.522Z",
+      "duration_ms": 9101,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 8,
+      "tool_call_id": null
+    },
+    {
+      "id": "6ea50b73c8828de3",
+      "parentObservationId": "c51493c6af45329a",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.tool_product_image_gen",
+      "startTime": "2026-11-13T09:33:55.522Z",
+      "endTime": "2026-11-13T09:34:18.656Z",
+      "duration_ms": 23134,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 8,
+      "tool_call_id": "call_5037822665916605182"
+    },
+    {
+      "id": "3308094c61739a4f",
+      "parentObservationId": "6ea50b73c8828de3",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "SPAN",
+      "name": "stage.product_image_request",
+      "startTime": "2026-11-13T09:33:55.533Z",
+      "endTime": "2026-11-13T09:34:16.212Z",
+      "duration_ms": 20679,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "031b1a09b4b1d664",
+      "parentObservationId": "c51493c6af45329a",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:34:19.382Z",
+      "endTime": "2026-11-13T09:34:25.247Z",
+      "duration_ms": 5865,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 9,
+      "tool_call_id": null
+    },
+    {
+      "id": "27e7d543486975f4",
+      "parentObservationId": "c51493c6af45329a",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.canvas_product_add",
+      "startTime": "2026-11-13T09:34:25.247Z",
+      "endTime": "2026-11-13T09:36:27.528Z",
+      "duration_ms": 122281,
+      "level": "ERROR",
+      "statusMessage": "timeout",
+      "step": 9,
+      "tool_call_id": "call_3164690444550167213"
+    },
+    {
+      "id": "76f4cbb629e663e7",
+      "parentObservationId": "6d6d4fa2c5ea3f55",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T09:36:27.521Z",
+      "endTime": "2026-11-13T09:36:33.198Z",
+      "duration_ms": 5677,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "3de9d11f0f8919bd",
+      "parentObservationId": "76f4cbb629e663e7",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:36:28.230Z",
+      "endTime": "2026-11-13T09:36:33.184Z",
+      "duration_ms": 4954,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 10,
+      "tool_call_id": null
+    },
+    {
+      "id": "249e0b42fda67081",
+      "parentObservationId": "76f4cbb629e663e7",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.canvas_product_inspect",
+      "startTime": "2026-11-13T09:36:33.185Z",
+      "endTime": "2026-11-13T09:36:34.789Z",
+      "duration_ms": 1604,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 10,
+      "tool_call_id": "call_8284608000205758900"
+    },
+    {
+      "id": "3657e5eac5a5a6be",
+      "parentObservationId": "6d6d4fa2c5ea3f55",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T09:36:34.787Z",
+      "endTime": "2026-11-13T09:36:44.717Z",
+      "duration_ms": 9930,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "b96de73a33ee1dcc",
+      "parentObservationId": "3657e5eac5a5a6be",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:36:35.517Z",
+      "endTime": "2026-11-13T09:36:44.696Z",
+      "duration_ms": 9179,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 11,
+      "tool_call_id": null
+    },
+    {
+      "id": "17203cf3110ed7a9",
+      "parentObservationId": "3657e5eac5a5a6be",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.canvas3d_read",
+      "startTime": "2026-11-13T09:36:44.696Z",
+      "endTime": "2026-11-13T09:36:47.637Z",
+      "duration_ms": 2941,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 11,
+      "tool_call_id": "call_16718064030699899831"
+    },
+    {
+      "id": "a25d66cd3674f42d",
+      "parentObservationId": "6d6d4fa2c5ea3f55",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T09:36:47.634Z",
+      "endTime": "2026-11-13T09:36:56.088Z",
+      "duration_ms": 8454,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "4ad3d29aa58155e6",
+      "parentObservationId": "a25d66cd3674f42d",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:36:48.331Z",
+      "endTime": "2026-11-13T09:36:56.063Z",
+      "duration_ms": 7732,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 12,
+      "tool_call_id": null
+    },
+    {
+      "id": "ca69f11e8f18a716",
+      "parentObservationId": "a25d66cd3674f42d",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.canvas3d_render",
+      "startTime": "2026-11-13T09:36:56.063Z",
+      "endTime": "2026-11-13T09:36:58.992Z",
+      "duration_ms": 2929,
+      "level": "ERROR",
+      "statusMessage": "This product has no standalone 3D renderer; open it in 3D and request view=\"current\"",
+      "step": 12,
+      "tool_call_id": "call_1459420647869905393"
+    },
+    {
+      "id": "ccfe632ed31b0600",
+      "parentObservationId": "6d6d4fa2c5ea3f55",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T09:36:58.989Z",
+      "endTime": "2026-11-13T09:37:24.009Z",
+      "duration_ms": 25020,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "75aa7ecb1781d8b3",
+      "parentObservationId": "ccfe632ed31b0600",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:36:59.661Z",
+      "endTime": "2026-11-13T09:37:15.123Z",
+      "duration_ms": 15462,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 13,
+      "tool_call_id": null
+    },
+    {
+      "id": "833231ee980fbcb2",
+      "parentObservationId": "ccfe632ed31b0600",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:37:15.795Z",
+      "endTime": "2026-11-13T09:37:23.982Z",
+      "duration_ms": 8186.999999999999,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 14,
+      "tool_call_id": null
+    },
+    {
+      "id": "78a49156aae1f324",
+      "parentObservationId": "ccfe632ed31b0600",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "TOOL",
+      "name": "tool.canvas_product_add",
+      "startTime": "2026-11-13T09:37:23.982Z",
+      "endTime": "2026-11-13T09:37:26.021Z",
+      "duration_ms": 2039.0000000000002,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 14,
+      "tool_call_id": "call_10737081405347981406"
+    },
+    {
+      "id": "46fce1347c1991d1",
+      "parentObservationId": "6d6d4fa2c5ea3f55",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "AGENT",
+      "name": "agent.round",
+      "startTime": "2026-11-13T09:37:26.019Z",
+      "endTime": "2026-11-13T09:37:38.414Z",
+      "duration_ms": 12395,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": null,
+      "tool_call_id": null
+    },
+    {
+      "id": "436dd4140923286c",
+      "parentObservationId": "46fce1347c1991d1",
+      "traceId": "27df8fffeb815875cd5462722940edb7",
+      "type": "GENERATION",
+      "name": "llm.plan",
+      "startTime": "2026-11-13T09:37:26.744Z",
+      "endTime": "2026-11-13T09:37:38.395Z",
+      "duration_ms": 11651,
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "step": 15,
+      "tool_call_id": null
+    }
+  ],
+  "stages": [
+    {
+      "tool": "canvas_product_add",
+      "at": "2026-11-13T17:33:17+08:00",
+      "tool_call_id": "call_9161854784691871728",
+      "timing": {
+        "total_ms": 79925,
+        "stages": {
+          "prepare_master": 0,
+          "load_source": 77384,
+          "open_doc": 0,
+          "save": 150,
+          "record_version": 2211
+        },
+        "hidden_ms": 0,
+        "main_thread": {
+          "max_gap_ms": 83,
+          "long_tasks": 3,
+          "long_task_ms": 237,
+          "max_long_task_ms": 92
+        }
+      }
+    },
+    {
+      "tool": "canvas_product_add",
+      "at": "2026-11-13T17:37:26+08:00",
+      "tool_call_id": "call_10737081405347981406",
+      "timing": {
+        "total_ms": 1052,
+        "stages": {
+          "prepare_master": 75,
+          "load_source": 262,
+          "open_doc": 0,
+          "save": 117,
+          "record_version": 151
+        },
+        "hidden_ms": 0,
+        "main_thread": {
+          "max_gap_ms": 52,
+          "long_tasks": 3,
+          "long_task_ms": 350,
+          "max_long_task_ms": 133
+        }
+      }
+    }
+  ],
+  "verifications": [
+    {
+      "started_at": "2026-11-14T14:43:51.437747+08:00",
+      "ended_at": "2026-11-14T14:43:52.298792+08:00",
+      "seconds": 0.28,
+      "success": false,
+      "error": "This product has no standalone 3D renderer; open it in 3D and request view=\"current\""
+    }
+  ],
+  "images": [
+    {
+      "src": "images/B07-1.webp",
+      "caption": "本次生成的二维画稿 · 不代表三维验收通过",
+      "source_name": "generated-image-20261113-38187b.png",
+      "source_sha256": "8ba82a2dde8c254a7570ca9876f7e86c207704dcbaef4c1ba3954470de6f0530"
+    },
+    {
+      "src": "images/B07-2.webp",
+      "caption": "本次生成的二维画稿 · 不代表三维验收通过",
+      "source_name": "generated-image-20261113-9a2800.png",
+      "source_sha256": "fae823989d118b572079c03fb581acc89cfe786b4976a2858fb270bda585a07a"
+    }
+  ]
+}
