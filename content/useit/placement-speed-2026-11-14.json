@@ -1,0 +1,969 @@
+{
+  "case": "B10-R4",
+  "test_date": "2026-11-14",
+  "theme": "诸葛亮火烧连营 · 并行与规划提速复测",
+  "prompt": "请在当前独立测试项目制作默认规格的双图光栅变图卡，主题为架空三国插画“诸葛亮火烧连营”，明确作为虚构创作而非史实还原。A 面为诸葛亮挥羽扇、远眺营寨；B 面保持人物构图，背景营帐出现壮观火光与烟云，无伤亡特写；背面为羽扇、阵图与题名字样。全部重新生图，不复用旧项目素材。需要正面 A、B 两帧与背面三张画稿。参数采用默认值，无需询问。此次只测试画稿生成及装配，不要调用三维渲染。三张素材就绪后用 canvas_product_add_batch 一次提交 frame-a、frame-b、back，让素材读取并行；如果返回 task_status=running，使用 canvas_product_add_status 查询同一个任务，直到 completed 或 failed，不要重新装配。最后 canvas_product_inspect 确认三面内容已保存，报告真实结果。",
+  "implementation_version": {
+    "label": "placement-task-v1 + planner-batching-v1 / local working tree",
+    "app_version": "0.5.2",
+    "frontend_base_commit": "6d04b2cd22b94eb9376b419c466d9db1347b5d43",
+    "frontend_base_is_release_of_this_fix": false,
+    "tracked_file_sha256": {
+      "src/features/chat/handlers/appActions/actions/productPlacementTasks.ts": "2fcb71599ea68eabe7f98ebee6bcaba85b17b4647f52faf742d467b8557aaa97",
+      "src/features/chat/handlers/appActions/actions/productDraftActions.ts": "ad1d640dd458798a12d8988f6825e9ba5515d493f66b457c0d2a0bfcc4c778e9",
+      "src/features/workspace/canvas/commands/productCommands.ts": "e97de97e3e4d0b4363da6d95f7976d4c193b525f46ea1b01004f0ad6046de973",
+      "src/features/workspace/canvas/storage/assetLocator.ts": "51970642c1e6291c6a863171c7ea59c34a12e562f2e782244cdd9daacca05838",
+      "apps/desktop/electron/services/presignedDownloader.ts": "cfe1f2b24cc68f55ba7f17b7740e6fcfc0251cf15804a2ecdce4923b3ad5be5c",
+      "src/features/chat/handlers/appActions/app-tools.snapshot.json": "dff6c949c88741d70ec042045cecb1089855e969f69e84d7e3faa1046f864fcc"
+    },
+    "agent_pack_base_commit": "fe662472d70c5b4d70c2e7db0c85e68baf906f72",
+    "description": "Original placement fix plus one checklist update alongside a work action, independent product-image fanout guidance, and isolated artifact save failures.",
+    "agent_base_commit": "2838e6e659987cb56bfdbc31f3e61db14609c80d",
+    "agent_tracked_file_sha256": {
+      "agent/agent_loop/context/instructions.py": "e798290f037067087456770f047a53bfb67e4ef4f75709126921514f10344692",
+      "agent/agent_loop/planning/planner.py": "61b871960901587d4bb9b107d519efefb955fa3c4a443962e084302e9c0ee947",
+      "agent/agent_loop/execution/dispatch.py": "80a6caa5f3e139355af1746c6b670c4b4c029e697c6315c9e95264bfc5f97a27",
+      "agent/agent_loop/execution/actions/plan_write.py": "55bac6ca9b221fc57ba651bfe256464ffd55edce735230331fa6c2ca70b7022f",
+      "agent/agent_loop/execution/artifacts.py": "81ca87a6c35c5b0d755211d1c5b81db80aef7c91495306122abde10c47076732",
+      "agent/core/tools/packs/orchestrator/tools.py": "c5312207351d11daa9b13f2a41de348d3f9fb268938294233e2ac5edc13a345b"
+    }
+  },
+  "session_id": "a8d8ef8d-5d89-4989-9ee5-373ca5d986ed",
+  "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/a8d8ef8d-5d89-4989-9ee5-373ca5d986ed",
+  "project_id": "39a240d1-9981-4de3-9277-bbd8d834275f",
+  "task_ids": [
+    "90d3b72d-2f56-4742-8b74-5c43ca4297aa"
+  ],
+  "sent_at": "2026-11-14T18:56:21.485408+08:00",
+  "completed_at": "2026-11-14T19:00:37+08:00",
+  "agent_seconds": 251.05,
+  "submitted_to_local_completion_seconds": 255.515,
+  "batch_ms": 12133,
+  "batch_status": "completed",
+  "batch_call_id": "call_9244158074278597900",
+  "batch_tool_ms": 13954.0,
+  "placements": [
+    {
+      "face": "frame-a",
+      "success": true,
+      "task_status": "completed",
+      "source": "project/assets/working/other/generated-image-20261114-e4b2cb.png",
+      "receipt": {
+        "status": "applied",
+        "at": "2026-11-14T10:59:44.405Z",
+        "rev": {
+          "before": "r:34ccce6a:6809",
+          "after": "r:d2f926d4:3957688"
+        },
+        "checks": [
+          {
+            "name": "saved",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "placed",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "source_intact",
+            "pass": true,
+            "severity": "info",
+            "value": 2962943,
+            "detail": "complete png 1104×1504 px, 2.8 MB"
+          },
+          {
+            "name": "visible",
+            "pass": true,
+            "severity": "info",
+            "value": 0
+          }
+        ],
+        "timing": {
+          "total_ms": 2534,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 10,
+            "source_integrity": 1,
+            "source_decode": 139,
+            "source_hash": 419,
+            "load_source": 570,
+            "write_queue": 0,
+            "prepare_master": 0,
+            "open_doc": 9,
+            "save": 1438,
+            "record_version": 203
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 56,
+            "long_tasks": 9,
+            "long_task_ms": 1312,
+            "max_long_task_ms": 461,
+            "top_scripts": [
+              {
+                "name": "HTMLImageElement.decode.then@lenticularRenderer.ts",
+                "ms": 477
+              },
+              {
+                "name": "VoidFunction@chunk-ZBXU67MV.js",
+                "ms": 468
+              },
+              {
+                "name": "performWorkUntilDeadline@chunk-ZBXU67MV.js",
+                "ms": 286
+              }
+            ]
+          }
+        },
+        "seq": 1
+      }
+    },
+    {
+      "face": "frame-b",
+      "success": true,
+      "task_status": "completed",
+      "source": "project/assets/working/other/edited-image-20261114-c1b172.png",
+      "receipt": {
+        "status": "applied",
+        "at": "2026-11-14T10:59:48.091Z",
+        "rev": {
+          "before": "r:d2f926d4:3957688",
+          "after": "r:aba4bfeb:7993140"
+        },
+        "checks": [
+          {
+            "name": "saved",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "placed",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "source_intact",
+            "pass": true,
+            "severity": "info",
+            "value": 3026376,
+            "detail": "complete png 1104×1504 px, 2.9 MB"
+          },
+          {
+            "name": "visible",
+            "pass": true,
+            "severity": "info",
+            "value": 0
+          }
+        ],
+        "timing": {
+          "total_ms": 6220,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 159,
+            "source_integrity": 0,
+            "source_decode": 190,
+            "source_hash": 226,
+            "load_source": 575,
+            "write_queue": 1915,
+            "prepare_master": 53,
+            "open_doc": 83,
+            "save": 1629,
+            "record_version": 1120
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 334,
+            "long_tasks": 21,
+            "long_task_ms": 4361,
+            "max_long_task_ms": 487,
+            "top_scripts": [
+              {
+                "name": "VoidFunction@chunk-ZBXU67MV.js",
+                "ms": 1493
+              },
+              {
+                "name": "HTMLImageElement.decode.then@lenticularRenderer.ts",
+                "ms": 937
+              },
+              {
+                "name": "performWorkUntilDeadline@chunk-ZBXU67MV.js",
+                "ms": 895
+              }
+            ]
+          }
+        },
+        "seq": 2
+      }
+    },
+    {
+      "face": "back",
+      "success": true,
+      "task_status": "completed",
+      "source": "project/assets/working/other/generated-image-20261114-cc7608.png",
+      "receipt": {
+        "status": "applied",
+        "at": "2026-11-14T10:59:53.884Z",
+        "rev": {
+          "before": "r:aba4bfeb:7993140",
+          "after": "r:83936129:13749515"
+        },
+        "checks": [
+          {
+            "name": "saved",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "placed",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "source_intact",
+            "pass": true,
+            "severity": "info",
+            "value": 4317064,
+            "detail": "complete png 1104×1504 px, 4.1 MB"
+          },
+          {
+            "name": "visible",
+            "pass": true,
+            "severity": "info",
+            "value": 0
+          }
+        ],
+        "timing": {
+          "total_ms": 12013,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 362,
+            "source_integrity": 0,
+            "source_decode": 196,
+            "source_hash": 14,
+            "load_source": 574,
+            "write_queue": 5589,
+            "prepare_master": 105,
+            "open_doc": 156,
+            "save": 3297,
+            "record_version": 1645
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 1029,
+            "long_tasks": 32,
+            "long_task_ms": 8755,
+            "max_long_task_ms": 677,
+            "top_scripts": [
+              {
+                "name": "VoidFunction@chunk-ZBXU67MV.js",
+                "ms": 3586
+              },
+              {
+                "name": "performWorkUntilDeadline@chunk-ZBXU67MV.js",
+                "ms": 1862
+              },
+              {
+                "name": "HTMLImageElement.decode.then@lenticularRenderer.ts",
+                "ms": 937
+              }
+            ]
+          }
+        },
+        "seq": 3
+      }
+    }
+  ],
+  "images": [
+    {
+      "src": "images/B10-R4-1.png",
+      "caption": "A 面 · 羽扇远眺营寨",
+      "source_sha256": "861fcf749c55ae334ad0190c6c416161ee0c148ea06b311bb90050e7136871f8"
+    },
+    {
+      "src": "images/B10-R4-2.png",
+      "caption": "B 面 · 参考新 A 图编辑火光背景",
+      "source_sha256": "a8f0750ad6d317be54e3de1ad2c0658fc7148a89a871d7c49da7b69098ee7546"
+    },
+    {
+      "src": "images/B10-R4-3.png",
+      "caption": "背面 · 羽扇、阵图与题名",
+      "source_sha256": "a87f9259fb8ad5fceee94eaf597b46783eb61d0d99d123679265c9b917913906"
+    }
+  ],
+  "downloads": [
+    {
+      "request_id": "canvas-cloud-939ad65a-423e-4bd0-834b-d20bde179d78",
+      "file": ".cloud-download-939ad65a-423e-4bd0-834b-d20bde179d78",
+      "transport": "node-fetch",
+      "outcome": "success",
+      "headers_ms": 667,
+      "body_wait_ms": 827.5244000004604,
+      "disk_backpressure_ms": 46.115200004540384,
+      "commit_ms": 137.60709999967366,
+      "bytes": 2962943,
+      "total_ms": 1680,
+      "face": "frame-a"
+    },
+    {
+      "request_id": "canvas-cloud-7bf24c11-2c8e-429f-9c77-41c2f22bb79a",
+      "file": ".cloud-download-7bf24c11-2c8e-429f-9c77-41c2f22bb79a",
+      "transport": "node-fetch",
+      "outcome": "success",
+      "headers_ms": 623,
+      "body_wait_ms": 6367.070899991319,
+      "disk_backpressure_ms": 42.32490000035614,
+      "commit_ms": 12.597399999387562,
+      "bytes": 3026376,
+      "total_ms": 7050,
+      "face": "frame-b"
+    },
+    {
+      "request_id": "canvas-cloud-3bb6aef3-6063-4609-9c7e-3dfe08a5dd75",
+      "file": ".cloud-download-3bb6aef3-6063-4609-9c7e-3dfe08a5dd75",
+      "transport": "node-fetch",
+      "outcome": "success",
+      "headers_ms": 678,
+      "body_wait_ms": 947.7562000034377,
+      "disk_backpressure_ms": 122.58789999317378,
+      "commit_ms": 25.088100000284612,
+      "bytes": 4317064,
+      "total_ms": 1785,
+      "face": "back"
+    }
+  ],
+  "saved_master": {
+    "path": "project/assets/working/product-design/zhuge-liang-card.svg",
+    "exists": true,
+    "rev": "r:83936129:13749515"
+  },
+  "saved_image_count": 3,
+  "saved_placement_count": 3,
+  "observations": 32,
+  "failure_observations": [],
+  "langfuse": {
+    "session_id": "a8d8ef8d-5d89-4989-9ee5-373ca5d986ed",
+    "url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/a8d8ef8d-5d89-4989-9ee5-373ca5d986ed",
+    "traces": [
+      {
+        "id": "16933caa8e3cc3fcf4a8674187974df2",
+        "name": "agent.run",
+        "timestamp": "2026-11-14T10:56:25.496Z",
+        "sessionId": "a8d8ef8d-5d89-4989-9ee5-373ca5d986ed",
+        "totalCost": 0.094873499998
+      }
+    ],
+    "observations": [
+      {
+        "id": "9f86ac2143e3037a",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T10:58:41.968Z",
+        "endTime": "2026-11-14T10:59:00.509Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 10030,
+          "output": 1307,
+          "total": 72287,
+          "cache_read_input_tokens": 60950,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.0075225,
+          "output": 0.00490125,
+          "total": 0.01242375
+        },
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 18541.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "751ed822060e4156",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T10:59:00.509Z",
+        "endTime": "2026-11-14T10:59:00.546Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 37.0,
+        "tool_call_id": "call_1062177251969646717"
+      },
+      {
+        "id": "1aefc991056703d3",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T10:56:46.312Z",
+        "endTime": "2026-11-14T10:56:53.613Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 2921,
+          "output": 171,
+          "total": 30644,
+          "cache_read_input_tokens": 27552,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00219075,
+          "output": 0.00064125,
+          "total": 0.002832
+        },
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 7301.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "3f0878f7aaa03f1d",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T10:56:30.170Z",
+        "endTime": "2026-11-14T10:56:45.587Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 1435,
+          "output": 1089,
+          "total": 28946,
+          "cache_read_input_tokens": 26422,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00107625,
+          "output": 0.00408375,
+          "total": 0.00516
+        },
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 15417.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "4ecaf78b9c537b12",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T10:56:54.316Z",
+        "endTime": "2026-11-14T10:57:01.911Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 3243,
+          "output": 73,
+          "total": 63387,
+          "cache_read_input_tokens": 60071,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00243225,
+          "output": 0.00027375,
+          "total": 0.002706
+        },
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 7595.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "559c69f79d8cbce8",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T10:57:24.606Z",
+        "endTime": "2026-11-14T10:57:44.336Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 7754,
+          "output": 1196,
+          "total": 69900,
+          "cache_read_input_tokens": 60950,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.0058155,
+          "output": 0.004485,
+          "total": 0.0103005
+        },
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 19730.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "e6c33eb5f63591b7",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T10:57:02.596Z",
+        "endTime": "2026-11-14T10:57:23.819Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 4787,
+          "output": 2283,
+          "total": 67141,
+          "cache_read_input_tokens": 60071,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00359025,
+          "output": 0.00856125,
+          "total": 0.012151499999
+        },
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 21223.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "4af02d46a3925d10",
+        "parentObservationId": "a0b4debf7a94e6ae",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T10:57:44.525Z",
+        "endTime": "2026-11-14T10:58:35.784Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 51259.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "8cf18bc0adc11739",
+        "parentObservationId": "a2087ba1e2de4f23",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T10:57:44.877Z",
+        "endTime": "2026-11-14T10:58:32.616Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 47739.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "03d31538bb363c36",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.read",
+        "startTime": "2026-11-14T10:57:01.911Z",
+        "endTime": "2026-11-14T10:57:01.925Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 14.0,
+        "tool_call_id": "call_9246145144631170655"
+      },
+      {
+        "id": "10206104a6024f36",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T10:57:23.820Z",
+        "endTime": "2026-11-14T10:57:23.829Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 9.0,
+        "tool_call_id": "call_14557850712191033808"
+      },
+      {
+        "id": "1d87318289c8829a",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.project_plan_write",
+        "startTime": "2026-11-14T10:57:23.820Z",
+        "endTime": "2026-11-14T10:57:23.836Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 16.0,
+        "tool_call_id": "call_14557850712191036383"
+      },
+      {
+        "id": "69554ccf1fcb38c4",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.load_pack",
+        "startTime": "2026-11-14T10:56:53.613Z",
+        "endTime": "2026-11-14T10:56:53.622Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 9.0,
+        "tool_call_id": "call_12337841111034312222"
+      },
+      {
+        "id": "a0b4debf7a94e6ae",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.tool_product_image_gen",
+        "startTime": "2026-11-14T10:57:44.341Z",
+        "endTime": "2026-11-14T10:58:36.016Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 51675.0,
+        "tool_call_id": "call_13251772045469141062"
+      },
+      {
+        "id": "a2087ba1e2de4f23",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.tool_product_image_gen",
+        "startTime": "2026-11-14T10:57:44.341Z",
+        "endTime": "2026-11-14T10:58:33.356Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 49015.0,
+        "tool_call_id": "call_13251772045469140169"
+      },
+      {
+        "id": "c1efdf19d9e530d5",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T10:57:44.340Z",
+        "endTime": "2026-11-14T10:57:44.393Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 53.0,
+        "tool_call_id": "call_13251772045469141955"
+      },
+      {
+        "id": "d830fd696b50c5b0",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.read",
+        "startTime": "2026-11-14T10:56:45.587Z",
+        "endTime": "2026-11-14T10:56:45.608Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 21.0,
+        "tool_call_id": "call_5699750644822501208"
+      },
+      {
+        "id": "708df7abb52d062f",
+        "parentObservationId": null,
+        "type": "AGENT",
+        "name": "agent.run",
+        "startTime": "2026-11-14T10:56:25.496Z",
+        "endTime": "2026-11-14T11:00:40.025Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 254529.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "acf5eeb69a134bf3",
+        "parentObservationId": "708df7abb52d062f",
+        "type": "AGENT",
+        "name": "agent.round",
+        "startTime": "2026-11-14T11:00:12.241Z",
+        "endTime": "2026-11-14T11:00:37.153Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 24912.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "8bab354e5828ca78",
+        "parentObservationId": "acf5eeb69a134bf3",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:00:17.050Z",
+        "endTime": "2026-11-14T11:00:37.057Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 19329,
+          "output": 1776,
+          "total": 82055,
+          "cache_read_input_tokens": 60950,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.01449675,
+          "output": 0.00666,
+          "total": 0.02115675
+        },
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 20007.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "0fefe512e10c0b4b",
+        "parentObservationId": "acf5eeb69a134bf3",
+        "type": "TOOL",
+        "name": "tool.respond_to_user",
+        "startTime": "2026-11-14T11:00:37.059Z",
+        "endTime": "2026-11-14T11:00:37.104Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 45.0,
+        "tool_call_id": "call_7209530430491620339"
+      },
+      {
+        "id": "a68143f147e05027",
+        "parentObservationId": "acf5eeb69a134bf3",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:00:37.058Z",
+        "endTime": "2026-11-14T11:00:37.094Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 36.0,
+        "tool_call_id": "call_7209530430491622158"
+      },
+      {
+        "id": "a4ce46b8e5f6fe15",
+        "parentObservationId": "708df7abb52d062f",
+        "type": "AGENT",
+        "name": "agent.round",
+        "startTime": "2026-11-14T10:56:29.490Z",
+        "endTime": "2026-11-14T10:59:40.653Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 191163.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "64857593bf87e1b6",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T10:59:29.273Z",
+        "endTime": "2026-11-14T10:59:40.587Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 11879,
+          "output": 863,
+          "total": 73692,
+          "cache_read_input_tokens": 60950,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00890925,
+          "output": 0.00323625,
+          "total": 0.0121455
+        },
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 11314.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "a7a5994f11c789b1",
+        "parentObservationId": "a75e220a1cf99dd5",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T10:59:00.566Z",
+        "endTime": "2026-11-14T10:59:23.501Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 22935.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "4debfb028a87c028",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.canvas_product_add_batch",
+        "startTime": "2026-11-14T10:59:40.589Z",
+        "endTime": "2026-11-14T10:59:54.543Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 13954.0,
+        "tool_call_id": "call_9244158074278597900"
+      },
+      {
+        "id": "7571dba56cc99a24",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T10:59:40.588Z",
+        "endTime": "2026-11-14T10:59:40.627Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 39.0,
+        "tool_call_id": "call_9244158074278598033"
+      },
+      {
+        "id": "a75e220a1cf99dd5",
+        "parentObservationId": "a4ce46b8e5f6fe15",
+        "type": "TOOL",
+        "name": "tool.tool_product_image_gen",
+        "startTime": "2026-11-14T10:59:00.510Z",
+        "endTime": "2026-11-14T10:59:25.107Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 24597.0,
+        "tool_call_id": "call_1062177251969648414"
+      },
+      {
+        "id": "0b4d6068c430a751",
+        "parentObservationId": "708df7abb52d062f",
+        "type": "AGENT",
+        "name": "agent.round",
+        "startTime": "2026-11-14T10:59:54.524Z",
+        "endTime": "2026-11-14T11:00:08.781Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 14257.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "c40d6daa3d5b7b3a",
+        "parentObservationId": "0b4d6068c430a751",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T10:59:58.157Z",
+        "endTime": "2026-11-14T11:00:08.726Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 17935,
+          "output": 679,
+          "total": 79564,
+          "cache_read_input_tokens": 60950,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.01345125,
+          "output": 0.00254625,
+          "total": 0.015997499999
+        },
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 10569.0,
+        "tool_call_id": null
+      },
+      {
+        "id": "56502f95ed1d93d0",
+        "parentObservationId": "0b4d6068c430a751",
+        "type": "TOOL",
+        "name": "tool.canvas_product_inspect",
+        "startTime": "2026-11-14T11:00:08.728Z",
+        "endTime": "2026-11-14T11:00:12.249Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 3521.0,
+        "tool_call_id": "call_929955391989840452"
+      },
+      {
+        "id": "87da6ab663c94f76",
+        "parentObservationId": "0b4d6068c430a751",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:00:08.728Z",
+        "endTime": "2026-11-14T11:00:08.763Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "16933caa8e3cc3fcf4a8674187974df2",
+        "duration_ms": 35.0,
+        "tool_call_id": "call_929955391989838817"
+      }
+    ]
+  },
+  "scope": "Same R3 user prompt and models; fresh project and new images. B references the newly generated A. Artwork generation and placement only; no 3D rendering.",
+  "conclusion": "同一提示词、同一模型、新建项目与新素材；三面画稿已保存。规划与生图并行的实际执行顺序、耗时变化见本页对照。",
+  "download_conclusion": "本次下载分段是全新素材的记录；单次网络耗时可能波动，不能把全部速度变化归功于调度修改。",
+  "visual_review": {
+    "summary": "二维目视检查：A/B 主体构图基本保留，B 的火光变化明确，背面主题与标题匹配。未发现明显画稿异常。",
+    "notes": "装饰印章细字未逐字核验；尚未验收光栅变图、三维效果或印刷成品。"
+  }
+}

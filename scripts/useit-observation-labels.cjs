@@ -5,8 +5,11 @@
 const LABELS = {
  'agent.run': ['一次 Agent 执行总计', '从这轮 Agent 开始到结束的总时间，包含下面的模型调用和工具操作；不能再与子步骤相加。', 'aggregate'],
  'agent.round': ['一轮连续操作小计', '这一轮中的模型调用和工具操作合在一起的时间；它包住下面的子步骤，不是额外消耗。', 'aggregate'],
- 'llm.plan': ['理解任务并安排下一步', '模型处理当前任务和已有结果，生成下一步操作或回复；耗时包含等待模型响应。', 'planning'],
+ 'llm.plan': ['模型请求与等待', '模型处理当前任务和已有结果，生成下一步操作或回复；耗时包含等待模型响应。', 'planning'],
  'stage.product_image_request': ['等待生图服务返回画稿', '向图片服务请求制品画稿并等待返回。这是上层生图工具内部的一段时间，不能重复相加。', 'generation'],
+ 'stage.product_image_job': ['生成并保存一面画稿', '整套画稿任务中的一个面片：请求图片服务、校验并保存素材。不同面片可能并行，这段时间已计入整套生图。', 'generation'],
+ 'stage.prompt_rewrite': ['后台整理并改写用户需求', '用轻量模型将原始需求改写为结构化画面说明，再交给 Agent。原文保留并优先；此实验步骤的耗时和费用单列。', 'planning'],
+ 'llm.gemini-3.1-flash-lite-preview': ['轻量模型生成改写建议', '提示词改写内部的一次轻量模型请求；返回建议仍需校验。耗时已经包含在上层改写步骤中，不能再次相加。', 'planning'],
  'tool.list_packs': ['查看可用工具', '查询当前可以使用哪些工具包，为后续制作选择工具。', 'setup'],
  'tool.load_pack': ['启用制作工具', '加载选中的工具包，让 Agent 可以调用其中的制作功能。', 'setup'],
  'tool.read': ['读取规格或说明资料', '读取任务需要的产品规格、使用说明或文件内容，为后续操作提供依据。', 'setup'],
@@ -33,7 +36,7 @@ const LABELS = {
 };
 
 function lookupNote(observation, notes) {
- for (const key of [observation?.tool_call_id, observation?.id]) {
+ for (const key of [observation?.id, observation?.tool_call_id]) {
   if (key && notes && Object.prototype.hasOwnProperty.call(notes, key)) return notes[key];
  }
  return null;
@@ -53,30 +56,44 @@ function basicLabel(observation, notes) {
  };
 }
 
-function nextRecordedTool(observation, observations) {
- // Do not bridge rounds/traces or skip an intervening model call. In that case
- // the first call did not immediately produce the eventual tool invocation.
- if (!observation?.parentObservationId) return null;
+function nextRecordedTools(observation, observations) {
+ // One model response may submit several sibling tools. Stop at the next model
+ // request; do not bridge rounds/traces or include nested tool/service spans.
+ if (!observation?.parentObservationId) return [];
  const after = Date.parse(observation.endTime || observation.startTime || '');
- if (!Number.isFinite(after)) return null;
- const next = observations
+ if (!Number.isFinite(after)) return [];
+ const following = observations
   .filter(candidate => candidate.id !== observation.id
    && candidate.parentObservationId === observation.parentObservationId
    && (!observation.traceId || candidate.traceId === observation.traceId)
    && (candidate.name === 'llm.plan' || String(candidate.name || '').startsWith('tool.'))
    && Number.isFinite(Date.parse(candidate.startTime || ''))
    && Date.parse(candidate.startTime) >= after)
-  .sort((a, b) => Date.parse(a.startTime) - Date.parse(b.startTime))[0];
- return next && String(next.name).startsWith('tool.') ? next : null;
+  .sort((a, b) => Date.parse(a.startTime) - Date.parse(b.startTime));
+ const nextModel = following.find(candidate => candidate.name === 'llm.plan');
+ const before = nextModel ? Date.parse(nextModel.startTime) : Infinity;
+ return following.filter(candidate => String(candidate.name).startsWith('tool.')
+  && Date.parse(candidate.startTime) < before);
 }
 
 function describeObservation(observation, observations = [], notes = {}) {
  const result = basicLabel(observation, notes);
  if (observation?.name !== 'llm.plan' || lookupNote(observation, notes)) return result;
- const next = nextRecordedTool(observation, observations);
- if (!next) return result;
- const action = basicLabel(next, notes);
- if (action.kind === 'unknown') return result;
+ const next = nextRecordedTools(observation, observations);
+ if (!next.length) return result;
+ const actions = next.map(tool => basicLabel(tool, notes));
+ if (actions.every(action => action.kind === 'unknown')) return result;
+ if (actions.length > 1) {
+  const counts = new Map();
+  for (const action of actions) counts.set(action.title, (counts.get(action.title) || 0) + 1);
+  const actionTitles = [...counts].map(([title, count]) => title + (count > 1 ? `（${count} 次）` : ''));
+  return {
+   title: `同轮安排：${actionTitles.join('、')}`,
+   description: `这次模型请求后，同一轮提交了 ${next.length} 项工具操作：${actionTitles.join('；')}。依据实际调用说明用途，不代表这些操作都并行执行。这里记录模型处理与响应等待时间，工具执行时间在后面分别列出。`,
+   kind: 'planning',
+  };
+ }
+ const action = actions[0];
  return {
   title: `安排下一步：${action.title}`,
   description: `模型调用后，紧接着执行了“${action.title}”。这里记录的是模型处理与响应等待时间；后续工具执行的时间单独列出。`,

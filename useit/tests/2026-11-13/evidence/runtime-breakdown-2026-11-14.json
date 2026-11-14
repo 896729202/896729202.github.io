@@ -7,7 +7,7 @@
       "items": [
         {
           "key": "planning",
-          "title": "理解任务与决定下一步",
+          "title": "模型请求与等待",
           "description": "14 次模型请求：理解当前结果、安排下一步操作并整理最终答复，包含等待模型响应。",
           "milliseconds": 161047,
           "count": 14
@@ -85,8 +85,8 @@
       "items": [
         {
           "key": "planning",
-          "title": "理解任务与决定下一步",
-          "description": "18 次模型请求：理解当前结果、安排下一步操作并整理最终答复，包含等待模型响应。",
+          "title": "模型请求与等待",
+          "description": "18 次模型请求，含 7 次单独更新清单；不是连续思考 164 秒。下方逐次解释实际动作。",
           "milliseconds": 164395,
           "count": 18
         },
@@ -154,6 +154,411 @@
       ],
       "source_task_ids": [
         "fb33f388-147d-4d01-95de-4561e2585679"
+      ]
+    },
+    {
+      "case": "B10-R4",
+      "local_total_ms": 251050,
+      "cloud_total_ms": 254529,
+      "items": [
+        {
+          "key": "planning",
+          "title": "模型请求与等待",
+          "description": "9 次模型请求；清单与实际操作同轮，包含模型服务处理、传输和等待，无法进一步拆成纯思考。",
+          "milliseconds": 131145,
+          "count": 9
+        },
+        {
+          "key": "generation",
+          "title": "生成三面图片（并行去重）",
+          "description": "A 面与背面并行；B 使用新 A 图。这里计整段生图的实际等待时间，三次调用有重叠，不能相加。",
+          "milliseconds": 76218,
+          "count": 3
+        },
+        {
+          "key": "placement",
+          "title": "装配并保存三面",
+          "description": "含 Agent 与前端通信；前端整批处理 12.133 秒。三面素材读取并行，同一画稿依次保存。",
+          "milliseconds": 13882,
+          "count": 1
+        },
+        {
+          "key": "verification",
+          "title": "检查保存结果",
+          "description": "检查三面图片和保存记录，确认没有重复装配。",
+          "milliseconds": 3474,
+          "count": 1
+        },
+        {
+          "key": "other",
+          "title": "其他衔接与未细分时间",
+          "description": "本地总时间扣除以上四类后的余量，不能全部当成网络或模型耗时。",
+          "milliseconds": 26331,
+          "count": null
+        }
+      ],
+      "generation_steps": [
+        {
+          "face": "back",
+          "action": "generate",
+          "title": "生成背面画稿",
+          "milliseconds": 47746,
+          "source_step": 5,
+          "tool_call_id": "call_13251772045469140169"
+        },
+        {
+          "face": "frame-a",
+          "action": "generate",
+          "title": "生成A 面画稿",
+          "milliseconds": 51378,
+          "source_step": 5,
+          "tool_call_id": "call_13251772045469141062"
+        },
+        {
+          "face": "frame-b",
+          "action": "edit",
+          "title": "编辑B 面画稿",
+          "milliseconds": 22944,
+          "source_step": 6,
+          "tool_call_id": "call_1062177251969648414"
+        }
+      ],
+      "generation_groups": [
+        {
+          "source_step": 5,
+          "milliseconds": 51642,
+          "faces": [
+            "A 面",
+            "背面"
+          ]
+        },
+        {
+          "source_step": 6,
+          "milliseconds": 24576,
+          "faces": [
+            "B 面"
+          ]
+        }
+      ],
+      "generation_critical_path_ms": 76218,
+      "method": "模型与前端回调取本地测得 duration_ms；生图取外层 run_action 的实际墙钟时长，并行一组只计一次。个别图时长仅作明细，不相加到总额。",
+      "limitations": [
+        "模型轮数减半并不等于模型时间减半：每个合并响应输出更多工具参数，本次模型总等待只减少33.250秒。",
+        "每轮模型耗时是整体请求等待，不能拆成纯理解、供应商排队或网络各占多少。",
+        "orch.plan.llm_call与frontend_roundtrip起止为事后补记，只用duration_ms；前端回调phase的step属于收到结果的下一轮，按tool_call_id匹配发起轮。",
+        "生图总时间使用两个外层run_action之和76.218秒；三图inline相加122.068秒包含并行重叠，不能叠加到总用时。",
+        "残余26.331秒是本地总用时扣除上述三组后的余额，包含上下文/记录/交接等未单独归类工作；尚不能归因于一个具体瓶颈。",
+        "这是同主题新素材的一次复测，供应商单次延迟、输出长度和缓存均可能变化，不视为稳定性能保证。"
+      ],
+      "source_task_ids": [
+        "90d3b72d-2f56-4742-8b74-5c43ca4297aa"
+      ]
+    },
+    {
+      "case": "B10-R5",
+      "local_total_ms": 261600,
+      "cloud_total_ms": 264972,
+      "items": [
+        {
+          "key": "planning",
+          "title": "模型请求与等待",
+          "description": "7 次模型请求，其中一轮用了 90.313 秒；现有日志不能确定是服务排队、模型处理还是网络导致。",
+          "milliseconds": 179237,
+          "count": 7
+        },
+        {
+          "key": "generation",
+          "title": "生成三面图片（并行去重）",
+          "description": "A 面与背面并行；B 使用新 A 图。这里计整段生图的实际等待时间，三次调用有重叠，不能相加。",
+          "milliseconds": 58718,
+          "count": 3
+        },
+        {
+          "key": "placement",
+          "title": "装配并保存三面",
+          "description": "含 Agent 与前端通信；前端整批处理 10.884 秒。三面素材读取并行，同一画稿依次保存。",
+          "milliseconds": 11467,
+          "count": 1
+        },
+        {
+          "key": "verification",
+          "title": "检查保存结果",
+          "description": "本轮 Agent 未单独调用检查工具；运行结束后另做只读核验，结果单列，不计入 Agent 总时间。",
+          "milliseconds": 0,
+          "count": 0
+        },
+        {
+          "key": "other",
+          "title": "其他衔接与未细分时间",
+          "description": "本地总时间扣除以上四类后的余量，不能全部当成网络或模型耗时。",
+          "milliseconds": 12178,
+          "count": null
+        }
+      ],
+      "generation_steps": [
+        {
+          "face": "frame-a",
+          "action": "generate",
+          "title": "生成A 面画稿",
+          "milliseconds": 38578,
+          "source_step": 4,
+          "tool_call_id": "call_12621280724367148037",
+          "observation_id": "42426dd7cc8c43d2"
+        },
+        {
+          "face": "frame-b",
+          "action": "edit",
+          "title": "编辑B 面画稿",
+          "milliseconds": 19500,
+          "source_step": 4,
+          "tool_call_id": "call_12621280724367148037",
+          "observation_id": "7cbe6b5d84a8d83e"
+        },
+        {
+          "face": "back",
+          "action": "generate",
+          "title": "生成背面画稿",
+          "milliseconds": 37313,
+          "source_step": 4,
+          "tool_call_id": "call_12621280724367148037",
+          "observation_id": "10c773ea6de0be27"
+        }
+      ],
+      "generation_groups": [
+        {
+          "source_step": 4,
+          "milliseconds": 58718,
+          "faces": [
+            "A 面",
+            "B 面",
+            "背面"
+          ]
+        }
+      ],
+      "generation_critical_path_ms": 58718,
+      "method": "模型与前端回调取本地测得 duration_ms；生图取外层 run_action 的实际墙钟时长，并行一组只计一次。个别图时长仅作明细，不相加到总额。",
+      "limitations": [
+        "7轮模型请求合179.237秒；第3轮90.313秒返回成功，且本地仅记录一次llm_call，日志未见HTTP重试标志。不能判断供应商内部排队或重试。",
+        "模型等待包含请求/推理/输出等，不能简单等同为理解时间；没有读取隐藏推理解释延迟。",
+        "三图job持续时间包含生成与持久化提交；均在step4同一个外层tool_call_id下，用独立job_id/observation_id区分。",
+        "生图总时间使用外层58.718秒；各job相加95.391秒包含并发重叠，不能计入总墙钟。",
+        "Agent没有调用canvas_product_inspect；已观察到批量装配三面均completed/applied，独立母版检查若由采集器完成应另行标注。",
+        "本次同时改变自然语言提示与调度代码，且缺少原先独立inspect，不能当作单变量性能实验或稳定速度承诺。",
+        "orch.plan.llm_call与frontend_roundtrip的时间戳为事后补记，仅采用duration_ms；生图job用其自身记录。",
+        "残余12.178秒为总耗时扣除模型、生图外层及前端回调的余额，不归因于一个未实测瓶颈。",
+        "job_ms使用本地单调计时；Langfuse stage起止换算可能差几毫秒，独立保留langfuse_duration_ms，不混入总用时。"
+      ],
+      "source_task_ids": [
+        "5727fee6-4a27-43bd-ad2d-575077699b81"
+      ]
+    },
+    {
+      "case": "B10-R6",
+      "local_total_ms": 226860,
+      "cloud_total_ms": 228763,
+      "items": [
+        {
+          "key": "rewrite",
+          "title": "后台提示词改写（新增）",
+          "description": "主 Agent 开始规划前的一次轻量模型调用；原文保留，改写仅作建议。此等待已计入总时间。",
+          "milliseconds": 2838,
+          "count": 1
+        },
+        {
+          "key": "planning",
+          "title": "模型请求与等待",
+          "description": "8 次模型请求；清单与实际操作同轮，包含模型服务处理、传输和等待，无法进一步拆成纯思考。",
+          "milliseconds": 98225,
+          "count": 8
+        },
+        {
+          "key": "generation",
+          "title": "生成三面图片（并行去重）",
+          "description": "A 面与背面并行；B 使用新 A 图。这里计整段生图的实际等待时间，三次调用有重叠，不能相加。",
+          "milliseconds": 73215,
+          "count": 3
+        },
+        {
+          "key": "placement",
+          "title": "装配并保存三面",
+          "description": "含 Agent 与前端通信；前端整批处理 47.231 秒。三面素材读取并行，同一画稿依次保存。",
+          "milliseconds": 42729,
+          "count": 1
+        },
+        {
+          "key": "verification",
+          "title": "检查保存结果",
+          "description": "本轮 Agent 未单独调用检查工具；运行结束后另做只读核验，结果单列，不计入 Agent 总时间。",
+          "milliseconds": 0,
+          "count": 0
+        },
+        {
+          "key": "other",
+          "title": "其他衔接与未细分时间",
+          "description": "本地总时间扣除以上四类后的余量，不能全部当成网络或模型耗时。",
+          "milliseconds": 9853,
+          "count": null
+        }
+      ],
+      "generation_steps": [
+        {
+          "face": "frame-a",
+          "action": "generate",
+          "title": "生成A 面画稿",
+          "milliseconds": 49484,
+          "source_step": 4,
+          "tool_call_id": "call_6366749502596367822",
+          "observation_id": "79e4f8d1fd13fd87"
+        },
+        {
+          "face": "frame-b",
+          "action": "edit",
+          "title": "编辑B 面画稿",
+          "milliseconds": 18156,
+          "source_step": 4,
+          "tool_call_id": "call_6366749502596367822",
+          "observation_id": "c39375815339ff56"
+        },
+        {
+          "face": "back",
+          "action": "generate",
+          "title": "生成背面画稿",
+          "milliseconds": 36203,
+          "source_step": 4,
+          "tool_call_id": "call_6366749502596367822",
+          "observation_id": "2fe6347124a08d48"
+        }
+      ],
+      "generation_groups": [
+        {
+          "source_step": 4,
+          "milliseconds": 73215,
+          "faces": [
+            "A 面",
+            "B 面",
+            "背面"
+          ]
+        }
+      ],
+      "generation_critical_path_ms": 73215,
+      "method": "模型与前端回调取本地测得 duration_ms；生图取外层 run_action 的实际墙钟时长，并行一组只计一次。个别图时长仅作明细，不相加到总额。",
+      "limitations": [
+        "前置改写耗时2.838秒、参考费用0.001336美元，但因ValueError回退，brief=null；该次调用不是成功改写或生图质量提升的证据。",
+        "改写已包含在Agent总耗时226.860秒，单列rewrite项；planner model仅计8次orch.plan.llm_call，不重复包含light模型，也不把rewrite再塞进residual。",
+        "R5第三轮planner90.313秒，R6对应建制品轮11.723秒；这种延迟波动不能被归为改写收益，尤其R6根本没有采用改写。",
+        "R6整套耗时比R5少34.740秒，但同时包含网络波动、新单面scope/取消补丁与一次状态查询；不是单变量改写实验。",
+        "生图job时间包含生成与持久化提交，各图并发不能直接相加到总时间。",
+        "原装配任务总历时47.231秒包含中间状态查询前的模型安排，不可作为另一项与全部模型时间再相加；分解用两次frontend_roundtrip合42.729秒。",
+        "Agent未单独调用inspect；若另行只读检查，必须标为运行后补采且不计Agent耗时。",
+        "残余9.853秒为总耗时扣除模型、改写、生图外层及前端回调后的余额，未归因于单一瓶颈。"
+      ],
+      "source_task_ids": [
+        "3463a7ab-1820-49d8-bc1b-d88f506f2d56"
+      ]
+    },
+    {
+      "case": "B10-R7",
+      "local_total_ms": 310030,
+      "cloud_total_ms": 313439,
+      "items": [
+        {
+          "key": "rewrite",
+          "title": "后台提示词改写（新增）",
+          "description": "主 Agent 开始规划前的一次轻量模型调用；原文保留，改写仅作建议。此等待已计入总时间。",
+          "milliseconds": 2587,
+          "count": 1
+        },
+        {
+          "key": "planning",
+          "title": "模型请求与等待",
+          "description": "两轮合计 9 次模型请求；首次规划后多问确认，续做才生图和装配。最长一轮 97.009 秒，现有日志不能进一步区分服务排队、处理和网络。",
+          "milliseconds": 222308,
+          "count": 9
+        },
+        {
+          "key": "generation",
+          "title": "生成三面图片（并行去重）",
+          "description": "A 面与背面并行；B 使用新 A 图。这里计整段生图的实际等待时间，三次调用有重叠，不能相加。",
+          "milliseconds": 57412,
+          "count": 3
+        },
+        {
+          "key": "placement",
+          "title": "装配并保存三面",
+          "description": "实际分别调用 A 面、B 面、背面装配并保存，共 3 次；本次没有采用批量装配，不能描述成三面并行读取。",
+          "milliseconds": 14818,
+          "count": 3
+        },
+        {
+          "key": "verification",
+          "title": "检查保存结果",
+          "description": "本轮 Agent 未单独调用检查工具；运行结束后另做只读核验，结果单列，不计入 Agent 总时间。",
+          "milliseconds": 0,
+          "count": 0
+        },
+        {
+          "key": "other",
+          "title": "其他衔接与未细分时间",
+          "description": "本地总时间扣除以上四类后的余量，不能全部当成网络或模型耗时。",
+          "milliseconds": 12905,
+          "count": null
+        }
+      ],
+      "generation_steps": [
+        {
+          "face": "frame-a",
+          "action": "generate",
+          "title": "生成A 面画稿",
+          "milliseconds": 34468,
+          "source_step": 5,
+          "tool_call_id": "call_6343724441457130664",
+          "observation_id": "c604baa28776b5f8"
+        },
+        {
+          "face": "frame-b",
+          "action": "edit",
+          "title": "编辑B 面画稿",
+          "milliseconds": 18813,
+          "source_step": 5,
+          "tool_call_id": "call_6343724441457130664",
+          "observation_id": "142c9a2ced2ae8c4"
+        },
+        {
+          "face": "back",
+          "action": "generate",
+          "title": "生成背面画稿",
+          "milliseconds": 16297,
+          "source_step": 5,
+          "tool_call_id": "call_6343724441457130664",
+          "observation_id": "a34eeb93299c4664"
+        }
+      ],
+      "generation_groups": [
+        {
+          "source_step": 5,
+          "milliseconds": 57412,
+          "faces": [
+            "A 面",
+            "B 面",
+            "背面"
+          ]
+        }
+      ],
+      "generation_critical_path_ms": 57412,
+      "method": "模型与前端回调取本地测得 duration_ms；生图取外层 run_action 的实际墙钟时长，并行一组只计一次。个别图时长仅作明细，不相加到总额。 本次合计两个 Agent 运行；等待续做的间隔单列，不混入 Agent 执行时间。",
+      "limitations": [
+        "首run151.350秒结束时只有draft方案，生图/装配待办仍pending，不能标成成功制图。续做run158.680秒才完成画稿和三面装配。",
+        "两个Agent执行合计310.030秒不含中间确认/调试间隙；用户从首次提交到最终完成墙钟423.233秒，包括101.990秒续做前间隙及约11.213秒启动交接。",
+        "rewrite只首run执行一次成功，耗时2.587秒、参考0.001337美元，已单列且不重复计入planner或残余。",
+        "首run第三轮planner97.009秒，供应商聚合输出12727tokens；未读取隐藏推理，无法仅凭日志拆出模型内部、排队和网络各占多少。",
+        "GTA6与诸葛亮主题不同，且多了一次确认续做，不是单变量改写效果实验。改写成功不等于总流程更快。",
+        "续做采取三次canvas_product_add单面装配，无batch/status查询，不能声称本轮采用了批量装配机制。",
+        "Agent未独立inspect；若补做只读检查应标为运行后采集，不算Agent调用。",
+        "时间分解采用本地duration_ms，生图用外层墙钟，重叠job不重复累加。"
+      ],
+      "source_task_ids": [
+        "57c4a58f-fc87-4894-a025-1cb045fd9851",
+        "99f6cc97-251a-4132-8d43-1c6ea148b123"
       ]
     }
   ]

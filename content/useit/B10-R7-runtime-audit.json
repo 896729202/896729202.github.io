@@ -1,0 +1,803 @@
+{
+  "case": "B10-R7",
+  "test_date": "2026-11-14",
+  "theme": "GTA6 游戏主题光栅卡",
+  "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+  "task_ids": [
+    "57c4a58f-fc87-4894-a025-1cb045fd9851",
+    "99f6cc97-251a-4132-8d43-1c6ea148b123"
+  ],
+  "project_id": "e78d8e6e-e7eb-418a-abe7-77d57bfe8e67",
+  "source_run": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195731_agent_tid_99f6cc97-251a-4132-8d43-1c6ea148b123",
+  "source_runs": [
+    "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195318_agent_tid_57c4a58f-fc87-4894-a025-1cb045fd9851",
+    "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195731_agent_tid_99f6cc97-251a-4132-8d43-1c6ea148b123"
+  ],
+  "runs": [
+    {
+      "run_index": 1,
+      "role": "planning_stopped_for_confirmation",
+      "task_id": "57c4a58f-fc87-4894-a025-1cb045fd9851",
+      "source_run": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195318_agent_tid_57c4a58f-fc87-4894-a025-1cb045fd9851",
+      "directory": "261114-195318_agent_tid_57c4a58f-fc87-4894-a025-1cb045fd9851",
+      "agent_seconds": 151.35,
+      "model_round_count": 4,
+      "completed_at": "2026-11-14T19:55:45+08:00",
+      "final_state": "done",
+      "goal_completed_at_this_stop": false,
+      "token_usage": {
+        "input_tokens": 140735,
+        "output_tokens": 16016,
+        "total_tokens": 156751,
+        "cache_read_tokens": 113042,
+        "cache_creation_tokens": 0
+      },
+      "breakdown_ms": {
+        "local_total": 151350,
+        "model": 141510,
+        "rewrite": 2587,
+        "generation_outer_wall": 0,
+        "frontend_roundtrip": 0,
+        "residual": 7253
+      }
+    },
+    {
+      "run_index": 2,
+      "role": "authorized_continuation_production",
+      "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "source_run": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195731_agent_tid_99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "directory": "261114-195731_agent_tid_99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "agent_seconds": 158.68,
+      "model_round_count": 5,
+      "completed_at": "2026-11-14T20:00:09+08:00",
+      "final_state": "done",
+      "goal_completed_at_this_stop": true,
+      "token_usage": {
+        "input_tokens": 212498,
+        "output_tokens": 6699,
+        "total_tokens": 219197,
+        "cache_read_tokens": 173560,
+        "cache_creation_tokens": 0
+      },
+      "breakdown_ms": {
+        "local_total": 158680,
+        "model": 80798,
+        "rewrite": 0,
+        "generation_outer_wall": 57412,
+        "frontend_roundtrip": 14818,
+        "residual": 5652
+      }
+    }
+  ],
+  "completed_at": "2026-11-14T20:00:09+08:00",
+  "final_state": "done",
+  "goal_completed": true,
+  "execution_outcome": "completed_after_authorized_continuation",
+  "first_run_stopped_for_confirmation": true,
+  "scope": "GTA6新题材。首run只建draft方案并请求确认；经自然语言续做后，第二run生成三图并逐面装配。聚合两个Agent运行，不把首run当成功制图，不与诸葛亮主题作严格单变量对照。",
+  "local_total_seconds": 310.03,
+  "agent_execution_sum_seconds": 310.03,
+  "agent_execution_sum_excludes_inter_run_gap": true,
+  "submitted_to_final_completion_seconds": 423.233,
+  "first_submitted_at": "2026-11-14T19:53:05.766801+08:00",
+  "continuation_submitted_at": "2026-11-14T19:57:26.989810+08:00",
+  "confirmation_and_debug_gap_seconds": 101.99,
+  "wall_outside_agent_seconds": 113.203,
+  "other_submission_and_handoff_seconds": 11.213,
+  "model_seconds": 222.308,
+  "rewrite_seconds": 2.587,
+  "generation_wall_seconds": 57.412,
+  "frontend_roundtrip_seconds": 14.818,
+  "residual_seconds": 12.905,
+  "breakdown_ms": {
+    "local_total": 310030,
+    "model": 222308,
+    "rewrite": 2587,
+    "generation_outer_wall": 57412,
+    "frontend_roundtrip": 14818,
+    "residual": 12905
+  },
+  "model_round_count": 9,
+  "visible_tool_call_count": 14,
+  "paired_plan_round_count": 5,
+  "pure_checklist_round_count": 0,
+  "steps": [
+    {
+      "step": 1,
+      "global_step": 1,
+      "source_step": 1,
+      "run_index": 1,
+      "task_id": "57c4a58f-fc87-4894-a025-1cb045fd9851",
+      "run_role": "planning_stopped_for_confirmation",
+      "observable_action": "读取实物设计指南与光栅卡目录",
+      "model_ms": 16958,
+      "model_seconds": 16.958,
+      "tool_names": [
+        "read"
+      ],
+      "calls": [
+        {
+          "tool_name": "read",
+          "tool_call_id": "call_2870054172663801518",
+          "paths": [
+            "catalog/lenticular-card",
+            "skills/physical-design/SKILL.md"
+          ]
+        }
+      ],
+      "pairs_plan_with_work": false,
+      "pure_checklist_round": false,
+      "outer_action_ms": 14,
+      "model_input_tokens": 28455,
+      "model_output_tokens": 1582,
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195318_agent_tid_57c4a58f-fc87-4894-a025-1cb045fd9851/steps/step_001/output/output.json"
+    },
+    {
+      "step": 2,
+      "global_step": 2,
+      "source_step": 2,
+      "run_index": 1,
+      "task_id": "57c4a58f-fc87-4894-a025-1cb045fd9851",
+      "run_role": "planning_stopped_for_confirmation",
+      "observable_action": "读取双图光栅卡规格",
+      "model_ms": 7307,
+      "model_seconds": 7.307,
+      "tool_names": [
+        "read"
+      ],
+      "calls": [
+        {
+          "tool_name": "read",
+          "tool_call_id": "call_15138797155207828365",
+          "paths": [
+            "catalog/lenticular-card/two-image-flip"
+          ]
+        }
+      ],
+      "pairs_plan_with_work": false,
+      "pure_checklist_round": false,
+      "outer_action_ms": 5,
+      "model_input_tokens": 31563,
+      "model_output_tokens": 203,
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195318_agent_tid_57c4a58f-fc87-4894-a025-1cb045fd9851/steps/step_002/output/output.json"
+    },
+    {
+      "step": 3,
+      "global_step": 3,
+      "source_step": 3,
+      "run_index": 1,
+      "task_id": "57c4a58f-fc87-4894-a025-1cb045fd9851",
+      "run_role": "planning_stopped_for_confirmation",
+      "observable_action": "创建进度清单与draft制品方案",
+      "model_ms": 97009,
+      "model_seconds": 97.009,
+      "tool_names": [
+        "plan_write",
+        "project_plan_write"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_14776899790144602946",
+          "status_updates": [
+            {
+              "id": "setup-spec",
+              "status": "in_progress"
+            },
+            {
+              "id": "generate-artwork",
+              "status": "pending"
+            },
+            {
+              "id": "place-artwork",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "tool_name": "project_plan_write",
+          "tool_call_id": "call_14776899790144606119"
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 16,
+      "model_input_tokens": 33237,
+      "model_output_tokens": 12727,
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195318_agent_tid_57c4a58f-fc87-4894-a025-1cb045fd9851/steps/step_003/output/output.json"
+    },
+    {
+      "step": 4,
+      "global_step": 4,
+      "source_step": 4,
+      "run_index": 1,
+      "task_id": "57c4a58f-fc87-4894-a025-1cb045fd9851",
+      "run_role": "planning_stopped_for_confirmation",
+      "observable_action": "完成规划后请求确认，未开始生图或装配",
+      "model_ms": 20236,
+      "model_seconds": 20.236,
+      "tool_names": [
+        "plan_write",
+        "respond_to_user"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_6759324834788031062",
+          "status_updates": [
+            {
+              "id": "setup-spec",
+              "status": "completed"
+            },
+            {
+              "id": "generate-artwork",
+              "status": "pending"
+            },
+            {
+              "id": "place-artwork",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "tool_name": "respond_to_user",
+          "tool_call_id": "call_6759324834788030537"
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 5,
+      "model_input_tokens": 47480,
+      "model_output_tokens": 1504,
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195318_agent_tid_57c4a58f-fc87-4894-a025-1cb045fd9851/steps/step_004/output/output.json"
+    },
+    {
+      "step": 5,
+      "global_step": 5,
+      "source_step": 1,
+      "run_index": 2,
+      "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "run_role": "authorized_continuation_production",
+      "observable_action": "按续做指令生成整套三图：A/背面并发，A保存后编辑B",
+      "model_ms": 28729,
+      "model_seconds": 28.729,
+      "tool_names": [
+        "plan_write",
+        "tool_product_image_gen"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_6343724441457128309",
+          "status_updates": [
+            {
+              "id": "gen-artwork",
+              "status": "in_progress"
+            },
+            {
+              "id": "place-master",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "tool_name": "tool_product_image_gen",
+          "tool_call_id": "call_6343724441457130664",
+          "uses_artwork_set": true,
+          "artwork_set_jobs": [
+            "back",
+            "frame_b",
+            "frame_a"
+          ],
+          "uses_reference_image_args": false
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 57412,
+      "model_input_tokens": 37308,
+      "model_output_tokens": 2448,
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195731_agent_tid_99f6cc97-251a-4132-8d43-1c6ea148b123/steps/step_001/output/output.json"
+    },
+    {
+      "step": 6,
+      "global_step": 6,
+      "source_step": 2,
+      "run_index": 2,
+      "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "run_role": "authorized_continuation_production",
+      "observable_action": "更新进度并单独装配A面",
+      "model_ms": 21973,
+      "model_seconds": 21.973,
+      "tool_names": [
+        "plan_write",
+        "canvas_product_add"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_7043936217974299344",
+          "status_updates": [
+            {
+              "id": "gen-artwork",
+              "status": "completed"
+            },
+            {
+              "id": "place-master",
+              "status": "in_progress"
+            }
+          ]
+        },
+        {
+          "tool_name": "canvas_product_add",
+          "tool_call_id": "call_7043936217974297363",
+          "face": "frame-a"
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 5,
+      "model_input_tokens": 40201,
+      "model_output_tokens": 2082,
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195731_agent_tid_99f6cc97-251a-4132-8d43-1c6ea148b123/steps/step_002/output/output.json"
+    },
+    {
+      "step": 7,
+      "global_step": 7,
+      "source_step": 3,
+      "run_index": 2,
+      "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "run_role": "authorized_continuation_production",
+      "observable_action": "单独装配B面",
+      "model_ms": 4184,
+      "model_seconds": 4.184,
+      "tool_names": [
+        "canvas_product_add"
+      ],
+      "calls": [
+        {
+          "tool_name": "canvas_product_add",
+          "tool_call_id": "call_14347537353963071849",
+          "face": "frame-b"
+        }
+      ],
+      "pairs_plan_with_work": false,
+      "pure_checklist_round": false,
+      "outer_action_ms": 0,
+      "model_input_tokens": 43527,
+      "model_output_tokens": 189,
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195731_agent_tid_99f6cc97-251a-4132-8d43-1c6ea148b123/steps/step_003/output/output.json"
+    },
+    {
+      "step": 8,
+      "global_step": 8,
+      "source_step": 4,
+      "run_index": 2,
+      "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "run_role": "authorized_continuation_production",
+      "observable_action": "单独装配背面",
+      "model_ms": 8111,
+      "model_seconds": 8.111,
+      "tool_names": [
+        "canvas_product_add"
+      ],
+      "calls": [
+        {
+          "tool_name": "canvas_product_add",
+          "tool_call_id": "call_17702814786198949485",
+          "face": "back"
+        }
+      ],
+      "pairs_plan_with_work": false,
+      "pure_checklist_round": false,
+      "outer_action_ms": 1,
+      "model_input_tokens": 44929,
+      "model_output_tokens": 387,
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195731_agent_tid_99f6cc97-251a-4132-8d43-1c6ea148b123/steps/step_004/output/output.json"
+    },
+    {
+      "step": 9,
+      "global_step": 9,
+      "source_step": 5,
+      "run_index": 2,
+      "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "run_role": "authorized_continuation_production",
+      "observable_action": "完成清单并汇报；未独立调用inspect",
+      "model_ms": 17801,
+      "model_seconds": 17.801,
+      "tool_names": [
+        "plan_write",
+        "respond_to_user"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_14085715605427512256",
+          "status_updates": [
+            {
+              "id": "gen-artwork",
+              "status": "completed"
+            },
+            {
+              "id": "place-master",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "tool_name": "respond_to_user",
+          "tool_call_id": "call_14085715605427515163"
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 4,
+      "model_input_tokens": 46533,
+      "model_output_tokens": 1593,
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-195731_agent_tid_99f6cc97-251a-4132-8d43-1c6ea148b123/steps/step_005/output/output.json"
+    }
+  ],
+  "prompt_rewrite": {
+    "status": "success",
+    "model": "gemini-3.1-flash-lite-preview",
+    "timeout_seconds": 10.0,
+    "original_chars": 82,
+    "original_message_unchanged": true,
+    "rewrite_chars": 158,
+    "duration_ms": 2587,
+    "usage_by_model": [
+      {
+        "model": "gemini-3.1-flash-lite-preview",
+        "input_tokens": 377,
+        "output_tokens": 320,
+        "total_tokens": 697,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "call_count": 1
+      }
+    ],
+    "token_usage_available": true,
+    "reference_cost_usd": 0.001337,
+    "cost_is_provider_invoice": false,
+    "brief": {
+      "rewritten_prompt": "请设计一张以《GTA6》游戏为主题的双图光栅卡。正面图像由两帧组成：第一帧（Frame A）展示海滨城市白天的景象；第二帧（Frame B）在保持人物和跑车构图位置完全不变的前提下，将场景切换为霓虹闪烁的夜景。背面设计需与正面主题保持统一风格。请按照默认规格完成画稿，并将画稿放置于卡片模板中，无需提供三维效果预览。",
+      "product": [
+        "双图光栅卡"
+      ],
+      "theme": [
+        "GTA6 游戏主题"
+      ],
+      "shared_subject": [
+        "人物和跑车"
+      ],
+      "frame_a": [
+        "海滨城市白天"
+      ],
+      "frame_b_change": [
+        "切换到霓虹夜景"
+      ],
+      "back": [
+        "背面做同主题设计"
+      ],
+      "consistency": [
+        "人物和跑车构图保持一致",
+        "同主题设计"
+      ],
+      "delivery": [
+        "用默认规格",
+        "做好画稿并装到卡里",
+        "先不用三维预览"
+      ],
+      "constraints": [
+        "先不用三维预览"
+      ]
+    },
+    "run_index": 1,
+    "task_id": "57c4a58f-fc87-4894-a025-1cb045fd9851",
+    "event_count": 1,
+    "phase_count": 1,
+    "continuation_rewrite_count": 0,
+    "included_in_agent_seconds": true,
+    "counted_in_planner_model_seconds": false,
+    "counted_in_residual_seconds": false,
+    "applied_to_planner": true,
+    "source_phase": "orch.prompt_rewrite",
+    "source_event": "experiment_prompt_rewrite",
+    "observation_id": "004d675eede820ea",
+    "semantic_review": {
+      "status": "consistent_as_advisory",
+      "preserved": [
+        "GTA6主题",
+        "海滨城市白天到霓虹夜景",
+        "人物和跑车构图一致",
+        "背面同主题",
+        "默认规格",
+        "画稿装入卡片",
+        "不做三维预览"
+      ],
+      "added_unrequested_objects_or_operations_observed": false,
+      "note": "改写把A/B与固定主体分开表达，交付为画稿放置卡片模板，没有装裱歧义；只说明文字整理恰当，不能据此断言生图质量或总速度提升。"
+    },
+    "trace_id": "4dce7dc7010ee6dbaa4efa47a18b5bcf",
+    "langfuse_duration_ms": 2588.0,
+    "model_observation_id": "1f43dff25d23f298",
+    "model_call_langfuse_ms": 1957.0
+  },
+  "generation_steps": [
+    {
+      "step": 5,
+      "source_step": 1,
+      "run_index": 2,
+      "faces": [
+        "A 面",
+        "B 面",
+        "背面"
+      ],
+      "outer_action_ms": 57412,
+      "outer_action_seconds": 57.412,
+      "started_at": "2026-11-14T19:58:01.437+08:00",
+      "ended_at": "2026-11-14T19:58:58.849+08:00",
+      "phase": "orch.plan.run_action",
+      "note": "续做run的一个artwork_set外层调用，只计一次。"
+    }
+  ],
+  "generation_individual_calls": [
+    {
+      "step": 5,
+      "source_step": 1,
+      "run_index": 2,
+      "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "face": "A 面",
+      "job_id": "frame_a",
+      "tool_call_id": "call_6343724441457130664",
+      "outer_tool_call_id": "call_6343724441457130664",
+      "observation_id": "c604baa28776b5f8",
+      "status": "completed",
+      "job_ms": 34468,
+      "job_seconds": 34.468,
+      "duration_ms": 34468,
+      "inline_ms": 34468,
+      "inline_seconds": 34.468,
+      "inline_alias_note": "页面兼容字段，指该job含保存时长，不是整个工具外层时长。",
+      "duration_includes_generation_and_durable_save": true,
+      "started_at": "2026-11-14T19:58:05.546+08:00",
+      "ended_at": "2026-11-14T19:58:40.018+08:00",
+      "relative_started_ms": 0,
+      "relative_ended_ms": 34468,
+      "depends_on": [],
+      "reference_artifact_id": null,
+      "artifact_commit_status": "committed",
+      "output_images": [
+        {
+          "filename": "generated-image-20261114-e8db39.png",
+          "artifact_id": "art_e80db65afc94449e8e95c8cff9e8db39",
+          "width": 1104,
+          "height": 1504
+        }
+      ],
+      "phase": "stage.product_image_job",
+      "local_duration_source": "production run stream_messages.jsonl:image_gen_end.payload.jobs[].duration_ms",
+      "trace_id": "cf7d9640b20c140cce1a4f093218b6be",
+      "langfuse_duration_ms": 34472.0,
+      "langfuse_started_at": "2026-11-14T11:58:05.546Z",
+      "langfuse_ended_at": "2026-11-14T11:58:40.018Z"
+    },
+    {
+      "step": 5,
+      "source_step": 1,
+      "run_index": 2,
+      "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "face": "B 面",
+      "job_id": "frame_b",
+      "tool_call_id": "call_6343724441457130664",
+      "outer_tool_call_id": "call_6343724441457130664",
+      "observation_id": "142c9a2ced2ae8c4",
+      "status": "completed",
+      "job_ms": 18813,
+      "job_seconds": 18.813,
+      "duration_ms": 18813,
+      "inline_ms": 18813,
+      "inline_seconds": 18.813,
+      "inline_alias_note": "页面兼容字段，指该job含保存时长，不是整个工具外层时长。",
+      "duration_includes_generation_and_durable_save": true,
+      "started_at": "2026-11-14T19:58:40.018+08:00",
+      "ended_at": "2026-11-14T19:58:58.820+08:00",
+      "relative_started_ms": 34468,
+      "relative_ended_ms": 53281,
+      "depends_on": [
+        "frame_a"
+      ],
+      "reference_artifact_id": "art_e80db65afc94449e8e95c8cff9e8db39",
+      "artifact_commit_status": "committed",
+      "output_images": [
+        {
+          "filename": "edited-image-20261114-6f881f.png",
+          "artifact_id": "art_5cebf0ce55234013b8727577cc6f881f",
+          "width": 1104,
+          "height": 1504
+        }
+      ],
+      "phase": "stage.product_image_job",
+      "local_duration_source": "production run stream_messages.jsonl:image_gen_end.payload.jobs[].duration_ms",
+      "trace_id": "cf7d9640b20c140cce1a4f093218b6be",
+      "langfuse_duration_ms": 18802.0,
+      "langfuse_started_at": "2026-11-14T11:58:40.018Z",
+      "langfuse_ended_at": "2026-11-14T11:58:58.820Z"
+    },
+    {
+      "step": 5,
+      "source_step": 1,
+      "run_index": 2,
+      "task_id": "99f6cc97-251a-4132-8d43-1c6ea148b123",
+      "face": "背面",
+      "job_id": "back",
+      "tool_call_id": "call_6343724441457130664",
+      "outer_tool_call_id": "call_6343724441457130664",
+      "observation_id": "a34eeb93299c4664",
+      "status": "completed",
+      "job_ms": 16297,
+      "job_seconds": 16.297,
+      "duration_ms": 16297,
+      "inline_ms": 16297,
+      "inline_seconds": 16.297,
+      "inline_alias_note": "页面兼容字段，指该job含保存时长，不是整个工具外层时长。",
+      "duration_includes_generation_and_durable_save": true,
+      "started_at": "2026-11-14T19:58:05.881+08:00",
+      "ended_at": "2026-11-14T19:58:22.191+08:00",
+      "relative_started_ms": 343,
+      "relative_ended_ms": 16640,
+      "depends_on": [],
+      "reference_artifact_id": null,
+      "artifact_commit_status": "committed",
+      "output_images": [
+        {
+          "filename": "generated-image-20261114-1c79d6.png",
+          "artifact_id": "art_34497122748249a0a5eb3f1df01c79d6",
+          "width": 1104,
+          "height": 1504
+        }
+      ],
+      "phase": "stage.product_image_job",
+      "local_duration_source": "production run stream_messages.jsonl:image_gen_end.payload.jobs[].duration_ms",
+      "trace_id": "cf7d9640b20c140cce1a4f093218b6be",
+      "langfuse_duration_ms": 16309.999999999998,
+      "langfuse_started_at": "2026-11-14T11:58:05.881Z",
+      "langfuse_ended_at": "2026-11-14T11:58:22.191Z"
+    }
+  ],
+  "generation_overlap": {
+    "a_and_back_same_round": true,
+    "a_and_back_same_outer_call": true,
+    "step": 5,
+    "source_step": 1,
+    "run_index": 2,
+    "overlap_ms": 16297,
+    "overlap_seconds": 16.297,
+    "overlap_source": "product_image_job elapsed_ms",
+    "individual_job_sum_ms": 69578,
+    "do_not_add_individual_times_to_total": true,
+    "b_started_after_a_saved": true,
+    "b_start_delay_after_a_completed_ms": 0,
+    "back_completed_before_a": true,
+    "b_does_not_wait_for_slow_back_demonstrated_this_run": false
+  },
+  "frontend_roundtrips": [
+    {
+      "tool_name": "canvas_product_add",
+      "tool_call_id": "call_7043936217974297363",
+      "issued_step": 6,
+      "issued_source_step": 2,
+      "run_index": 2,
+      "phase_recorded_step": 3,
+      "duration_ms": 5555,
+      "seconds": 5.555,
+      "success": true,
+      "phase": "orch.action.frontend_roundtrip"
+    },
+    {
+      "tool_name": "canvas_product_add",
+      "tool_call_id": "call_14347537353963071849",
+      "issued_step": 7,
+      "issued_source_step": 3,
+      "run_index": 2,
+      "phase_recorded_step": 4,
+      "duration_ms": 4006,
+      "seconds": 4.006,
+      "success": true,
+      "phase": "orch.action.frontend_roundtrip"
+    },
+    {
+      "tool_name": "canvas_product_add",
+      "tool_call_id": "call_17702814786198949485",
+      "issued_step": 8,
+      "issued_source_step": 4,
+      "run_index": 2,
+      "phase_recorded_step": 5,
+      "duration_ms": 5257,
+      "seconds": 5.257,
+      "success": true,
+      "phase": "orch.action.frontend_roundtrip"
+    }
+  ],
+  "observed_execution": {
+    "used_artwork_set": true,
+    "used_canvas_product_add_batch": false,
+    "canvas_product_add_batch_call_count": 0,
+    "canvas_product_add_call_count": 3,
+    "canvas_product_add_status_call_count": 0,
+    "agent_called_canvas_product_inspect": false,
+    "called_3d_renderer": false,
+    "placement_mode": "three_serial_single_face_calls",
+    "all_placements_completed": true,
+    "same_face_repeated": false,
+    "placement_receipts": [
+      {
+        "face": "frame-a",
+        "task_id": "13b60ee8-4af9-4772-9414-fbc8e9f15f20",
+        "tool_call_id": "call_7043936217974297363",
+        "step": 6,
+        "source_step": 2,
+        "success": true,
+        "task_status": "completed",
+        "receipt_status": "applied",
+        "elapsed_ms": 4342,
+        "version_saved": true
+      },
+      {
+        "face": "frame-b",
+        "task_id": "d00d7d02-7ec6-4181-bf5f-bac18eb46914",
+        "tool_call_id": "call_14347537353963071849",
+        "step": 7,
+        "source_step": 3,
+        "success": true,
+        "task_status": "completed",
+        "receipt_status": "applied",
+        "elapsed_ms": 3498,
+        "version_saved": true
+      },
+      {
+        "face": "back",
+        "task_id": "a12a0825-c44b-4feb-9499-4d4da15bd0d6",
+        "tool_call_id": "call_17702814786198949485",
+        "step": 8,
+        "source_step": 4,
+        "success": true,
+        "task_status": "completed",
+        "receipt_status": "applied",
+        "elapsed_ms": 4706,
+        "version_saved": true
+      }
+    ],
+    "note": "三次是A/B/背面不同面，并非重试。本轮未采用批量装配入口，不能声称验证了批量任务复用或并行读取。"
+  },
+  "fresh_asset_evidence": {
+    "artwork_set_reference_args_empty": true,
+    "b_reference_matches_current_run_a_output": true,
+    "b_reference_artifact_id": "art_e80db65afc94449e8e95c8cff9e8db39",
+    "a_artifact_id": "art_e80db65afc94449e8e95c8cff9e8db39",
+    "a_filename": "generated-image-20261114-e8db39.png",
+    "b_filename": "edited-image-20261114-6f881f.png",
+    "back_filename": "generated-image-20261114-1c79d6.png",
+    "source": "续做run image_gen_end的jobs与images；不保存原始媒体URL。"
+  },
+  "interpretation_notes": [
+    "首run151.350秒结束时只有draft方案，生图/装配待办仍pending，不能标成成功制图。续做run158.680秒才完成画稿和三面装配。",
+    "两个Agent执行合计310.030秒不含中间确认/调试间隙；用户从首次提交到最终完成墙钟423.233秒，包括101.990秒续做前间隙及约11.213秒启动交接。",
+    "rewrite只首run执行一次成功，耗时2.587秒、参考0.001337美元，已单列且不重复计入planner或残余。",
+    "首run第三轮planner97.009秒，供应商聚合输出12727tokens；未读取隐藏推理，无法仅凭日志拆出模型内部、排队和网络各占多少。",
+    "GTA6与诸葛亮主题不同，且多了一次确认续做，不是单变量改写效果实验。改写成功不等于总流程更快。",
+    "续做采取三次canvas_product_add单面装配，无batch/status查询，不能声称本轮采用了批量装配机制。",
+    "Agent未独立inspect；若补做只读检查应标为运行后采集，不算Agent调用。",
+    "时间分解采用本地duration_ms，生图用外层墙钟，重叠job不重复累加。"
+  ],
+  "langfuse_job_ids_pending": false,
+  "postrun_validation": {
+    "actor": "developer bridge read-only inspection after both Agent runs",
+    "source": "UseIt/diagnostics/placement-gta-20261114/postrun-inspect.json",
+    "duration_ms": 487,
+    "saved_image_count": 3,
+    "saved_placement_count": 3,
+    "included_in_agent_elapsed": false,
+    "note": "独立补采，不是两个Agent run的工具调用，不计310.030秒Agent执行时间或423.233秒到生产结束的墙钟。"
+  }
+}

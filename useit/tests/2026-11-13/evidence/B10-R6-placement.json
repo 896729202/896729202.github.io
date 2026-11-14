@@ -1,0 +1,1223 @@
+{
+  "case": "B10-R6",
+  "test_date": "2026-11-14",
+  "theme": "诸葛亮火烧连营 · 后台提示词整理实验",
+  "prompt": "做一张架空三国“诸葛亮火烧连营”的双图光栅卡：诸葛亮持扇，画面从营寨变成火海，人物构图不变；背面放羽扇、阵图和题名。用默认规格，做好画稿并装到卡里，先不用三维预览。",
+  "implementation_version": {
+    "label": "lenticular-artwork-set-v2 + prompt-rewrite-experiment-v1 / local working tree",
+    "app_version": "0.5.2",
+    "frontend_base_commit": "6d04b2cd22b94eb9376b419c466d9db1347b5d43",
+    "frontend_base_is_release_of_this_fix": false,
+    "tracked_file_sha256": {
+      "src/features/chat/handlers/appActions/actions/productPlacementTasks.ts": "2fcb71599ea68eabe7f98ebee6bcaba85b17b4647f52faf742d467b8557aaa97",
+      "src/features/chat/handlers/appActions/actions/productDraftActions.ts": "ad1d640dd458798a12d8988f6825e9ba5515d493f66b457c0d2a0bfcc4c778e9",
+      "src/features/workspace/canvas/commands/productCommands.ts": "e97de97e3e4d0b4363da6d95f7976d4c193b525f46ea1b01004f0ad6046de973",
+      "src/features/workspace/canvas/storage/assetLocator.ts": "51970642c1e6291c6a863171c7ea59c34a12e562f2e782244cdd9daacca05838",
+      "apps/desktop/electron/services/presignedDownloader.ts": "cfe1f2b24cc68f55ba7f17b7740e6fcfc0251cf15804a2ecdce4923b3ad5be5c",
+      "src/features/chat/handlers/appActions/app-tools.snapshot.json": "dff6c949c88741d70ec042045cecb1089855e969f69e84d7e3faa1046f864fcc"
+    },
+    "agent_pack_base_commit": "fe662472d70c5b4d70c2e7db0c85e68baf906f72",
+    "description": "R5 scheduling plus cancellation checkpoints and face-only scope; optional single pre-planner prompt rewrite experiment enabled for this run. Same 82-character natural user prompt.",
+    "agent_base_commit": "2838e6e659987cb56bfdbc31f3e61db14609c80d",
+    "agent_tracked_file_sha256": {
+      "agent/agent_loop/context/instructions.py": "f7486cffcffebf14222b31e8e4ea5e3c6b2b7b5caf3e8d48d6f9b0cce02182af",
+      "agent/agent_loop/planning/planner.py": "61b871960901587d4bb9b107d519efefb955fa3c4a443962e084302e9c0ee947",
+      "agent/agent_loop/execution/dispatch.py": "80a6caa5f3e139355af1746c6b670c4b4c029e697c6315c9e95264bfc5f97a27",
+      "agent/agent_loop/execution/actions/plan_write.py": "55bac6ca9b221fc57ba651bfe256464ffd55edce735230331fa6c2ca70b7022f",
+      "agent/agent_loop/execution/artifacts.py": "81ca87a6c35c5b0d755211d1c5b81db80aef7c91495306122abde10c47076732",
+      "agent/core/tools/packs/orchestrator/tools.py": "c5312207351d11daa9b13f2a41de348d3f9fb268938294233e2ac5edc13a345b",
+      "agent/core/tools/inline/product_image_gen.py": "7449b75528a61f14d5e5177ff90c66120d70fa4b17744f35651a585103cde7b8",
+      "agent/core/product_artwork_set.py": "bfbee6be0521fe3c8371111a7bc0e000d451c3d3130b8ae71264571ccd8674a6",
+      "agent/agent_loop/execution/inline.py": "d7b4a676babbf9f9dcd0fb045532a416ce22baa0cf11b7e08fc4001b10a27d20",
+      "agent/core/tool_runtime.py": "6e0faca16e97c3095382f81de6e00f5dcecaccc069e01aa19b0635c24b479b86",
+      "agent/agent_loop/execution/driver.py": "00cf6d867df2b64fdcbb565a441c64225324356916462379a977556346761aed",
+      "agent/agent_loop/execution/prompt_rewrite.py": "b7803f4884f143d25af67a9a00f78453d541209059a6225950315b41f4f14432"
+    }
+  },
+  "session_id": "053927a4-f806-4382-9b3a-2ec94fa8de2e",
+  "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/053927a4-f806-4382-9b3a-2ec94fa8de2e",
+  "project_id": "1a80c695-a28e-4a30-b382-3cf55a4ffe83",
+  "task_ids": [
+    "3463a7ab-1820-49d8-bc1b-d88f506f2d56"
+  ],
+  "sent_at": "2026-11-14T19:37:04.434068+08:00",
+  "completed_at": "2026-11-14T19:40:57+08:00",
+  "agent_seconds": 226.86,
+  "submitted_to_local_completion_seconds": 232.566,
+  "batch_ms": 47231,
+  "batch_status": "completed",
+  "batch_call_id": "call_7311326796113037737",
+  "batch_tool_ms": 42766,
+  "batch_call_count": 2,
+  "placement_task_flow": [
+    {
+      "action": "canvas_product_add_batch",
+      "tool_call_id": "call_7311326796113037737",
+      "task_id": "4babb742-470d-49e3-9d48-284d12d4a0b5",
+      "status": "running",
+      "elapsed_ms": 21616
+    },
+    {
+      "action": "canvas_product_add_status",
+      "tool_call_id": "call_1447183963977046472",
+      "task_id": "4babb742-470d-49e3-9d48-284d12d4a0b5",
+      "status": "completed",
+      "elapsed_ms": 47231
+    }
+  ],
+  "placements": [
+    {
+      "face": "frame-a",
+      "success": true,
+      "task_status": "completed",
+      "source": "project/assets/working/other/generated-image-20261114-f4e9dc.png",
+      "receipt": {
+        "status": "applied",
+        "at": "2026-11-14T11:40:02.925Z",
+        "rev": {
+          "before": "r:34ccce6a:6809",
+          "after": "r:2ced01d8:4356144"
+        },
+        "checks": [
+          {
+            "name": "saved",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "placed",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "source_intact",
+            "pass": true,
+            "severity": "info",
+            "value": 3261784,
+            "detail": "complete png 1104×1504 px, 3.1 MB"
+          },
+          {
+            "name": "visible",
+            "pass": true,
+            "severity": "info",
+            "value": 0
+          }
+        ],
+        "timing": {
+          "total_ms": 9419,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 36,
+            "source_integrity": 0,
+            "source_decode": 651,
+            "source_hash": 1808,
+            "load_source": 2497,
+            "write_queue": 0,
+            "prepare_master": 2,
+            "open_doc": 29,
+            "save": 3190,
+            "record_version": 2888
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 1515,
+            "long_tasks": 12,
+            "long_task_ms": 5169,
+            "max_long_task_ms": 1588,
+            "top_scripts": [
+              {
+                "name": "import.then@LenticularPreview.tsx",
+                "ms": 245
+              },
+              {
+                "name": "performWorkUntilDeadline@chunk-ZBXU67MV.js",
+                "ms": 204
+              }
+            ]
+          }
+        },
+        "seq": 1
+      }
+    },
+    {
+      "face": "frame-b",
+      "success": true,
+      "task_status": "completed",
+      "source": "project/assets/working/other/edited-image-20261114-387095.png",
+      "receipt": {
+        "status": "applied",
+        "at": "2026-11-14T11:40:17.415Z",
+        "rev": {
+          "before": "r:2ced01d8:4356144",
+          "after": "r:3525b2cb:8975040"
+        },
+        "checks": [
+          {
+            "name": "saved",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "placed",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "source_intact",
+            "pass": true,
+            "severity": "info",
+            "value": 3463957,
+            "detail": "complete png 1104×1504 px, 3.3 MB"
+          },
+          {
+            "name": "visible",
+            "pass": true,
+            "severity": "info",
+            "value": 0
+          }
+        ],
+        "timing": {
+          "total_ms": 23909,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 739,
+            "source_integrity": 0,
+            "source_decode": 689,
+            "source_hash": 1071,
+            "load_source": 2499,
+            "write_queue": 6859,
+            "prepare_master": 198,
+            "open_doc": 304,
+            "save": 8159,
+            "record_version": 4275
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 2338,
+            "long_tasks": 26,
+            "long_task_ms": 16465,
+            "max_long_task_ms": 1636,
+            "top_scripts": [
+              {
+                "name": "import.then@LenticularPreview.tsx",
+                "ms": 684
+              },
+              {
+                "name": "performWorkUntilDeadline@chunk-ZBXU67MV.js",
+                "ms": 621
+              }
+            ]
+          }
+        },
+        "seq": 2
+      }
+    },
+    {
+      "face": "back",
+      "success": true,
+      "task_status": "completed",
+      "source": "project/assets/working/other/generated-image-20261114-5cd5e4.png",
+      "receipt": {
+        "status": "applied",
+        "at": "2026-11-14T11:40:40.249Z",
+        "rev": {
+          "before": "r:3525b2cb:8975040",
+          "after": "r:d1f04ea9:14449175"
+        },
+        "checks": [
+          {
+            "name": "saved",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "placed",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "source_intact",
+            "pass": true,
+            "severity": "info",
+            "value": 4105385,
+            "detail": "complete png 1104×1504 px, 3.9 MB"
+          },
+          {
+            "name": "visible",
+            "pass": true,
+            "severity": "info",
+            "value": 0
+          }
+        ],
+        "timing": {
+          "total_ms": 46742,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 1478,
+            "source_integrity": 0,
+            "source_decode": 905,
+            "source_hash": 131,
+            "load_source": 2515,
+            "write_queue": 21263,
+            "prepare_master": 455,
+            "open_doc": 595,
+            "save": 12055,
+            "record_version": 6063
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 4876,
+            "long_tasks": 48,
+            "long_task_ms": 34304,
+            "max_long_task_ms": 2529,
+            "top_scripts": [
+              {
+                "name": "performWorkUntilDeadline@chunk-ZBXU67MV.js",
+                "ms": 1337
+              },
+              {
+                "name": "import.then@LenticularPreview.tsx",
+                "ms": 684
+              }
+            ]
+          }
+        },
+        "seq": 3
+      }
+    }
+  ],
+  "images": [
+    {
+      "src": "images/B10-R6-1.png",
+      "caption": "A 面 · 羽扇远眺营寨",
+      "source_sha256": "6b0724d6c03588009ad279c48bdac17f194707cd71c594fed53fc4c4d5439d3b"
+    },
+    {
+      "src": "images/B10-R6-2.png",
+      "caption": "B 面 · 参考新 A 图编辑火光背景",
+      "source_sha256": "9aca60313ba12d623792f277a8aeda1b9223fe027bf3634f9800bd842c91d1b1"
+    },
+    {
+      "src": "images/B10-R6-3.png",
+      "caption": "背面 · 羽扇、阵图与题名",
+      "source_sha256": "f039ddf3c5ede5961b950a6d7a5c413645b1cab767986de11a68cc58dca338d3"
+    }
+  ],
+  "downloads": [
+    {
+      "request_id": "canvas-cloud-d14b55b9-5ba8-4ca5-980d-646cf337cacc",
+      "file": ".cloud-download-d14b55b9-5ba8-4ca5-980d-646cf337cacc",
+      "transport": "node-fetch",
+      "outcome": "success",
+      "headers_ms": 653,
+      "body_wait_ms": 822.4471000069752,
+      "disk_backpressure_ms": 22.36130000371486,
+      "commit_ms": 32.25249999947846,
+      "bytes": 3261784,
+      "total_ms": 1531,
+      "face": "frame-a"
+    },
+    {
+      "request_id": "canvas-cloud-a4c6e596-199f-4164-9f29-d709cc70bae3",
+      "file": ".cloud-download-a4c6e596-199f-4164-9f29-d709cc70bae3",
+      "transport": "node-fetch",
+      "outcome": "success",
+      "headers_ms": 660,
+      "body_wait_ms": 815.3275999967009,
+      "disk_backpressure_ms": 85.82890000380576,
+      "commit_ms": 17.144700000062585,
+      "bytes": 3463957,
+      "total_ms": 1585,
+      "face": "frame-b"
+    },
+    {
+      "request_id": "canvas-cloud-c587d597-3aec-40d9-ab75-c17cc7d07ed1",
+      "file": ".cloud-download-c587d597-3aec-40d9-ab75-c17cc7d07ed1",
+      "transport": "node-fetch",
+      "outcome": "success",
+      "headers_ms": 697,
+      "body_wait_ms": 530.9354000017047,
+      "disk_backpressure_ms": 131.31519999541342,
+      "commit_ms": 4.395999999716878,
+      "bytes": 4105385,
+      "total_ms": 1627,
+      "face": "back"
+    }
+  ],
+  "saved_master": {
+    "path": "project/assets/working/product-design/zhugeliang-lenticular-card.svg",
+    "exists": true,
+    "rev": "r:d1f04ea9:14449175"
+  },
+  "saved_image_count": 3,
+  "saved_placement_count": 3,
+  "observations": 33,
+  "failure_observations": [],
+  "langfuse": {
+    "session_id": "053927a4-f806-4382-9b3a-2ec94fa8de2e",
+    "url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/053927a4-f806-4382-9b3a-2ec94fa8de2e",
+    "traces": [
+      {
+        "id": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "name": "agent.run",
+        "timestamp": "2026-11-14T11:37:09.618Z",
+        "sessionId": "053927a4-f806-4382-9b3a-2ec94fa8de2e",
+        "totalCost": 0.074308
+      }
+    ],
+    "observations": [
+      {
+        "id": "22a6eebcd936fc5b",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:37:17.574Z",
+        "endTime": "2026-11-14T11:37:36.735Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 1280,
+          "output": 1657,
+          "total": 29725,
+          "cache_read_input_tokens": 26788,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00096,
+          "output": 0.00621375,
+          "total": 0.00717375
+        },
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 19161,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "277643f8eb78fba8",
+        "parentObservationId": "a26798c3ede4c147",
+        "type": "GENERATION",
+        "name": "llm.gemini-3.1-flash-lite-preview",
+        "startTime": "2026-11-14T11:37:14.660Z",
+        "endTime": "2026-11-14T11:37:16.868Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.1-flash-lite-preview",
+        "usageDetails": {
+          "input": 337,
+          "output": 333,
+          "total": 670,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00008425,
+          "output": 0.0004995,
+          "total": 0.00058375
+        },
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 2208,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "90b45f9d3bf9849b",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:37:57.850Z",
+        "endTime": "2026-11-14T11:38:19.139Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 6858,
+          "output": 1424,
+          "total": 37079,
+          "cache_read_input_tokens": 28797,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.0051435,
+          "output": 0.00534,
+          "total": 0.0104835
+        },
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 21289,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "a21e5ae02dc5671b",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:37:37.503Z",
+        "endTime": "2026-11-14T11:37:44.718Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 3502,
+          "output": 185,
+          "total": 31605,
+          "cache_read_input_tokens": 27918,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.0026265,
+          "output": 0.00069375,
+          "total": 0.00332025
+        },
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 7215,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "b6714d3f3b6b6982",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:37:45.357Z",
+        "endTime": "2026-11-14T11:37:57.108Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 5158,
+          "output": 1152,
+          "total": 34228,
+          "cache_read_input_tokens": 27918,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.0038685,
+          "output": 0.00432,
+          "total": 0.0081885
+        },
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 11751,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "a26798c3ede4c147",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "SPAN",
+        "name": "stage.prompt_rewrite",
+        "startTime": "2026-11-14T11:37:14.031Z",
+        "endTime": "2026-11-14T11:37:16.870Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 2839,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "0096c26ed5776717",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:38:19.139Z",
+        "endTime": "2026-11-14T11:38:19.284Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 145,
+        "tool_call_id": "call_6366749502596366747",
+        "job_id": null
+      },
+      {
+        "id": "1dc038dc0416b227",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.project_plan_write",
+        "startTime": "2026-11-14T11:37:57.108Z",
+        "endTime": "2026-11-14T11:37:57.129Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 21,
+        "tool_call_id": "call_12458081285529270528",
+        "job_id": null
+      },
+      {
+        "id": "332bf013814c294d",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.read",
+        "startTime": "2026-11-14T11:37:36.736Z",
+        "endTime": "2026-11-14T11:37:36.780Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 44,
+        "tool_call_id": "call_9784296382554005250",
+        "job_id": null
+      },
+      {
+        "id": "7deab31f9c6434a4",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:37:57.108Z",
+        "endTime": "2026-11-14T11:37:57.118Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 10,
+        "tool_call_id": "call_12458081285529272047",
+        "job_id": null
+      },
+      {
+        "id": "93773213fc16eae7",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.read",
+        "startTime": "2026-11-14T11:37:44.718Z",
+        "endTime": "2026-11-14T11:37:44.740Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 22,
+        "tool_call_id": "call_12840860698162221126",
+        "job_id": null
+      },
+      {
+        "id": "9feebb52ba4546d5",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:37:36.736Z",
+        "endTime": "2026-11-14T11:37:36.757Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 21,
+        "tool_call_id": "call_9784296382554002947",
+        "job_id": null
+      },
+      {
+        "id": "3cf77dd61297bf65",
+        "parentObservationId": "c9f1e2d712d0312c",
+        "type": "AGENT",
+        "name": "agent.round",
+        "startTime": "2026-11-14T11:40:16.173Z",
+        "endTime": "2026-11-14T11:40:21.300Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 5127,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "4410bd55c765e31b",
+        "parentObservationId": "3cf77dd61297bf65",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:40:16.901Z",
+        "endTime": "2026-11-14T11:40:21.288Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 10292,
+          "output": 218,
+          "total": 71826,
+          "cache_read_input_tokens": 61316,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.007719,
+          "output": 0.0008175,
+          "total": 0.0085365
+        },
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 4387,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "913ba81f7dfe5080",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.canvas_product_add_batch",
+        "startTime": "2026-11-14T11:39:53.367Z",
+        "endTime": "2026-11-14T11:40:16.176Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 22809,
+        "tool_call_id": "call_7311326796113037737",
+        "job_id": null
+      },
+      {
+        "id": "18e23ac3dd4cf4ef",
+        "parentObservationId": "c9f1e2d712d0312c",
+        "type": "AGENT",
+        "name": "agent.round",
+        "startTime": "2026-11-14T11:37:14.022Z",
+        "endTime": "2026-11-14T11:39:53.392Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 159370,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "1a59e156de71c401",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:39:33.197Z",
+        "endTime": "2026-11-14T11:39:41.114Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 8605,
+          "output": 772,
+          "total": 38174,
+          "cache_read_input_tokens": 28797,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00645375,
+          "output": 0.002895,
+          "total": 0.00934875
+        },
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 7917,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "33ae729466a073d7",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:39:41.786Z",
+        "endTime": "2026-11-14T11:39:53.366Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 9533,
+          "output": 632,
+          "total": 71481,
+          "cache_read_input_tokens": 61316,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00714975,
+          "output": 0.00237,
+          "total": 0.00951975
+        },
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 11580,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "0c0ab925dbe214ca",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.load_pack",
+        "startTime": "2026-11-14T11:39:41.115Z",
+        "endTime": "2026-11-14T11:39:41.141Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 26,
+        "tool_call_id": "call_13145310557729616842",
+        "job_id": null
+      },
+      {
+        "id": "7e0df2cacab74574",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:39:41.114Z",
+        "endTime": "2026-11-14T11:39:41.136Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 22,
+        "tool_call_id": "call_13145310557729616731",
+        "job_id": null
+      },
+      {
+        "id": "2fe6347124a08d48",
+        "parentObservationId": "d161011a22dd0680",
+        "type": "SPAN",
+        "name": "stage.product_image_job",
+        "startTime": "2026-11-14T11:38:25.292Z",
+        "endTime": "2026-11-14T11:39:01.501Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 36209,
+        "tool_call_id": null,
+        "job_id": "back"
+      },
+      {
+        "id": "4757bd2a89e78ac9",
+        "parentObservationId": "79e4f8d1fd13fd87",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T11:38:24.940Z",
+        "endTime": "2026-11-14T11:39:13.483Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 48543,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "79e4f8d1fd13fd87",
+        "parentObservationId": "d161011a22dd0680",
+        "type": "SPAN",
+        "name": "stage.product_image_job",
+        "startTime": "2026-11-14T11:38:24.848Z",
+        "endTime": "2026-11-14T11:39:14.320Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 49472,
+        "tool_call_id": null,
+        "job_id": "frame_a"
+      },
+      {
+        "id": "a4ef2b111e8e3dd5",
+        "parentObservationId": "c39375815339ff56",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T11:39:14.322Z",
+        "endTime": "2026-11-14T11:39:31.543Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 17221,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "c39375815339ff56",
+        "parentObservationId": "d161011a22dd0680",
+        "type": "SPAN",
+        "name": "stage.product_image_job",
+        "startTime": "2026-11-14T11:39:14.321Z",
+        "endTime": "2026-11-14T11:39:32.477Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 18156,
+        "tool_call_id": null,
+        "job_id": "frame_b"
+      },
+      {
+        "id": "e36fbacd8c05b80e",
+        "parentObservationId": "2fe6347124a08d48",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T11:38:25.308Z",
+        "endTime": "2026-11-14T11:39:00.681Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 35373,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "d161011a22dd0680",
+        "parentObservationId": "18e23ac3dd4cf4ef",
+        "type": "TOOL",
+        "name": "tool.tool_product_image_gen",
+        "startTime": "2026-11-14T11:38:19.140Z",
+        "endTime": "2026-11-14T11:39:32.486Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 73346,
+        "tool_call_id": "call_6366749502596367822",
+        "job_id": null
+      },
+      {
+        "id": "7707abcdb6d6c2c0",
+        "parentObservationId": "c9f1e2d712d0312c",
+        "type": "AGENT",
+        "name": "agent.round",
+        "startTime": "2026-11-14T11:40:41.243Z",
+        "endTime": "2026-11-14T11:40:57.114Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 15871,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "c9f1e2d712d0312c",
+        "parentObservationId": null,
+        "type": "AGENT",
+        "name": "agent.run",
+        "startTime": "2026-11-14T11:37:09.618Z",
+        "endTime": "2026-11-14T11:40:58.381Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 228763,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "be0a732e75f82bce",
+        "parentObservationId": "7707abcdb6d6c2c0",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:40:41.919Z",
+        "endTime": "2026-11-14T11:40:57.067Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 15716,
+          "output": 1431,
+          "total": 78463,
+          "cache_read_input_tokens": 61316,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.011787,
+          "output": 0.00536625,
+          "total": 0.01715325
+        },
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 15148,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "273b5731a6355d6b",
+        "parentObservationId": "7707abcdb6d6c2c0",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:40:57.067Z",
+        "endTime": "2026-11-14T11:40:57.084Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 17,
+        "tool_call_id": "call_2880023172292723625",
+        "job_id": null
+      },
+      {
+        "id": "95fb6969baac0cc6",
+        "parentObservationId": "3cf77dd61297bf65",
+        "type": "TOOL",
+        "name": "tool.canvas_product_add_status",
+        "startTime": "2026-11-14T11:40:21.288Z",
+        "endTime": "2026-11-14T11:40:41.245Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 19957,
+        "tool_call_id": "call_1447183963977046472",
+        "job_id": null
+      },
+      {
+        "id": "bed812d542fc1783",
+        "parentObservationId": "7707abcdb6d6c2c0",
+        "type": "TOOL",
+        "name": "tool.respond_to_user",
+        "startTime": "2026-11-14T11:40:57.067Z",
+        "endTime": "2026-11-14T11:40:57.090Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "05aba400d6c0a64c3b9093f64e33b1d4",
+        "duration_ms": 23,
+        "tool_call_id": "call_2880023172292724608",
+        "job_id": null
+      }
+    ]
+  },
+  "post_run_verification": {
+    "method": "Independent read-only canvas_product_inspect after Agent completed; not an Agent tool call",
+    "agent_called_inspect": false,
+    "observed_at": "2026-11-14T19:42:45.187440+08:00",
+    "duration_ms": 515,
+    "included_in_agent_seconds": false,
+    "success": true
+  },
+  "scope": "Short natural user prompt, without tool names, fields or concurrency instructions; fresh project and new images. This changes both prompt and scheduling code and is not a single-variable speed experiment. B references the newly generated A. Artwork generation and placement only; no 3D rendering. Independent post-run verification is separate. Prompt rewrite and face-scope changes are both present, so quality and total-time differences cannot isolate the rewrite effect.",
+  "conclusion": "同一简短自然语言需求，额外的提示词改写未通过校验，已回退原文。代码仍完成并行生图与三面保存；装配超过首次等待窗口后查询同一任务，没有重新装配。",
+  "download_conclusion": "本轮新图下载约 1.5–1.6 秒、素材准备约 2.5 秒，47.231 秒整批装配主要花在依次保存、版本记录与排队。记录中有前端主线程长任务；脚本采样不足以把全部延迟归因于某个渲染模块。历史 132–190 秒素材异常仍未复现。",
+  "prompt_rewrite": {
+    "status": "fallback",
+    "model": "gemini-3.1-flash-lite-preview",
+    "timeout_seconds": 10,
+    "original_chars": 82,
+    "original_message_unchanged": true,
+    "fallback_reason": "ValueError",
+    "duration_ms": 2838,
+    "usage_by_model": [
+      {
+        "model": "gemini-3.1-flash-lite-preview",
+        "input_tokens": 337,
+        "output_tokens": 333,
+        "total_tokens": 670,
+        "cache_read_tokens": 0,
+        "cache_creation_tokens": 0,
+        "call_count": 1
+      }
+    ],
+    "token_usage_available": true,
+    "reference_cost_usd": 0.001336,
+    "cost_is_provider_invoice": false,
+    "brief": null,
+    "enabled": true,
+    "included_in_agent_seconds": true,
+    "rewritten": null,
+    "applied_to_planner": false
+  },
+  "visual_review": {
+    "summary": "A/B 主体构图基本一致，B 的营寨火海变化明显；本轮背面是完整独立画稿，未再见 R5 的人物对照拼版。",
+    "notes": [
+      "A/B 中人物的脸部朝向、冠帽、持扇姿势、衣袍轮廓与主体位置基本保留。A 是夕照营寨与局部照明火盆，B 将营寨和天空改为大范围火焰、浓烟与暖色映光。",
+      "背面以羽扇、八卦／阵图纹样和金色云纹边框构成完整画面，可读题名为“火烧连营”和“诸葛孔明”；未见额外人物对照图或三面拼版。",
+      "未发现明显空白、破图或主体严重变形；未对装饰纹样作历史或制版准确性验收。",
+      "本轮提示词整理在 2.838 秒后因 ValueError 回退，未应用改写结果；同时包含单面输出范围补丁，背面改善不能归因于提示词改写。",
+      "仅检查三张二维 PNG 的可见内容，不代表光栅变图、三维效果或印刷成品已验收。"
+    ]
+  },
+  "rewrite_probe": {
+    "scope": "standalone text-only",
+    "applied_to_R6": false,
+    "no_image_generation": true,
+    "no_chat_sent": true,
+    "original_prompt": "做一张架空三国“诸葛亮火烧连营”的双图光栅卡：诸葛亮持扇，画面从营寨变成火海，人物构图不变；背面放羽扇、阵图和题名。用默认规格，做好画稿并装到卡里，先不用三维预览。",
+    "total_duration_ms": 6847,
+    "total_reference_cost_usd": 0.002687,
+    "has_successful_rewrite": true,
+    "note": "独立纯文本实验共2次调用，均未应用到R6，也没有再次生图或发送chat。第1次结构校验通过但人工发现“装裱”歧义，保留原输出；增加交付措辞约束后做第2次。R6原候选缺失，不能借新probe推断R6具体失败原因。费用为本地费率参考估值。",
+    "successful_revised_attempt": 2,
+    "successful_revised_duration_ms": 3737,
+    "successful_revised_reference_cost_usd": 0.001322,
+    "standalone_attempt_limit_reached": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "started_at": "2026-11-14T19:48:58.421+08:00",
+        "model": "gemini-3.1-flash-lite-preview",
+        "status": "success",
+        "duration_ms": 3110,
+        "reference_cost_usd": 0.001365,
+        "cost_is_provider_invoice": false,
+        "usage_by_model": [
+          {
+            "model": "gemini-3.1-flash-lite-preview",
+            "input_tokens": 348,
+            "output_tokens": 339,
+            "total_tokens": 687,
+            "cache_read_tokens": 0,
+            "cache_creation_tokens": 0,
+            "call_count": 1
+          }
+        ],
+        "rewritten_prompt": "设计一张架空三国题材的双图光栅卡。正面为‘诸葛亮火烧连营’主题：画面包含诸葛亮持羽扇的固定构图，通过光栅效果实现动态切换，第一帧（Frame A）呈现诸葛亮所在的营寨，第二帧（Frame B）将背景营寨场景转变为火海，保持诸葛亮人物形象与构图位置完全一致。背面设计需包含羽扇、阵图元素及题名。请输出画稿并完成光栅卡装裱，无需提供三维预览。",
+        "brief": {
+          "rewritten_prompt": "设计一张架空三国题材的双图光栅卡。正面为‘诸葛亮火烧连营’主题：画面包含诸葛亮持羽扇的固定构图，通过光栅效果实现动态切换，第一帧（Frame A）呈现诸葛亮所在的营寨，第二帧（Frame B）将背景营寨场景转变为火海，保持诸葛亮人物形象与构图位置完全一致。背面设计需包含羽扇、阵图元素及题名。请输出画稿并完成光栅卡装裱，无需提供三维预览。",
+          "product": [
+            "双图光栅卡"
+          ],
+          "theme": [
+            "架空三国“诸葛亮火烧连营”"
+          ],
+          "shared_subject": [
+            "诸葛亮持扇",
+            "人物构图不变"
+          ],
+          "frame_a": [
+            "营寨"
+          ],
+          "frame_b_change": [
+            "变成火海"
+          ],
+          "back": [
+            "羽扇、阵图和题名"
+          ],
+          "consistency": [
+            "人物构图不变"
+          ],
+          "delivery": [
+            "用默认规格",
+            "做好画稿并装到卡里",
+            "先不用三维预览"
+          ],
+          "constraints": [
+            "先不用三维预览"
+          ]
+        },
+        "manual_review": {
+          "status": "needs_revision",
+          "issues": [
+            "将原文“做好画稿并装到卡里”改为“光栅卡装裱”，可能误导成新增实体工序；未采用。"
+          ],
+          "automatic_validation_at_execution": "passed_before_delivery_wording_guard"
+        }
+      },
+      {
+        "attempt": 2,
+        "started_at": "2026-11-14T19:51:01.949+08:00",
+        "model": "gemini-3.1-flash-lite-preview",
+        "status": "success",
+        "duration_ms": 3737,
+        "reference_cost_usd": 0.001322,
+        "cost_is_provider_invoice": false,
+        "usage_by_model": [
+          {
+            "model": "gemini-3.1-flash-lite-preview",
+            "input_tokens": 386,
+            "output_tokens": 312,
+            "total_tokens": 698,
+            "cache_read_tokens": 0,
+            "cache_creation_tokens": 0,
+            "call_count": 1
+          }
+        ],
+        "rewritten_prompt": "设计一张以架空三国为主题的双图光栅卡。正面视觉：主体为手持羽扇的诸葛亮，构图位置保持固定。第一帧（Frame A）背景为营寨；第二帧（Frame B）背景切换为火海，诸葛亮人物形象与位置需与第一帧保持高度一致。背面设计：排版羽扇、阵图和题名元素。请提供画稿并将其置入卡片模板中。请使用默认规格，无需制作三维预览。",
+        "brief": {
+          "rewritten_prompt": "设计一张以架空三国为主题的双图光栅卡。正面视觉：主体为手持羽扇的诸葛亮，构图位置保持固定。第一帧（Frame A）背景为营寨；第二帧（Frame B）背景切换为火海，诸葛亮人物形象与位置需与第一帧保持高度一致。背面设计：排版羽扇、阵图和题名元素。请提供画稿并将其置入卡片模板中。请使用默认规格，无需制作三维预览。",
+          "product": [
+            "双图光栅卡"
+          ],
+          "theme": [
+            "架空三国“诸葛亮火烧连营”"
+          ],
+          "shared_subject": [
+            "诸葛亮持扇"
+          ],
+          "frame_a": [
+            "营寨"
+          ],
+          "frame_b_change": [
+            "变成火海"
+          ],
+          "back": [
+            "羽扇、阵图和题名"
+          ],
+          "consistency": [
+            "人物构图不变"
+          ],
+          "delivery": [
+            "做好画稿并装到卡里",
+            "先不用三维预览"
+          ],
+          "constraints": [
+            "用默认规格"
+          ]
+        },
+        "manual_review": {
+          "status": "usable_as_advisory_with_original_priority",
+          "preserved": [
+            "架空三国主题在原文引用保留",
+            "诸葛亮与扇",
+            "营寨到火海",
+            "A/B人物构图一致",
+            "背面羽扇、阵图、题名",
+            "默认规格",
+            "画稿装入卡片",
+            "不做三维预览"
+          ],
+          "improvements": [
+            "明确区分A/B背景变化与固定人物",
+            "交付措辞改为将画稿置入卡片模板，避免装裱歧义"
+          ],
+          "limitations": [
+            "自由改写简写了主题全称，完整名称仍在已验证theme引用和原文中，原文优先。",
+            "自由改写将正面“扇”说成“羽扇”；羽扇是原文已有元素，但前景材质未单独规定，不应把此词变成额外强制规格。",
+            "仅比较了文本忠实与清晰度，未将其用于R6、没有图像效果验证。"
+          ]
+        }
+      }
+    ]
+  }
+}

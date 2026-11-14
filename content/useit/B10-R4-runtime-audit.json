@@ -1,0 +1,596 @@
+{
+  "case": "B10-R4",
+  "test_date": "2026-11-14",
+  "task_id": "90d3b72d-2f56-4742-8b74-5c43ca4297aa",
+  "project_id": "39a240d1-9981-4de3-9277-bbd8d834275f",
+  "source_run": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa",
+  "completed_at": "2026-11-14T19:00:37+08:00",
+  "final_state": "done",
+  "scope": "只读本地已完成运行日志；只读取可见工具调用及耗时，不读取或发布隐藏推理、敏感URL或凭据。",
+  "local_total_seconds": 251.05,
+  "model_seconds": 131.145,
+  "generation_wall_seconds": 76.218,
+  "frontend_roundtrip_seconds": 17.356,
+  "residual_seconds": 26.331,
+  "breakdown_ms": {
+    "local_total": 251050,
+    "model": 131145,
+    "generation_outer_wall": 76218,
+    "frontend_roundtrip": 17356,
+    "residual": 26331
+  },
+  "model_round_count": 9,
+  "visible_tool_call_count": 16,
+  "paired_plan_round_count": 6,
+  "pure_checklist_round_count": 0,
+  "steps": [
+    {
+      "step": 1,
+      "observable_action": "同轮读取实物设计指南与光栅卡目录",
+      "model_ms": 15395,
+      "model_seconds": 15.395,
+      "tool_names": [
+        "read"
+      ],
+      "calls": [
+        {
+          "tool_name": "read",
+          "tool_call_id": "call_5699750644822501208",
+          "paths": [
+            "skills/physical-design/SKILL.md",
+            "catalog/lenticular-card"
+          ]
+        }
+      ],
+      "pairs_plan_with_work": false,
+      "pure_checklist_round": false,
+      "outer_action_ms": 9,
+      "r3_source_steps": [
+        3
+      ],
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa/steps/step_001/output/output.json"
+    },
+    {
+      "step": 2,
+      "observable_action": "直接加载 canvas 工具包，省去 list_packs",
+      "model_ms": 7283,
+      "model_seconds": 7.283,
+      "tool_names": [
+        "load_pack"
+      ],
+      "calls": [
+        {
+          "tool_name": "load_pack",
+          "tool_call_id": "call_12337841111034312222"
+        }
+      ],
+      "pairs_plan_with_work": false,
+      "pure_checklist_round": false,
+      "outer_action_ms": 1,
+      "r3_source_steps": [
+        2
+      ],
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa/steps/step_002/output/output.json"
+    },
+    {
+      "step": 3,
+      "observable_action": "读取双图光栅卡具体规格",
+      "model_ms": 7573,
+      "model_seconds": 7.573,
+      "tool_names": [
+        "read"
+      ],
+      "calls": [
+        {
+          "tool_name": "read",
+          "tool_call_id": "call_9246145144631170655",
+          "paths": [
+            "catalog/lenticular-card/two-image-flip"
+          ]
+        }
+      ],
+      "pairs_plan_with_work": false,
+      "pure_checklist_round": false,
+      "outer_action_ms": 14,
+      "r3_source_steps": [
+        4
+      ],
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa/steps/step_003/output/output.json"
+    },
+    {
+      "step": 4,
+      "observable_action": "创建进度清单，并在同轮创建光栅卡制品",
+      "model_ms": 21200,
+      "model_seconds": 21.2,
+      "tool_names": [
+        "plan_write",
+        "project_plan_write"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_14557850712191033808",
+          "status_updates": [
+            {
+              "id": "create-plan",
+              "status": "in_progress"
+            },
+            {
+              "id": "gen-frame-a-and-back",
+              "status": "pending"
+            },
+            {
+              "id": "gen-frame-b",
+              "status": "pending"
+            },
+            {
+              "id": "batch-add-faces",
+              "status": "pending"
+            },
+            {
+              "id": "inspect-result",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "tool_name": "project_plan_write",
+          "tool_call_id": "call_14557850712191036383"
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 9,
+      "r3_source_steps": [
+        5,
+        6
+      ],
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa/steps/step_004/output/output.json"
+    },
+    {
+      "step": 5,
+      "observable_action": "更新进度清单，并同时生成 A 面和背面",
+      "model_ms": 19668,
+      "model_seconds": 19.668,
+      "tool_names": [
+        "plan_write",
+        "tool_product_image_gen",
+        "tool_product_image_gen"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_13251772045469141955",
+          "status_updates": [
+            {
+              "id": "create-plan",
+              "status": "completed"
+            },
+            {
+              "id": "gen-frame-a-and-back",
+              "status": "in_progress"
+            },
+            {
+              "id": "gen-frame-b",
+              "status": "pending"
+            },
+            {
+              "id": "batch-add-faces",
+              "status": "pending"
+            },
+            {
+              "id": "inspect-result",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "tool_name": "tool_product_image_gen",
+          "tool_call_id": "call_13251772045469141062",
+          "face_id": "front",
+          "frame_id": "frame-a",
+          "uses_reference_image": false
+        },
+        {
+          "tool_name": "tool_product_image_gen",
+          "tool_call_id": "call_13251772045469140169",
+          "face_id": "back",
+          "frame_id": null,
+          "uses_reference_image": false
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 51642,
+      "r3_source_steps": [
+        7,
+        8,
+        11,
+        12
+      ],
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa/steps/step_005/output/output.json"
+    },
+    {
+      "step": 6,
+      "observable_action": "确认 A 面与背面完成，并使用 A 图编辑 B 面",
+      "model_ms": 18451,
+      "model_seconds": 18.451,
+      "tool_names": [
+        "plan_write",
+        "tool_product_image_gen"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_1062177251969646717",
+          "status_updates": [
+            {
+              "id": "create-plan",
+              "status": "completed"
+            },
+            {
+              "id": "gen-frame-a-and-back",
+              "status": "completed"
+            },
+            {
+              "id": "gen-frame-b",
+              "status": "in_progress"
+            },
+            {
+              "id": "batch-add-faces",
+              "status": "pending"
+            },
+            {
+              "id": "inspect-result",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "tool_name": "tool_product_image_gen",
+          "tool_call_id": "call_1062177251969648414",
+          "face_id": "front",
+          "frame_id": "frame-b",
+          "uses_reference_image": true
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 24576,
+      "r3_source_steps": [
+        9,
+        10
+      ],
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa/steps/step_006/output/output.json"
+    },
+    {
+      "step": 7,
+      "observable_action": "确认三张图完成，并批量装配到同一画稿",
+      "model_ms": 11127,
+      "model_seconds": 11.127,
+      "tool_names": [
+        "plan_write",
+        "canvas_product_add_batch"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_9244158074278598033",
+          "status_updates": [
+            {
+              "id": "create-plan",
+              "status": "completed"
+            },
+            {
+              "id": "gen-frame-a-and-back",
+              "status": "completed"
+            },
+            {
+              "id": "gen-frame-b",
+              "status": "completed"
+            },
+            {
+              "id": "batch-add-faces",
+              "status": "in_progress"
+            },
+            {
+              "id": "inspect-result",
+              "status": "pending"
+            }
+          ]
+        },
+        {
+          "tool_name": "canvas_product_add_batch",
+          "tool_call_id": "call_9244158074278597900"
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 20,
+      "r3_source_steps": [
+        13,
+        14
+      ],
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa/steps/step_007/output/output.json"
+    },
+    {
+      "step": 8,
+      "observable_action": "确认装配完成，并检查三面保存结果",
+      "model_ms": 10506,
+      "model_seconds": 10.506,
+      "tool_names": [
+        "plan_write",
+        "canvas_product_inspect"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_929955391989838817",
+          "status_updates": [
+            {
+              "id": "create-plan",
+              "status": "completed"
+            },
+            {
+              "id": "gen-frame-a-and-back",
+              "status": "completed"
+            },
+            {
+              "id": "gen-frame-b",
+              "status": "completed"
+            },
+            {
+              "id": "batch-add-faces",
+              "status": "completed"
+            },
+            {
+              "id": "inspect-result",
+              "status": "in_progress"
+            }
+          ]
+        },
+        {
+          "tool_name": "canvas_product_inspect",
+          "tool_call_id": "call_929955391989840452"
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 9,
+      "r3_source_steps": [
+        15,
+        16
+      ],
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa/steps/step_008/output/output.json"
+    },
+    {
+      "step": 9,
+      "observable_action": "确认检查完成，并在同轮回复结果",
+      "model_ms": 19942,
+      "model_seconds": 19.942,
+      "tool_names": [
+        "plan_write",
+        "respond_to_user"
+      ],
+      "calls": [
+        {
+          "tool_name": "plan_write",
+          "tool_call_id": "call_7209530430491622158",
+          "status_updates": [
+            {
+              "id": "create-plan",
+              "status": "completed"
+            },
+            {
+              "id": "gen-frame-a-and-back",
+              "status": "completed"
+            },
+            {
+              "id": "gen-frame-b",
+              "status": "completed"
+            },
+            {
+              "id": "batch-add-faces",
+              "status": "completed"
+            },
+            {
+              "id": "inspect-result",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "tool_name": "respond_to_user",
+          "tool_call_id": "call_7209530430491620339"
+        }
+      ],
+      "pairs_plan_with_work": true,
+      "pure_checklist_round": false,
+      "outer_action_ms": 22,
+      "r3_source_steps": [
+        17,
+        18
+      ],
+      "source": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-185629_agent_tid_90d3b72d-2f56-4742-8b74-5c43ca4297aa/steps/step_009/output/output.json"
+    }
+  ],
+  "generation_steps": [
+    {
+      "step": 5,
+      "faces": [
+        "A 面",
+        "背面"
+      ],
+      "outer_action_ms": 51642,
+      "outer_action_seconds": 51.642,
+      "started_at": "2026-11-14T18:57:44.392+08:00",
+      "ended_at": "2026-11-14T18:58:36.034+08:00",
+      "phase": "orch.plan.run_action",
+      "note": "整轮外层墙钟，包含同轮清单及生图收尾；本轮多图只能计一次。"
+    },
+    {
+      "step": 6,
+      "faces": [
+        "B 面"
+      ],
+      "outer_action_ms": 24576,
+      "outer_action_seconds": 24.576,
+      "started_at": "2026-11-14T18:59:00.544+08:00",
+      "ended_at": "2026-11-14T18:59:25.120+08:00",
+      "phase": "orch.plan.run_action",
+      "note": "整轮外层墙钟，包含同轮清单及生图收尾；本轮多图只能计一次。"
+    }
+  ],
+  "generation_individual_calls": [
+    {
+      "step": 5,
+      "face": "背面",
+      "depends_on": "已保存制品规格",
+      "tool_call_id": "call_13251772045469140169",
+      "inline_ms": 47746,
+      "inline_seconds": 47.746,
+      "started_at": "2026-11-14T18:57:44.870+08:00",
+      "ended_at": "2026-11-14T18:58:32.616+08:00",
+      "phase": "orch.inline_tool.run",
+      "output_images": [
+        {
+          "filename": "generated-image-20261114-cc7608.png",
+          "artifact_id": "art_876b02344fb045898c56d52ca5cc7608",
+          "width": 1104,
+          "height": 1504
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "face": "A 面",
+      "depends_on": "已保存制品规格",
+      "tool_call_id": "call_13251772045469141062",
+      "inline_ms": 51378,
+      "inline_seconds": 51.378,
+      "started_at": "2026-11-14T18:57:44.406+08:00",
+      "ended_at": "2026-11-14T18:58:35.784+08:00",
+      "phase": "orch.inline_tool.run",
+      "output_images": [
+        {
+          "filename": "generated-image-20261114-e4b2cb.png",
+          "artifact_id": "art_1981e1352a284d0e8399bea5c9e4b2cb",
+          "width": 1104,
+          "height": 1504
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "face": "B 面",
+      "depends_on": "本次 A 面新生成图片",
+      "tool_call_id": "call_1062177251969648414",
+      "inline_ms": 22944,
+      "inline_seconds": 22.944,
+      "started_at": "2026-11-14T18:59:00.557+08:00",
+      "ended_at": "2026-11-14T18:59:23.501+08:00",
+      "phase": "orch.inline_tool.run",
+      "output_images": [
+        {
+          "filename": "edited-image-20261114-c1b172.png",
+          "artifact_id": "art_9935e79347e841fd9675b95450c1b172",
+          "width": 1104,
+          "height": 1504
+        }
+      ]
+    }
+  ],
+  "generation_overlap": {
+    "a_and_back_same_round": true,
+    "step": 5,
+    "overlap_started_at": "2026-11-14T18:57:44.870+08:00",
+    "overlap_ended_at": "2026-11-14T18:58:32.616+08:00",
+    "overlap_ms": 47746,
+    "overlap_seconds": 47.746,
+    "individual_inline_sum_ms": 122068,
+    "do_not_add_individual_times_to_total": true,
+    "b_dependency": "B 面使用本次新 A 图作参考，仍需在 A 完成后开始。",
+    "evidence": "A/背面同属step_005的两个tool_product_image_gen；orch.inline_tool.run使用with phase实测起止，重叠可直接计算。"
+  },
+  "frontend_roundtrips": [
+    {
+      "tool_name": "canvas_product_add_batch",
+      "tool_call_id": "call_9244158074278597900",
+      "issued_step": 7,
+      "phase_recorded_step": 8,
+      "duration_ms": 13882,
+      "seconds": 13.882,
+      "success": true,
+      "phase": "orch.action.frontend_roundtrip"
+    },
+    {
+      "tool_name": "canvas_product_inspect",
+      "tool_call_id": "call_929955391989840452",
+      "issued_step": 8,
+      "phase_recorded_step": 9,
+      "duration_ms": 3474,
+      "seconds": 3.474,
+      "success": true,
+      "phase": "orch.action.frontend_roundtrip"
+    }
+  ],
+  "comparison_to_r3": {
+    "source_run": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679",
+    "model_rounds_before": 18,
+    "model_rounds_after": 9,
+    "local_total_before_seconds": 296.46,
+    "local_total_after_seconds": 251.05,
+    "local_saved_seconds": 45.41,
+    "local_reduction_percent": 15.3174,
+    "model_before_seconds": 164.395,
+    "model_after_seconds": 131.145,
+    "model_saved_seconds": 33.25,
+    "generation_outer_before_seconds": 101.498,
+    "generation_outer_after_seconds": 76.218,
+    "frontend_before_seconds": 15.718,
+    "frontend_after_seconds": 17.356,
+    "residual_before_seconds": 14.849,
+    "residual_after_seconds": 26.331,
+    "removed_round": {
+      "r3_step": 1,
+      "tool_name": "list_packs",
+      "reason": "系统提示已有工具包信息，直接加载canvas。"
+    },
+    "mapping_note": "steps[].r3_source_steps是可观察工作的对应关系；旧R3第11轮背面开始清单被提前并入新R4第5轮。",
+    "token_usage_before": {
+      "input_tokens": 1225627,
+      "output_tokens": 10464,
+      "total_tokens": 1236091,
+      "cache_read_tokens": 1015874,
+      "cache_creation_tokens": 0
+    },
+    "token_usage_after": {
+      "input_tokens": 558179,
+      "output_tokens": 9437,
+      "total_tokens": 567616,
+      "cache_read_tokens": 478866,
+      "cache_creation_tokens": 0
+    }
+  },
+  "interpretation_notes": [
+    "模型轮数减半并不等于模型时间减半：每个合并响应输出更多工具参数，本次模型总等待只减少33.250秒。",
+    "每轮模型耗时是整体请求等待，不能拆成纯理解、供应商排队或网络各占多少。",
+    "orch.plan.llm_call与frontend_roundtrip起止为事后补记，只用duration_ms；前端回调phase的step属于收到结果的下一轮，按tool_call_id匹配发起轮。",
+    "生图总时间使用两个外层run_action之和76.218秒；三图inline相加122.068秒包含并行重叠，不能叠加到总用时。",
+    "残余26.331秒是本地总用时扣除上述三组后的余额，包含上下文/记录/交接等未单独归类工作；尚不能归因于一个具体瓶颈。",
+    "这是同主题新素材的一次复测，供应商单次延迟、输出长度和缓存均可能变化，不视为稳定性能保证。"
+  ],
+  "fresh_asset_evidence": {
+    "a_and_back_reference_image_args_empty": true,
+    "b_reference_filenames": [
+      "generated-image-20261114-e4b2cb.png"
+    ],
+    "b_reference_matches_current_run_a_output": true,
+    "a_filename": "generated-image-20261114-e4b2cb.png",
+    "b_filename": "edited-image-20261114-c1b172.png",
+    "back_filename": "generated-image-20261114-cc7608.png",
+    "source": "step_005/step_006 output/output.json.tool_calls 与 stream_messages.jsonl 的 image_gen_end.images.filename；不保存原始媒体 URL。"
+  },
+  "reference_cost_usd": 0.3311142,
+  "cost_note": "按本地配置费率计算的参考值，由本次费用采集提供；不是供应商账单。"
+}

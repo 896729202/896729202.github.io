@@ -13,6 +13,8 @@ class Parser(HTMLParser):
   for key in ['href','src']:
    if key in a:self.links.append(a[key])
   if tag=='img':self.images.append(a);assert a.get('alt')
+  if tag=='a' and re.search(r'(?:^|/)B10(?:-R\d+)?\.html(?:#|$)',a.get('href','')):
+   assert a.get('target')!='_blank','Internal test version link opens another tab'
 errors=[];pages=[ROOT/'index.html',*list((ROOT/'useit').rglob('*.html'))]
 for p in pages:
  text=p.read_text('utf8');doc=Parser();doc.feed(text)
@@ -40,7 +42,8 @@ for c in cases:
  assert (BASE/(c['case']+'.html')).exists()
 assert not errors,errors
 retests=[]
-for name,source in [('B10-R2','placement-fix'),('B10-R3','placement-fire')]:
+for name,source in [('B10-R2','placement-fix'),('B10-R3','placement-fire'),('B10-R4','placement-speed'),('B10-R5','placement-natural'),('B10-R6','placement-rewrite'),('B10-R7','placement-gta')]:
+ if not (ROOT/f'content/useit/{source}-2026-11-14.json').exists():continue
  r=json.loads((BASE/f'evidence/{name}-placement.json').read_text('utf8'));retests.append(r)
  assert r==json.loads((ROOT/f'content/useit/{source}-2026-11-14.json').read_text('utf8'))
  assert r['batch_status']=='completed' and not r['failure_observations']
@@ -51,6 +54,6 @@ for name,source in [('B10-R2','placement-fix'),('B10-R3','placement-fire')]:
  for im in r['images']:
   assert hashlib.sha256((BASE/im['src']).read_bytes()).hexdigest()==im['source_sha256']
  assert (BASE/f'{name}.html').is_file()
-for p in [*(BASE/'data').glob('*.json'),*(BASE/'evidence').glob('*.json')]:
+for p in [*(BASE/'data').glob('*.json'),*(BASE/'evidence').glob('*.json'),*(ROOT/'content/useit').glob('*.json')]:
  assert not re.search(r'Bearer\s|sk-[a-zA-Z0-9]{20}|X-Amz-Signature|api_key=|[A-Z]:[\\/]Users',p.read_text('utf8'),re.I),p
-print(f'PASS: {len(pages)} pages, 12 categories, 15 original attempts/32 images/{sum(c["observation_count"] for c in cases)} observations plus 2 independent retests/6 verified images/{sum(r["observations"] for r in retests)} observations; all links and anchors resolve.')
+print(f'PASS: {len(pages)} pages, 12 categories, 15 original attempts/32 images/{sum(c["observation_count"] for c in cases)} observations plus {len(retests)} independent retests/{sum(len(r["images"]) for r in retests)} verified images/{sum(r["observations"] for r in retests)} observations; all links and anchors resolve.')

@@ -1,0 +1,437 @@
+{
+  "case": "B10-R3",
+  "theme": "诸葛亮火烧连营（架空插画）",
+  "test_date": "2026-11-14",
+  "source_run": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679",
+  "scope": "仅分析可见工具调用、参数与耗时；不读取或发布模型隐藏推理。",
+  "timing_note": "模型耗时是18次LLM请求的总等待，不能等同为纯理解时间，也不能由客户端日志拆出供应商内部推理、排队或网络各占多少。使用duration_ms；日志started_at为事后补记，不能做区间相加。",
+  "total_model_ms": 164395,
+  "checklist_model_ms": 85291,
+  "checklist_execution_ms": 33,
+  "status_update_model_ms": 71535,
+  "groups": [
+    {
+      "id": "preparation",
+      "label": "发现工具与读取规格",
+      "model_ms": 28323,
+      "steps": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "product_spec",
+      "label": "创建制品配置",
+      "model_ms": 5613,
+      "steps": [
+        6
+      ]
+    },
+    {
+      "id": "checklist",
+      "label": "仅更新进度清单",
+      "model_ms": 85291,
+      "steps": [
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17
+      ]
+    },
+    {
+      "id": "image_requests",
+      "label": "编写并提交三张图的参数",
+      "model_ms": 26882,
+      "steps": [
+        8,
+        10,
+        12
+      ]
+    },
+    {
+      "id": "assembly_verification",
+      "label": "装配与验收参数",
+      "model_ms": 9252,
+      "steps": [
+        14,
+        16
+      ]
+    },
+    {
+      "id": "final_response",
+      "label": "最终结果回复",
+      "model_ms": 9034,
+      "steps": [
+        18
+      ]
+    }
+  ],
+  "calls": [
+    {
+      "step": 1,
+      "model_ms": 10157,
+      "model_seconds": 10.157,
+      "tool_name": "list_packs",
+      "tool_call_id": "call_8576129420675589963",
+      "observable_action": "发现可用工具包",
+      "group": "preparation",
+      "pure_checklist": false,
+      "optimization": "可省：系统提示已列出 canvas 工具包，可直接加载。",
+      "dependency": "无",
+      "action_ms": 2,
+      "model_input_tokens": 27430,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_001",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 2,
+      "model_ms": 4487,
+      "model_seconds": 4.487,
+      "tool_name": "load_pack",
+      "tool_call_id": "call_17306973418046504451",
+      "observable_action": "加载画稿与装配工具包 canvas",
+      "group": "preparation",
+      "pure_checklist": false,
+      "optimization": "保留必要加载；可与已知路径的只读准备合并。",
+      "dependency": "已确认需使用 canvas 工具包",
+      "action_ms": 1,
+      "model_input_tokens": 29456,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_002",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 3,
+      "model_ms": 6584,
+      "model_seconds": 6.584,
+      "tool_name": "read",
+      "tool_call_id": "call_1653056713132535",
+      "observable_action": "读取实物设计指南与光栅卡目录",
+      "group": "preparation",
+      "pure_checklist": false,
+      "optimization": "本轮已把两份资料合并读取。",
+      "dependency": "已知技能路径与品类",
+      "action_ms": 4,
+      "model_input_tokens": 62376,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_003",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 4,
+      "model_ms": 7095,
+      "model_seconds": 7.095,
+      "tool_name": "read",
+      "tool_call_id": "call_9766153888190643325",
+      "observable_action": "读取双图变换光栅卡的具体规格",
+      "group": "preparation",
+      "pure_checklist": false,
+      "optimization": "目录确认的必要读取；仅在路径已核实时可提前合并。",
+      "dependency": "上一轮目录返回 two-image-flip 入口",
+      "action_ms": 10,
+      "model_input_tokens": 63979,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_004",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 5,
+      "model_ms": 13756,
+      "model_seconds": 13.756,
+      "tool_name": "plan_write",
+      "tool_call_id": "call_3054602399178874790",
+      "observable_action": "创建六项进度清单",
+      "group": "checklist",
+      "pure_checklist": true,
+      "optimization": "与创建制品放在同次模型响应，清单先执行。",
+      "dependency": "规格已读取",
+      "action_ms": 2,
+      "model_input_tokens": 65509,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_005",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 6,
+      "model_ms": 5613,
+      "model_seconds": 5.613,
+      "tool_name": "project_plan_write",
+      "tool_call_id": "call_2659351016310256029",
+      "observable_action": "创建 63×88 mm 光栅卡制品与工艺配置",
+      "group": "product_spec",
+      "pure_checklist": false,
+      "optimization": "必要业务动作，可与首次清单更新同轮。",
+      "dependency": "已读取真实品类、尺寸与工艺",
+      "action_ms": 42,
+      "model_input_tokens": 67187,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_006",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 7,
+      "model_ms": 14798,
+      "model_seconds": 14.798,
+      "tool_name": "plan_write",
+      "tool_call_id": "call_14145002003267899954",
+      "observable_action": "勾选制品已建好，将生成 A 面标为进行中",
+      "group": "checklist",
+      "pure_checklist": true,
+      "optimization": "与 A 面及背面生图参数合并；无须单独问模型。",
+      "dependency": "创建制品成功回执",
+      "action_ms": 1,
+      "model_input_tokens": 68950,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_007",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 8,
+      "model_ms": 9110,
+      "model_seconds": 9.11,
+      "tool_name": "tool_product_image_gen",
+      "tool_call_id": "call_5348505254142174549",
+      "observable_action": "编写 A 面插画生图参数并提交",
+      "group": "image_requests",
+      "pure_checklist": false,
+      "optimization": "保留创作参数，可和不依赖 A 面的背面同时提交。",
+      "dependency": "已保存制品规格",
+      "action_ms": 43359,
+      "model_input_tokens": 70191,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_008",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 9,
+      "model_ms": 7132,
+      "model_seconds": 7.132,
+      "tool_name": "plan_write",
+      "tool_call_id": "call_8557722455867982788",
+      "observable_action": "勾选 A 面已生成，将生成 B 面标为进行中",
+      "group": "checklist",
+      "pure_checklist": true,
+      "optimization": "与使用 A 图编辑 B 图的请求合并。",
+      "dependency": "A 面生图成功回执",
+      "action_ms": 2,
+      "model_input_tokens": 71295,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_009",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 10,
+      "model_ms": 8996,
+      "model_seconds": 8.996,
+      "tool_name": "tool_product_image_gen",
+      "tool_call_id": "call_10711306783153495920",
+      "observable_action": "以 A 面为参考，编写并提交 B 面火烧营寨编辑参数",
+      "group": "image_requests",
+      "pure_checklist": false,
+      "optimization": "保持 A→B 依赖，不能在尚无 A 图时假装三图独立。",
+      "dependency": "A 面真实新图路径",
+      "action_ms": 24858,
+      "model_input_tokens": 71960,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_010",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 11,
+      "model_ms": 6577,
+      "model_seconds": 6.577,
+      "tool_name": "plan_write",
+      "tool_call_id": "call_5597263150850346576",
+      "observable_action": "勾选 B 面已生成，将生成背面标为进行中",
+      "group": "checklist",
+      "pure_checklist": true,
+      "optimization": "背面提前并行后，此串行清单阶段可消除。",
+      "dependency": "旧流程 B 面成功回执；背面内容本身不依赖它",
+      "action_ms": 4,
+      "model_input_tokens": 73204,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_011",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 12,
+      "model_ms": 8776,
+      "model_seconds": 8.776,
+      "tool_name": "tool_product_image_gen",
+      "tool_call_id": "call_3944446583937642422",
+      "observable_action": "编写羽扇、阵图与题名的背面生图参数并提交",
+      "group": "image_requests",
+      "pure_checklist": false,
+      "optimization": "与 A 面合并为同一轮独立并行生图。",
+      "dependency": "已保存制品规格，不依赖 A/B 生图结果",
+      "action_ms": 33281,
+      "model_input_tokens": 73817,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_012",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 13,
+      "model_ms": 27337,
+      "model_seconds": 27.337,
+      "tool_name": "plan_write",
+      "tool_call_id": "call_16540558426745666523",
+      "observable_action": "勾选背面已生成，将三面装配标为进行中",
+      "group": "checklist",
+      "pure_checklist": true,
+      "optimization": "与三面批量装配参数合并。",
+      "dependency": "三张图均已生成成功",
+      "action_ms": 10,
+      "model_input_tokens": 74802,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_013",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 14,
+      "model_ms": 5329,
+      "model_seconds": 5.329,
+      "tool_name": "canvas_product_add_batch",
+      "tool_call_id": "call_13443661718880243649",
+      "observable_action": "一次提交 A、B、背面三张素材，等待批量装配结果",
+      "group": "assembly_verification",
+      "pure_checklist": false,
+      "optimization": "必要动作；素材读取并行、同一画稿保存串行。",
+      "dependency": "三张图真实素材路径",
+      "action_ms": 1,
+      "model_input_tokens": 75749,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_014",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 15,
+      "model_ms": 7673,
+      "model_seconds": 7.673,
+      "tool_name": "plan_write",
+      "tool_call_id": "call_10202644502309775288",
+      "observable_action": "勾选装配已完成，将保存检查标为进行中",
+      "group": "checklist",
+      "pure_checklist": true,
+      "optimization": "与检查请求合并。",
+      "dependency": "批量装配 completed 回执",
+      "action_ms": 11,
+      "model_input_tokens": 81347,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_015",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 16,
+      "model_ms": 3923,
+      "model_seconds": 3.923,
+      "tool_name": "canvas_product_inspect",
+      "tool_call_id": "call_9936084658820366314",
+      "observable_action": "检查制品母版与三面内容是否已经保存",
+      "group": "assembly_verification",
+      "pure_checklist": false,
+      "optimization": "保留验收，不因提速省略。",
+      "dependency": "装配完成回执",
+      "action_ms": 0,
+      "model_input_tokens": 82000,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_016",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 17,
+      "model_ms": 8018,
+      "model_seconds": 8.018,
+      "tool_name": "plan_write",
+      "tool_call_id": "call_10199419548051999479",
+      "observable_action": "把六项清单全部勾选完成",
+      "group": "checklist",
+      "pure_checklist": true,
+      "optimization": "与最终答复合并；只能依据上一轮真实检查结果。",
+      "dependency": "母版检查成功回执",
+      "action_ms": 3,
+      "model_input_tokens": 82808,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_017",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    },
+    {
+      "step": 18,
+      "model_ms": 9034,
+      "model_seconds": 9.034,
+      "tool_name": "respond_to_user",
+      "tool_call_id": "call_4038131379764276039",
+      "observable_action": "向用户汇报三面画稿、规格和保存检查结果",
+      "group": "final_response",
+      "pure_checklist": false,
+      "optimization": "必要交付回复，可与最后清单更新同轮。",
+      "dependency": "保存验收结果",
+      "action_ms": 2,
+      "model_input_tokens": 83567,
+      "source_step": "UseIt/useit-agent-internal/logs/useit_ai_run_logs/261114-180954_agent_tid_fb33f388-147d-4d01-95de-4561e2585679/steps/step_018",
+      "source_fields": [
+        "output/output.json:tool_calls",
+        "phase_timings.jsonl:orch.plan.llm_call.duration_ms",
+        "phase_timings.jsonl:orch.plan.run_action.duration_ms"
+      ]
+    }
+  ],
+  "image_dependency": "A面与背面可以并行；本次B面使用新A图作编辑参考，需要A完成后开始。现有三图耗时相加不是并行后的预测值，必须复测。"
+}

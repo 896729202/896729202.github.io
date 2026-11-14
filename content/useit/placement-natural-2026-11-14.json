@@ -1,0 +1,913 @@
+{
+  "case": "B10-R5",
+  "test_date": "2026-11-14",
+  "theme": "诸葛亮火烧连营 · 短自然语言与代码自动调度验收",
+  "prompt": "做一张架空三国“诸葛亮火烧连营”的双图光栅卡：诸葛亮持扇，画面从营寨变成火海，人物构图不变；背面放羽扇、阵图和题名。用默认规格，做好画稿并装到卡里，先不用三维预览。",
+  "implementation_version": {
+    "label": "placement-task-v1 + planner-batching-v1 + lenticular-artwork-set-v1 / local working tree",
+    "app_version": "0.5.2",
+    "frontend_base_commit": "6d04b2cd22b94eb9376b419c466d9db1347b5d43",
+    "frontend_base_is_release_of_this_fix": false,
+    "tracked_file_sha256": {
+      "src/features/chat/handlers/appActions/actions/productPlacementTasks.ts": "2fcb71599ea68eabe7f98ebee6bcaba85b17b4647f52faf742d467b8557aaa97",
+      "src/features/chat/handlers/appActions/actions/productDraftActions.ts": "ad1d640dd458798a12d8988f6825e9ba5515d493f66b457c0d2a0bfcc4c778e9",
+      "src/features/workspace/canvas/commands/productCommands.ts": "e97de97e3e4d0b4363da6d95f7976d4c193b525f46ea1b01004f0ad6046de973",
+      "src/features/workspace/canvas/storage/assetLocator.ts": "51970642c1e6291c6a863171c7ea59c34a12e562f2e782244cdd9daacca05838",
+      "apps/desktop/electron/services/presignedDownloader.ts": "cfe1f2b24cc68f55ba7f17b7740e6fcfc0251cf15804a2ecdce4923b3ad5be5c",
+      "src/features/chat/handlers/appActions/app-tools.snapshot.json": "dff6c949c88741d70ec042045cecb1089855e969f69e84d7e3faa1046f864fcc"
+    },
+    "agent_pack_base_commit": "fe662472d70c5b4d70c2e7db0c85e68baf906f72",
+    "description": "Short natural user prompt. Code schedules A/back concurrently, starts B after A commit, isolates per-image results and preserves the placement task fix.",
+    "agent_base_commit": "2838e6e659987cb56bfdbc31f3e61db14609c80d",
+    "agent_tracked_file_sha256": {
+      "agent/agent_loop/context/instructions.py": "f7486cffcffebf14222b31e8e4ea5e3c6b2b7b5caf3e8d48d6f9b0cce02182af",
+      "agent/agent_loop/planning/planner.py": "61b871960901587d4bb9b107d519efefb955fa3c4a443962e084302e9c0ee947",
+      "agent/agent_loop/execution/dispatch.py": "80a6caa5f3e139355af1746c6b670c4b4c029e697c6315c9e95264bfc5f97a27",
+      "agent/agent_loop/execution/actions/plan_write.py": "55bac6ca9b221fc57ba651bfe256464ffd55edce735230331fa6c2ca70b7022f",
+      "agent/agent_loop/execution/artifacts.py": "81ca87a6c35c5b0d755211d1c5b81db80aef7c91495306122abde10c47076732",
+      "agent/core/tools/packs/orchestrator/tools.py": "c5312207351d11daa9b13f2a41de348d3f9fb268938294233e2ac5edc13a345b",
+      "agent/core/tools/inline/product_image_gen.py": "a617d1f7a924bedc0a3c741913d8824c62ac1deae7fa70e8ca8cb04c0dbb341d",
+      "agent/core/product_artwork_set.py": "6b666b19f532c66e92f90736b34babc2b98ca70f0dd7520a966d22e253a143d0",
+      "agent/agent_loop/execution/inline.py": "fc5f6abd81095d5a262eee18917d5e405102a4c93790b57e31a145435455d5ff",
+      "agent/core/tool_runtime.py": "6e0faca16e97c3095382f81de6e00f5dcecaccc069e01aa19b0635c24b479b86"
+    }
+  },
+  "session_id": "be6b3bc3-49d0-43a8-8212-3d9cb2ee878f",
+  "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/be6b3bc3-49d0-43a8-8212-3d9cb2ee878f",
+  "project_id": "d697e036-d8f2-4c4f-b5f8-b39ad11cb67c",
+  "task_ids": [
+    "5727fee6-4a27-43bd-ad2d-575077699b81"
+  ],
+  "sent_at": "2026-11-14T19:13:54.929959+08:00",
+  "completed_at": "2026-11-14T19:18:22+08:00",
+  "agent_seconds": 261.6,
+  "submitted_to_local_completion_seconds": 267.07,
+  "batch_ms": 10884,
+  "batch_status": "completed",
+  "batch_call_id": "call_8386971896038322021",
+  "batch_tool_ms": 11546,
+  "placements": [
+    {
+      "face": "frame-a",
+      "success": true,
+      "task_status": "completed",
+      "source": "project/assets/working/other/generated-image-20261114-b25b95.png",
+      "receipt": {
+        "status": "applied",
+        "at": "2026-11-14T11:17:47.990Z",
+        "rev": {
+          "before": "r:34ccce6a:6809",
+          "after": "r:9f0b055b:4307912"
+        },
+        "checks": [
+          {
+            "name": "saved",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "placed",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "source_intact",
+            "pass": true,
+            "severity": "info",
+            "value": 3225612,
+            "detail": "complete png 1104×1504 px, 3.1 MB"
+          },
+          {
+            "name": "visible",
+            "pass": true,
+            "severity": "info",
+            "value": 0
+          }
+        ],
+        "timing": {
+          "total_ms": 2394,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 11,
+            "source_integrity": 0,
+            "source_decode": 135,
+            "source_hash": 345,
+            "load_source": 492,
+            "write_queue": 0,
+            "prepare_master": 0,
+            "open_doc": 7,
+            "save": 1454,
+            "record_version": 237
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 175,
+            "long_tasks": 9,
+            "long_task_ms": 1345,
+            "max_long_task_ms": 479,
+            "top_scripts": [
+              {
+                "name": "HTMLImageElement.decode.then@lenticularRenderer.ts",
+                "ms": 500
+              },
+              {
+                "name": "VoidFunction@chunk-ZBXU67MV.js",
+                "ms": 450
+              },
+              {
+                "name": "performWorkUntilDeadline@chunk-ZBXU67MV.js",
+                "ms": 299
+              }
+            ]
+          }
+        },
+        "seq": 1
+      }
+    },
+    {
+      "face": "frame-b",
+      "success": true,
+      "task_status": "completed",
+      "source": "project/assets/working/other/edited-image-20261114-5360c7.png",
+      "receipt": {
+        "status": "applied",
+        "at": "2026-11-14T11:17:51.464Z",
+        "rev": {
+          "before": "r:9f0b055b:4307912",
+          "after": "r:0d156df5:8766128"
+        },
+        "checks": [
+          {
+            "name": "saved",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "placed",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "source_intact",
+            "pass": true,
+            "severity": "info",
+            "value": 3343447,
+            "detail": "complete png 1104×1504 px, 3.2 MB"
+          },
+          {
+            "name": "visible",
+            "pass": true,
+            "severity": "info",
+            "value": 0
+          }
+        ],
+        "timing": {
+          "total_ms": 5868,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 159,
+            "source_integrity": 0,
+            "source_decode": 145,
+            "source_hash": 189,
+            "load_source": 493,
+            "write_queue": 1883,
+            "prepare_master": 53,
+            "open_doc": 77,
+            "save": 1621,
+            "record_version": 1019
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 469,
+            "long_tasks": 21,
+            "long_task_ms": 4085,
+            "max_long_task_ms": 479,
+            "top_scripts": [
+              {
+                "name": "VoidFunction@chunk-ZBXU67MV.js",
+                "ms": 1494
+              },
+              {
+                "name": "performWorkUntilDeadline@chunk-ZBXU67MV.js",
+                "ms": 901
+              },
+              {
+                "name": "HTMLImageElement.decode.then@lenticularRenderer.ts",
+                "ms": 500
+              }
+            ]
+          }
+        },
+        "seq": 2
+      }
+    },
+    {
+      "face": "back",
+      "success": true,
+      "task_status": "completed",
+      "source": "project/assets/working/other/generated-image-20261114-c3d086.png",
+      "receipt": {
+        "status": "applied",
+        "at": "2026-11-14T11:17:56.363Z",
+        "rev": {
+          "before": "r:0d156df5:8766128",
+          "after": "r:88e39936:13942535"
+        },
+        "checks": [
+          {
+            "name": "saved",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "placed",
+            "pass": true,
+            "severity": "info"
+          },
+          {
+            "name": "source_intact",
+            "pass": true,
+            "severity": "info",
+            "value": 3882089,
+            "detail": "complete png 1104×1504 px, 3.7 MB"
+          },
+          {
+            "name": "visible",
+            "pass": true,
+            "severity": "info",
+            "value": 0
+          }
+        ],
+        "timing": {
+          "total_ms": 10767,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 316,
+            "source_integrity": 0,
+            "source_decode": 168,
+            "source_hash": 14,
+            "load_source": 498,
+            "write_queue": 5336,
+            "prepare_master": 113,
+            "open_doc": 166,
+            "save": 2657,
+            "record_version": 1284
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 767,
+            "long_tasks": 32,
+            "long_task_ms": 8047,
+            "max_long_task_ms": 673,
+            "top_scripts": [
+              {
+                "name": "VoidFunction@chunk-ZBXU67MV.js",
+                "ms": 3235
+              },
+              {
+                "name": "performWorkUntilDeadline@chunk-ZBXU67MV.js",
+                "ms": 1846
+              },
+              {
+                "name": "HTMLImageElement.decode.then@lenticularRenderer.ts",
+                "ms": 855
+              }
+            ]
+          }
+        },
+        "seq": 3
+      }
+    }
+  ],
+  "images": [
+    {
+      "src": "images/B10-R5-1.png",
+      "caption": "A 面 · 羽扇远眺营寨",
+      "source_sha256": "41b5349b061d900bdd9f91055d6ffec96b4d222a266779a61a577fc9ccaf25be"
+    },
+    {
+      "src": "images/B10-R5-2.png",
+      "caption": "B 面 · 参考新 A 图编辑火光背景",
+      "source_sha256": "5886c0e94ac90237d1cc3346af15db2d7896edd57801a914eb45a3730d9845fe"
+    },
+    {
+      "src": "images/B10-R5-3.png",
+      "caption": "背面 · 羽扇、阵图与题名",
+      "source_sha256": "f4e1170770eb99b47a93b6f3f07bfb4fb228465246f9820b0445ec62d090763c"
+    }
+  ],
+  "downloads": [
+    {
+      "request_id": "canvas-cloud-48669704-482f-4fae-9e4b-f88bc6ed076f",
+      "file": ".cloud-download-48669704-482f-4fae-9e4b-f88bc6ed076f",
+      "transport": "node-fetch",
+      "outcome": "success",
+      "headers_ms": 606,
+      "body_wait_ms": 816.9132000040263,
+      "disk_backpressure_ms": 29.206000002101064,
+      "commit_ms": 3.2516999999061227,
+      "bytes": 3225612,
+      "total_ms": 1459,
+      "face": "frame-a"
+    },
+    {
+      "request_id": "canvas-cloud-5f950207-b953-4c10-a6f6-70930cc15f56",
+      "file": ".cloud-download-5f950207-b953-4c10-a6f6-70930cc15f56",
+      "transport": "node-fetch",
+      "outcome": "success",
+      "headers_ms": 626,
+      "body_wait_ms": 837.7976999944076,
+      "disk_backpressure_ms": 84.50949999783188,
+      "commit_ms": 4.679399999789894,
+      "bytes": 3343447,
+      "total_ms": 1555,
+      "face": "frame-b"
+    },
+    {
+      "request_id": "canvas-cloud-9e752ce0-6491-4034-a203-b49808a600c3",
+      "file": ".cloud-download-9e752ce0-6491-4034-a203-b49808a600c3",
+      "transport": "node-fetch",
+      "outcome": "success",
+      "headers_ms": 644,
+      "body_wait_ms": 882.4858000092208,
+      "disk_backpressure_ms": 90.12470000144094,
+      "commit_ms": 5.95369999948889,
+      "bytes": 3882089,
+      "total_ms": 1625,
+      "face": "back"
+    }
+  ],
+  "saved_master": {
+    "path": "project/assets/working/product-design/lenticular-zhuge-fire.svg",
+    "exists": true,
+    "rev": "r:88e39936:13942535"
+  },
+  "saved_image_count": 3,
+  "saved_placement_count": 3,
+  "observations": 27,
+  "failure_observations": [],
+  "langfuse": {
+    "session_id": "be6b3bc3-49d0-43a8-8212-3d9cb2ee878f",
+    "url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/be6b3bc3-49d0-43a8-8212-3d9cb2ee878f",
+    "traces": [
+      {
+        "id": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "name": "agent.run",
+        "timestamp": "2026-11-14T11:13:59.909Z",
+        "sessionId": "be6b3bc3-49d0-43a8-8212-3d9cb2ee878f",
+        "totalCost": 0.136704749999
+      }
+    ],
+    "observations": [
+      {
+        "id": "de392434a2267769",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "TOOL",
+        "name": "tool.canvas_product_add_batch",
+        "startTime": "2026-11-14T11:17:45.476Z",
+        "endTime": "2026-11-14T11:17:57.022Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 11546,
+        "tool_call_id": "call_8386971896038322021",
+        "job_id": null
+      },
+      {
+        "id": "7687f015ef07b2f7",
+        "parentObservationId": "81260d8467b0a92b",
+        "type": "AGENT",
+        "name": "agent.round",
+        "startTime": "2026-11-14T11:17:57.007Z",
+        "endTime": "2026-11-14T11:18:22.138Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 25131,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "81260d8467b0a92b",
+        "parentObservationId": null,
+        "type": "AGENT",
+        "name": "agent.run",
+        "startTime": "2026-11-14T11:13:59.909Z",
+        "endTime": "2026-11-14T11:18:24.881Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 264972,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "329beb012347ba63",
+        "parentObservationId": "7687f015ef07b2f7",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:18:01.276Z",
+        "endTime": "2026-11-14T11:18:22.031Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 25912,
+          "output": 1748,
+          "total": 88880,
+          "cache_read_input_tokens": 61220,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.019434,
+          "output": 0.006555,
+          "total": 0.025988999999
+        },
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 20755,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "1ec8d53cf30b38e2",
+        "parentObservationId": "7687f015ef07b2f7",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:18:22.032Z",
+        "endTime": "2026-11-14T11:18:22.077Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 45,
+        "tool_call_id": "call_9602227080557999326",
+        "job_id": null
+      },
+      {
+        "id": "bad690e6de00a41c",
+        "parentObservationId": "7687f015ef07b2f7",
+        "type": "TOOL",
+        "name": "tool.respond_to_user",
+        "startTime": "2026-11-14T11:18:22.032Z",
+        "endTime": "2026-11-14T11:18:22.086Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 54,
+        "tool_call_id": "call_9602227080557999097",
+        "job_id": null
+      },
+      {
+        "id": "cf74f89cda873f91",
+        "parentObservationId": "81260d8467b0a92b",
+        "type": "AGENT",
+        "name": "agent.round",
+        "startTime": "2026-11-14T11:14:03.800Z",
+        "endTime": "2026-11-14T11:17:45.560Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 221760,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "4a7b764cebecafb9",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:16:00.910Z",
+        "endTime": "2026-11-14T11:16:21.554Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 17372,
+          "output": 1238,
+          "total": 47311,
+          "cache_read_input_tokens": 28701,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.013029,
+          "output": 0.0046425,
+          "total": 0.0176715
+        },
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 20644,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "84a0efe3300a9a34",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:17:21.091Z",
+        "endTime": "2026-11-14T11:17:32.024Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 18933,
+          "output": 1040,
+          "total": 48674,
+          "cache_read_input_tokens": 28701,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.01419975,
+          "output": 0.0039,
+          "total": 0.01809975
+        },
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 10933,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "ce27b0ab10b3c36e",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:14:29.899Z",
+        "endTime": "2026-11-14T11:16:00.241Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 4797,
+          "output": 11899,
+          "total": 44518,
+          "cache_read_input_tokens": 27822,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00359775,
+          "output": 0.04462125,
+          "total": 0.048219
+        },
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 90342,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "ea8b8f25e4375e1c",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:17:32.766Z",
+        "endTime": "2026-11-14T11:17:45.475Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 20124,
+          "output": 568,
+          "total": 81912,
+          "cache_read_input_tokens": 61220,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.015093,
+          "output": 0.00213,
+          "total": 0.017223
+        },
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 12709,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "10c773ea6de0be27",
+        "parentObservationId": "0af07ee8b1edaf69",
+        "type": "SPAN",
+        "name": "stage.product_image_job",
+        "startTime": "2026-11-14T11:16:22.265Z",
+        "endTime": "2026-11-14T11:16:59.584Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 37319,
+        "tool_call_id": null,
+        "job_id": "back"
+      },
+      {
+        "id": "1d53dfec279b4224",
+        "parentObservationId": "7cbe6b5d84a8d83e",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T11:17:00.803Z",
+        "endTime": "2026-11-14T11:17:19.455Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 18652,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "42426dd7cc8c43d2",
+        "parentObservationId": "0af07ee8b1edaf69",
+        "type": "SPAN",
+        "name": "stage.product_image_job",
+        "startTime": "2026-11-14T11:16:22.217Z",
+        "endTime": "2026-11-14T11:17:00.802Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 38585,
+        "tool_call_id": null,
+        "job_id": "frame_a"
+      },
+      {
+        "id": "48471ebc2ef7bca2",
+        "parentObservationId": "42426dd7cc8c43d2",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T11:16:22.229Z",
+        "endTime": "2026-11-14T11:17:00.564Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 38335,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "7cbe6b5d84a8d83e",
+        "parentObservationId": "0af07ee8b1edaf69",
+        "type": "SPAN",
+        "name": "stage.product_image_job",
+        "startTime": "2026-11-14T11:17:00.802Z",
+        "endTime": "2026-11-14T11:17:20.291Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 19489,
+        "tool_call_id": null,
+        "job_id": "frame_b"
+      },
+      {
+        "id": "80e01556b317afe1",
+        "parentObservationId": "10c773ea6de0be27",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T11:16:22.266Z",
+        "endTime": "2026-11-14T11:16:58.804Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 36538,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "0af07ee8b1edaf69",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "TOOL",
+        "name": "tool.tool_product_image_gen",
+        "startTime": "2026-11-14T11:16:21.554Z",
+        "endTime": "2026-11-14T11:17:20.297Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 58743,
+        "tool_call_id": "call_12621280724367148037",
+        "job_id": null
+      },
+      {
+        "id": "11d349c68b0a6127",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:16:21.554Z",
+        "endTime": "2026-11-14T11:16:21.585Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 31,
+        "tool_call_id": "call_12621280724367147014",
+        "job_id": null
+      },
+      {
+        "id": "7d4b1cbf9f0092ae",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:16:00.241Z",
+        "endTime": "2026-11-14T11:16:00.268Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 27,
+        "tool_call_id": "call_1982413120739370004",
+        "job_id": null
+      },
+      {
+        "id": "a356fd35845569da",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T11:17:32.025Z",
+        "endTime": "2026-11-14T11:17:32.042Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 17,
+        "tool_call_id": "call_6714090542930617940",
+        "job_id": null
+      },
+      {
+        "id": "b2c28b7bf8ae221a",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "TOOL",
+        "name": "tool.project_plan_write",
+        "startTime": "2026-11-14T11:16:00.241Z",
+        "endTime": "2026-11-14T11:16:00.284Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 43,
+        "tool_call_id": "call_1982413120739372839",
+        "job_id": null
+      },
+      {
+        "id": "ccee4693d26aadc1",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "TOOL",
+        "name": "tool.load_pack",
+        "startTime": "2026-11-14T11:17:32.025Z",
+        "endTime": "2026-11-14T11:17:32.045Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 20,
+        "tool_call_id": "call_6714090542930618165",
+        "job_id": null
+      },
+      {
+        "id": "28948af15349a4de",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:14:22.151Z",
+        "endTime": "2026-11-14T11:14:29.252Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 3153,
+          "output": 173,
+          "total": 31148,
+          "cache_read_input_tokens": 27822,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00236475,
+          "output": 0.00064875,
+          "total": 0.0030135
+        },
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 7101,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "78b6ac8beb32bc9d",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T11:14:04.415Z",
+        "endTime": "2026-11-14T11:14:21.431Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 1282,
+          "output": 1474,
+          "total": 29448,
+          "cache_read_input_tokens": 26692,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.0009615,
+          "output": 0.0055275,
+          "total": 0.006489
+        },
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 17016,
+        "tool_call_id": null,
+        "job_id": null
+      },
+      {
+        "id": "48060091e3ae4eb3",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "TOOL",
+        "name": "tool.read",
+        "startTime": "2026-11-14T11:14:21.431Z",
+        "endTime": "2026-11-14T11:14:21.454Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 23,
+        "tool_call_id": "call_15100553131679948099",
+        "job_id": null
+      },
+      {
+        "id": "b3b7a3c8b5f48dc4",
+        "parentObservationId": "cf74f89cda873f91",
+        "type": "TOOL",
+        "name": "tool.read",
+        "startTime": "2026-11-14T11:14:29.252Z",
+        "endTime": "2026-11-14T11:14:29.268Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "3a920e6fb4c9e2d7f94bc0a514df20cc",
+        "duration_ms": 16,
+        "tool_call_id": "call_1971273565320105142",
+        "job_id": null
+      }
+    ]
+  },
+  "post_run_verification": {
+    "method": "Independent read-only canvas_product_inspect after Agent completed; not an Agent tool call",
+    "agent_called_inspect": false,
+    "observed_at": "2026-11-14T19:20:03.362246+08:00",
+    "duration_ms": 156,
+    "included_in_agent_seconds": false,
+    "success": true
+  },
+  "scope": "Short natural user prompt, without tool names, fields or concurrency instructions; fresh project and new images. This changes both prompt and scheduling code and is not a single-variable speed experiment. B references the newly generated A. Artwork generation and placement only; no 3D rendering. Agent did not call inspect; independent post-run verification is separate.",
+  "conclusion": "使用简短自然语言创建全新项目画稿，不向用户要求工具名或并行参数。三面已保存；是否采用代码自动调度以本页调用链与运行审计为准。",
+  "download_conclusion": "本次下载分段是全新素材的记录；单次网络耗时可能波动，不能把全部速度变化归功于调度修改。",
+  "visual_review": {
+    "summary": "A/B 人物与主体构图基本保留，B 的火海变化清楚；背面出现额外人物拼版，内容需复核，不能记为设计全部验收通过。",
+    "notes": [
+      "A/B 中人物的正面朝向、冠帽、持扇姿势、衣袍轮廓与画面位置基本一致。A 是冷色月夜营寨，局部有照明火盆；B 的营寨、船只与天空明显转为连片火焰和烟火。",
+      "背面下半部可见羽扇、阵图和可读题名“火烧连营·诸葛孔明”，但上半部额外拼入两幅人物前后对照，整张形成三块拼版；需复核它是否符合独立背稿的设计要求。",
+      "未发现明显空白、破图或主体严重变形；装饰印章细字未逐字核验。",
+      "仅检查三张二维 PNG 的可见内容，不代表光栅变图、三维效果或印刷成品已验收；保存完整性由另外的检查记录确认。"
+    ]
+  }
+}

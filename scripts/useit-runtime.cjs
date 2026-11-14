@@ -3,13 +3,19 @@ const {describeObservation}=require('./useit-observation-labels.cjs');
 module.exports=function({esc,date,dur,external,runtimes}){
  const seconds=ms=>`${(ms/1000).toFixed(ms<1000?2:1)} 秒`;
  const clock=s=>date(s).split(' ').at(-1);
- function breakdown(id){
+ function breakdown(id,report=null){
   const r=runtimes.cases.find(x=>x.case===id);if(!r)return '';
-  const spent=key=>r.items.find(x=>x.key===key).milliseconds;
-  const share=Math.round((spent('planning')+spent('generation'))/r.local_total_ms*100);
+  const spent=key=>r.items.find(x=>x.key===key)?.milliseconds||0;
+  const runs=report?.execution_runs||[],multiple=runs.length>1,serial=report?.placement_mode==='serial';
+  const wall=report?.elapsed_wall_seconds??report?.submitted_to_local_completion_seconds;
+  const gap=report?.continuation_gap_seconds;
+  const handoff=Number.isFinite(wall)&&Number.isFinite(gap)?Math.max(0,wall-r.local_total_ms/1000-gap):null;
+  const runSummary=multiple?`<p><strong>首次提交至最终完成：${dur(wall)}（${wall.toFixed(3)} 秒）。</strong>由 Agent 执行 ${(r.local_total_ms/1000).toFixed(3)} 秒、确认后到续做前的间隔 ${gap.toFixed(3)} 秒、启动与交接 ${handoff.toFixed(3)} 秒组成。</p><p>${runs.map((run,index)=>`${index===0?'首轮':'续做'} <strong>${Number(run.agent_seconds).toFixed(3)} 秒</strong>：${run.generated_images===0?'读取资料、规划规格后要求确认，没有生图':'生成并保存三面画稿'}`).join('；')}。首轮包含真实规划工作，不能把整轮都当作可省时间。</p>`:'';
+  const share=Math.round((spent('planning')+spent('rewrite')+spent('generation'))/r.local_total_ms*100);
   const bars=r.items.map(i=>`<span class="runtime-color-${i.key}" style="width:${i.milliseconds/r.local_total_ms*100}%" title="${esc(i.title)} ${seconds(i.milliseconds)}"></span>`).join('');
-  const rows=r.items.map(i=>`<div class="runtime-row runtime-color-${i.key}"><span class="runtime-dot" aria-hidden="true"></span><div><strong>${esc(i.title)}</strong><p>${esc(i.description)}</p></div><div class="runtime-value"><b>${seconds(i.milliseconds)}</b><small>${(i.milliseconds/r.local_total_ms*100).toFixed(1)}%</small></div></div>`).join('');
-  return `<section class="runtime-overview" id="runtime-overview"><div class="runtime-heading"><div><p class="eyebrow">先看时间花在哪里</p><h2>Agent 本地执行 <strong>${dur(r.local_total_ms/1000)}</strong></h2></div><a href="#chain">逐步查看做了什么 ↓</a></div><p class="runtime-takeaway"><strong>约 ${share}% 的时间用于等待模型响应和生成图片。</strong>三面装配约 ${Math.round(spent('placement')/1000)} 秒。</p><div class="runtime-stack" role="img" aria-label="${esc(r.items.map(i=>i.title+' '+seconds(i.milliseconds)).join('；'))}">${bars}</div><div class="runtime-list">${rows}</div><details class="runtime-method"><summary>计时口径：这五项相加就是本地执行总时间</summary><p>合计 ${(r.local_total_ms/1000).toFixed(3)} 秒。模型、生成、装配与核验采用本地记录的执行时长，其他时间为剩余差额。生图内部调用、前端保存步骤等已包含在上层操作中，不重复相加。</p><p>这是一张时间分布图，不是精确的起止时间线。Langfuse 全程记录为 ${(r.cloud_total_ms/1000).toFixed(3)} 秒，计时边界不同；下面的云端记录不能拿来直接凑这个本地总计。其他时间不能全部归因为网络等待。</p><p><a href="evidence/runtime-breakdown-2026-11-14.json" download>下载本地分段计时依据 ↓</a></p></details></section>`;
+  const rows=r.items.map(i=>`<div class="runtime-row runtime-color-${i.key}"><span class="runtime-dot" aria-hidden="true"></span><div><strong>${esc(i.title)}</strong><p>${esc(i.description)}</p></div><div class="runtime-value"><b>${i.key==='verification'&&i.count===0?'未调用':seconds(i.milliseconds)}</b><small>${(i.milliseconds/r.local_total_ms*100).toFixed(1)}%</small></div></div>`).join('');
+  const takeaway=serial?`<strong>最大一项是模型请求与等待：${(spent('planning')/1000).toFixed(3)} 秒，占 ${(spent('planning')/r.local_total_ms*100).toFixed(1)}%。</strong>三次单面装配回调合计 ${(spent('placement')/1000).toFixed(3)} 秒；本轮未测试三维，不能把它当作纯三维耗时。`:`<strong>约 ${share}% 的时间用于等待模型响应和生成图片。</strong>三面装配约 ${Math.round(spent('placement')/1000)} 秒。`;
+  return `<section class="runtime-overview" id="runtime-overview"><div class="runtime-heading"><div><p class="eyebrow">先看时间花在哪里</p><h2>Agent 本地执行${multiple?'合计':''} <strong>${dur(r.local_total_ms/1000)}</strong></h2></div><a href="#chain">逐步查看做了什么 ↓</a></div>${runSummary}<p class="runtime-takeaway">${takeaway}</p><div class="runtime-stack" role="img" aria-label="${esc(r.items.map(i=>i.title+' '+seconds(i.milliseconds)).join('；'))}">${bars}</div><div class="runtime-list">${rows}</div><details class="runtime-method"><summary>计时口径：这 ${r.items.length} 项相加就是本地执行总时间</summary><p>合计 ${(r.local_total_ms/1000).toFixed(3)} 秒。模型、生成、装配与核验采用本地记录的执行时长，其他时间为剩余差额。生图内部调用、前端保存步骤等已包含在上层操作中，不重复相加。</p><p>这是一张时间分布图，不是精确的起止时间线。Langfuse ${multiple?'两轮记录合计':'全程记录'}为 ${(r.cloud_total_ms/1000).toFixed(3)} 秒，计时边界不同；下面的云端记录不能拿来直接凑这个本地总计。其他时间不能全部归因为网络等待。</p><p><a href="evidence/runtime-breakdown-2026-11-14.json" download>下载本地分段计时依据 ↓</a></p></details></section>`;
  }
  function rows(observations,{notes={},failures=[],baseUrl=''}={}){
   return [...observations].sort((a,b)=>String(a.startTime).localeCompare(String(b.startTime))).map((o,index)=>{
