@@ -1,0 +1,356 @@
+{
+  "case": "B01-R1",
+  "title": "插盖盒：五个面为什么对不上",
+  "test_date": "2026-11-14",
+  "timezone": "Asia/Shanghai",
+  "scope": "原始图片与原始刀版的独立回放；隔离浏览器运行实际切图、装配代码；未运行新 Agent 或共享 USEIT 应用。",
+  "original_session": "56f93d58-ac69-4f8f-a598-01d4ed53b0b3",
+  "original_trace": "d64079342297bb70ab6c292228c66485",
+  "langfuse_base": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0",
+  "source_sha256": "80ad20cdd193861f67a8576cadac13b1470341a4dd0645b10b7732e2e8de03f6",
+  "master_sha256": "c7ff394c241678f55d0654ee8c9ba7a97e847ab4947b27e682625ace1688e98e",
+  "geometry_fingerprint": "cf374a8591413fa2dfc1f2956f6d16f5eeaa54aaa7a9e6076fa18e0fb99c4009",
+  "original_files_unchanged": true,
+  "before": {
+    "status": "error",
+    "mapped": 8,
+    "expected": 13,
+    "elapsed_seconds": 22.399750600015977,
+    "observed_at": "2026-11-14T19:40:31.922204+08:00",
+    "attempts": 8
+  },
+  "after": {
+    "status": "needs_review",
+    "mapped": 13,
+    "expected": 13,
+    "elapsed_seconds": 9.497010799997952,
+    "evidence_saved_at": "2026-11-14T19:51:29.539509+08:00",
+    "guide_detection": "saturated_core",
+    "attempts": 4,
+    "warnings": [
+      "extra_regions",
+      "P02: residual boundary error exceeds 4 source pixels; inspect the fitted edge",
+      "P04: residual boundary error exceeds 4 source pixels; inspect the fitted edge"
+    ]
+  },
+  "assembly": {
+    "observed_at": "2026-11-14T12:04:34.421Z",
+    "status": "passed",
+    "scope": "isolated browser replay: real production rasterization, face slicing, assembly and save adapter; cached real fit output; no Agent/app/cloud save/3D",
+    "elapsed_seconds": 0.4574000000059605,
+    "fit_status": "needs_review",
+    "note": "Fitted the flat spread to the dieline and placed it on 13 faces (needs_review); saved. Whether it is visible is in the receipt checks. Review: extra_regions; P02: residual boundary error exceeds 4 source pixels; inspect the fitted edge; P04: residual boundary error exceeds 4 source pixels; inspect the fitted edge",
+    "fit_calls": 1,
+    "slice_calls": 1,
+    "save_calls": 1,
+    "version_count": 1,
+    "faces": [
+      {
+        "face": "front",
+        "width": 363,
+        "height": 365,
+        "colored_pixels": 127971
+      },
+      {
+        "face": "right",
+        "width": 363,
+        "height": 368,
+        "colored_pixels": 130777
+      },
+      {
+        "face": "back",
+        "width": 363,
+        "height": 365,
+        "colored_pixels": 112093
+      },
+      {
+        "face": "left",
+        "width": 360,
+        "height": 365,
+        "colored_pixels": 124407
+      },
+      {
+        "face": "glue",
+        "width": 88,
+        "height": 363,
+        "colored_pixels": 30174
+      },
+      {
+        "face": "top-lid-front",
+        "width": 363,
+        "height": 363,
+        "colored_pixels": 127618
+      },
+      {
+        "face": "top-tongue",
+        "width": 357,
+        "height": 83,
+        "colored_pixels": 25602
+      },
+      {
+        "face": "bottom-lid-back",
+        "width": 363,
+        "height": 363,
+        "colored_pixels": 131575
+      },
+      {
+        "face": "bottom-tongue",
+        "width": 357,
+        "height": 83,
+        "colored_pixels": 28955
+      },
+      {
+        "face": "top-dust-right",
+        "width": 355,
+        "height": 162,
+        "colored_pixels": 51583
+      },
+      {
+        "face": "top-dust-left",
+        "width": 358,
+        "height": 162,
+        "colored_pixels": 51324
+      },
+      {
+        "face": "bottom-dust-right",
+        "width": 355,
+        "height": 162,
+        "colored_pixels": 51824
+      },
+      {
+        "face": "bottom-dust-left",
+        "width": 354,
+        "height": 162,
+        "colored_pixels": 51510
+      }
+    ],
+    "geometry_unchanged": true,
+    "structure_unchanged": true,
+    "saved_master_bytes": 2546222
+  },
+  "panels": [
+    {
+      "id": "P01",
+      "face": "front",
+      "label": "主体前面",
+      "before_error": null,
+      "cause": null,
+      "after_error": null,
+      "boundary_p95_source_px": 0.49232447525536427,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P02",
+      "face": "right",
+      "label": "右侧面",
+      "before_error": null,
+      "cause": null,
+      "after_error": null,
+      "boundary_p95_source_px": 5.3828828828829955,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P03",
+      "face": "back",
+      "label": "主体后面",
+      "before_error": "Mapped boundary/source containment check failed before clipping",
+      "cause": "识别出的面片轮廓无法通过边界包含检查；映射可能取到本面外的像素，因此被拒绝。",
+      "after_error": null,
+      "boundary_p95_source_px": 6.126951086549487e-13,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P04",
+      "face": "left",
+      "label": "左侧面",
+      "before_error": null,
+      "cause": null,
+      "after_error": null,
+      "boundary_p95_source_px": 5.431164901664033,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P05",
+      "face": "glue",
+      "label": "粘口",
+      "before_error": "No usable artwork pixels",
+      "cause": "清线时把这块窄面的青色画稿一起当成辅助线，清理后没有可用画面像素。",
+      "after_error": null,
+      "boundary_p95_source_px": 1.0047461996808775,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P06",
+      "face": "top-lid-front",
+      "label": "上盖",
+      "before_error": "Hole count mismatch: target 0, detected 2",
+      "cause": "目标上盖没有孔，识别结果却多出两个孔；画面中的青色区域干扰了轮廓分割。",
+      "after_error": null,
+      "boundary_p95_source_px": 0.6687765160697067,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P07",
+      "face": "top-tongue",
+      "label": "上插舌",
+      "before_error": null,
+      "cause": null,
+      "after_error": null,
+      "boundary_p95_source_px": 1.0112306389512993,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P08",
+      "face": "bottom-lid-back",
+      "label": "下盖",
+      "before_error": null,
+      "cause": null,
+      "after_error": null,
+      "boundary_p95_source_px": 0.7749623591187912,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P09",
+      "face": "bottom-tongue",
+      "label": "下插舌",
+      "before_error": "No usable artwork pixels",
+      "cause": "与粘口相同，较窄的青色画稿落入清线区域，清理后没有可用画面像素。",
+      "after_error": null,
+      "boundary_p95_source_px": 0.530649243195962,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P10",
+      "face": "top-dust-right",
+      "label": "右上防尘翼",
+      "before_error": null,
+      "cause": null,
+      "after_error": null,
+      "boundary_p95_source_px": 0.8988069906533114,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P11",
+      "face": "top-dust-left",
+      "label": "左上防尘翼",
+      "before_error": null,
+      "cause": null,
+      "after_error": null,
+      "boundary_p95_source_px": 0.6645837314520154,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P12",
+      "face": "bottom-dust-right",
+      "label": "右下防尘翼",
+      "before_error": "Mapped boundary/source containment check failed before clipping",
+      "cause": "识别出的不规则面片轮廓未通过边界包含检查，因此没有强行裁切后放入。",
+      "after_error": null,
+      "boundary_p95_source_px": 1.0024199305977946,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    },
+    {
+      "id": "P13",
+      "face": "bottom-dust-left",
+      "label": "左下防尘翼",
+      "before_error": null,
+      "cause": null,
+      "after_error": null,
+      "boundary_p95_source_px": 1.4492942779570142,
+      "mesh_flips": 0,
+      "sampling_outside_panel_px": 0
+    }
+  ],
+  "source_drift": "主画面下沿折线比目标位置向下偏移约 80–95 个原图像素（原图 3104 × 2608）；这是生成图的几何偏移，不是尺寸参数改变。",
+  "fixes": [
+    {
+      "title": "先分清辅助线和画稿",
+      "detail": "优先提取高饱和度的辅助线核心，沿目标刀版附近寻找真实线条；保留旧识别方式作为后备。"
+    },
+    {
+      "title": "清线只清线条附近",
+      "detail": "清理范围收窄到已检测线条及其抗锯齿边缘，避免把宽搜索带内的青色背景一并抹掉。"
+    },
+    {
+      "title": "把逐面原因和复核提示带回界面",
+      "detail": "回执保留具体面片的失败原因；成功装配后也保留 needs_review 和边缘残差提示。面片身份、孔洞、网格翻转及越界检查继续执行。"
+    }
+  ],
+  "checks": {
+    "python_passed": 32,
+    "frontend_passed": 52,
+    "total_passed": 84,
+    "isolated_browser_passed": true,
+    "whole_repo_checked": false
+  },
+  "cost": {
+    "new_model_calls": 0,
+    "new_model_usd": 0,
+    "basis": "复用原始测试图片，直接运行本地算法和隔离浏览器；本次没有新模型/生图 API 请求。本机计算成本未计价，不代表原始 B01 任务免费。"
+  },
+  "limits": [
+    "未重跑完整 Agent、生图、下载、应用保存和云端回调流程，未验证三维预览或印刷成品。",
+    "原始两次约 120 秒超时的底层原因仍未证实，本次配准修复不能替代其验证。",
+    "right、left 的边缘残差仍超过 4 个原图像素，并检测出额外区域；本次状态为 needs_review。",
+    "配准与隔离装配分别计时，不能直接称作完整任务耗时或无报错完成时间。"
+  ],
+  "code_version": {
+    "label": "2026-11-14 本地工作区修复快照（文件 SHA-256）",
+    "files": [
+      {
+        "path": "useit-agent-pack-dieline/useit_dieline/spread/registration.py",
+        "sha256": "ac028c25b7edba67be03ef2e2590a18b2d52702986893beb7d2bdca5bafdf35d"
+      },
+      {
+        "path": "useit-agent-pack-dieline/useit_dieline/spread/fit.py",
+        "sha256": "07da09cd131bc5a8309f3fcbcd103acbcb5feb6ddac3b2438dec6eaa8d7a6862"
+      },
+      {
+        "path": "useit-agent-pack-dieline/useit_dieline/ops.py",
+        "sha256": "1958057345d639176b7fcdb674c1a0a5b6133f8c5f5bd82f4d64c3d1daf05bc2"
+      },
+      {
+        "path": "useit-studio-frontend/src/features/workspace/canvas/product-preview/addToProduct.ts",
+        "sha256": "c24d98114e1283b9b85870bd0b51bc0bb3772ffff5d5ca08bef5222af443d1ba"
+      }
+    ]
+  },
+  "errors": [
+    {
+      "tool": "tool_image_gen",
+      "seconds": 0.035,
+      "observation": "3ab4f92e7577407d",
+      "what": "调用了通用生图入口，被制品校验拒绝；原任务后来改用正确入口。"
+    },
+    {
+      "tool": "canvas_product_add",
+      "seconds": 123.848,
+      "observation": "ba15643ae7849517",
+      "what": "等待装配回调超时；没有足够日志证明最底层原因。"
+    },
+    {
+      "tool": "canvas_product_add",
+      "seconds": 122.391,
+      "observation": "85576e918c3533ef",
+      "what": "再次等待装配回调超时；本次独立回放没有复测云端等待链路。"
+    },
+    {
+      "tool": "canvas_product_add",
+      "seconds": 21.411,
+      "observation": "6d6603191d7f8cdb",
+      "what": "五个面未通过配准，整版未放入；本次修复针对这一条。"
+    }
+  ]
+}
