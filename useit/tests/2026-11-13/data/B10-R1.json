@@ -77,7 +77,7 @@
       "end": "2026-11-14T06:31:05.833Z",
       "observation_id": "148facfd6b8d5e8f",
       "diagnosis_title": "后台等待超时；前端随后保存成功",
-      "diagnosis_reason": "后台等待约 120 秒后清除了等待记录，前端没有停止，随后完成保存。迟到的成功通知被拒收，已保存画稿未因此撤销。A、B 面各发生一次重复装配，背面无重试。详见下方专项分析。"
+      "diagnosis_reason": "后台等待约 120 秒后清除了等待记录，前端没有停止，随后完成保存。迟到的成功通知被拒收，已保存画稿未因此撤销。A、B 面各发生一次重复装配，背面无重试。详见本页专项分析与修复后独立复测。"
     },
     {
       "tool_call_id": "call_6768887459301539665",
@@ -89,7 +89,7 @@
       "end": "2026-11-14T06:35:20.819Z",
       "observation_id": "b9c90ff779e108da",
       "diagnosis_title": "后台等待超时；前端随后保存成功",
-      "diagnosis_reason": "后台等待约 120 秒后清除了等待记录，前端没有停止，随后完成保存。迟到的成功通知被拒收，已保存画稿未因此撤销。A、B 面各发生一次重复装配，背面无重试。详见下方专项分析。"
+      "diagnosis_reason": "后台等待约 120 秒后清除了等待记录，前端没有停止，随后完成保存。迟到的成功通知被拒收，已保存画稿未因此撤销。A、B 面各发生一次重复装配，背面无重试。详见本页专项分析与修复后独立复测。"
     },
     {
       "tool_call_id": "call_13111585461626942245",
@@ -101,7 +101,7 @@
       "end": "2026-11-14T06:40:03.577Z",
       "observation_id": "b35c457ff54491e4",
       "diagnosis_title": "后台等待超时；前端随后保存成功",
-      "diagnosis_reason": "后台等待约 120 秒后清除了等待记录，前端没有停止，随后完成保存。迟到的成功通知被拒收，已保存画稿未因此撤销。A、B 面各发生一次重复装配，背面无重试。详见下方专项分析。"
+      "diagnosis_reason": "后台等待约 120 秒后清除了等待记录，前端没有停止，随后完成保存。迟到的成功通知被拒收，已保存画稿未因此撤销。A、B 面各发生一次重复装配，背面无重试。详见本页专项分析与修复后独立复测。"
     },
     {
       "tool_call_id": "call_7560513992926117013",
@@ -1075,7 +1075,7 @@
         "call_id": "call_13111585461626942245"
       }
     ],
-    "fix_status": "2026-11-14 17:42–17:48 完成 B10-R2 真实复测：三面批量装配成功，没有重复写入；生图与装配流程无错误记录。复测未包含三维渲染。"
+    "fix_status": "2026-11-14 已完成两轮独立复测：B10-R2 为原主题修复复测，B10-R3 为全新主题“诸葛亮火烧连营”。两轮三面均保存成功，无重复装配；详情、版本、图片、耗时与费用分别记录在独立页面。"
   },
   "no_error_estimate": {
     "failed_calls": 4,
@@ -1087,5 +1087,69 @@
     "complete_run": false,
     "invalid_reason": "三次超时区间包含仍在执行的必要工作，不能全部扣除。撤回此前约 8 分 55 秒的无报错估算；下方另列修复后实测，范围仅为生图与装配。",
     "windows": []
+  },
+  "cost": {
+    "case": "B10-R1",
+    "session_id": "18dc9322-7c4c-4e24-a804-bed899c711f7",
+    "currency": "USD",
+    "method": "recorded_usage_at_local_configured_rates",
+    "invoice_verified": false,
+    "coverage": "captured",
+    "reference_total_usd": 0.569789,
+    "known_reference_subtotal_usd": 0.569789,
+    "model_reference_usd": 0.329789,
+    "service_reference_usd": 0.24,
+    "langfuse_recorded_partial_usd": 0.2576745,
+    "langfuse_priced_observations": 19,
+    "tasks": [
+      {
+        "task_id": "48cada04-ae92-44ef-8363-bc0dd45f5e3b",
+        "status": "done",
+        "coverage": "captured",
+        "last_usage_at": "2026-11-14T14:40:53+08:00",
+        "source_seq": 156,
+        "source": "local stream_messages.jsonl / last cumulative usage snapshot (not sum of snapshots)",
+        "model_lines": [
+          {
+            "model": "gemini-3.8-flash",
+            "key_source": "official",
+            "input_tokens": 1236101,
+            "output_tokens": 12985,
+            "cache_read_tokens": 957460,
+            "cache_creation_tokens": 0,
+            "call_count": 19,
+            "fresh_input_tokens": 278641,
+            "reference_usd": 0.329484
+          },
+          {
+            "model": "gemini-3.1-flash-lite-preview",
+            "key_source": "official",
+            "input_tokens": 1040,
+            "output_tokens": 30,
+            "cache_read_tokens": 0,
+            "cache_creation_tokens": 0,
+            "call_count": 3,
+            "fresh_input_tokens": 1040,
+            "reference_usd": 0.000305
+          }
+        ],
+        "service_lines": [
+          {
+            "service": "openai_image_gen",
+            "variant": "generate",
+            "key_source": "user",
+            "units": 3,
+            "call_count": 3,
+            "unit_type": "image",
+            "reference_usd": 0.24,
+            "invoice_verified": false
+          }
+        ],
+        "unpriced": [],
+        "model_reference_usd": 0.329789,
+        "service_reference_usd": 0.24,
+        "reference_usd": 0.569789
+      }
+    ]
   }
 }

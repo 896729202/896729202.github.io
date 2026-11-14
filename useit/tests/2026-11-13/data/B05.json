@@ -1363,5 +1363,69 @@
         "seconds": 1.732
       }
     ]
+  },
+  "cost": {
+    "case": "B05",
+    "session_id": "70990626-d5e8-472a-8ffc-69c672a1075f",
+    "currency": "USD",
+    "method": "recorded_usage_at_local_configured_rates",
+    "invoice_verified": false,
+    "coverage": "captured",
+    "reference_total_usd": 2.26964325,
+    "known_reference_subtotal_usd": 2.26964325,
+    "model_reference_usd": 2.10964325,
+    "service_reference_usd": 0.16,
+    "langfuse_recorded_partial_usd": 1.986378,
+    "langfuse_priced_observations": 28,
+    "tasks": [
+      {
+        "task_id": "8c7408ed-0bba-4154-9729-4fd940ebc22a",
+        "status": "done",
+        "coverage": "captured",
+        "last_usage_at": "2026-11-13T17:13:24+08:00",
+        "source_seq": 239,
+        "source": "local stream_messages.jsonl / last cumulative usage snapshot (not sum of snapshots)",
+        "model_lines": [
+          {
+            "model": "gemini-3.8-flash",
+            "key_source": "official",
+            "input_tokens": 4194929,
+            "output_tokens": 18965,
+            "cache_read_tokens": 1641250,
+            "cache_creation_tokens": 0,
+            "call_count": 28,
+            "fresh_input_tokens": 2553679,
+            "reference_usd": 2.10947175
+          },
+          {
+            "model": "gemini-3.1-flash-lite-preview",
+            "key_source": "official",
+            "input_tokens": 566,
+            "output_tokens": 20,
+            "cache_read_tokens": 0,
+            "cache_creation_tokens": 0,
+            "call_count": 2,
+            "fresh_input_tokens": 566,
+            "reference_usd": 0.0001715
+          }
+        ],
+        "service_lines": [
+          {
+            "service": "openai_image_gen",
+            "variant": "generate",
+            "key_source": "user",
+            "units": 2,
+            "call_count": 2,
+            "unit_type": "image",
+            "reference_usd": 0.16,
+            "invoice_verified": false
+          }
+        ],
+        "unpriced": [],
+        "model_reference_usd": 2.10964325,
+        "service_reference_usd": 0.16,
+        "reference_usd": 2.26964325
+      }
+    ]
   }
 }

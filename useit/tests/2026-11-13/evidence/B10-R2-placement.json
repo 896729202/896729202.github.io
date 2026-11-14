@@ -220,7 +220,8 @@
       "disk_backpressure_ms": 27.070499999972526,
       "commit_ms": 14.423299999994924,
       "bytes": 2583580,
-      "total_ms": 2730
+      "total_ms": 2730,
+      "face": "frame-a"
     },
     {
       "request_id": "canvas-cloud-3d6ed041-d385-4876-a266-ed2b2df85a16",
@@ -232,7 +233,8 @@
       "disk_backpressure_ms": 20.720999999844935,
       "commit_ms": 4.557499999995343,
       "bytes": 2486924,
-      "total_ms": 1419
+      "total_ms": 1419,
+      "face": "frame-b"
     },
     {
       "request_id": "canvas-cloud-d37dce9d-182f-41b1-a610-5b6c5c9c6fdc",
@@ -244,7 +246,8 @@
       "disk_backpressure_ms": 57.09720000065863,
       "commit_ms": 6.535499999998137,
       "bytes": 2867321,
-      "total_ms": 1531
+      "total_ms": 1531,
+      "face": "back"
     }
   ],
   "observations": 37,
@@ -258,220 +261,11 @@
         "id": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "name": "agent.run",
         "timestamp": "2026-11-14T09:43:40.195Z",
-        "sessionId": "dcbbc8c7-b463-47ad-aa2c-755e74892721"
+        "sessionId": "dcbbc8c7-b463-47ad-aa2c-755e74892721",
+        "totalCost": 0.168084749999
       }
     ],
     "observations": [
-      {
-        "id": "348df771c3aef2bf",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "GENERATION",
-        "name": "llm.plan",
-        "startTime": "2026-11-14T09:45:16.476Z",
-        "endTime": "2026-11-14T09:45:35.603Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": "gemini-3.8-flash",
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 19127,
-        "tool_call_id": null
-      },
-      {
-        "id": "4fcf38f8828c9de6",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "GENERATION",
-        "name": "llm.plan",
-        "startTime": "2026-11-14T09:45:36.340Z",
-        "endTime": "2026-11-14T09:45:50.586Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": "gemini-3.8-flash",
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 14246,
-        "tool_call_id": null
-      },
-      {
-        "id": "7ab98d82ed0ea5cb",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "GENERATION",
-        "name": "llm.plan",
-        "startTime": "2026-11-14T09:44:28.719Z",
-        "endTime": "2026-11-14T09:44:45.001Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": "gemini-3.8-flash",
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 16282,
-        "tool_call_id": null
-      },
-      {
-        "id": "9313559562f9bf7e",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "GENERATION",
-        "name": "llm.plan",
-        "startTime": "2026-11-14T09:44:05.453Z",
-        "endTime": "2026-11-14T09:44:24.025Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": "gemini-3.8-flash",
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 18572,
-        "tool_call_id": null
-      },
-      {
-        "id": "935a6f073cca7a3d",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "GENERATION",
-        "name": "llm.plan",
-        "startTime": "2026-11-14T09:45:07.475Z",
-        "endTime": "2026-11-14T09:45:15.822Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": "gemini-3.8-flash",
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 8347,
-        "tool_call_id": null
-      },
-      {
-        "id": "fabbefd8e5c5aaac",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "GENERATION",
-        "name": "llm.plan",
-        "startTime": "2026-11-14T09:44:49.415Z",
-        "endTime": "2026-11-14T09:45:06.797Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": "gemini-3.8-flash",
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 17382,
-        "tool_call_id": null
-      },
-      {
-        "id": "011fe112ef597eaf",
-        "parentObservationId": "a25d0c4559be45c3",
-        "type": "SPAN",
-        "name": "stage.product_image_request",
-        "startTime": "2026-11-14T09:45:50.618Z",
-        "endTime": "2026-11-14T09:46:24.679Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": null,
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 34061,
-        "tool_call_id": null
-      },
-      {
-        "id": "033932c547949aa1",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "TOOL",
-        "name": "tool.load_pack",
-        "startTime": "2026-11-14T09:44:45.002Z",
-        "endTime": "2026-11-14T09:44:45.066Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": null,
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 64,
-        "tool_call_id": "call_24495966455418278"
-      },
-      {
-        "id": "2e3ab8e78a030cd9",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "TOOL",
-        "name": "tool.read",
-        "startTime": "2026-11-14T09:44:24.026Z",
-        "endTime": "2026-11-14T09:44:24.101Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": null,
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 75,
-        "tool_call_id": "call_8601876553816670572"
-      },
-      {
-        "id": "3aeb919db357387c",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "TOOL",
-        "name": "tool.plan_write",
-        "startTime": "2026-11-14T09:45:06.797Z",
-        "endTime": "2026-11-14T09:45:06.812Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": null,
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 15,
-        "tool_call_id": "call_4039194636191769534"
-      },
-      {
-        "id": "841732e0402b3948",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "TOOL",
-        "name": "tool.project_plan_write",
-        "startTime": "2026-11-14T09:45:15.822Z",
-        "endTime": "2026-11-14T09:45:15.844Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": null,
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 22,
-        "tool_call_id": "call_17640525238736511862"
-      },
-      {
-        "id": "87d74d0dc63be529",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "TOOL",
-        "name": "tool.plan_write",
-        "startTime": "2026-11-14T09:45:35.603Z",
-        "endTime": "2026-11-14T09:45:35.613Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": null,
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 10,
-        "tool_call_id": "call_11951675745682449362"
-      },
-      {
-        "id": "a25d0c4559be45c3",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "TOOL",
-        "name": "tool.tool_product_image_gen",
-        "startTime": "2026-11-14T09:45:50.587Z",
-        "endTime": "2026-11-14T09:46:25.479Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": null,
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 34892,
-        "tool_call_id": "call_2818971517350074672"
-      },
-      {
-        "id": "bb7e5fb66714aebd",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "TOOL",
-        "name": "tool.list_packs",
-        "startTime": "2026-11-14T09:44:24.027Z",
-        "endTime": "2026-11-14T09:44:24.135Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": null,
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 108,
-        "tool_call_id": "call_8601876553816673435"
-      },
-      {
-        "id": "ee0b74a16f47afb9",
-        "parentObservationId": "016224a02815c6c2",
-        "type": "TOOL",
-        "name": "tool.read",
-        "startTime": "2026-11-14T09:44:45.003Z",
-        "endTime": "2026-11-14T09:44:45.058Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": null,
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 55,
-        "tool_call_id": "call_24495966455418643"
-      },
       {
         "id": "016224a02815c6c2",
         "parentObservationId": "066aa972d5caf682",
@@ -482,8 +276,26 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 251751,
+        "tool_call_id": null
+      },
+      {
+        "id": "066aa972d5caf682",
+        "parentObservationId": null,
+        "type": "AGENT",
+        "name": "agent.run",
+        "startTime": "2026-11-14T09:43:40.195Z",
+        "endTime": "2026-11-14T09:48:57.832Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 317637,
         "tool_call_id": null
       },
       {
@@ -496,8 +308,26 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 10615,
+        "tool_call_id": null
+      },
+      {
+        "id": "4d555e36a653f99b",
+        "parentObservationId": "066aa972d5caf682",
+        "type": "AGENT",
+        "name": "agent.round",
+        "startTime": "2026-11-14T09:48:37.780Z",
+        "endTime": "2026-11-14T09:48:56.767Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 18987,
         "tool_call_id": null
       },
       {
@@ -510,6 +340,18 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 13722,
+          "output": 733,
+          "total": 74987,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.0102915,
+          "output": 0.00274875,
+          "total": 0.01304025
+        },
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 11297,
         "tool_call_id": null
@@ -524,8 +366,72 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 12813,
+          "output": 387,
+          "total": 73732,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00960975,
+          "output": 0.00145125,
+          "total": 0.011061
+        },
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 10508,
+        "tool_call_id": null
+      },
+      {
+        "id": "348df771c3aef2bf",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T09:45:16.476Z",
+        "endTime": "2026-11-14T09:45:35.603Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 9011,
+          "output": 1336,
+          "total": 70879,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00675825,
+          "output": 0.00501,
+          "total": 0.01176825
+        },
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 19127,
+        "tool_call_id": null
+      },
+      {
+        "id": "4fcf38f8828c9de6",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T09:45:36.340Z",
+        "endTime": "2026-11-14T09:45:50.586Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 10391,
+          "output": 957,
+          "total": 71880,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00779325,
+          "output": 0.00358875,
+          "total": 0.011382
+        },
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 14246,
         "tool_call_id": null
       },
       {
@@ -538,6 +444,18 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 11869,
+          "output": 423,
+          "total": 72824,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00890175,
+          "output": 0.00158625,
+          "total": 0.010488
+        },
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 8921,
         "tool_call_id": null
@@ -552,8 +470,46 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 14461,
+          "output": 545,
+          "total": 75538,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.01084575,
+          "output": 0.00204375,
+          "total": 0.0128895
+        },
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 10023,
+        "tool_call_id": null
+      },
+      {
+        "id": "7ab98d82ed0ea5cb",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T09:44:28.719Z",
+        "endTime": "2026-11-14T09:44:45.001Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 4393,
+          "output": 787,
+          "total": 32314,
+          "cache_read_input_tokens": 27134,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.00329475,
+          "output": 0.00295125,
+          "total": 0.006246
+        },
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 16282,
         "tool_call_id": null
       },
       {
@@ -566,8 +522,72 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 20279,
+          "output": 57,
+          "total": 80868,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.01520925,
+          "output": 0.00021375,
+          "total": 0.015423
+        },
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 3495,
+        "tool_call_id": null
+      },
+      {
+        "id": "9313559562f9bf7e",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T09:44:05.453Z",
+        "endTime": "2026-11-14T09:44:24.025Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 1388,
+          "output": 1102,
+          "total": 28494,
+          "cache_read_input_tokens": 26004,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.001041,
+          "output": 0.0041325,
+          "total": 0.0051735
+        },
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 18572,
+        "tool_call_id": null
+      },
+      {
+        "id": "935a6f073cca7a3d",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T09:45:07.475Z",
+        "endTime": "2026-11-14T09:45:15.822Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 7944,
+          "output": 574,
+          "total": 68171,
+          "cache_read_input_tokens": 59653,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.005958,
+          "output": 0.0021525,
+          "total": 0.0081105
+        },
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 8347,
         "tool_call_id": null
       },
       {
@@ -580,8 +600,46 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 21037,
+          "output": 634,
+          "total": 82203,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.01577775,
+          "output": 0.0023775,
+          "total": 0.01815525
+        },
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 7436,
+        "tool_call_id": null
+      },
+      {
+        "id": "bba72dc0f65abba0",
+        "parentObservationId": "4d555e36a653f99b",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T09:48:46.652Z",
+        "endTime": "2026-11-14T09:48:56.737Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 21667,
+          "output": 869,
+          "total": 83068,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.01625025,
+          "output": 0.00325875,
+          "total": 0.019509
+        },
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 10085,
         "tool_call_id": null
       },
       {
@@ -594,8 +652,62 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 19905,
+          "output": 370,
+          "total": 80807,
+          "cache_read_input_tokens": 60532,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.01492875,
+          "output": 0.0013875,
+          "total": 0.01631625
+        },
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 5770,
+        "tool_call_id": null
+      },
+      {
+        "id": "fabbefd8e5c5aaac",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "GENERATION",
+        "name": "llm.plan",
+        "startTime": "2026-11-14T09:44:49.415Z",
+        "endTime": "2026-11-14T09:45:06.797Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": "gemini-3.8-flash",
+        "usageDetails": {
+          "input": 6858,
+          "output": 901,
+          "total": 67412,
+          "cache_read_input_tokens": 59653,
+          "cache_creation_input_tokens": 0
+        },
+        "costDetails": {
+          "input": 0.0051435,
+          "output": 0.00337875,
+          "total": 0.008522249999
+        },
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 17382,
+        "tool_call_id": null
+      },
+      {
+        "id": "011fe112ef597eaf",
+        "parentObservationId": "a25d0c4559be45c3",
+        "type": "SPAN",
+        "name": "stage.product_image_request",
+        "startTime": "2026-11-14T09:45:50.618Z",
+        "endTime": "2026-11-14T09:46:24.679Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 34061,
         "tool_call_id": null
       },
       {
@@ -608,6 +720,8 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 29375,
         "tool_call_id": null
@@ -622,6 +736,8 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 33172,
         "tool_call_id": null
@@ -636,9 +752,27 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 33966,
         "tool_call_id": "call_4419244816733039791"
+      },
+      {
+        "id": "033932c547949aa1",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "TOOL",
+        "name": "tool.load_pack",
+        "startTime": "2026-11-14T09:44:45.002Z",
+        "endTime": "2026-11-14T09:44:45.066Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 64,
+        "tool_call_id": "call_24495966455418278"
       },
       {
         "id": "040b9d8553b38f88",
@@ -650,6 +784,8 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 1775,
         "tool_call_id": "call_5232965746602004948"
@@ -664,9 +800,27 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 30156,
         "tool_call_id": "call_8968709624443024963"
+      },
+      {
+        "id": "2e3ab8e78a030cd9",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "TOOL",
+        "name": "tool.read",
+        "startTime": "2026-11-14T09:44:24.026Z",
+        "endTime": "2026-11-14T09:44:24.101Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 75,
+        "tool_call_id": "call_8601876553816670572"
       },
       {
         "id": "363ecf8823fb1e2d",
@@ -678,9 +832,27 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 15,
         "tool_call_id": "call_15066944205044863092"
+      },
+      {
+        "id": "3aeb919db357387c",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T09:45:06.797Z",
+        "endTime": "2026-11-14T09:45:06.812Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 15,
+        "tool_call_id": "call_4039194636191769534"
       },
       {
         "id": "4b7b7529f030a9dd",
@@ -692,6 +864,8 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 8,
         "tool_call_id": "call_5025617337554648659"
@@ -706,65 +880,59 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 10,
         "tool_call_id": "call_5741891843004842492"
       },
       {
-        "id": "bd2abd92607da0ae",
+        "id": "841732e0402b3948",
         "parentObservationId": "016224a02815c6c2",
         "type": "TOOL",
-        "name": "tool.canvas_product_add_batch",
-        "startTime": "2026-11-14T09:48:13.204Z",
-        "endTime": "2026-11-14T09:48:25.409Z",
+        "name": "tool.project_plan_write",
+        "startTime": "2026-11-14T09:45:15.822Z",
+        "endTime": "2026-11-14T09:45:15.844Z",
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 12205,
-        "tool_call_id": "call_8229222459427758359"
+        "duration_ms": 22,
+        "tool_call_id": "call_17640525238736511862"
       },
       {
-        "id": "066aa972d5caf682",
-        "parentObservationId": null,
-        "type": "AGENT",
-        "name": "agent.run",
-        "startTime": "2026-11-14T09:43:40.195Z",
-        "endTime": "2026-11-14T09:48:57.832Z",
+        "id": "87d74d0dc63be529",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "TOOL",
+        "name": "tool.plan_write",
+        "startTime": "2026-11-14T09:45:35.603Z",
+        "endTime": "2026-11-14T09:45:35.613Z",
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 317637,
-        "tool_call_id": null
+        "duration_ms": 10,
+        "tool_call_id": "call_11951675745682449362"
       },
       {
-        "id": "4d555e36a653f99b",
-        "parentObservationId": "066aa972d5caf682",
-        "type": "AGENT",
-        "name": "agent.round",
-        "startTime": "2026-11-14T09:48:37.780Z",
-        "endTime": "2026-11-14T09:48:56.767Z",
+        "id": "a25d0c4559be45c3",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "TOOL",
+        "name": "tool.tool_product_image_gen",
+        "startTime": "2026-11-14T09:45:50.587Z",
+        "endTime": "2026-11-14T09:46:25.479Z",
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 18987,
-        "tool_call_id": null
-      },
-      {
-        "id": "bba72dc0f65abba0",
-        "parentObservationId": "4d555e36a653f99b",
-        "type": "GENERATION",
-        "name": "llm.plan",
-        "startTime": "2026-11-14T09:48:46.652Z",
-        "endTime": "2026-11-14T09:48:56.737Z",
-        "level": "DEFAULT",
-        "statusMessage": null,
-        "model": "gemini-3.8-flash",
-        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
-        "duration_ms": 10085,
-        "tool_call_id": null
+        "duration_ms": 34892,
+        "tool_call_id": "call_2818971517350074672"
       },
       {
         "id": "aa27095e9cb2427b",
@@ -776,9 +944,59 @@
         "level": "DEFAULT",
         "statusMessage": null,
         "model": null,
+        "usageDetails": {},
+        "costDetails": {},
         "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
         "duration_ms": 14,
         "tool_call_id": "call_14578221110350965476"
+      },
+      {
+        "id": "bb7e5fb66714aebd",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "TOOL",
+        "name": "tool.list_packs",
+        "startTime": "2026-11-14T09:44:24.027Z",
+        "endTime": "2026-11-14T09:44:24.135Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 108,
+        "tool_call_id": "call_8601876553816673435"
+      },
+      {
+        "id": "bd2abd92607da0ae",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "TOOL",
+        "name": "tool.canvas_product_add_batch",
+        "startTime": "2026-11-14T09:48:13.204Z",
+        "endTime": "2026-11-14T09:48:25.409Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 12205,
+        "tool_call_id": "call_8229222459427758359"
+      },
+      {
+        "id": "ee0b74a16f47afb9",
+        "parentObservationId": "016224a02815c6c2",
+        "type": "TOOL",
+        "name": "tool.read",
+        "startTime": "2026-11-14T09:44:45.003Z",
+        "endTime": "2026-11-14T09:44:45.058Z",
+        "level": "DEFAULT",
+        "statusMessage": null,
+        "model": null,
+        "usageDetails": {},
+        "costDetails": {},
+        "traceId": "be8f05d07c0eda5983d7af57a9c1ee2e",
+        "duration_ms": 55,
+        "tool_call_id": "call_24495966455418643"
       }
     ]
   },
@@ -964,5 +1182,19 @@
       "caption": "背面 · 本次生成并装入母版的二维画稿",
       "source_sha256": "9633229b0f26159b4dde6feafed557a9b6ce96f9ebc795d76b0050ccec2416f6"
     }
-  ]
+  ],
+  "theme": "黄仁勋参加华为面试 · 修复复测",
+  "prompt": "请在当前独立测试项目制作默认规格的双图光栅变图卡，主题为明显虚构、幽默卡通的“黄仁勋参加华为面试”。需要正面 A、B 两帧与背面三张画稿。参数采用默认值，无需询问。此次只测试画稿生成及装配，不要调用三维渲染。三张素材就绪后用 canvas_product_add_batch 一次提交 frame-a、frame-b、back，让素材读取并行；如果返回 task_status=running，使用 canvas_product_add_status 查询同一个任务，直到 completed 或 failed，不要重新装配。最后 canvas_product_inspect 确认三面内容已保存，报告真实结果。",
+  "task_ids": [
+    "6a802c4d-bad2-41b2-b953-662017b2a7e7"
+  ],
+  "implementation_version": {
+    "label": "placement-task-v1 / local working tree",
+    "app_version": "0.5.2",
+    "frontend_base_commit": "6d04b2cd22b94eb9376b419c466d9db1347b5d43",
+    "frontend_base_is_release_of_this_fix": false,
+    "agent_pack_base_commit": "fe662472d70c5b4d70c2e7db0c85e68baf906f72",
+    "description": "20s task response, status polling, active duplicate reuse, concurrent source preparation, serialized master saves, segmented IO timings"
+  },
+  "version_note": "R2 使用同一装配任务修复；复测后只更正主机读取计时字段名称。没有保留 R2 当时的逐文件指纹，因此不拿 R3 的指纹冒充。"
 }

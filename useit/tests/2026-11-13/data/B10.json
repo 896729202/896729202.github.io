@@ -210,5 +210,47 @@
     "cancelled": true,
     "complete_run": false,
     "windows": []
+  },
+  "cost": {
+    "case": "B10",
+    "session_id": "c7fa3ec7-7251-47d0-95fc-ace8bcfe2d6a",
+    "currency": "USD",
+    "method": "recorded_usage_at_local_configured_rates",
+    "invoice_verified": false,
+    "coverage": "captured",
+    "reference_total_usd": 0.0094326,
+    "known_reference_subtotal_usd": 0.0094326,
+    "model_reference_usd": 0.0094326,
+    "service_reference_usd": 0,
+    "langfuse_recorded_partial_usd": 0.00544725,
+    "langfuse_priced_observations": 2,
+    "tasks": [
+      {
+        "task_id": "bd23f68f-3c5f-47ec-97fd-d9fbfe1d5709",
+        "status": "cancelled",
+        "coverage": "captured",
+        "last_usage_at": "2026-11-14T13:49:30+08:00",
+        "source_seq": 40,
+        "source": "local stream_messages.jsonl / last cumulative usage snapshot (not sum of snapshots)",
+        "model_lines": [
+          {
+            "model": "gemini-3.8-flash",
+            "key_source": "official",
+            "input_tokens": 56516,
+            "output_tokens": 777,
+            "cache_read_tokens": 53138,
+            "cache_creation_tokens": 0,
+            "call_count": 2,
+            "fresh_input_tokens": 3378,
+            "reference_usd": 0.0094326
+          }
+        ],
+        "service_lines": [],
+        "unpriced": [],
+        "model_reference_usd": 0.0094326,
+        "service_reference_usd": 0,
+        "reference_usd": 0.0094326
+      }
+    ]
   }
 }

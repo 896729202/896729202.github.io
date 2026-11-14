@@ -1073,5 +1073,95 @@
         "seconds": 83.537
       }
     ]
+  },
+  "cost": {
+    "case": "B11",
+    "session_id": "2ad64004-8fb2-4966-bf84-1884357d26f1",
+    "currency": "USD",
+    "method": "recorded_usage_at_local_configured_rates",
+    "invoice_verified": false,
+    "coverage": "captured",
+    "reference_total_usd": 0.3814649,
+    "known_reference_subtotal_usd": 0.3814649,
+    "model_reference_usd": 0.3014649,
+    "service_reference_usd": 0.08,
+    "langfuse_recorded_partial_usd": 0.2202735,
+    "langfuse_priced_observations": 22,
+    "tasks": [
+      {
+        "task_id": "3c76af1e-020e-4385-a1bb-a88cb50950ca",
+        "status": "done",
+        "coverage": "captured",
+        "last_usage_at": "2026-11-14T13:52:07+08:00",
+        "source_seq": 62,
+        "source": "local stream_messages.jsonl / last cumulative usage snapshot (not sum of snapshots)",
+        "model_lines": [
+          {
+            "model": "gemini-3.8-flash",
+            "key_source": "official",
+            "input_tokens": 361445,
+            "output_tokens": 7183,
+            "cache_read_tokens": 315392,
+            "cache_creation_tokens": 0,
+            "call_count": 7,
+            "fresh_input_tokens": 46053,
+            "reference_usd": 0.0851304
+          }
+        ],
+        "service_lines": [],
+        "unpriced": [],
+        "model_reference_usd": 0.0851304,
+        "service_reference_usd": 0,
+        "reference_usd": 0.0851304
+      },
+      {
+        "task_id": "dc2da51c-2baf-4a27-b52c-ea516b7aa1b9",
+        "status": "done",
+        "coverage": "captured",
+        "last_usage_at": "2026-11-14T13:56:52+08:00",
+        "source_seq": 109,
+        "source": "local stream_messages.jsonl / last cumulative usage snapshot (not sum of snapshots)",
+        "model_lines": [
+          {
+            "model": "gemini-3.8-flash",
+            "key_source": "official",
+            "input_tokens": 945850,
+            "output_tokens": 6342,
+            "cache_read_tokens": 765830,
+            "cache_creation_tokens": 0,
+            "call_count": 15,
+            "fresh_input_tokens": 180020,
+            "reference_usd": 0.21623475
+          },
+          {
+            "model": "gemini-3.1-flash-lite-preview",
+            "key_source": "official",
+            "input_tokens": 345,
+            "output_tokens": 9,
+            "cache_read_tokens": 0,
+            "cache_creation_tokens": 0,
+            "call_count": 1,
+            "fresh_input_tokens": 345,
+            "reference_usd": 0.00009975
+          }
+        ],
+        "service_lines": [
+          {
+            "service": "openai_image_gen",
+            "variant": "generate",
+            "key_source": "user",
+            "units": 1,
+            "call_count": 1,
+            "unit_type": "image",
+            "reference_usd": 0.08,
+            "invoice_verified": false
+          }
+        ],
+        "unpriced": [],
+        "model_reference_usd": 0.2163345,
+        "service_reference_usd": 0.08,
+        "reference_usd": 0.2963345
+      }
+    ]
   }
 }
