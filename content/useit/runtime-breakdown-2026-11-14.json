@@ -1,0 +1,160 @@
+{
+  "cases": [
+    {
+      "case": "B10-R2",
+      "local_total_ms": 314630,
+      "cloud_total_ms": 317637,
+      "items": [
+        {
+          "key": "planning",
+          "title": "理解任务与决定下一步",
+          "description": "14 次模型请求：理解当前结果、安排下一步操作并整理最终答复，包含等待模型响应。",
+          "milliseconds": 161047,
+          "count": 14
+        },
+        {
+          "key": "generation",
+          "title": "生成三面图片",
+          "description": "分别生成 A 面、B 面与背面，包含生图工具内部处理和等待。",
+          "milliseconds": 99008,
+          "count": 3
+        },
+        {
+          "key": "placement",
+          "title": "装配并保存三面",
+          "description": "Agent 等待三面素材装入母版并保存，包含前端处理与通信；前端自身处理为 9.495 秒。",
+          "milliseconds": 12191,
+          "count": 1
+        },
+        {
+          "key": "verification",
+          "title": "检查保存结果",
+          "description": "读取产品母版状态，确认三面图片与保存记录。",
+          "milliseconds": 1765,
+          "count": 1
+        },
+        {
+          "key": "other",
+          "title": "其他衔接与未细分时间",
+          "description": "总时间扣除以上四类后的余量，包含其他小工具、上下文准备和未进一步分段的时间。",
+          "milliseconds": 40619,
+          "count": null
+        }
+      ],
+      "generation_steps": [
+        {
+          "face": "frame-a",
+          "action": "generate",
+          "title": "生成 A 面画稿",
+          "milliseconds": 34897,
+          "source_step": 6,
+          "tool_call_id": "call_2818971517350074672"
+        },
+        {
+          "face": "frame-b",
+          "action": "generate",
+          "title": "生成 B 面画稿",
+          "milliseconds": 33963,
+          "source_step": 7,
+          "tool_call_id": "call_4419244816733039791"
+        },
+        {
+          "face": "back",
+          "action": "generate",
+          "title": "生成背面画稿",
+          "milliseconds": 30148,
+          "source_step": 8,
+          "tool_call_id": "call_8968709624443024963"
+        }
+      ],
+      "method": "以本地 summary.json 的 elapsed_seconds 为总额；从 phase_timings.jsonl 只取主模型请求、外层生图操作、装配回调等待和检查回调等待的 duration_ms，其他时间取差额。生图的面片按工具输出文件名与最终装配素材对应确认。",
+      "limitations": [
+        "本地执行和云端 agent.run 的起止边界不同；云端总计仅作对照，不参加本地拆分。",
+        "模型请求与前端回调的阶段时间戳存在事后补记，不能据此绘制精确起止时间线；此处使用已记录的实际持续时间。",
+        "生图内部请求、素材下载和前端内部阶段已包含在所选外层操作中，不能再次相加。",
+        "其他时间是未细分余量，不能全部归因于网络等待；这些值也不是纯模型计算时间。"
+      ],
+      "source_task_ids": [
+        "6a802c4d-bad2-41b2-b953-662017b2a7e7"
+      ]
+    },
+    {
+      "case": "B10-R3",
+      "local_total_ms": 296460,
+      "cloud_total_ms": 298043,
+      "items": [
+        {
+          "key": "planning",
+          "title": "理解任务与决定下一步",
+          "description": "18 次模型请求：理解当前结果、安排下一步操作并整理最终答复，包含等待模型响应。",
+          "milliseconds": 164395,
+          "count": 18
+        },
+        {
+          "key": "generation",
+          "title": "生成三面图片",
+          "description": "生成 A 面、基于本次新 A 图编辑 B 面，再生成背面，包含生图工具内部处理和等待。",
+          "milliseconds": 101498,
+          "count": 3
+        },
+        {
+          "key": "placement",
+          "title": "装配并保存三面",
+          "description": "Agent 等待三面素材装入母版并保存，包含前端处理与通信；前端自身处理为 13.728 秒。",
+          "milliseconds": 14235,
+          "count": 1
+        },
+        {
+          "key": "verification",
+          "title": "检查保存结果",
+          "description": "读取产品母版状态，确认三面图片与保存记录。",
+          "milliseconds": 1483,
+          "count": 1
+        },
+        {
+          "key": "other",
+          "title": "其他衔接与未细分时间",
+          "description": "总时间扣除以上四类后的余量，包含其他小工具、上下文准备和未进一步分段的时间。",
+          "milliseconds": 14849,
+          "count": null
+        }
+      ],
+      "generation_steps": [
+        {
+          "face": "frame-a",
+          "action": "generate",
+          "title": "生成 A 面画稿",
+          "milliseconds": 43359,
+          "source_step": 8,
+          "tool_call_id": "call_5348505254142174549"
+        },
+        {
+          "face": "frame-b",
+          "action": "edit",
+          "title": "基于本次新 A 图编辑 B 面",
+          "milliseconds": 24858,
+          "source_step": 10,
+          "tool_call_id": "call_10711306783153495920"
+        },
+        {
+          "face": "back",
+          "action": "generate",
+          "title": "生成背面画稿",
+          "milliseconds": 33281,
+          "source_step": 12,
+          "tool_call_id": "call_3944446583937642422"
+        }
+      ],
+      "method": "以本地 summary.json 的 elapsed_seconds 为总额；从 phase_timings.jsonl 只取主模型请求、外层生图操作、装配回调等待和检查回调等待的 duration_ms，其他时间取差额。生图的面片按工具输出文件名与最终装配素材对应确认。",
+      "limitations": [
+        "本地执行和云端 agent.run 的起止边界不同；云端总计仅作对照，不参加本地拆分。",
+        "模型请求与前端回调的阶段时间戳存在事后补记，不能据此绘制精确起止时间线；此处使用已记录的实际持续时间。",
+        "生图内部请求、素材下载和前端内部阶段已包含在所选外层操作中，不能再次相加。",
+        "其他时间是未细分余量，不能全部归因于网络等待；这些值也不是纯模型计算时间。"
+      ],
+      "source_task_ids": [
+        "fb33f388-147d-4d01-95de-4561e2585679"
+      ]
+    }
+  ]
+}
