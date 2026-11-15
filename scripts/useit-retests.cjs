@@ -31,14 +31,14 @@ module.exports=function({esc,table,date,dur,sec,external,costPanel,runtimeUI,run
   return `<section id="rewrite-probe"><div class="section-heading"><p class="eyebrow">R6 之后 / 独立文字测试</p><h2>整理器另测了什么？</h2></div><p><strong>以下只测试文字整理，不生图，也没有把结果应用到原 R6。</strong>这些试次的耗时和参考费用均不计入 R6 原来的 ${dur(r.agent_seconds)} 与任务总费用；原 R6 等待 2.838 秒后回退、未应用改写的记录保留。</p>${attempts.length?table(['文字试次','记录结果','独立耗时','独立参考费用 USD','失败或人工审阅问题'],rows):'<p>文字试次明细尚未记录。</p>'}${total}<p>首次失败或需修正的候选与后续结果分别保留，返回成功或结构校验通过不等于人工审阅通过。R6 当时的候选未保存，这些新文本不能反推它回退的具体原因。</p>${notes(probe.review_notes).map(note=>'<p>'+esc(note)+'</p>').join('')}${attempts.map((attempt,index)=>{const brief=attempt.brief||attempt.rewritten||{},body=attempt.rewritten_prompt;return `<details><summary>${esc(attemptLabel(attempt,index))}：查看可见正文与人工审阅</summary>${visibleRewrite(body?{...brief,rewritten_prompt:body}:brief)}${['preserved','improvements','issues','limitations'].map(key=>{const labels={preserved:'保留的原意',improvements:'更清楚的表达',issues:'需修正的问题',limitations:'仍需保留的边界'},items=notes(attempt.manual_review?.[key]);return items.length?'<p><strong>'+labels[key]+'</strong></p><ul>'+items.map(note=>'<li>'+esc(note)+'</li>').join('')+'</ul>':'';}).join('')}</details>`;}).join('')}</section>`;
  }
  function history(){
-  return `<section id="improvement-history"><div class="section-heading"><p class="eyebrow">改进历程 / 统一看 Agent 执行时间</p><h2>问题怎样一步步改进？</h2></div>${table(['阶段','Agent 执行','这一步做了什么'],[
+  return `<section id="improvement-history"><details><summary>中间试次与计时归档（已归入两轮优化）</summary><div class="section-heading"><p class="eyebrow">改进历程 / 统一看 Agent 执行时间</p><h2>问题怎样一步步改进？</h2></div>${table(['阶段','Agent 执行','这一步做了什么'],[
    ['<a href="B10-R1.html">R1 发现问题</a>',dur(900.7),'发现装配超时后前端仍继续保存，重复调用与慢素材拖长了流程。'],
    ['<a href="B10-R2.html">R2 修复</a> → <a href="B10-R3.html">R3 新素材复测</a>',dur(314.63)+' → '+dur(296.46),'补上任务追踪、防重复与素材并行准备，再用新主题、新素材确认修复后的表现。'],
    ['<a href="B10-R4.html">R4 同轮与并发</a>',dur(251.05),'把清单更新和实际动作放在同轮，独立的 A 面与背面并发生图。'],
    ['<a href="B10-R5.html">R5 自然语言调度</a>',dur(261.6),'用户只写短需求，由代码安排图片依赖；实测 7 轮模型请求，生图等待 '+ms(58718)+'。'],
    ...(hasRewriteRetest?[[ '<a href="B10-R6.html#prompt-rewrite">R6 提示词整理实验</a>',dur(226.86),'整理等待 2.838 秒后回退，改写未应用；本轮另有单面范围修复，模型等待也有波动。' ]]:[]),
    ...(hasGtaRetest?[[ '<a href="B10-R7.html#run-findings">R7 GTA6 主题复测</a>',dur(310.03)+'（两轮合计）','改写已应用，但多问一次确认、装配退回三次单面保存；墙钟 '+dur(423.233)+'，不能声称这轮更快。' ]]:[])
-  ])}<p>以上统一使用 Agent 执行口径；R1 从提交到结束另为约 ${dur(912.476)}。历史的长素材等待未复现，速度提升不能全归功于代码；R1 还尝试了三维，新轮只做生图与装配，不能当作严格同条件的“约 70% 提速”。</p><p class="sub">${hasRewriteRetest?'<strong>画稿边界：</strong>R5 背面拼版保留为历史问题；R6 本次背面未见拼版，但改写回退未应用，画面改善不能归功于改写，结果也不倒填前轮。':'<strong>仍待完成：</strong>R5 背面出现多余人物拼版，需修改后再验收；R6 提示词整理实验准备中，尚无结果。'}</p></section>`;
+  ])}<p>以上统一使用 Agent 执行口径；R1 从提交到结束另为约 ${dur(912.476)}。历史的长素材等待未复现，速度提升不能全归功于代码；R1 还尝试了三维，新轮只做生图与装配，不能当作严格同条件的“约 70% 提速”。</p><p class="sub">${hasRewriteRetest?'<strong>画稿边界：</strong>R5 背面拼版保留为历史问题；R6 本次背面未见拼版，但改写回退未应用，画面改善不能归功于改写，结果也不倒填前轮。':'<strong>仍待完成：</strong>R5 背面出现多余人物拼版，需修改后再验收；R6 提示词整理实验准备中，尚无结果。'}</p></details></section>`;
  }
  function runFindingsSection(r){
   if(r.case!=='B10-R7')return '';

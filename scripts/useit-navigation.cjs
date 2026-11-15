@@ -1,13 +1,10 @@
 'use strict';
 const rounds=[
- ['B10-latest','最新成果 · 11/15'],
- ['B10','B10 原始'],['B10-R1','B10-R1 补测'],
- ['B10-R2','B10-R2 修复复测'],['B10-R3','B10-R3 新主题复测'],
- ['B10-R4','B10-R4 并行技术对照'],['B10-R5','B10-R5 自然语言验收'],
- ['B10-R6','B10-R6 提示词整理'],['B10-R7','B10-R7 GTA6 复测'],
- ['B10-R8','B10-R8 五项改动复测'],
- ['B10-short-prompts','短句复测 · R9 / R10']
+ ['B10-R1','① 原始版 · 15分01秒'],
+ ['B10-R7','② 第一轮优化 · 5分10秒'],
+ ['B10-latest','③ 第二轮优化 · 多次实测']
 ];
 module.exports=function(active=''){
- return `<nav class="tabs siblings" aria-label="光栅卡测试与最新成果">${rounds.map(([id,label])=>`<a href="${id}.html"${id===active?' aria-current="page"':''}${id==='B10-latest'?' class="latest-tab"':''}>${label}</a>`).join('')}</nav>`;
+ const group=['B10','B10-R1'].includes(active)?'B10-R1':/^B10-R[2-7]$/.test(active)?'B10-R7':active?'B10-latest':'';
+ return `<nav class="tabs siblings" aria-label="光栅卡三个版本">${rounds.map(([id,label])=>`<a href="${id}.html"${id===group?` aria-current="${id===active?'page':'step'}"`:''}${id==='B10-latest'?' class="latest-tab"':''}>${label}</a>`).join('')}</nav>`;
 };

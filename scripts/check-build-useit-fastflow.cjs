@@ -61,7 +61,8 @@ try{
  assert.equal(fs.readFileSync(result.pageFile,'utf8'),html);
 
  const nav=navigation('B10-R8');
- assert(nav.includes('href="B10-R8.html" aria-current="page"'));
+ assert(nav.includes('href="B10-latest.html" aria-current="step"'));
+ assert.equal((nav.match(/<a /g)||[]).length,3);
  assert(!nav.includes('target='));
  assert.deepEqual(parseArgs(['--input','curated.json','--pending']),{inputFile:'curated.json',allowPending:true});
  assert.throws(()=>parseArgs(['--input']),/requires/);

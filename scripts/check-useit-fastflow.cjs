@@ -47,7 +47,7 @@ assert(latest.includes('<h1>光栅卡最新成果</h1>'));
 assert(latest.includes('<span>/</span>最新成果</nav>'));
 assert(latest.includes('href="B10-latest.html" aria-current="page"'));
 assert(!latest.includes('href="B10-R8.html" aria-current="page"'));
-assert(complete.includes('href="B10-R8.html" aria-current="page"'));
+assert(complete.includes('href="B10-latest.html" aria-current="step"'));
 assert.equal((latest.match(/aria-current="page"/g)||[]).length,1);
 const observedNoRewrite=ui.render({report:{...sample,rewrite_observation:{observed_event_count:0,observed_duration_ms:0}}});
 assert(observedNoRewrite.includes('本轮没有实际执行提示词改写'));
@@ -159,5 +159,5 @@ for(const html of [final,latestFinal]){
  for(const anchor of html.matchAll(/<a\b[^>]*href="(?:B10[^"#]*\.html|images\/)[^"]*"[^>]*>/g))assert(!anchor[0].includes('target='),anchor[0]);
 }
 assert(latestFinal.includes('href="B10-latest.html" aria-current="page"'));
-assert(final.includes('href="B10-R8.html" aria-current="page"'));
+assert(final.includes('href="B10-latest.html" aria-current="step"'));
 console.log('PASS: R8 final and latest views; reconciled runtime; same-tab navigation/images; cost anchors; observed rewrite facts; concurrent-task and sidebar boundaries; incomplete attempts stay unknown; IDs folded and Chinese search retained. In-memory only, no page built.');

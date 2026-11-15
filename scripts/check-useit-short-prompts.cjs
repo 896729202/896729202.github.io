@@ -17,7 +17,7 @@ assert(html.includes('20.0 秒'));assert(html.includes('40.0 秒'));assert(html.
 assert(html.includes('Actual &lt;script&gt; reply'));assert(!html.includes('Actual <script>'));assert(html.includes('A &lt; B'));
 assert(html.includes('canvas3d_render'));assert(html.includes('独立三维入口不支持该品类'));
 assert(html.includes('R8 的 1分32秒，不能直接当作普通短句的普遍速度'));
-assert(html.includes('href="B10-short-prompts.html" aria-current="page"'));
+assert(html.includes('href="B10-latest.html" aria-current="step"'));
 assert(!/<a[^>]+href="(?:images\/|B10)[^>]+target=/.test(html));
 assert(html.includes('href="https://example.com/session/fixture" target="_blank"'));
 assert.equal(ui.breakdown({...saved,runtime:{...saved.runtime,local_total_ms:999999}}),null);
