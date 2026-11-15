@@ -13,7 +13,7 @@ class Parser(HTMLParser):
   for key in ['href','src']:
    if key in a:self.links.append(a[key])
   if tag=='img':self.images.append(a);assert a.get('alt')
-  if tag=='a' and re.search(r'(?:^|/)B10(?:-R\d+)?\.html(?:#|$)',a.get('href','')):
+  if tag=='a' and re.search(r'(?:^|/)B10(?:-R\d+|-latest)?\.html(?:#|$)',a.get('href','')):
    assert a.get('target')!='_blank','Internal test version link opens another tab'
 errors=[];pages=[ROOT/'index.html',*list((ROOT/'useit').rglob('*.html'))]
 for p in pages:

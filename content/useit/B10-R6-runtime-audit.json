@@ -346,7 +346,7 @@
       }
     ],
     "token_usage_available": true,
-    "reference_cost_usd": 0.001336,
+    "reference_cost_usd": 0.00058375,
     "cost_is_provider_invoice": false,
     "brief": null,
     "event_count": 1,
@@ -363,7 +363,24 @@
     "trace_id": "05aba400d6c0a64c3b9093f64e33b1d4",
     "langfuse_duration_ms": 2839.0,
     "model_observation_id": "277643f8eb78fba8",
-    "model_call_langfuse_ms": 2208.0
+    "model_call_langfuse_ms": 2208.0,
+    "captured_reference_cost_usd": 0.001336,
+    "captured_reference_cost_basis": "Original runtime/helper usage-tracker estimate captured at execution time; retained for provenance, not the current display rate.",
+    "reference_cost_basis": {
+      "method": "recorded_usage_at_local_configured_rates",
+      "rate_source": "website/content/useit/costs-2026-11-14.json",
+      "model": "gemini-3.1-flash-lite-preview",
+      "rates_usd_per_million": {
+        "input": 0.25,
+        "output": 1.5,
+        "cache_read_multiplier": 0.25,
+        "cache_creation_multiplier": 1.0
+      },
+      "formula": "(fresh_input_tokens * input + cache_read_tokens * input * cache_read_multiplier + cache_creation_tokens * input * cache_creation_multiplier + output_tokens * output) / 1000000",
+      "fresh_input_tokens": "max(0, input_tokens - cache_read_tokens - cache_creation_tokens)",
+      "usage_scope": "Only this rewrite/probe invocation, not all light-model helpers in the task.",
+      "invoice_verified": false
+    }
   },
   "generation_steps": [
     {
@@ -622,7 +639,7 @@
     "mapping_note": "R6重写失败未应用；运行间总差不能当作改写收益，新增状态查询并不代表重新装配。"
   },
   "interpretation_notes": [
-    "前置改写耗时2.838秒、参考费用0.001336美元，但因ValueError回退，brief=null；该次调用不是成功改写或生图质量提升的证据。",
+    "前置改写耗时2.838秒、参考费用0.00058375美元，但因ValueError回退，brief=null；该次调用不是成功改写或生图质量提升的证据。",
     "改写已包含在Agent总耗时226.860秒，单列rewrite项；planner model仅计8次orch.plan.llm_call，不重复包含light模型，也不把rewrite再塞进residual。",
     "R5第三轮planner90.313秒，R6对应建制品轮11.723秒；这种延迟波动不能被归为改写收益，尤其R6根本没有采用改写。",
     "R6整套耗时比R5少34.740秒，但同时包含网络波动、新单面scope/取消补丁与一次状态查询；不是单变量改写实验。",

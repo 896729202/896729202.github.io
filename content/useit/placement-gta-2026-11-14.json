@@ -415,7 +415,7 @@
       }
     ],
     "token_usage_available": true,
-    "reference_cost_usd": 0.001337,
+    "reference_cost_usd": 0.00057425,
     "cost_is_provider_invoice": false,
     "brief": {
       "rewritten_prompt": "请设计一张以《GTA6》游戏为主题的双图光栅卡。正面图像由两帧组成：第一帧（Frame A）展示海滨城市白天的景象；第二帧（Frame B）在保持人物和跑车构图位置完全不变的前提下，将场景切换为霓虹闪烁的夜景。背面设计需与正面主题保持统一风格。请按照默认规格完成画稿，并将画稿放置于卡片模板中，无需提供三维效果预览。",
@@ -479,7 +479,24 @@
     "trace_id": "4dce7dc7010ee6dbaa4efa47a18b5bcf",
     "langfuse_duration_ms": 2588.0,
     "model_observation_id": "1f43dff25d23f298",
-    "model_call_langfuse_ms": 1957.0
+    "model_call_langfuse_ms": 1957.0,
+    "captured_reference_cost_usd": 0.001337,
+    "captured_reference_cost_basis": "Original runtime/helper usage-tracker estimate captured at execution time; retained for provenance, not the current display rate.",
+    "reference_cost_basis": {
+      "method": "recorded_usage_at_local_configured_rates",
+      "rate_source": "website/content/useit/costs-2026-11-14.json",
+      "model": "gemini-3.1-flash-lite-preview",
+      "rates_usd_per_million": {
+        "input": 0.25,
+        "output": 1.5,
+        "cache_read_multiplier": 0.25,
+        "cache_creation_multiplier": 1.0
+      },
+      "formula": "(fresh_input_tokens * input + cache_read_tokens * input * cache_read_multiplier + cache_creation_tokens * input * cache_creation_multiplier + output_tokens * output) / 1000000",
+      "fresh_input_tokens": "max(0, input_tokens - cache_read_tokens - cache_creation_tokens)",
+      "usage_scope": "Only this rewrite/probe invocation, not all light-model helpers in the task.",
+      "invoice_verified": false
+    }
   },
   "observations": 38,
   "failure_observations": [],

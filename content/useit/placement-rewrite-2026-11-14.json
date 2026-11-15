@@ -1050,13 +1050,30 @@
       }
     ],
     "token_usage_available": true,
-    "reference_cost_usd": 0.001336,
+    "reference_cost_usd": 0.00058375,
     "cost_is_provider_invoice": false,
     "brief": null,
     "enabled": true,
     "included_in_agent_seconds": true,
     "rewritten": null,
-    "applied_to_planner": false
+    "applied_to_planner": false,
+    "captured_reference_cost_usd": 0.001336,
+    "captured_reference_cost_basis": "Original runtime/helper usage-tracker estimate captured at execution time; retained for provenance, not the current display rate.",
+    "reference_cost_basis": {
+      "method": "recorded_usage_at_local_configured_rates",
+      "rate_source": "website/content/useit/costs-2026-11-14.json",
+      "model": "gemini-3.1-flash-lite-preview",
+      "rates_usd_per_million": {
+        "input": 0.25,
+        "output": 1.5,
+        "cache_read_multiplier": 0.25,
+        "cache_creation_multiplier": 1.0
+      },
+      "formula": "(fresh_input_tokens * input + cache_read_tokens * input * cache_read_multiplier + cache_creation_tokens * input * cache_creation_multiplier + output_tokens * output) / 1000000",
+      "fresh_input_tokens": "max(0, input_tokens - cache_read_tokens - cache_creation_tokens)",
+      "usage_scope": "Only this rewrite/probe invocation, not all light-model helpers in the task.",
+      "invoice_verified": false
+    }
   },
   "visual_review": {
     "summary": "A/B 主体构图基本一致，B 的营寨火海变化明显；本轮背面是完整独立画稿，未再见 R5 的人物对照拼版。",
@@ -1075,12 +1092,12 @@
     "no_chat_sent": true,
     "original_prompt": "做一张架空三国“诸葛亮火烧连营”的双图光栅卡：诸葛亮持扇，画面从营寨变成火海，人物构图不变；背面放羽扇、阵图和题名。用默认规格，做好画稿并装到卡里，先不用三维预览。",
     "total_duration_ms": 6847,
-    "total_reference_cost_usd": 0.002687,
+    "total_reference_cost_usd": 0.00116,
     "has_successful_rewrite": true,
     "note": "独立纯文本实验共2次调用，均未应用到R6，也没有再次生图或发送chat。第1次结构校验通过但人工发现“装裱”歧义，保留原输出；增加交付措辞约束后做第2次。R6原候选缺失，不能借新probe推断R6具体失败原因。费用为本地费率参考估值。",
     "successful_revised_attempt": 2,
     "successful_revised_duration_ms": 3737,
-    "successful_revised_reference_cost_usd": 0.001322,
+    "successful_revised_reference_cost_usd": 0.0005645,
     "standalone_attempt_limit_reached": true,
     "attempts": [
       {
@@ -1089,7 +1106,7 @@
         "model": "gemini-3.1-flash-lite-preview",
         "status": "success",
         "duration_ms": 3110,
-        "reference_cost_usd": 0.001365,
+        "reference_cost_usd": 0.0005955,
         "cost_is_provider_invoice": false,
         "usage_by_model": [
           {
@@ -1142,6 +1159,23 @@
             "将原文“做好画稿并装到卡里”改为“光栅卡装裱”，可能误导成新增实体工序；未采用。"
           ],
           "automatic_validation_at_execution": "passed_before_delivery_wording_guard"
+        },
+        "captured_reference_cost_usd": 0.001365,
+        "captured_reference_cost_basis": "Original runtime/helper usage-tracker estimate captured at execution time; retained for provenance, not the current display rate.",
+        "reference_cost_basis": {
+          "method": "recorded_usage_at_local_configured_rates",
+          "rate_source": "website/content/useit/costs-2026-11-14.json",
+          "model": "gemini-3.1-flash-lite-preview",
+          "rates_usd_per_million": {
+            "input": 0.25,
+            "output": 1.5,
+            "cache_read_multiplier": 0.25,
+            "cache_creation_multiplier": 1.0
+          },
+          "formula": "(fresh_input_tokens * input + cache_read_tokens * input * cache_read_multiplier + cache_creation_tokens * input * cache_creation_multiplier + output_tokens * output) / 1000000",
+          "fresh_input_tokens": "max(0, input_tokens - cache_read_tokens - cache_creation_tokens)",
+          "usage_scope": "Only this rewrite/probe invocation, not all light-model helpers in the task.",
+          "invoice_verified": false
         }
       },
       {
@@ -1150,7 +1184,7 @@
         "model": "gemini-3.1-flash-lite-preview",
         "status": "success",
         "duration_ms": 3737,
-        "reference_cost_usd": 0.001322,
+        "reference_cost_usd": 0.0005645,
         "cost_is_provider_invoice": false,
         "usage_by_model": [
           {
@@ -1216,8 +1250,28 @@
             "自由改写将正面“扇”说成“羽扇”；羽扇是原文已有元素，但前景材质未单独规定，不应把此词变成额外强制规格。",
             "仅比较了文本忠实与清晰度，未将其用于R6、没有图像效果验证。"
           ]
+        },
+        "captured_reference_cost_usd": 0.001322,
+        "captured_reference_cost_basis": "Original runtime/helper usage-tracker estimate captured at execution time; retained for provenance, not the current display rate.",
+        "reference_cost_basis": {
+          "method": "recorded_usage_at_local_configured_rates",
+          "rate_source": "website/content/useit/costs-2026-11-14.json",
+          "model": "gemini-3.1-flash-lite-preview",
+          "rates_usd_per_million": {
+            "input": 0.25,
+            "output": 1.5,
+            "cache_read_multiplier": 0.25,
+            "cache_creation_multiplier": 1.0
+          },
+          "formula": "(fresh_input_tokens * input + cache_read_tokens * input * cache_read_multiplier + cache_creation_tokens * input * cache_creation_multiplier + output_tokens * output) / 1000000",
+          "fresh_input_tokens": "max(0, input_tokens - cache_read_tokens - cache_creation_tokens)",
+          "usage_scope": "Only this rewrite/probe invocation, not all light-model helpers in the task.",
+          "invoice_verified": false
         }
       }
-    ]
+    ],
+    "captured_total_reference_cost_usd": 0.002687,
+    "captured_successful_revised_reference_cost_usd": 0.001322,
+    "reference_cost_basis": "Sum of standalone text-only attempt costs at costs-2026-11-14.json rates. Not included in R6 or R7 task totals; no image generation."
   }
 }
