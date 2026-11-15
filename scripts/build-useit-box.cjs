@@ -51,3 +51,4 @@ inject(`${base}/B01.html`,'B01-FIT-UPDATE',short,'<section id="chain">');
 inject(`${base}/index.html`,'B01-FIT-UPDATE','<p class="verdict"><strong>插盖盒专项更新：</strong>原图复现并修复 5 个面配准失败，13 面独立回放通过，边缘仍需复核。<a href="B01-R1.html">B01-R1 原因、修复与独立验证 →</a>（不计入原始 15 次 Agent 测试）</p>','<div class="section-heading catalog-title">');
 inject('useit/index.html','B01-FIT-UPDATE','<p class="verdict"><strong>插盖盒：五面配准问题已定位并修复。</strong><br>相同原图回放 13/13 面映射，隔离装配验证通过；应用内完整复测待做。<a href="tests/2026-11-13/B01-R1.html">查看 B01-R1 独立验证 →</a></p>','</main>');
 console.log('Built B01-R1 independent replay and linked original B01 / USEIT indexes.');
+require('./build-useit-box-v1.cjs');
