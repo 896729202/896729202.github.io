@@ -3,6 +3,7 @@
 // Build only the short-prompt report and its curated evidence snapshot.
 const fs=require('node:fs'),path=require('node:path');
 const navigation=require('./useit-navigation.cjs');
+const renderTimeBar=require('./useit-time-bar.cjs');
 const {describeObservation}=require('./useit-observation-labels.cjs');
 const PAGE='useit/tests/2026-11-13/B10-short-prompts.html';
 const EVIDENCE='useit/tests/2026-11-13/evidence/B10-short-prompts.json';
@@ -64,8 +65,8 @@ function navigationWithCurrent(latestView=false){
  return navigation(latestView?'B10-latest':'B10-short-prompts');
 }
 function topCard(r){
- const parts=breakdown(r),names=['模型请求与等待','生图','装配与保存','其他执行与衔接'];
- return `<article class="sp-card"><h2><a href="#${esc(r.case)}">${esc(r.case)}</a></h2><blockquote><p>“${esc(r.prompt)}”</p></blockquote><small class="sp-meta">${Array.from(r.prompt).length} 字（含标点）</small><strong class="sp-time">${completedExecution(r)?duration(r.agent_seconds):'待完整记录'}</strong><span class="sp-meta">Agent 已执行时间</span><p class="sp-status">${esc(status(r))}</p>${parts?`<div class="sp-parts">${parts.map((n,i)=>`<span><small>${names[i]}</small><strong>${seconds(n)}</strong></span>`).join('')}</div>`:'<p class="sp-meta">时间组成尚未完成核对，不将缺失项记为零。</p>'}<p class="sp-meta">模型 ${count(r.modelCallCount)} · 工具失败 ${count(r.failureCount)}<br>参考费用 ${money(r.cost.reference_total_usd)}</p></article>`;
+ const parts=breakdown(r);
+ return `<article class="sp-card"><h2><a href="#${esc(r.case)}">${esc(r.case)}</a></h2><blockquote><p>“${esc(r.prompt)}”</p></blockquote><small class="sp-meta">${Array.from(r.prompt).length} 字（含标点）</small><strong class="sp-time">${completedExecution(r)?duration(r.agent_seconds):'待完整记录'}</strong><span class="sp-meta">Agent 已执行时间</span><p class="sp-status">${esc(status(r))}</p>${parts?renderTimeBar(parts):'<p class="sp-meta">时间组成尚未完成核对，不将缺失项记为零。</p>'}<p class="sp-meta">模型 ${count(r.modelCallCount)} · 工具失败 ${count(r.failureCount)}<br>参考费用 ${money(r.cost.reference_total_usd)}</p></article>`;
 }
 function chain(r){
  if(!r.observations.length)return '<p>尚未取得完整 Langfuse 观测；不补猜缺失步骤。</p>';

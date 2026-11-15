@@ -14,8 +14,10 @@ module.exports=function({cases,latestReport:r,latestVersionReports=[],esc,table,
  const representative=reports.find(report=>report.case==='B10-R8');
  const versionCaveat=shortTests?`较完整需求触发快速流程；两句短需求仍走普通流程。${representative?dur(representative.agent_seconds):'单次实测'}不是通用完成时间。`:'每次实测分别记录，单次结果不是固定完成时间。';
  const stages=()=>`<a href="B10-R1.html">① 原始版</a><a href="B10-R7.html">② 第一轮优化</a><a href="B10-latest.html">③ 第二轮优化 · 多次实测</a>`;
+ const earlierReports=reports.filter(report=>report.case!==r.case);
+ const earlierResults=()=>earlierReports.map(report=>`<small><a href="B10-latest.html#latest-tests">${esc(sampleLabel(report))}：${dur(report.agent_seconds)}（${errorLabel(report)}）</a>${report.case==='B10-R9'?' · 三维入口报错，三面保存成功':''}</small>`).join('');
  function sampleResults(){
-  return reports.map(report=>`<div><a class="optimized-result${failureCount(report)>0?' result-failed':''}" href="B10-latest.html#latest-tests"><strong>${dur(report.agent_seconds)}</strong><span>（${errorLabel(report)}）</span></a><small>${esc(sampleLabel(report))}${report.case==='B10-R9'?' · 三维入口报错，三面保存成功':''}</small></div>`).join('');
+  return `<a class="optimized-result${failureCount(r)>0?' result-failed':''}" href="B10-latest.html#latest-tests"><strong>${dur(r.agent_seconds)}</strong><span>（${errorLabel(r)}）</span></a><small><b>最新实测 · ${esc(sampleLabel(r))}</b></small>${earlierReports.length?`<small>同版较早实测：</small>${earlierResults()}`:''}`;
  }
  function comparison(){
   const rows=cases.filter(c=>!c.case.includes('-')).map(c=>{
@@ -35,7 +37,7 @@ module.exports=function({cases,latestReport:r,latestVersionReports=[],esc,table,
  function latestCard(category){
   const images=Array.isArray(r.images)?r.images:[],im=images.find(image=>image.face==='frame-a')||images[0];
   const cover=im?.src?`<img src="${esc(im.src)}" alt="${esc(category+' · '+(im.caption||'本轮画稿'))}" loading="lazy" width="600" height="440">`:'<span>本轮画稿待接入</span>';
-  const times=reports.map(report=>`<div class="case-time"><span>${esc(sampleLabel(report))}<small>${errorLabel(report)}${report.case==='B10-R9'?' · 三维入口':''}</small></span><strong>${dur(report.agent_seconds)}</strong></div>`).join('');
+  const times=`<div class="case-estimate"><span>最新实测 · ${esc(sampleLabel(r))}</span><strong>${dur(r.agent_seconds)}</strong><small>${errorLabel(r)} · Agent 执行时间</small></div>${earlierReports.length?`<p class="sub">同版较早实测：${earlierResults()}</p>`:''}`;
   return `<article class="case-card${completed?' case-card-verified':''}" data-case="B10 ${esc(category)}"><a class="case-cover" href="B10-latest.html">${cover}<span>第三版 · 多次实测</span></a><div class="case-body"><p class="case-number">B10 / 第二轮优化 · ${esc(r.test_date)}</p><h2><a href="B10-latest.html">${tick}${esc(category)}</a></h2><p class="case-status${completed?' status-verified':''}">${completed?`${reports.length} 次画稿与装配均已验证`:'保存结果见逐次记录'} · 三维未验收</p><p class="case-summary">${esc(versionCaveat)}</p>${times}<div class="case-links">${stages()}</div><p class="sub"><a href="B10-latest.html#latest-tests">查看每次输入、时间与参考费用 →</a></p></div></article>`;
  }
  return {comparison,latestCard};
