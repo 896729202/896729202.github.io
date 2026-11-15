@@ -12,11 +12,11 @@ module.exports=function({report:r,runtimeUI,costs,esc,table,dur,sec,external}){
  ${runtimeUI.breakdown(r.case,r)}
  <nav class="jump"><a href="#changes">已做改动</a><a href="#images">最新画稿</a><a href="#next">仍需改进</a><a href="#chain">原始证据</a></nav>
  <section id="changes"><h2>已经改了什么，取得了什么结果？</h2>${table(['原来的问题','已完成的修改','最新验证结果'],[
-  ['后台约 120 秒报超时，前端却继续保存；重试可能重复装配。','超过 20 秒返回任务编号，继续查询原任务；相同运行中请求复用任务。','R6 已真实走通“返回运行中 → 查询原任务 → 完成”；R7 三面回执均完成，没有装配重试。'],
-  ['清单更新与实际操作分开调用模型，往返较多。','清单更新与实际动作可在同一轮提交，合并不必要的安排步骤。','R3 为 18 次模型请求；R7 两轮合计 9 次。模型请求仍耗时 222.308 秒，仍是最大项。'],
-  ['多张图片逐个安排，等待时间叠加。','由代码同时启动 A 面与背面；A 保存成功后，以它为参考自动制作 B 面。','用户只写自然语言。R7 生图整段等待 57.412 秒，已扣除并发重叠；三张图均已保存。'],
-  ['素材读取慢，但旧计时看不出慢在哪一步。','分别记录下载、素材准备、写入排队和保存耗时。','R7 三面素材准备约 0.753 / 0.167 / 0.144 秒；历史 132–190 秒的异常仍未复现，最底层原因尚未证实。'],
-  ['希望短需求表达得更清楚，又担心改写拖慢流程。','增加可选后台提示词整理：保留原文优先，失败或超时回退；默认关闭。',`R7 实验已应用改写，增加 ${sec(r.prompt_rewrite.duration_ms/1000)}，参考 $${r.prompt_rewrite.reference_cost_usd.toFixed(6)}；已计入总时间和费用。单次实验尚不能证明效果提升。`]
+  ['后台约 120 秒<strong>报超时，前端却继续保存</strong>；重试可能<strong>重复装配</strong>。','超过 20 秒<strong>返回任务编号</strong>，继续查询原任务；相同运行中请求<strong>复用任务</strong>。','R6 已真实走通“<strong>返回运行中 → 查询原任务 → 完成</strong>”；R7 三面回执均完成，<strong>没有装配重试</strong>。'],
+  ['清单更新与实际操作<strong>分开调用模型</strong>，往返较多。','清单更新与实际动作可在<strong>同一轮提交</strong>，合并不必要的安排步骤。','R3 为 <strong>18 次</strong>模型请求；R7 两轮合计 <strong>9 次</strong>。模型请求仍耗时 <strong>222.308 秒</strong>，仍是最大项。'],
+  ['多张图片<strong>逐个安排</strong>，等待时间叠加。','由代码<strong>同时启动 A 面与背面</strong>；<strong>A 保存成功后</strong>，以它为参考自动制作 B 面。','用户只写自然语言。R7 生图整段等待 <strong>57.412 秒</strong>，已扣除并发重叠；<strong>三张图均已保存</strong>。'],
+  ['旧日志<strong>只有 load_source 总耗时</strong>，<strong>缺少内部拆分</strong>，看不出素材慢在哪一步。','<strong>新增分段计时</strong>，分别记录下载、素材准备、写入排队和保存耗时。','R7 三面素材准备约 <strong>0.753 / 0.167 / 0.144 秒</strong>；历史 132–190 秒的<strong>异常仍未复现</strong>，最底层原因尚未证实。'],
+  ['希望短需求表达得更清楚，又担心<strong>改写拖慢流程</strong>。','增加可选后台提示词整理：<strong>保留原文优先</strong>，<strong>失败或超时回退</strong>；默认关闭。',`R7 实验已应用改写，增加 <strong>${sec(r.prompt_rewrite.duration_ms/1000)}</strong>，参考 <strong>$${r.prompt_rewrite.reference_cost_usd.toFixed(6)}</strong>；已计入总时间和费用。单次实验<strong>尚不能证明效果提升</strong>。`]
  ])}<p class="sub">已有批量装配入口可并行准备素材，但 R7 实际仍调用三次单面装配。将它变成代码默认流程，以及只保存一次，仍是后续工作。</p>
  <p>从最初 R1 的约 <strong>15分01秒</strong>，到 R6 的 <strong>3分47秒</strong>、最新 R7 的 <strong>5分10秒</strong>，耗时仍有波动。R1 还尝试了三维，历史慢素材也未复现，不能把全部差值归功于代码提速。<a href="B10-R7.html#improvement-history">查看每次改动与耗时历程</a>。</p></section>
  <section id="images"><h2>最新成果：GTA6 昼夜变图卡</h2><div class="gallery">${gallery}</div><p>A/B 的人物与跑车构图基本一致，白昼到霓虹夜景的变化清楚；背面为完整的同主题设计。局部车轮、反光有变化，背面外框裁切仍需复核。以上是二维画稿及保存证据。</p></section>
