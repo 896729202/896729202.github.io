@@ -1,4 +1,5 @@
 'use strict';
+const boxRetest=require('../content/useit/box-v1-2026-11-15.json');
 module.exports=function({cases,latestReport:r,esc,table,dur,costLabel}){
  const latestErrors=r.failure_observations.length;
  const completed=r.batch_status==='completed'&&r.saved_image_count===3&&r.saved_placement_count===3&&r.placements.every(p=>p.success);
@@ -11,8 +12,8 @@ module.exports=function({cases,latestReport:r,esc,table,dur,costLabel}){
    if(c.case==='B10')before+='<small>R1 早期基线；原 B10 中断且计时异常</small>';
    else if(cancelled)before+='<small>已取消，仅已执行时间，未完成整次制作</small>';
    let after='<span class="comparison-pending">—（待优化复测）</span>';
-   if(c.case==='B10')after=`<a href="B10-latest.html"><strong>${dur(r.agent_seconds)}</strong>（${latestErrors} 次失败）</a><small>R7 · 画稿与装配已验证，三维未验收</small>`;
-   else if(c.case==='B01')after='<span class="comparison-pending">—（完整复测待做）</span><small><a href="B01-R1.html">已完成局部配准修复与独立回放</a></small>';
+   if(c.case==='B10')after=`<a class="optimized-result" href="B10-latest.html"><strong>${dur(r.agent_seconds)}</strong><span>（${latestErrors} 次失败）</span></a><small>R7 · 画稿与装配已验证，三维未验收</small>`;
+   else if(c.case==='B01')after=`<a class="optimized-result result-failed" href="B01-V1.html"><strong>${dur(boxRetest.agent_seconds)}</strong><span>（${boxRetest.failures.length} 次失败）</span></a><small>V1 完整流程复测未通过；新图未装配，三维为白模</small>`;
    else if(['B08','B09'].includes(c.case))after+=`<small><a href="${c.case}-R1.html">已有原任务补测，非优化对照</a></small>`;
    return [`<a href="${c.case==='B10'?'B10-latest':c.case}.html">${c.case==='B10'?tick:''}<strong>${esc(c.category)}</strong></a><small>${c.case}</small>`,before,after];
   });
