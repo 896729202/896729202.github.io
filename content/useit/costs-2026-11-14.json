@@ -1683,6 +1683,150 @@
       "test_date": "2026-11-15",
       "model_reference_usd": 0.008143475,
       "service_reference_usd": 0.2
+    },
+    {
+      "reference_total_usd": 0.3053225,
+      "tasks": [
+        {
+          "task_id": "ddf41397-0c7b-4551-870d-2adbfbb892a1",
+          "coverage": "captured",
+          "reference_usd": 0.3053225,
+          "known_subtotal_usd": 0.3053225,
+          "model_lines": [
+            {
+              "model": "gemini-3.8-flash",
+              "input_tokens": 454370,
+              "output_tokens": 6920,
+              "cache_read_tokens": 387380,
+              "cache_creation_tokens": 0,
+              "call_count": 9,
+              "reference_usd": 0.105246,
+              "fresh_input_tokens": 66990
+            },
+            {
+              "model": "gemini-3.1-flash-lite-preview",
+              "input_tokens": 258,
+              "output_tokens": 8,
+              "cache_read_tokens": 0,
+              "cache_creation_tokens": 0,
+              "call_count": 1,
+              "reference_usd": 7.65e-05,
+              "fresh_input_tokens": 258
+            }
+          ],
+          "service_lines": [
+            {
+              "service": "openai_image_gen",
+              "variant": "generate",
+              "units": 2.0,
+              "unit_type": "image",
+              "call_count": 2,
+              "reference_usd": 0.16,
+              "invoice_verified": false
+            },
+            {
+              "service": "openai_image_gen",
+              "variant": "edit",
+              "units": 1.0,
+              "unit_type": "image",
+              "call_count": 1,
+              "reference_usd": 0.04,
+              "invoice_verified": false
+            }
+          ],
+          "unpriced": [],
+          "last_usage_at": "2026-11-15T16:37:09+08:00",
+          "source_seq": 94,
+          "rate_source_sha256": "e171cda2daeed054dcc5515ea64662547c7bd7f8758809fa57337abb3fb44b0e",
+          "note": "Last cumulative snapshot once per task. Reference configured rates, not provider invoices; helper/rewrite usage included when present.",
+          "status": "done",
+          "model_reference_usd": 0.1053225,
+          "service_reference_usd": 0.2
+        }
+      ],
+      "known_reference_subtotal_usd": 0.3053225,
+      "case": "B10-R9",
+      "session_id": "7496a38d-9d5d-4113-992e-32a8fab29549",
+      "test_date": "2026-11-15",
+      "report_url": "B10-short-prompts.html#B10-R9",
+      "currency": "USD",
+      "method": "recorded_usage_at_local_configured_rates",
+      "invoice_verified": false,
+      "coverage": "captured",
+      "model_reference_usd": 0.1053225,
+      "service_reference_usd": 0.2
+    },
+    {
+      "reference_total_usd": 0.297273825,
+      "tasks": [
+        {
+          "task_id": "4d72f6e3-e81f-4d96-be25-c889c9426855",
+          "coverage": "captured",
+          "reference_usd": 0.297273825,
+          "known_subtotal_usd": 0.297273825,
+          "model_lines": [
+            {
+              "model": "gemini-3.8-flash",
+              "input_tokens": 418104,
+              "output_tokens": 6013,
+              "cache_read_tokens": 353971,
+              "cache_creation_tokens": 0,
+              "call_count": 9,
+              "reference_usd": 0.097196325,
+              "fresh_input_tokens": 64133
+            },
+            {
+              "model": "gemini-3.1-flash-lite-preview",
+              "input_tokens": 244,
+              "output_tokens": 11,
+              "cache_read_tokens": 0,
+              "cache_creation_tokens": 0,
+              "call_count": 1,
+              "reference_usd": 7.75e-05,
+              "fresh_input_tokens": 244
+            }
+          ],
+          "service_lines": [
+            {
+              "service": "openai_image_gen",
+              "variant": "generate",
+              "units": 2.0,
+              "unit_type": "image",
+              "call_count": 2,
+              "reference_usd": 0.16,
+              "invoice_verified": false
+            },
+            {
+              "service": "openai_image_gen",
+              "variant": "edit",
+              "units": 1.0,
+              "unit_type": "image",
+              "call_count": 1,
+              "reference_usd": 0.04,
+              "invoice_verified": false
+            }
+          ],
+          "unpriced": [],
+          "last_usage_at": "2026-11-15T16:41:20+08:00",
+          "source_seq": 86,
+          "rate_source_sha256": "e171cda2daeed054dcc5515ea64662547c7bd7f8758809fa57337abb3fb44b0e",
+          "note": "Last cumulative snapshot once per task. Reference configured rates, not provider invoices; helper/rewrite usage included when present.",
+          "status": "done",
+          "model_reference_usd": 0.097273825,
+          "service_reference_usd": 0.2
+        }
+      ],
+      "known_reference_subtotal_usd": 0.297273825,
+      "case": "B10-R10",
+      "session_id": "854f0216-56fb-4f9f-ac59-4bf307597acc",
+      "test_date": "2026-11-15",
+      "report_url": "B10-short-prompts.html#B10-R10",
+      "currency": "USD",
+      "method": "recorded_usage_at_local_configured_rates",
+      "invoice_verified": false,
+      "coverage": "captured",
+      "model_reference_usd": 0.097273825,
+      "service_reference_usd": 0.2
     }
   ]
 }

@@ -23,8 +23,9 @@ for(const c of data.cases){
  }
  eq(c.model_reference_usd,modelSum);eq(c.service_reference_usd,serviceSum);
  if(c.reference_total_usd!==null)eq(c.reference_total_usd,modelSum+serviceSum);
- const html=fs.readFileSync(path.join(root,`useit/tests/2026-11-13/${c.case}.html`),'utf8');
- assert(html.includes('id="cost"'));assert(html.includes('不是供应商实际扣款账单'));
+ const page=c.report_url?c.report_url.split('#')[0]:`${c.case}.html`;
+ const html=fs.readFileSync(path.join(root,`useit/tests/2026-11-13/${page}`),'utf8');
+ assert(html.includes(`id="${c.report_url?c.report_url.split('#')[1]:'cost'}"`));assert(html.includes('不是供应商实际扣款账单'));
 }
 const r3=data.cases.find(c=>c.case==='B10-R3');
 const serviceLines=r3.tasks.flatMap(t=>t.service_lines||[]);

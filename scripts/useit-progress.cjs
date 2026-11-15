@@ -1,6 +1,7 @@
 'use strict';
 const navigation=require('./useit-navigation.cjs');
-module.exports=function({report:r,fastflowBundle,runtimeUI,costs,esc,table,dur,sec,external}){
+module.exports=function({report:r,shortBundle,fastflowBundle,runtimeUI,costs,esc,table,dur,sec,external}){
+ if(shortBundle)return require('./build-useit-short-prompts.cjs').renderBody(shortBundle,{latestView:true});
  if(r.case==='B10-R8'&&fastflowBundle)return require('./useit-fastflow.cjs')().render({...fastflowBundle,latestView:true,evidenceUrl:'evidence/B10-R8-placement.json'});
  const cost=costs.cases.find(x=>x.case===r.case);
  const failureCount=r.failure_observations.length;

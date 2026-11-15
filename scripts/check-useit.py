@@ -73,4 +73,21 @@ if fastflow.exists():
    assert hashlib.sha256((BASE/im['src']).read_bytes()).hexdigest()==im['display_sha256']
    assert hashlib.sha256((BASE/im['original_src']).read_bytes()).hexdigest()==im['sha256']
  print('PASS: R8 completed, disjoint timing, 3 saved faces, valid Langfuse links and 9 source/display image hashes.')
+short_file=ROOT/'content/useit/short-prompts-2026-11-15.json'
+if short_file.exists():
+ bundle=json.loads(short_file.read_text('utf8'))
+ assert bundle==json.loads((BASE/'evidence/B10-short-prompts.json').read_text('utf8'))
+ assert [r['case'] for r in bundle['cases']]==['B10-R9','B10-R10']
+ for r in bundle['cases']:
+  assert r['summary_available'] and r['post_run_verification']['success']
+  assert len(r['prompt'])<=20 and not r['bootstrap_fastpath_applied']
+  assert r['saved_image_count']==r['saved_placement_count']==3
+  assert {p['face'] for p in r['placements']}=={'frame-a','frame-b','back'}
+  assert all(p['success'] and p['data']['version_saved'] for p in r['placements'])
+  assert abs(sum(i['milliseconds'] for i in r['runtime']['items'])-r['agent_seconds']*1000)<1
+  assert r['langfuse_url'].startswith('https://') and r['langfuse_url'].endswith(r['session_id'])
+  for im in r['images']:
+   assert hashlib.sha256((BASE/im['src']).read_bytes()).hexdigest()==im['display_sha256']
+   assert hashlib.sha256((BASE/im['original_src']).read_bytes()).hexdigest()==im['sha256']
+ print('PASS: R9/R10 short inputs, actual saved faces, disjoint timings, intact links, and six source/display image hashes.')
 print(f'PASS: {len(pages)} pages, 12 categories, 15 original attempts/32 images/{sum(c["observation_count"] for c in cases)} observations plus {len(retests)} independent retests/{sum(len(r["images"]) for r in retests)} verified images/{sum(r["observations"] for r in retests)} observations; all links and anchors resolve.')

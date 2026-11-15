@@ -4,14 +4,14 @@ module.exports=function({cases,latestReport:r,esc,table,dur,costLabel}){
  const latestErrors=Array.isArray(r.failure_observations)?r.failure_observations.length:null;
  const errorLabel=latestErrors===null?'失败次数待核验':`${latestErrors} 次失败`;
  const round=String(r.case||'最新复测').replace(/^B10-/,'');
- const detailPage=`${r.case||'B10-latest'}.html`;
+ const detailPage=r.report_page||`${r.case||'B10-latest'}.html`;
  const placements=Array.isArray(r.placements)?r.placements:[];
  const completed=r.batch_status==='completed'&&r.saved_image_count===3&&r.saved_placement_count===3&&placements.length===3&&placements.every(p=>p.success===true)
   &&['frame-a','frame-b','back'].every(face=>placements.some(p=>p.face===face));
  const modelCount=Array.isArray(r.model_calls)?r.model_calls.length:null;
- const batchCount=r.call_counts?.canvas_product_add_batch,statusCount=r.call_counts?.canvas_product_add_status;
+ const batchCount=r.call_counts?.canvas_product_add_batch,statusCount=r.call_counts?(r.call_counts.canvas_product_add_status||0):undefined;
  const hasCodeFlow=Number.isInteger(modelCount)&&Number.isInteger(batchCount)&&Number.isInteger(statusCount);
- const flowText=hasCodeFlow?`${modelCount} 次模型请求；代码批量派发 ${batchCount} 次，查询原装配任务 ${statusCount} 次。`:'调用安排与等待组成见本轮完整记录。';
+ const flowText=hasCodeFlow?`${modelCount} 次模型请求；${r.fast_path_activated===false?'模型安排批量装配':'代码批量派发'} ${batchCount} 次，查询原装配任务 ${statusCount} 次。${r.fast_path_activated===false?'短句未触发快速流程。':''}`:'调用安排与等待组成见本轮完整记录。';
  const tick=completed?'<span class="case-check" role="img" aria-label="画稿与装配已验证">√</span> ':'';
  function comparison(){
   const rows=cases.filter(c=>!c.case.includes('-')).map(c=>{
