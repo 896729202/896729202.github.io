@@ -56,4 +56,21 @@ for name,source in [('B10-R2','placement-fix'),('B10-R3','placement-fire'),('B10
  assert (BASE/f'{name}.html').is_file()
 for p in [*(BASE/'data').glob('*.json'),*(BASE/'evidence').glob('*.json'),*(ROOT/'content/useit').glob('*.json')]:
  assert not re.search(r'Bearer\s|sk-[a-zA-Z0-9]{20}|X-Amz-Signature|api_key=|[A-Z]:[\\/]Users',p.read_text('utf8'),re.I),p
+fastflow=ROOT/'content/useit/placement-fastflow-2026-11-15.json'
+if fastflow.exists():
+ bundle=json.loads(fastflow.read_text('utf8'));r=bundle['report']
+ public=json.loads((BASE/'evidence/B10-R8-placement.json').read_text('utf8'))
+ assert all(public[key]==value for key,value in bundle.items())
+ assert r['summary_available'] and all(run['final_state']=='done' for run in r['execution_runs'])
+ assert r['saved_image_count']==r['saved_placement_count']==3 and not r['failure_observations']
+ assert {p['face'] for p in r['placements']}=={'frame-a','frame-b','back'}
+ assert all(p['success'] for p in r['placements'])
+ assert abs(sum(i['milliseconds'] for i in bundle['runtime']['items'])-r['agent_seconds']*1000)<1
+ assert r['langfuse_url'].startswith('https://') and r['langfuse_url'].endswith(r['session_id'])
+ for report in [r,*[a['report'] for a in bundle['attempts']]]:
+  assert report['langfuse_url'].startswith('https://')
+  for im in report['images']:
+   assert hashlib.sha256((BASE/im['src']).read_bytes()).hexdigest()==im['display_sha256']
+   assert hashlib.sha256((BASE/im['original_src']).read_bytes()).hexdigest()==im['sha256']
+ print('PASS: R8 completed, disjoint timing, 3 saved faces, valid Langfuse links and 9 source/display image hashes.')
 print(f'PASS: {len(pages)} pages, 12 categories, 15 original attempts/32 images/{sum(c["observation_count"] for c in cases)} observations plus {len(retests)} independent retests/{sum(len(r["images"]) for r in retests)} verified images/{sum(r["observations"] for r in retests)} observations; all links and anchors resolve.')

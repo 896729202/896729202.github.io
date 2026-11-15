@@ -1612,6 +1612,77 @@
           "reference_usd": 0.2674155
         }
       ]
+    },
+    {
+      "reference_total_usd": 0.208143475,
+      "tasks": [
+        {
+          "task_id": "f4aaed40-2019-4043-8a46-d4a2501dc946",
+          "coverage": "captured",
+          "reference_usd": 0.208143475,
+          "known_subtotal_usd": 0.208143475,
+          "model_lines": [
+            {
+              "model": "gemini-3.8-flash",
+              "input_tokens": 32540,
+              "output_tokens": 865,
+              "cache_read_tokens": 29003,
+              "cache_creation_tokens": 0,
+              "call_count": 1,
+              "reference_usd": 0.008071725,
+              "fresh_input_tokens": 3537
+            },
+            {
+              "model": "gemini-3.1-flash-lite-preview",
+              "input_tokens": 233,
+              "output_tokens": 9,
+              "cache_read_tokens": 0,
+              "cache_creation_tokens": 0,
+              "call_count": 1,
+              "reference_usd": 7.175e-05,
+              "fresh_input_tokens": 233
+            }
+          ],
+          "service_lines": [
+            {
+              "service": "openai_image_gen",
+              "variant": "generate",
+              "units": 2.0,
+              "unit_type": "image",
+              "call_count": 2,
+              "reference_usd": 0.16,
+              "invoice_verified": false
+            },
+            {
+              "service": "openai_image_gen",
+              "variant": "edit",
+              "units": 1.0,
+              "unit_type": "image",
+              "call_count": 1,
+              "reference_usd": 0.04,
+              "invoice_verified": false
+            }
+          ],
+          "unpriced": [],
+          "last_usage_at": "2026-11-15T15:42:49+08:00",
+          "source_seq": 54,
+          "rate_source_sha256": "e171cda2daeed054dcc5515ea64662547c7bd7f8758809fa57337abb3fb44b0e",
+          "note": "Last cumulative snapshot once per task. Reference configured rates, not provider invoices; helper/rewrite usage included when present.",
+          "status": "done",
+          "model_reference_usd": 0.008143475,
+          "service_reference_usd": 0.2
+        }
+      ],
+      "known_reference_subtotal_usd": 0.208143475,
+      "case": "B10-R8",
+      "session_id": "acfe9f8b-11fa-4464-bf96-7767d395c7bf",
+      "currency": "USD",
+      "method": "recorded_usage_at_local_configured_rates",
+      "invoice_verified": false,
+      "coverage": "captured",
+      "test_date": "2026-11-15",
+      "model_reference_usd": 0.008143475,
+      "service_reference_usd": 0.2
     }
   ]
 }
