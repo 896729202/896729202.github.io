@@ -1,6 +1,7 @@
 'use strict';
 const boxRetest=require('../content/useit/box-v1-2026-11-15.json');
-module.exports=function({cases,latestReport:r,latestVersionReports=[],esc,table,dur,costLabel}){
+const flatCardUI=require('./useit-b07-optimization.cjs');
+module.exports=function({cases,latestReport:r,latestVersionReports=[],flatCardReport=null,esc,table,dur,costLabel}){
  const reports=latestVersionReports.length?latestVersionReports:[r];
  const failureCount=report=>Number.isInteger(report.tool_failure_count)?report.tool_failure_count:Array.isArray(report.failure_observations)?report.failure_observations.length:null;
  const errorLabel=report=>failureCount(report)===null?'失败次数待核验':`${failureCount(report)} 次失败`;
@@ -28,11 +29,14 @@ module.exports=function({cases,latestReport:r,latestVersionReports=[],esc,table,
    else if(cancelled)before+='<small>已取消，仅已执行时间，未完成整次制作</small>';
    let after='<span class="comparison-pending">—（待优化复测）</span>';
    if(c.case==='B10')after=sampleResults()+`<small>第三版 · ${reports.length} 次实测；${completed?'画稿与装配已验证':'保存范围见逐次记录'}，三维未验收</small>`;
+   else if(c.case==='B07'&&flatCardReport)after=flatCardUI.overviewResult(flatCardReport);
    else if(c.case==='B01')after=`<a class="optimized-result result-failed" href="B01-V1.html"><strong>${dur(boxRetest.agent_seconds)}</strong><span>（${boxRetest.failures.length} 次失败）</span></a><small>V1 完整流程复测未通过；新图未装配，三维为白模</small>`;
    else if(['B08','B09'].includes(c.case))after+=`<small><a href="${c.case}-R1.html">已有原任务补测，非优化对照</a></small>`;
-   return [`<a href="${c.case==='B10'?'B10-latest':c.case}.html">${c.case==='B10'?tick:''}<strong>${esc(c.category)}</strong></a><small>${c.case}</small>`,before,after];
+   const currentHref=c.case==='B10'?'B10-latest':c.case==='B07'&&flatCardReport?'B07-R1':c.case;
+   const currentTick=c.case==='B10'?tick:c.case==='B07'&&flatCardReport?'<span class="case-check" role="img" aria-label="画稿与装配已验证">√</span> ':'';
+   return [`<a href="${currentHref}.html">${currentTick}<strong>${esc(c.category)}</strong></a><small>${c.case}</small>`,before,after];
   });
-  return `<section id="optimization-overview" class="optimization-overview"><div class="section-heading"><div><p class="eyebrow">优化进展 / 更新于 ${esc(r.test_date||'待记录')}</p><h2>各品类：最初耗时 → 当前优化结果</h2></div></div><p class="sub"><strong>统一展示 Agent 执行时间，括号内为工具调用失败次数。</strong>“—”表示尚无完整的优化后复测，不代表零耗时或零错误。√ 表示对应阶段已验证。</p>${table(['品类','最初耗时（工具失败次数）','目前优化后耗时（工具失败次数）'],rows)}<p class="sub">光栅卡只保留三个主版本：原始版 → 第一轮优化 → 第二轮优化。第三版的 ${reports.length} 次测试合并展示。${esc(versionCaveat)}R1 曾尝试三维，各轮主题和测试范围不同，不作严格同条件的提速比例。</p><div class="case-links">${stages()}</div></section>`;
+  return `<section id="optimization-overview" class="optimization-overview"><div class="section-heading"><div><p class="eyebrow">优化进展 / 更新于 ${esc(flatCardReport?.test_date||r.test_date||'待记录')}</p><h2>各品类：最初耗时 → 当前优化结果</h2></div></div><p class="sub"><strong>统一展示 Agent 执行时间，括号内为工具调用失败次数。</strong>“—”表示尚无完整的优化后复测，不代表零耗时或零错误。√ 表示对应阶段已验证。</p>${table(['品类','最初耗时（工具失败次数）','目前优化后耗时（工具失败次数）'],rows)}<p class="sub">光栅卡只保留三个主版本：原始版 → 第一轮优化 → 第二轮优化。第三版的 ${reports.length} 次测试合并展示。${esc(versionCaveat)}R1 曾尝试三维，各轮主题和测试范围不同，不作严格同条件的提速比例。</p><div class="case-links">${stages()}</div></section>`;
  }
  function latestCard(category){
   const images=Array.isArray(r.images)?r.images:[],im=images.find(image=>image.face==='frame-a')||images[0];

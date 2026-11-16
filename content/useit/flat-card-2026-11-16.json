@@ -1,0 +1,2881 @@
+{
+  "baseline": {
+    "case": "B07-baseline-20261115",
+    "test_date": "2026-11-15",
+    "title": "普通双面卡 · 11月15日优化前基线",
+    "prompt": "做一张普通双面卡牌，主题是星际猫咪：正面是宇航员猫，背面是同主题星空图案。用默认规格，直接做好两张画稿并装到卡里，不用三维预览。",
+    "task_id": "e2afeffb-a5cd-43e3-9ef5-cffb7dc144c4",
+    "session_id": "e0aa3f22-5fcd-4642-8fc9-392f7c57e435",
+    "final_state": "done",
+    "agent_seconds": 126.53,
+    "submitted_at": "2026-11-15T15:42:28.232593+08:00",
+    "completed_at": "2026-11-15T15:44:39+08:00",
+    "wall_seconds": 130.767,
+    "wall_seconds_precision": "approximate",
+    "model_calls": 7,
+    "image_calls": 2,
+    "auxiliary_model_calls": 2,
+    "auxiliary_note": "两次轻模型调用均位于生图阶段。结合 image_title.py 与 inline.py 推断用于图片命名；旧日志没有独立用途字段，未把它们记为规划调用。",
+    "tool_errors": 0,
+    "runtime": {
+      "planning": 74.401,
+      "generation": 24.799,
+      "placement": 19.327,
+      "other": 8.003
+    },
+    "model_rounds": [
+      {
+        "step": 1,
+        "model_ms": 15137,
+        "tools": [
+          "read"
+        ]
+      },
+      {
+        "step": 2,
+        "model_ms": 4424,
+        "tools": [
+          "read"
+        ]
+      },
+      {
+        "step": 3,
+        "model_ms": 13318,
+        "tools": [
+          "plan_write",
+          "project_plan_write"
+        ]
+      },
+      {
+        "step": 4,
+        "model_ms": 17104,
+        "tools": [
+          "plan_write",
+          "tool_product_image_gen",
+          "tool_product_image_gen"
+        ]
+      },
+      {
+        "step": 5,
+        "model_ms": 6192,
+        "tools": [
+          "plan_write",
+          "load_pack"
+        ]
+      },
+      {
+        "step": 6,
+        "model_ms": 9408,
+        "tools": [
+          "canvas_product_add_batch"
+        ]
+      },
+      {
+        "step": 7,
+        "model_ms": 8818,
+        "tools": [
+          "plan_write",
+          "respond_to_user"
+        ]
+      }
+    ],
+    "parallel_generation_calls": [
+      {
+        "phase": "orch.inline_tool.run",
+        "step": 4,
+        "duration_ms": 22416,
+        "tool_call_id": "call_18151394612892555737",
+        "started_at": "2026-11-15T15:43:28.439+08:00",
+        "ended_at": "2026-11-15T15:43:50.855+08:00"
+      },
+      {
+        "phase": "orch.inline_tool.run",
+        "step": 4,
+        "duration_ms": 22752,
+        "tool_call_id": "call_18151394612892556826",
+        "started_at": "2026-11-15T15:43:28.435+08:00",
+        "ended_at": "2026-11-15T15:43:51.187+08:00"
+      }
+    ],
+    "generation_note": "Both front/back tool calls belong to step 4; outer 24.799 seconds covers individual 22.752/22.416 seconds, not their sum.",
+    "faces": [
+      {
+        "face": "front",
+        "success": true,
+        "version_saved": true,
+        "receipt_status": "applied",
+        "checks": {
+          "saved": true,
+          "placed": true,
+          "source_intact": true,
+          "visible": true
+        },
+        "timing": {
+          "total_ms": 15925,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 4878,
+            "source_integrity": 0,
+            "source_decode": 181,
+            "source_hash": 8,
+            "load_source": 5068,
+            "write_queue": 0,
+            "prepare_master": 7924,
+            "open_doc": 6,
+            "save": 409,
+            "record_version": 2379
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 128,
+            "long_tasks": 2,
+            "long_task_ms": 169,
+            "max_long_task_ms": 96
+          }
+        },
+        "elapsed_ms": 18662
+      },
+      {
+        "face": "back",
+        "success": true,
+        "version_saved": true,
+        "receipt_status": "applied",
+        "checks": {
+          "saved": true,
+          "placed": true,
+          "source_intact": true,
+          "visible": true
+        },
+        "timing": {
+          "total_ms": 16877,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 5086,
+            "source_integrity": 0,
+            "source_decode": 176,
+            "source_hash": 9,
+            "load_source": 5271,
+            "write_queue": 10638,
+            "prepare_master": 59,
+            "open_doc": 6,
+            "save": 191,
+            "record_version": 368
+          },
+          "hidden_ms": 0,
+          "main_thread": {
+            "max_gap_ms": 177,
+            "long_tasks": 6,
+            "long_task_ms": 652,
+            "max_long_task_ms": 188
+          }
+        },
+        "elapsed_ms": 18819
+      }
+    ],
+    "images": [
+      {
+        "face": "front",
+        "source": "project/assets/working/other/generated-image-20261115-0662f3.png",
+        "bytes": 3126226,
+        "sha256": "6e28e9258506979db8036f2d0b9a08ebd4f2252468577c5315e0cf9a70809c71",
+        "alt": "星际猫咪正面画稿"
+      },
+      {
+        "face": "back",
+        "source": "project/assets/working/other/generated-image-20261115-c861ec.png",
+        "bytes": 3555653,
+        "sha256": "2e3a46f338d1cdf762cd81f2a97be1e130e0f2918ac9a38857d08a670f7d8882",
+        "alt": "同主题星空背面画稿"
+      }
+    ],
+    "verification_note": "两面的装配保存回执均通过；本轮没有额外调用 canvas_product_inspect，也没有测试三维。",
+    "cost": {
+      "task_id": "e2afeffb-a5cd-43e3-9ef5-cffb7dc144c4",
+      "coverage": "complete",
+      "reference_usd": 0.288673725,
+      "known_subtotal_usd": 0.288673725,
+      "model_lines": [
+        {
+          "model": "gemini-3.8-flash",
+          "input_tokens": 388815,
+          "output_tokens": 6637,
+          "cache_read_tokens": 278513,
+          "cache_creation_tokens": 0,
+          "call_count": 7,
+          "reference_usd": 0.128503725
+        },
+        {
+          "model": "gemini-3.1-flash-lite-preview",
+          "input_tokens": 566,
+          "output_tokens": 19,
+          "cache_read_tokens": 0,
+          "cache_creation_tokens": 0,
+          "call_count": 2,
+          "reference_usd": 0.00017
+        }
+      ],
+      "service_lines": [
+        {
+          "service": "openai_image_gen",
+          "variant": "generate",
+          "units": 2.0,
+          "unit_type": "image",
+          "call_count": 2,
+          "reference_usd": 0.16
+        }
+      ],
+      "unpriced": [],
+      "last_usage_at": "2026-11-15T15:44:39+08:00",
+      "source_seq": 72,
+      "rate_source_sha256": "e171cda2daeed054dcc5515ea64662547c7bd7f8758809fa57337abb3fb44b0e",
+      "note": "Last cumulative snapshot once per task. Reference configured rates, not provider invoices; helper/rewrite usage included when present."
+    },
+    "langfuse": {
+      "session_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/e0aa3f22-5fcd-4642-8fc9-392f7c57e435",
+      "traces": [
+        {
+          "id": "b342dc252ff35f5656451188977eaafc",
+          "url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/traces/b342dc252ff35f5656451188977eaafc"
+        }
+      ],
+      "evidence_status": "IDs from local incoming_requests; cloud observations were not fetched in this collection."
+    },
+    "evidence_sources": [
+      "summary.json",
+      "phase_timings.jsonl",
+      "stream_messages.jsonl",
+      "steps/step_006/output/tool_result.json",
+      "steps/step_006/output/output.json"
+    ],
+    "limits": [
+      "这是 11月15日并发验证中的普通卡任务；与 11月13日主题、质量与测试范围不同。",
+      "与新的短句复测也并非严格同输入，不能把时间差完全归因于某一项代码修改。",
+      "费用取任务最后一次累计用量乘配置费率，包含辅助模型，是参考成本而非实际账单。",
+      "模型等待是请求至响应时间，不是纯推理时间；并行子步骤不重复加到总耗时。"
+    ]
+  },
+  "report": {
+    "case": "B07-R1",
+    "test_date": "2026-11-16",
+    "title": "普通双面卡正常聊天真实复测",
+    "test_scope": "chat_ui",
+    "test_scope_note": "通过正常 ChatStore 发送，真实生图、素材下载、前端批量装配与保存均已执行；独立 inspect 核验两面。测试时窗口保持隐藏，本轮未做三维或印刷生产验收。此前未进入 Agent 的启动异常不计入这个成功任务。",
+    "prompt": "做一张星际猫咪双面卡牌。",
+    "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+    "task_ids": [
+      "425f047e-9258-492c-b7f9-226ee1374faf"
+    ],
+    "project_id": "fa19aeb2-efff-4e90-9e84-1c9e830f2a75",
+    "session_id": "a2784570-b154-4cd9-9af0-9338a514a797",
+    "agent_final_states": [
+      "done"
+    ],
+    "final_state": "done",
+    "verification_required": true,
+    "inspection_verified": true,
+    "inspection": {
+      "verified": true,
+      "status": "passed",
+      "reasons": [],
+      "product_id": "space-cat-card",
+      "product_kind": "card/custom",
+      "master_exists": true,
+      "placed": 2,
+      "sources": [
+        "project/assets/working/other/generated-image-20261116-2df733.png",
+        "project/assets/working/other/generated-image-20261116-c2752e.png"
+      ],
+      "observed_at": "2026-11-16T16:42:05.567197+08:00",
+      "independent_probe_ms": null,
+      "included_in_agent_seconds": false,
+      "source_sha256": "734df3c1f4c1bcc9d1c1cbece926b3fd33ae16dd8613964b14b9448df47e6605"
+    },
+    "automatic_workflow_applied": true,
+    "automatic_workflow_completed": true,
+    "optimization_status": "automatic_workflow_verified",
+    "automatic_host_action_counts": {
+      "canvas_product_add_batch": 1,
+      "canvas_product_add_status": 1,
+      "respond_to_user": 1
+    },
+    "tool_call_counts": {
+      "project_plan_write": 1,
+      "tool_product_image_gen": 1,
+      "canvas_product_add_batch": 1,
+      "canvas_product_add_status": 1,
+      "respond_to_user": 1
+    },
+    "execution_keepalive": {
+      "events": [
+        {
+          "task_id": "134cef0a-a974-4c71-a125-561f95871ea9",
+          "task_status": "running",
+          "status": "success",
+          "elapsed_ms": 20013,
+          "phase": "front: placing_and_saving",
+          "execution_keepalive": "acquired"
+        },
+        {
+          "task_id": "134cef0a-a974-4c71-a125-561f95871ea9",
+          "task_status": "completed",
+          "status": "success",
+          "elapsed_ms": 22142,
+          "execution_keepalive": "released"
+        }
+      ],
+      "acquired_and_released_same_task": true
+    },
+    "agent_seconds": 106.84,
+    "runtime": {
+      "planning": 45.812,
+      "generation": 31.889,
+      "placement": 23.075,
+      "other": 6.064
+    },
+    "submitted_at": "2026-11-16T16:39:53.367481+08:00",
+    "acknowledged_at": "2026-11-16T16:39:53.486032+08:00",
+    "wall_time_basis": "submitted_to_local_completed",
+    "completed_at": "2026-11-16T16:41:45+08:00",
+    "wall_seconds": 111.633,
+    "model_calls": 2,
+    "image_calls": 2,
+    "auxiliary_model_calls": 1,
+    "auxiliary_note": "辅助模型次数由累计模型用量次数减去主规划 phase 次数得到；用途不靠次数猜测。",
+    "tool_errors": 0,
+    "errors": [],
+    "steps": [
+      {
+        "phase": "主规划 1",
+        "description": "确定产品、规格和制作范围，提交产品计划",
+        "kind": "等主模型",
+        "seconds": 33.166,
+        "note": "随后执行：plan_write、project_plan_write",
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf"
+      },
+      {
+        "phase": "主规划 2",
+        "description": "设计正反两面的创意内容与生图提示词",
+        "kind": "等主模型",
+        "seconds": 12.646,
+        "note": "随后执行：tool_product_image_gen",
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf"
+      },
+      {
+        "phase": "生图阶段 2",
+        "description": "生成并准备正反面素材（同阶段的子任务不累加）",
+        "kind": "生图服务＋代码",
+        "seconds": 31.889,
+        "note": "采用包住生图的父阶段实测时间；含该阶段内部准备、并行生成及素材提交。",
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf"
+      },
+      {
+        "phase": "前端操作 4",
+        "description": "一次提交正反面装配并保存",
+        "kind": "代码＋前端",
+        "seconds": 21.188,
+        "note": "canvas_product_add_batch",
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf"
+      },
+      {
+        "phase": "前端操作 5",
+        "description": "查询同一个装配任务",
+        "kind": "代码＋前端",
+        "seconds": 1.887,
+        "note": "canvas_product_add_status",
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf"
+      }
+    ],
+    "faces": [
+      {
+        "face": "front",
+        "success": true,
+        "version_saved": true,
+        "receipt_status": "applied",
+        "checks": {
+          "saved": true,
+          "placed": true,
+          "source_intact": true,
+          "visible": true
+        },
+        "timing": {
+          "total_ms": 18245,
+          "hidden_ms": 0,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 5511,
+            "source_integrity": 0,
+            "source_decode": 144,
+            "source_hash": 8,
+            "load_source": 6596,
+            "write_queue": 10689,
+            "prepare_master": 56,
+            "open_doc": 6,
+            "save": 178,
+            "record_version": 401
+          },
+          "main_thread": {
+            "max_gap_ms": 82,
+            "long_tasks": 6,
+            "long_task_ms": 624,
+            "max_long_task_ms": 181
+          }
+        },
+        "elapsed_ms": 22140
+      },
+      {
+        "face": "back",
+        "success": true,
+        "version_saved": true,
+        "receipt_status": "applied",
+        "checks": {
+          "saved": true,
+          "placed": true,
+          "source_intact": true,
+          "visible": true
+        },
+        "timing": {
+          "total_ms": 17301,
+          "hidden_ms": 0,
+          "stages": {
+            "source_download_wait": 0,
+            "source_host_read": 4978,
+            "source_integrity": 0,
+            "source_decode": 169,
+            "source_hash": 8,
+            "load_source": 6044,
+            "write_queue": 0,
+            "prepare_master": 8784,
+            "open_doc": 6,
+            "save": 151,
+            "record_version": 2180
+          },
+          "main_thread": {
+            "max_gap_ms": 82,
+            "long_tasks": 2,
+            "long_task_ms": 166,
+            "max_long_task_ms": 95
+          }
+        },
+        "elapsed_ms": 22140
+      }
+    ],
+    "images": [
+      {
+        "face": "front",
+        "source": "project/assets/working/other/generated-image-20261116-2df733.png",
+        "local_copy": "images/B07-R1-front.png",
+        "url": "images/B07-R1-front.png",
+        "alt": "本轮普通双面卡正面画稿",
+        "bytes": 3445055,
+        "sha256": "045130104cd3facfba6ba59e3d9eab82091546e51f0c295fa15f7e3589943a08"
+      },
+      {
+        "face": "back",
+        "source": "project/assets/working/other/generated-image-20261116-c2752e.png",
+        "local_copy": "images/B07-R1-back.png",
+        "url": "images/B07-R1-back.png",
+        "alt": "本轮普通双面卡背面画稿",
+        "bytes": 3527644,
+        "sha256": "baa16c4bbafeaa0c6e05b3dcf8147c6664a07a1b01d7a22f1013f530262956d6"
+      }
+    ],
+    "verification_note": "独立 inspect 已核对同一母版、正反两张原始素材及保存版本回执；独立检查时间不计入 Agent 执行。未做三维验收。",
+    "cost": {
+      "coverage": "complete",
+      "reference_usd": 0.192054025,
+      "known_subtotal_usd": 0.192054025,
+      "model_lines": [
+        {
+          "model": "gemini-3.8-flash",
+          "input_tokens": 83960,
+          "output_tokens": 3622,
+          "cache_read_tokens": 66037,
+          "cache_creation_tokens": 0,
+          "call_count": 2,
+          "reference_usd": 0.031977525
+        },
+        {
+          "model": "gemini-3.1-flash-lite-preview",
+          "input_tokens": 246,
+          "output_tokens": 10,
+          "cache_read_tokens": 0,
+          "cache_creation_tokens": 0,
+          "call_count": 1,
+          "reference_usd": 7.65e-05
+        }
+      ],
+      "service_lines": [
+        {
+          "service": "openai_image_gen",
+          "variant": "generate",
+          "units": 2.0,
+          "unit_type": "image",
+          "call_count": 2,
+          "reference_usd": 0.16
+        }
+      ],
+      "tasks": [
+        {
+          "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+          "coverage": "complete",
+          "reference_usd": 0.192054025,
+          "known_subtotal_usd": 0.192054025,
+          "model_lines": [
+            {
+              "model": "gemini-3.8-flash",
+              "input_tokens": 83960,
+              "output_tokens": 3622,
+              "cache_read_tokens": 66037,
+              "cache_creation_tokens": 0,
+              "call_count": 2,
+              "reference_usd": 0.031977525
+            },
+            {
+              "model": "gemini-3.1-flash-lite-preview",
+              "input_tokens": 246,
+              "output_tokens": 10,
+              "cache_read_tokens": 0,
+              "cache_creation_tokens": 0,
+              "call_count": 1,
+              "reference_usd": 7.65e-05
+            }
+          ],
+          "service_lines": [
+            {
+              "service": "openai_image_gen",
+              "variant": "generate",
+              "units": 2.0,
+              "unit_type": "image",
+              "call_count": 2,
+              "reference_usd": 0.16
+            }
+          ],
+          "unpriced": [],
+          "last_usage_at": "2026-11-16T16:41:45+08:00",
+          "source_seq": 58,
+          "rate_source_sha256": "e171cda2daeed054dcc5515ea64662547c7bd7f8758809fa57337abb3fb44b0e",
+          "note": "Last cumulative snapshot once per task. Reference configured rates, not provider invoices; helper/rewrite usage included when present."
+        }
+      ],
+      "scope_note": "Agent任务日志内已记录模型、辅助调用及生图的参考成本；独立聊天标题等未记录服务不在内。coverage complete仅表示该口径记录完整，不代表供应商完整账单。"
+    },
+    "langfuse": {
+      "session_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/a2784570-b154-4cd9-9af0-9338a514a797",
+      "traces": [
+        {
+          "id": "7b5b8a0fe155a7203a250a3b83b83452",
+          "url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/traces/7b5b8a0fe155a7203a250a3b83b83452"
+        }
+      ],
+      "evidence_status": "Local request IDs only; this script does not fetch cloud observations."
+    },
+    "code_version": "9329b2cd1bca6fc4e231c35b084ca37aceb06eea",
+    "calls": [
+      {
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "tool_call_id": "call_7167478648010003884",
+        "action_name": "project_plan_write",
+        "success": null,
+        "failed": false,
+        "timestamp": "2026-11-16T16:40:36+08:00",
+        "decision_source": null,
+        "result_state": {
+          "status": "active"
+        }
+      },
+      {
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "tool_call_id": "call_12910445957953348153",
+        "action_name": "tool_product_image_gen",
+        "success": true,
+        "failed": false,
+        "timestamp": "2026-11-16T16:41:22+08:00",
+        "decision_source": null,
+        "result_state": {}
+      },
+      {
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "tool_call_id": "auto_flat_card_4c51ab2b456d40b7826efa9c42fec747",
+        "action_name": "canvas_product_add_batch",
+        "success": true,
+        "failed": false,
+        "timestamp": "2026-11-16T16:41:43+08:00",
+        "decision_source": "host_workflow",
+        "result_state": {
+          "task_id": "134cef0a-a974-4c71-a125-561f95871ea9",
+          "task_status": "running",
+          "status": "success",
+          "elapsed_ms": 20013,
+          "phase": "front: placing_and_saving",
+          "execution_keepalive": "acquired"
+        }
+      },
+      {
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "tool_call_id": "auto_flat_card_0b964140b28f4ae387b0135802699f66",
+        "action_name": "canvas_product_add_status",
+        "success": true,
+        "failed": false,
+        "timestamp": "2026-11-16T16:41:45+08:00",
+        "decision_source": "host_workflow",
+        "result_state": {
+          "task_id": "134cef0a-a974-4c71-a125-561f95871ea9",
+          "task_status": "completed",
+          "status": "success",
+          "elapsed_ms": 22142,
+          "execution_keepalive": "released"
+        }
+      },
+      {
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "tool_call_id": "auto_flat_card_c8346a3ce6a74dbe9b64db0a00bd43a2",
+        "action_name": "respond_to_user",
+        "success": null,
+        "failed": false,
+        "timestamp": "2026-11-16T16:41:45+08:00",
+        "decision_source": "host_workflow",
+        "result_state": {}
+      }
+    ],
+    "phases": [
+      {
+        "phase": "orch.http.parse_request",
+        "step": 0,
+        "started_at": "2026-11-16T16:39:58",
+        "ended_at": "2026-11-16T16:39:58.050+08:00",
+        "duration_ms": 50,
+        "tool_call_id": null,
+        "seq": 1,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.compact.tool_results",
+        "step": 1,
+        "started_at": "2026-11-16T16:40:03.074+08:00",
+        "ended_at": "2026-11-16T16:40:03.076+08:00",
+        "duration_ms": 2,
+        "tool_call_id": null,
+        "seq": 2,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.plan.build_tools",
+        "step": 1,
+        "started_at": "2026-11-16T16:40:03.077+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": null,
+        "seq": 3,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.plan.build_prompt",
+        "step": 1,
+        "started_at": "2026-11-16T16:40:03.079+08:00",
+        "ended_at": "2026-11-16T16:40:03.102+08:00",
+        "duration_ms": 23,
+        "tool_call_id": null,
+        "seq": 4,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "llm.prefix_chain",
+        "step": 1,
+        "started_at": "2026-11-16T16:40:03.780+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": null,
+        "seq": 5,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "model": "gemini-3.8-flash"
+        }
+      },
+      {
+        "phase": "orch.plan.llm_call",
+        "step": 1,
+        "started_at": "2026-11-16T16:40:36.946+08:00",
+        "ended_at": "2026-11-16T16:41:10.112+08:00",
+        "duration_ms": 33166,
+        "tool_call_id": null,
+        "seq": 6,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "model": "gemini-3.8-flash"
+        }
+      },
+      {
+        "phase": "orch.plan.run_action",
+        "step": 1,
+        "started_at": "2026-11-16T16:40:36.967+08:00",
+        "ended_at": "2026-11-16T16:40:36.986+08:00",
+        "duration_ms": 19,
+        "tool_call_id": null,
+        "seq": 7,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "tool_name": "plan_write",
+          "action_type": "plan"
+        }
+      },
+      {
+        "phase": "orch.compact.tool_results",
+        "step": 2,
+        "started_at": "2026-11-16T16:40:37.000+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": null,
+        "seq": 8,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.plan.build_tools",
+        "step": 2,
+        "started_at": "2026-11-16T16:40:37.000+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": null,
+        "seq": 9,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.plan.build_prompt",
+        "step": 2,
+        "started_at": "2026-11-16T16:40:37.001+08:00",
+        "ended_at": "2026-11-16T16:40:37.007+08:00",
+        "duration_ms": 6,
+        "tool_call_id": null,
+        "seq": 10,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "llm.prefix_chain",
+        "step": 2,
+        "started_at": "2026-11-16T16:40:37.703+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": null,
+        "seq": 11,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "model": "gemini-3.8-flash"
+        }
+      },
+      {
+        "phase": "orch.plan.llm_call",
+        "step": 2,
+        "started_at": "2026-11-16T16:40:50.348+08:00",
+        "ended_at": "2026-11-16T16:41:02.994+08:00",
+        "duration_ms": 12646,
+        "tool_call_id": null,
+        "seq": 12,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "model": "gemini-3.8-flash"
+        }
+      },
+      {
+        "phase": "llm.prefix_chain",
+        "step": 2,
+        "started_at": "2026-11-16T16:40:50.993+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": null,
+        "seq": 13,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "model": "gemini-3.1-flash-lite-preview"
+        }
+      },
+      {
+        "phase": "orch.inline_tool.run",
+        "step": 2,
+        "started_at": "2026-11-16T16:40:50.360+08:00",
+        "ended_at": "2026-11-16T16:41:22.236+08:00",
+        "duration_ms": 31876,
+        "tool_call_id": "call_12910445957953348153",
+        "seq": 14,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "tool_name": "tool_product_image_gen",
+          "is_image_gen": true
+        }
+      },
+      {
+        "phase": "orch.plan.run_action",
+        "step": 2,
+        "started_at": "2026-11-16T16:40:50.357+08:00",
+        "ended_at": "2026-11-16T16:41:22.246+08:00",
+        "duration_ms": 31889,
+        "tool_call_id": null,
+        "seq": 15,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "tool_name": "tool_product_image_gen",
+          "action_type": "registry_action"
+        }
+      },
+      {
+        "phase": "orch.automatic_flat_card.run_action",
+        "step": 3,
+        "started_at": "2026-11-16T16:41:22.323+08:00",
+        "ended_at": "2026-11-16T16:41:22.324+08:00",
+        "duration_ms": 1,
+        "tool_call_id": "auto_flat_card_4c51ab2b456d40b7826efa9c42fec747",
+        "seq": 16,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "tool_name": "canvas_product_add_batch",
+          "decision_source": "host_workflow"
+        }
+      },
+      {
+        "phase": "orch.http.parse_request",
+        "step": 3,
+        "started_at": "2026-11-16T16:41:42",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": null,
+        "seq": 17,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.action.frontend_roundtrip",
+        "step": 4,
+        "started_at": "2026-11-16T16:41:43.511+08:00",
+        "ended_at": "2026-11-16T16:42:04.699+08:00",
+        "duration_ms": 21188,
+        "tool_call_id": "auto_flat_card_4c51ab2b456d40b7826efa9c42fec747",
+        "seq": 18,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.callback.disk_write",
+        "step": 4,
+        "started_at": "2026-11-16T16:41:43.511+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": "auto_flat_card_4c51ab2b456d40b7826efa9c42fec747",
+        "seq": 19,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.callback.snapshot_route",
+        "step": 4,
+        "started_at": "2026-11-16T16:41:43.513+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": "auto_flat_card_4c51ab2b456d40b7826efa9c42fec747",
+        "seq": 20,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.callback.observation_emit",
+        "step": 4,
+        "started_at": "2026-11-16T16:41:43.513+08:00",
+        "ended_at": "2026-11-16T16:41:43.514+08:00",
+        "duration_ms": 1,
+        "tool_call_id": "auto_flat_card_4c51ab2b456d40b7826efa9c42fec747",
+        "seq": 21,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.automatic_flat_card.run_action",
+        "step": 4,
+        "started_at": "2026-11-16T16:41:43.539+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": "auto_flat_card_0b964140b28f4ae387b0135802699f66",
+        "seq": 22,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "tool_name": "canvas_product_add_status",
+          "decision_source": "host_workflow"
+        }
+      },
+      {
+        "phase": "orch.http.parse_request",
+        "step": 4,
+        "started_at": "2026-11-16T16:41:45",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": null,
+        "seq": 23,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.action.frontend_roundtrip",
+        "step": 5,
+        "started_at": "2026-11-16T16:41:45.426+08:00",
+        "ended_at": "2026-11-16T16:41:47.313+08:00",
+        "duration_ms": 1887,
+        "tool_call_id": "auto_flat_card_0b964140b28f4ae387b0135802699f66",
+        "seq": 24,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.callback.disk_write",
+        "step": 5,
+        "started_at": "2026-11-16T16:41:45.427+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": "auto_flat_card_0b964140b28f4ae387b0135802699f66",
+        "seq": 25,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.callback.snapshot_route",
+        "step": 5,
+        "started_at": "2026-11-16T16:41:45.427+08:00",
+        "ended_at": "",
+        "duration_ms": 0,
+        "tool_call_id": "auto_flat_card_0b964140b28f4ae387b0135802699f66",
+        "seq": 26,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.callback.observation_emit",
+        "step": 5,
+        "started_at": "2026-11-16T16:41:45.428+08:00",
+        "ended_at": "2026-11-16T16:41:45.430+08:00",
+        "duration_ms": 2,
+        "tool_call_id": "auto_flat_card_0b964140b28f4ae387b0135802699f66",
+        "seq": 27,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {}
+      },
+      {
+        "phase": "orch.automatic_flat_card.run_action",
+        "step": 5,
+        "started_at": "2026-11-16T16:41:45.456+08:00",
+        "ended_at": "2026-11-16T16:41:45.458+08:00",
+        "duration_ms": 2,
+        "tool_call_id": "auto_flat_card_c8346a3ce6a74dbe9b64db0a00bd43a2",
+        "seq": 28,
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "extra": {
+          "tool_name": "respond_to_user",
+          "decision_source": "host_workflow"
+        }
+      }
+    ],
+    "evidence_hashes": [
+      {
+        "task_id": "425f047e-9258-492c-b7f9-226ee1374faf",
+        "files": {
+          "summary.json": "54e1976d46b08f3a9eb833593315ef7f6a1fcd64b8b62c4ca95e950bb8d37ba9",
+          "phase_timings.jsonl": "9e47a0db88b020988b574d68464f68854cf304d83f3e67c33368f377ecac34af",
+          "stream_messages.jsonl": "e774c3aad924e9d4b71e0665738d2717283dbb023c3a9ea401a89825d7e3d64e"
+        }
+      }
+    ],
+    "timing_note": "The image parent phase is counted once; image children are nested/parallel. Frontend roundtrip phases are counted once. Other is measured total minus these exclusive categories.",
+    "measurement_id": "R3",
+    "frontend_commit": "e5dfe67a",
+    "summary": "一句“做一张星际猫咪双面卡牌。”完成两面新画稿与装配。主规划从7次降到2次，另有2次生图、1次辅助调用；保存与独立核验通过，0次工具失败。Agent本轮106.840秒，提交至结束约111.633秒。",
+    "changes": [
+      {
+        "before": "先问模型读目录、再问模型读设计资料与规格。",
+        "after": "代码提前提供设计要求；选好普通卡后提供当前款规格。",
+        "result": "最终没有额外“读资料”规划轮；总主规划为2次。"
+      },
+      {
+        "before": "固定规格和生产步骤由模型逐项安排。",
+        "after": "普通双面卡用自己的流程补缺省参数、校验并准备任务。",
+        "result": "用户仍只需一句短需求；指定参数保留，不强制改成默认值。"
+      },
+      {
+        "before": "模型既写创意，又逐步安排后续工具。",
+        "after": "模型一次给出两面的创意；代码并行生成正面与背面。",
+        "result": "两张新图；并行生图阶段实测31.889秒。"
+      },
+      {
+        "before": "生图后再等模型决定加载工具、装配和查询。",
+        "after": "代码一次批量装配；运行中只查询原任务，保存通过后自动回复。",
+        "result": "1次批量装配＋1次原任务查询；没有重复装配，两个面的保存与版本通过。"
+      },
+      {
+        "before": "普通待办缺少工具字段时，自动流程被误拦截。",
+        "after": "修正普通双面卡的接管判定，同时保留不适用任务的原有流程。",
+        "result": "D1未接管的问题已修；R2和最终R3都由代码完成装配与回复。"
+      },
+      {
+        "before": "后台运行的R2出现长主线程间隔，装配等待50.937秒。",
+        "after": "装配运行期间临时保持后台任务执行，完成后释放。",
+        "result": "最终租约取得与释放均有回执；装配往返23.075秒。不是把所有时间下降都归因于这一项。"
+      }
+    ],
+    "background_verification": {
+      "description": "最终测试窗口在发送与独立核验时均保持隐藏、未聚焦；START_HIDDEN启用，未启用全局BENCHMARK后台开关。正常装配任务取得执行租约，完成后释放，同一任务的两次回执可以对应。",
+      "previous_roundtrip_seconds": 50.937,
+      "current_roundtrip_seconds": 23.075,
+      "previous_task_seconds": 49.765,
+      "current_task_seconds": 22.142,
+      "previous_max_gap_ms": 32400,
+      "current_max_gap_ms": 82,
+      "note": "R3的hidden_ms=0是Electron关闭节流后Page Visibility计时语义发生变化，不表示窗口被显示。R2到R3的总时间变化还包含模型等待和生图波动，不能全部归因于后台修复。11月15日基线的装配为19.327秒，仍比这轮23.075秒短。"
+    },
+    "runtime_environment": {
+      "agent_commit": "9329b2cd1bca6fc4e231c35b084ca37aceb06eea",
+      "frontend_commit": "e5dfe67a",
+      "scope": "chat_ui",
+      "start_hidden": true,
+      "benchmark_background": false
+    },
+    "visual_review": "正面为宇航员猫与星空，背面为同色系猫形纹样；两张独立画稿主题清楚。此为目视检查，不等同于印刷生产验收或量化画质等价。"
+  },
+  "debugAttempts": [
+    {
+      "case": "B07-D1",
+      "test_date": "2026-11-16",
+      "title": "普通双面卡正常聊天真实复测",
+      "test_scope": "chat_ui",
+      "test_scope_note": "经正常 ChatStore 发送，覆盖真实生图、素材下载、前端装配与保存；以本轮记录和独立核验为准，不代表所有请求的固定完成时间。",
+      "prompt": "做一张星际猫咪双面卡牌。",
+      "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+      "task_ids": [
+        "9e8a0374-fe07-4460-be56-d20df07f1f40"
+      ],
+      "project_id": "584c9443-8297-474c-ab9e-d6f58fbfe355",
+      "session_id": "56f59786-37ad-4d67-a1ff-3d1f6752def7",
+      "agent_final_states": [
+        "done"
+      ],
+      "final_state": "done",
+      "verification_required": true,
+      "inspection_verified": true,
+      "inspection": {
+        "verified": true,
+        "status": "passed",
+        "reasons": [],
+        "product_id": "card-interstellar-cat",
+        "product_kind": "card/custom",
+        "master_exists": true,
+        "placed": 2,
+        "sources": [
+          "project/assets/working/other/generated-image-20261116-2208f1.png",
+          "project/assets/working/other/generated-image-20261116-ba722b.png"
+        ],
+        "observed_at": "2026-11-16T16:11:36.241620+08:00",
+        "independent_probe_ms": null,
+        "included_in_agent_seconds": false,
+        "source_sha256": "0e472e124940f92a8bd8b054d1f4536fd7ff05752695590b15e1aeff7121d1fb"
+      },
+      "automatic_workflow_applied": false,
+      "automatic_workflow_completed": false,
+      "optimization_status": "artwork_saved_without_automatic_workflow",
+      "automatic_host_action_counts": {},
+      "tool_call_counts": {
+        "project_plan_write": 1,
+        "tool_product_image_gen": 1,
+        "load_pack": 1,
+        "canvas_product_add_batch": 1,
+        "canvas_product_add_status": 1,
+        "respond_to_user": 1
+      },
+      "agent_seconds": 183.6,
+      "runtime": {
+        "planning": 88.371,
+        "generation": 36.624,
+        "placement": 41.175,
+        "other": 17.43
+      },
+      "submitted_at": null,
+      "acknowledged_at": "2026-11-16T16:06:59.529076+08:00",
+      "wall_time_basis": "acknowledged_to_local_completed",
+      "completed_at": "2026-11-16T16:10:11+08:00",
+      "wall_seconds": 191.471,
+      "model_calls": 6,
+      "image_calls": 2,
+      "auxiliary_model_calls": 1,
+      "auxiliary_note": "辅助模型次数由累计模型用量次数减去主规划 phase 次数得到；用途不靠次数猜测。",
+      "tool_errors": 0,
+      "errors": [],
+      "steps": [
+        {
+          "phase": "主规划 1",
+          "description": "确定产品、规格和制作范围，提交产品计划",
+          "kind": "等主模型",
+          "seconds": 25.619,
+          "note": "随后执行：plan_write、project_plan_write",
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40"
+        },
+        {
+          "phase": "主规划 2",
+          "description": "设计正反两面的创意内容与生图提示词",
+          "kind": "等主模型",
+          "seconds": 18.281,
+          "note": "随后执行：plan_write、tool_product_image_gen",
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40"
+        },
+        {
+          "phase": "生图阶段 2",
+          "description": "生成并准备正反面素材（同阶段的子任务不累加）",
+          "kind": "生图服务＋代码",
+          "seconds": 36.624,
+          "note": "采用包住生图的父阶段实测时间；含该阶段内部准备、并行生成及素材提交。",
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40"
+        },
+        {
+          "phase": "主规划 3",
+          "description": "决定加载下一步所需工具",
+          "kind": "等主模型",
+          "seconds": 9.365,
+          "note": "随后执行：load_pack、plan_write",
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40"
+        },
+        {
+          "phase": "主规划 4",
+          "description": "安排装配或查询、核验已保存结果",
+          "kind": "等主模型",
+          "seconds": 12.62,
+          "note": "随后执行：canvas_product_add_batch",
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40"
+        },
+        {
+          "phase": "前端操作 5",
+          "description": "一次提交正反面装配并保存",
+          "kind": "代码＋前端",
+          "seconds": 35.628,
+          "note": "canvas_product_add_batch",
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40"
+        },
+        {
+          "phase": "主规划 5",
+          "description": "安排装配或查询、核验已保存结果",
+          "kind": "等主模型",
+          "seconds": 7.265,
+          "note": "随后执行：canvas_product_add_status",
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40"
+        },
+        {
+          "phase": "前端操作 6",
+          "description": "查询同一个装配任务",
+          "kind": "代码＋前端",
+          "seconds": 5.547,
+          "note": "canvas_product_add_status",
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40"
+        },
+        {
+          "phase": "主规划 6",
+          "description": "整理给用户的回复",
+          "kind": "等主模型",
+          "seconds": 15.221,
+          "note": "随后执行：plan_write、respond_to_user",
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40"
+        }
+      ],
+      "faces": [
+        {
+          "face": "front",
+          "success": true,
+          "version_saved": true,
+          "receipt_status": "applied",
+          "checks": {
+            "saved": true,
+            "placed": true,
+            "source_intact": true,
+            "visible": true
+          },
+          "timing": {
+            "total_ms": 47536,
+            "hidden_ms": 34653,
+            "stages": {
+              "source_download_wait": 1,
+              "source_host_read": 31426,
+              "source_integrity": 0,
+              "source_decode": 307,
+              "source_hash": 761,
+              "load_source": 35041,
+              "write_queue": 9011,
+              "prepare_master": 70,
+              "open_doc": 124,
+              "save": 1157,
+              "record_version": 1102
+            }
+          },
+          "elapsed_ms": 52058
+        },
+        {
+          "face": "back",
+          "success": true,
+          "version_saved": true,
+          "receipt_status": "applied",
+          "checks": {
+            "saved": true,
+            "placed": true,
+            "source_intact": true,
+            "visible": true
+          },
+          "timing": {
+            "total_ms": 44409,
+            "hidden_ms": 34650,
+            "stages": {
+              "source_download_wait": 0,
+              "source_host_read": 165,
+              "source_integrity": 10,
+              "source_decode": 13426,
+              "source_hash": 110,
+              "load_source": 16261,
+              "write_queue": 1,
+              "prepare_master": 24,
+              "open_doc": 1220,
+              "save": 17579,
+              "record_version": 8351
+            }
+          },
+          "elapsed_ms": 51901
+        }
+      ],
+      "images": [
+        {
+          "face": "front",
+          "source": "project/assets/working/other/generated-image-20261116-ba722b.png",
+          "alt": "本轮普通双面卡正面画稿",
+          "bytes": 3377315,
+          "sha256": "d56076162f2e8b0ae9a87e7146281c78e3cb6125a4a6a65f1b546cfaabf82247"
+        },
+        {
+          "face": "back",
+          "source": "project/assets/working/other/generated-image-20261116-2208f1.png",
+          "alt": "本轮普通双面卡背面画稿",
+          "bytes": 3637227,
+          "sha256": "375d7ad8527aae450ae2499efafc9f11d312e7a018529f68df283b63b3e65ec0"
+        }
+      ],
+      "verification_note": "独立 inspect 已核对同一母版、正反两张原始素材及保存版本回执；独立检查时间不计入 Agent 执行。未做三维验收。",
+      "cost": {
+        "coverage": "complete",
+        "reference_usd": 0.246603325,
+        "known_subtotal_usd": 0.246603325,
+        "model_lines": [
+          {
+            "model": "gemini-3.8-flash",
+            "input_tokens": 340091,
+            "output_tokens": 6857,
+            "cache_read_tokens": 287781,
+            "cache_creation_tokens": 0,
+            "call_count": 6,
+            "reference_usd": 0.086529825
+          },
+          {
+            "model": "gemini-3.1-flash-lite-preview",
+            "input_tokens": 246,
+            "output_tokens": 8,
+            "cache_read_tokens": 0,
+            "cache_creation_tokens": 0,
+            "call_count": 1,
+            "reference_usd": 7.35e-05
+          }
+        ],
+        "service_lines": [
+          {
+            "service": "openai_image_gen",
+            "variant": "generate",
+            "units": 2.0,
+            "unit_type": "image",
+            "call_count": 2,
+            "reference_usd": 0.16
+          }
+        ],
+        "tasks": [
+          {
+            "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+            "coverage": "complete",
+            "reference_usd": 0.246603325,
+            "known_subtotal_usd": 0.246603325,
+            "model_lines": [
+              {
+                "model": "gemini-3.8-flash",
+                "input_tokens": 340091,
+                "output_tokens": 6857,
+                "cache_read_tokens": 287781,
+                "cache_creation_tokens": 0,
+                "call_count": 6,
+                "reference_usd": 0.086529825
+              },
+              {
+                "model": "gemini-3.1-flash-lite-preview",
+                "input_tokens": 246,
+                "output_tokens": 8,
+                "cache_read_tokens": 0,
+                "cache_creation_tokens": 0,
+                "call_count": 1,
+                "reference_usd": 7.35e-05
+              }
+            ],
+            "service_lines": [
+              {
+                "service": "openai_image_gen",
+                "variant": "generate",
+                "units": 2.0,
+                "unit_type": "image",
+                "call_count": 2,
+                "reference_usd": 0.16
+              }
+            ],
+            "unpriced": [],
+            "last_usage_at": "2026-11-16T16:10:11+08:00",
+            "source_seq": 71,
+            "rate_source_sha256": "e171cda2daeed054dcc5515ea64662547c7bd7f8758809fa57337abb3fb44b0e",
+            "note": "Last cumulative snapshot once per task. Reference configured rates, not provider invoices; helper/rewrite usage included when present."
+          }
+        ]
+      },
+      "langfuse": {
+        "session_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/56f59786-37ad-4d67-a1ff-3d1f6752def7",
+        "traces": [
+          {
+            "id": "37c3f46544aed6d6d84d576d01d13ded",
+            "url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/traces/37c3f46544aed6d6d84d576d01d13ded"
+          }
+        ],
+        "evidence_status": "Local request IDs only; this script does not fetch cloud observations."
+      },
+      "code_version": "61b6d911ff1b9f41fa12babfa83a604c2eda1fbf",
+      "calls": [
+        {
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "tool_call_id": "call_7739625614916865936",
+          "action_name": "project_plan_write",
+          "success": null,
+          "failed": false,
+          "timestamp": "2026-11-16T16:07:38+08:00",
+          "decision_source": null
+        },
+        {
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "tool_call_id": "call_13897834266408812998",
+          "action_name": "tool_product_image_gen",
+          "success": true,
+          "failed": false,
+          "timestamp": "2026-11-16T16:08:33+08:00",
+          "decision_source": null
+        },
+        {
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "tool_call_id": "call_6044070224205999326",
+          "action_name": "load_pack",
+          "success": null,
+          "failed": false,
+          "timestamp": "2026-11-16T16:08:43+08:00",
+          "decision_source": null
+        },
+        {
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "tool_call_id": "call_6334571812049806464",
+          "action_name": "canvas_product_add_batch",
+          "success": true,
+          "failed": false,
+          "timestamp": "2026-11-16T16:09:32+08:00",
+          "decision_source": null
+        },
+        {
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "tool_call_id": "call_8388786597043192012",
+          "action_name": "canvas_product_add_status",
+          "success": true,
+          "failed": false,
+          "timestamp": "2026-11-16T16:09:50+08:00",
+          "decision_source": null
+        },
+        {
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "tool_call_id": "call_14176142625706928416",
+          "action_name": "respond_to_user",
+          "success": null,
+          "failed": false,
+          "timestamp": "2026-11-16T16:10:11+08:00",
+          "decision_source": null
+        }
+      ],
+      "phases": [
+        {
+          "phase": "orch.http.parse_request",
+          "step": 0,
+          "started_at": "2026-11-16T16:07:07",
+          "ended_at": "2026-11-16T16:07:07.026+08:00",
+          "duration_ms": 26,
+          "tool_call_id": null,
+          "seq": 1,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.compact.tool_results",
+          "step": 1,
+          "started_at": "2026-11-16T16:07:11.931+08:00",
+          "ended_at": "2026-11-16T16:07:11.933+08:00",
+          "duration_ms": 2,
+          "tool_call_id": null,
+          "seq": 2,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_tools",
+          "step": 1,
+          "started_at": "2026-11-16T16:07:11.933+08:00",
+          "ended_at": "2026-11-16T16:07:11.934+08:00",
+          "duration_ms": 1,
+          "tool_call_id": null,
+          "seq": 3,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_prompt",
+          "step": 1,
+          "started_at": "2026-11-16T16:07:11.937+08:00",
+          "ended_at": "2026-11-16T16:07:11.943+08:00",
+          "duration_ms": 6,
+          "tool_call_id": null,
+          "seq": 4,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 1,
+          "started_at": "2026-11-16T16:07:12.612+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 5,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.llm_call",
+          "step": 1,
+          "started_at": "2026-11-16T16:07:38.230+08:00",
+          "ended_at": "2026-11-16T16:08:03.849+08:00",
+          "duration_ms": 25619,
+          "tool_call_id": null,
+          "seq": 6,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.run_action",
+          "step": 1,
+          "started_at": "2026-11-16T16:07:38.250+08:00",
+          "ended_at": "2026-11-16T16:07:38.262+08:00",
+          "duration_ms": 12,
+          "tool_call_id": null,
+          "seq": 7,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "tool_name": "plan_write",
+            "action_type": "plan"
+          }
+        },
+        {
+          "phase": "orch.compact.tool_results",
+          "step": 2,
+          "started_at": "2026-11-16T16:07:38.276+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 8,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_tools",
+          "step": 2,
+          "started_at": "2026-11-16T16:07:38.276+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 9,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_prompt",
+          "step": 2,
+          "started_at": "2026-11-16T16:07:38.278+08:00",
+          "ended_at": "2026-11-16T16:07:38.285+08:00",
+          "duration_ms": 7,
+          "tool_call_id": null,
+          "seq": 10,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 2,
+          "started_at": "2026-11-16T16:07:38.929+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 11,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.llm_call",
+          "step": 2,
+          "started_at": "2026-11-16T16:07:57.209+08:00",
+          "ended_at": "2026-11-16T16:08:15.490+08:00",
+          "duration_ms": 18281,
+          "tool_call_id": null,
+          "seq": 12,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 2,
+          "started_at": "2026-11-16T16:07:57.896+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 13,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.1-flash-lite-preview"
+          }
+        },
+        {
+          "phase": "orch.inline_tool.run",
+          "step": 2,
+          "started_at": "2026-11-16T16:07:57.238+08:00",
+          "ended_at": "2026-11-16T16:08:33.843+08:00",
+          "duration_ms": 36605,
+          "tool_call_id": "call_13897834266408812998",
+          "seq": 14,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "tool_name": "tool_product_image_gen",
+            "is_image_gen": true
+          }
+        },
+        {
+          "phase": "orch.plan.run_action",
+          "step": 2,
+          "started_at": "2026-11-16T16:07:57.224+08:00",
+          "ended_at": "2026-11-16T16:08:33.848+08:00",
+          "duration_ms": 36624,
+          "tool_call_id": null,
+          "seq": 15,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "tool_name": "plan_write",
+            "action_type": "plan"
+          }
+        },
+        {
+          "phase": "orch.compact.tool_results",
+          "step": 3,
+          "started_at": "2026-11-16T16:08:33.857+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 16,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_tools",
+          "step": 3,
+          "started_at": "2026-11-16T16:08:33.858+08:00",
+          "ended_at": "2026-11-16T16:08:33.859+08:00",
+          "duration_ms": 1,
+          "tool_call_id": null,
+          "seq": 17,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_prompt",
+          "step": 3,
+          "started_at": "2026-11-16T16:08:33.859+08:00",
+          "ended_at": "2026-11-16T16:08:33.865+08:00",
+          "duration_ms": 6,
+          "tool_call_id": null,
+          "seq": 18,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 3,
+          "started_at": "2026-11-16T16:08:34.552+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 19,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.llm_call",
+          "step": 3,
+          "started_at": "2026-11-16T16:08:43.916+08:00",
+          "ended_at": "2026-11-16T16:08:53.281+08:00",
+          "duration_ms": 9365,
+          "tool_call_id": null,
+          "seq": 20,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.run_action",
+          "step": 3,
+          "started_at": "2026-11-16T16:08:43.926+08:00",
+          "ended_at": "2026-11-16T16:08:43.929+08:00",
+          "duration_ms": 3,
+          "tool_call_id": null,
+          "seq": 21,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "tool_name": "plan_write",
+            "action_type": "plan"
+          }
+        },
+        {
+          "phase": "orch.compact.tool_results",
+          "step": 4,
+          "started_at": "2026-11-16T16:08:43.938+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 22,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_tools",
+          "step": 4,
+          "started_at": "2026-11-16T16:08:43.939+08:00",
+          "ended_at": "2026-11-16T16:08:43.942+08:00",
+          "duration_ms": 3,
+          "tool_call_id": null,
+          "seq": 23,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_prompt",
+          "step": 4,
+          "started_at": "2026-11-16T16:08:43.943+08:00",
+          "ended_at": "2026-11-16T16:08:43.948+08:00",
+          "duration_ms": 5,
+          "tool_call_id": null,
+          "seq": 24,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 4,
+          "started_at": "2026-11-16T16:08:44.677+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 25,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.llm_call",
+          "step": 4,
+          "started_at": "2026-11-16T16:08:57.297+08:00",
+          "ended_at": "2026-11-16T16:09:09.917+08:00",
+          "duration_ms": 12620,
+          "tool_call_id": null,
+          "seq": 26,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.run_action",
+          "step": 4,
+          "started_at": "2026-11-16T16:08:57.321+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 27,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "tool_name": "canvas_product_add_batch",
+            "action_type": "registry_action"
+          }
+        },
+        {
+          "phase": "orch.http.parse_request",
+          "step": 4,
+          "started_at": "2026-11-16T16:09:32",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 28,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.action.frontend_roundtrip",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:32.949+08:00",
+          "ended_at": "2026-11-16T16:10:08.577+08:00",
+          "duration_ms": 35628,
+          "tool_call_id": "call_6334571812049806464",
+          "seq": 29,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.disk_write",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:32.950+08:00",
+          "ended_at": "2026-11-16T16:09:32.953+08:00",
+          "duration_ms": 3,
+          "tool_call_id": "call_6334571812049806464",
+          "seq": 30,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.snapshot_route",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:32.955+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "call_6334571812049806464",
+          "seq": 31,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.observation_emit",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:32.957+08:00",
+          "ended_at": "2026-11-16T16:09:32.963+08:00",
+          "duration_ms": 6,
+          "tool_call_id": "call_6334571812049806464",
+          "seq": 32,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.compact.tool_results",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:33.005+08:00",
+          "ended_at": "2026-11-16T16:09:33.006+08:00",
+          "duration_ms": 1,
+          "tool_call_id": null,
+          "seq": 33,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_tools",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:33.007+08:00",
+          "ended_at": "2026-11-16T16:09:33.032+08:00",
+          "duration_ms": 25,
+          "tool_call_id": null,
+          "seq": 34,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_prompt",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:33.033+08:00",
+          "ended_at": "2026-11-16T16:09:33.057+08:00",
+          "duration_ms": 24,
+          "tool_call_id": null,
+          "seq": 35,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:38.021+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 36,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.llm_call",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:45.280+08:00",
+          "ended_at": "2026-11-16T16:09:52.545+08:00",
+          "duration_ms": 7265,
+          "tool_call_id": null,
+          "seq": 37,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.run_action",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:45.314+08:00",
+          "ended_at": "2026-11-16T16:09:45.317+08:00",
+          "duration_ms": 3,
+          "tool_call_id": null,
+          "seq": 38,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "tool_name": "canvas_product_add_status",
+            "action_type": "registry_action"
+          }
+        },
+        {
+          "phase": "orch.http.parse_request",
+          "step": 5,
+          "started_at": "2026-11-16T16:09:49",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 39,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.action.frontend_roundtrip",
+          "step": 6,
+          "started_at": "2026-11-16T16:09:50.862+08:00",
+          "ended_at": "2026-11-16T16:09:56.409+08:00",
+          "duration_ms": 5547,
+          "tool_call_id": "call_8388786597043192012",
+          "seq": 40,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.disk_write",
+          "step": 6,
+          "started_at": "2026-11-16T16:09:50.863+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "call_8388786597043192012",
+          "seq": 41,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.snapshot_route",
+          "step": 6,
+          "started_at": "2026-11-16T16:09:50.864+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "call_8388786597043192012",
+          "seq": 42,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.observation_emit",
+          "step": 6,
+          "started_at": "2026-11-16T16:09:50.868+08:00",
+          "ended_at": "2026-11-16T16:09:50.884+08:00",
+          "duration_ms": 16,
+          "tool_call_id": "call_8388786597043192012",
+          "seq": 43,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.compact.tool_results",
+          "step": 6,
+          "started_at": "2026-11-16T16:09:50.918+08:00",
+          "ended_at": "2026-11-16T16:09:50.919+08:00",
+          "duration_ms": 1,
+          "tool_call_id": null,
+          "seq": 44,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_tools",
+          "step": 6,
+          "started_at": "2026-11-16T16:09:50.922+08:00",
+          "ended_at": "2026-11-16T16:09:50.944+08:00",
+          "duration_ms": 22,
+          "tool_call_id": null,
+          "seq": 45,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_prompt",
+          "step": 6,
+          "started_at": "2026-11-16T16:09:50.946+08:00",
+          "ended_at": "2026-11-16T16:09:50.979+08:00",
+          "duration_ms": 33,
+          "tool_call_id": null,
+          "seq": 46,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {}
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 6,
+          "started_at": "2026-11-16T16:09:55.896+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 47,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.llm_call",
+          "step": 6,
+          "started_at": "2026-11-16T16:10:11.110+08:00",
+          "ended_at": "2026-11-16T16:10:26.331+08:00",
+          "duration_ms": 15221,
+          "tool_call_id": null,
+          "seq": 48,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.run_action",
+          "step": 6,
+          "started_at": "2026-11-16T16:10:11.120+08:00",
+          "ended_at": "2026-11-16T16:10:11.132+08:00",
+          "duration_ms": 12,
+          "tool_call_id": null,
+          "seq": 49,
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "extra": {
+            "tool_name": "plan_write",
+            "action_type": "plan"
+          }
+        }
+      ],
+      "evidence_hashes": [
+        {
+          "task_id": "9e8a0374-fe07-4460-be56-d20df07f1f40",
+          "files": {
+            "summary.json": "21d65bce35704f675d3ad42e68cff0d42683efa5c128ea3875ce007fda3c90e3",
+            "phase_timings.jsonl": "352adf0682afe3733785622b7ec875d4e1239efa5879486758d7088e88988876",
+            "stream_messages.jsonl": "259d2a2499af7cd902bd023d0d1f4c7ea702df11170e4552c255bdf3fa809069"
+          }
+        }
+      ],
+      "timing_note": "The image parent phase is counted once; image children are nested/parallel. Frontend roundtrip phases are counted once. Other is measured total minus these exclusive categories.",
+      "debug_note": "本轮为调试对照，普通 plan_write 待办未带 suggested_tool，自动流程激活 guard 将其当作 planner-owned 工作而未接续。根因由代码核查给出；本轮没有 automatic_flat_card host action，虽然两面保存核验通过，不能作为自动流程优化成功。",
+      "debug_label": "D1 · 入口未接管",
+      "debug_resolution": "已修复普通待办被误判为旧规划流程的问题；后续R2已验证自动接管。"
+    },
+    {
+      "case": "B07-R1",
+      "test_date": "2026-11-16",
+      "title": "普通双面卡正常聊天真实复测",
+      "test_scope": "chat_ui",
+      "test_scope_note": "经正常 ChatStore 发送，覆盖真实生图、素材下载、前端装配与保存；以本轮记录和独立核验为准，不代表所有请求的固定完成时间。",
+      "prompt": "做一张星际猫咪双面卡牌。",
+      "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+      "task_ids": [
+        "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21"
+      ],
+      "project_id": "4e418d28-719a-4c34-be29-271c7f6fc6b1",
+      "session_id": "249ffe1a-da41-4e02-930a-7e15515cff9c",
+      "agent_final_states": [
+        "done"
+      ],
+      "final_state": "done",
+      "verification_required": true,
+      "inspection_verified": true,
+      "inspection": {
+        "verified": true,
+        "status": "passed",
+        "reasons": [],
+        "product_id": "interstellar-cat-card",
+        "product_kind": "card/custom",
+        "master_exists": true,
+        "placed": 2,
+        "sources": [
+          "project/assets/working/other/generated-image-20261116-2363ec.png",
+          "project/assets/working/other/generated-image-20261116-72ba35.png"
+        ],
+        "observed_at": "2026-11-16T16:19:40.630692+08:00",
+        "independent_probe_ms": null,
+        "included_in_agent_seconds": false,
+        "source_sha256": "2408de782950f41bf9360b08990d49bca4b54c888b7d578bb4875a2ef7b06ec2"
+      },
+      "automatic_workflow_applied": true,
+      "automatic_workflow_completed": true,
+      "optimization_status": "automatic_workflow_verified",
+      "automatic_host_action_counts": {
+        "canvas_product_add_batch": 1,
+        "canvas_product_add_status": 2,
+        "respond_to_user": 1
+      },
+      "tool_call_counts": {
+        "read": 1,
+        "project_plan_write": 1,
+        "tool_product_image_gen": 1,
+        "canvas_product_add_batch": 1,
+        "canvas_product_add_status": 2,
+        "respond_to_user": 1
+      },
+      "agent_seconds": 151.73,
+      "runtime": {
+        "planning": 53.084,
+        "generation": 41.779,
+        "placement": 50.937,
+        "other": 5.93
+      },
+      "submitted_at": "2026-11-16T16:16:25.499455+08:00",
+      "acknowledged_at": "2026-11-16T16:16:27.268745+08:00",
+      "wall_time_basis": "submitted_to_local_completed",
+      "completed_at": "2026-11-16T16:19:08+08:00",
+      "wall_seconds": 162.501,
+      "model_calls": 3,
+      "image_calls": 2,
+      "auxiliary_model_calls": 1,
+      "auxiliary_note": "辅助模型次数由累计模型用量次数减去主规划 phase 次数得到；用途不靠次数猜测。",
+      "tool_errors": 0,
+      "errors": [],
+      "steps": [
+        {
+          "phase": "主规划 1",
+          "description": "决定读取产品目录或规格资料",
+          "kind": "等主模型",
+          "seconds": 18.056,
+          "note": "随后执行：read",
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21"
+        },
+        {
+          "phase": "主规划 2",
+          "description": "确定产品、规格和制作范围，提交产品计划",
+          "kind": "等主模型",
+          "seconds": 17.294,
+          "note": "随后执行：plan_write、project_plan_write",
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21"
+        },
+        {
+          "phase": "主规划 3",
+          "description": "设计正反两面的创意内容与生图提示词",
+          "kind": "等主模型",
+          "seconds": 17.734,
+          "note": "随后执行：tool_product_image_gen",
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21"
+        },
+        {
+          "phase": "生图阶段 3",
+          "description": "生成并准备正反面素材（同阶段的子任务不累加）",
+          "kind": "生图服务＋代码",
+          "seconds": 41.779,
+          "note": "采用包住生图的父阶段实测时间；含该阶段内部准备、并行生成及素材提交。",
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21"
+        },
+        {
+          "phase": "前端操作 5",
+          "description": "一次提交正反面装配并保存",
+          "kind": "代码＋前端",
+          "seconds": 21.963,
+          "note": "canvas_product_add_batch",
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21"
+        },
+        {
+          "phase": "前端操作 6",
+          "description": "查询同一个装配任务",
+          "kind": "代码＋前端",
+          "seconds": 20.611,
+          "note": "canvas_product_add_status",
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21"
+        },
+        {
+          "phase": "前端操作 7",
+          "description": "查询同一个装配任务",
+          "kind": "代码＋前端",
+          "seconds": 8.363,
+          "note": "canvas_product_add_status",
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21"
+        }
+      ],
+      "faces": [
+        {
+          "face": "front",
+          "success": true,
+          "version_saved": true,
+          "receipt_status": "applied",
+          "checks": {
+            "saved": true,
+            "placed": true,
+            "source_intact": true,
+            "visible": true
+          },
+          "timing": {
+            "total_ms": 44487,
+            "hidden_ms": 41255,
+            "stages": {
+              "source_download_wait": 1,
+              "source_host_read": 7171,
+              "source_integrity": 1,
+              "source_decode": 5064,
+              "source_hash": 293,
+              "load_source": 13624,
+              "write_queue": 0,
+              "prepare_master": 21255,
+              "open_doc": 114,
+              "save": 2444,
+              "record_version": 6701
+            },
+            "main_thread": {
+              "max_gap_ms": 32400,
+              "long_tasks": 19,
+              "long_task_ms": 7411,
+              "max_long_task_ms": 1944
+            }
+          },
+          "elapsed_ms": 49618
+        },
+        {
+          "face": "back",
+          "success": true,
+          "version_saved": true,
+          "receipt_status": "applied",
+          "checks": {
+            "saved": true,
+            "placed": true,
+            "source_intact": true,
+            "visible": true
+          },
+          "timing": {
+            "total_ms": 45503,
+            "hidden_ms": 41252,
+            "stages": {
+              "source_download_wait": 0,
+              "source_host_read": 12888,
+              "source_integrity": 1,
+              "source_decode": 3051,
+              "source_hash": 61,
+              "load_source": 17114,
+              "write_queue": 27325,
+              "prepare_master": 58,
+              "open_doc": 6,
+              "save": 231,
+              "record_version": 402
+            },
+            "main_thread": {
+              "max_gap_ms": 32400,
+              "long_tasks": 23,
+              "long_task_ms": 8006,
+              "max_long_task_ms": 1944
+            }
+          },
+          "elapsed_ms": 49764
+        }
+      ],
+      "images": [
+        {
+          "face": "front",
+          "source": "project/assets/working/other/generated-image-20261116-2363ec.png",
+          "alt": "本轮普通双面卡正面画稿",
+          "bytes": 3444567,
+          "sha256": "36dad808232fb3c4675983a486cb4ceaa3293cc04a5c906f4de3d2ff79510b63"
+        },
+        {
+          "face": "back",
+          "source": "project/assets/working/other/generated-image-20261116-72ba35.png",
+          "alt": "本轮普通双面卡背面画稿",
+          "bytes": 3481607,
+          "sha256": "f3c574e155a092a46195414bd8b152a7844e6e509d164edbaabec0a97aecf163"
+        }
+      ],
+      "verification_note": "独立 inspect 已核对同一母版、正反两张原始素材及保存版本回执；独立检查时间不计入 Agent 执行。未做三维验收。",
+      "cost": {
+        "coverage": "complete",
+        "reference_usd": 0.206936125,
+        "known_subtotal_usd": 0.206936125,
+        "model_lines": [
+          {
+            "model": "gemini-3.8-flash",
+            "input_tokens": 130341,
+            "output_tokens": 3909,
+            "cache_read_tokens": 97115,
+            "cache_creation_tokens": 0,
+            "call_count": 3,
+            "reference_usd": 0.046861875
+          },
+          {
+            "model": "gemini-3.1-flash-lite-preview",
+            "input_tokens": 249,
+            "output_tokens": 8,
+            "cache_read_tokens": 0,
+            "cache_creation_tokens": 0,
+            "call_count": 1,
+            "reference_usd": 7.425e-05
+          }
+        ],
+        "service_lines": [
+          {
+            "service": "openai_image_gen",
+            "variant": "generate",
+            "units": 2.0,
+            "unit_type": "image",
+            "call_count": 2,
+            "reference_usd": 0.16
+          }
+        ],
+        "tasks": [
+          {
+            "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+            "coverage": "complete",
+            "reference_usd": 0.206936125,
+            "known_subtotal_usd": 0.206936125,
+            "model_lines": [
+              {
+                "model": "gemini-3.8-flash",
+                "input_tokens": 130341,
+                "output_tokens": 3909,
+                "cache_read_tokens": 97115,
+                "cache_creation_tokens": 0,
+                "call_count": 3,
+                "reference_usd": 0.046861875
+              },
+              {
+                "model": "gemini-3.1-flash-lite-preview",
+                "input_tokens": 249,
+                "output_tokens": 8,
+                "cache_read_tokens": 0,
+                "cache_creation_tokens": 0,
+                "call_count": 1,
+                "reference_usd": 7.425e-05
+              }
+            ],
+            "service_lines": [
+              {
+                "service": "openai_image_gen",
+                "variant": "generate",
+                "units": 2.0,
+                "unit_type": "image",
+                "call_count": 2,
+                "reference_usd": 0.16
+              }
+            ],
+            "unpriced": [],
+            "last_usage_at": "2026-11-16T16:19:08+08:00",
+            "source_seq": 70,
+            "rate_source_sha256": "e171cda2daeed054dcc5515ea64662547c7bd7f8758809fa57337abb3fb44b0e",
+            "note": "Last cumulative snapshot once per task. Reference configured rates, not provider invoices; helper/rewrite usage included when present."
+          }
+        ]
+      },
+      "langfuse": {
+        "session_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/249ffe1a-da41-4e02-930a-7e15515cff9c",
+        "traces": [
+          {
+            "id": "8d980e9f846f68a3d0cc0c73405bd564",
+            "url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/traces/8d980e9f846f68a3d0cc0c73405bd564"
+          }
+        ],
+        "evidence_status": "Local request IDs only; this script does not fetch cloud observations."
+      },
+      "code_version": "5ddac71725ae1a3ddae712dec08fabe496ccc138",
+      "calls": [
+        {
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "tool_call_id": "call_13525219517344988072",
+          "action_name": "read",
+          "success": true,
+          "failed": false,
+          "timestamp": "2026-11-16T16:16:59+08:00",
+          "decision_source": null
+        },
+        {
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "tool_call_id": "call_8381082401854801536",
+          "action_name": "project_plan_write",
+          "success": null,
+          "failed": false,
+          "timestamp": "2026-11-16T16:17:17+08:00",
+          "decision_source": null
+        },
+        {
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "tool_call_id": "call_11485448684471973359",
+          "action_name": "tool_product_image_gen",
+          "success": true,
+          "failed": false,
+          "timestamp": "2026-11-16T16:18:17+08:00",
+          "decision_source": null
+        },
+        {
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "tool_call_id": "auto_flat_card_bec6f7482003401883df24dca059ec6f",
+          "action_name": "canvas_product_add_batch",
+          "success": true,
+          "failed": false,
+          "timestamp": "2026-11-16T16:18:39+08:00",
+          "decision_source": "host_workflow"
+        },
+        {
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "tool_call_id": "auto_flat_card_c7681f033fe04e21839bece1a2aa97f8",
+          "action_name": "canvas_product_add_status",
+          "success": true,
+          "failed": false,
+          "timestamp": "2026-11-16T16:19:00+08:00",
+          "decision_source": "host_workflow"
+        },
+        {
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "tool_call_id": "auto_flat_card_8f9d7192abe34d3da9d6d7dafbaa264e",
+          "action_name": "canvas_product_add_status",
+          "success": true,
+          "failed": false,
+          "timestamp": "2026-11-16T16:19:08+08:00",
+          "decision_source": "host_workflow"
+        },
+        {
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "tool_call_id": "auto_flat_card_8bcf617d02724a85b902c8e31498ad22",
+          "action_name": "respond_to_user",
+          "success": null,
+          "failed": false,
+          "timestamp": "2026-11-16T16:19:08+08:00",
+          "decision_source": "host_workflow"
+        }
+      ],
+      "phases": [
+        {
+          "phase": "orch.http.parse_request",
+          "step": 0,
+          "started_at": "2026-11-16T16:16:37",
+          "ended_at": "2026-11-16T16:16:37.024+08:00",
+          "duration_ms": 24,
+          "tool_call_id": null,
+          "seq": 1,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.compact.tool_results",
+          "step": 1,
+          "started_at": "2026-11-16T16:16:40.736+08:00",
+          "ended_at": "2026-11-16T16:16:40.739+08:00",
+          "duration_ms": 3,
+          "tool_call_id": null,
+          "seq": 2,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_tools",
+          "step": 1,
+          "started_at": "2026-11-16T16:16:40.739+08:00",
+          "ended_at": "2026-11-16T16:16:40.741+08:00",
+          "duration_ms": 2,
+          "tool_call_id": null,
+          "seq": 3,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_prompt",
+          "step": 1,
+          "started_at": "2026-11-16T16:16:40.742+08:00",
+          "ended_at": "2026-11-16T16:16:40.747+08:00",
+          "duration_ms": 5,
+          "tool_call_id": null,
+          "seq": 4,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 1,
+          "started_at": "2026-11-16T16:16:41.408+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 5,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.llm_call",
+          "step": 1,
+          "started_at": "2026-11-16T16:16:59.463+08:00",
+          "ended_at": "2026-11-16T16:17:17.519+08:00",
+          "duration_ms": 18056,
+          "tool_call_id": null,
+          "seq": 6,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.run_action",
+          "step": 1,
+          "started_at": "2026-11-16T16:16:59.492+08:00",
+          "ended_at": "2026-11-16T16:16:59.503+08:00",
+          "duration_ms": 11,
+          "tool_call_id": null,
+          "seq": 7,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "tool_name": "read",
+            "action_type": "registry_action"
+          }
+        },
+        {
+          "phase": "orch.compact.tool_results",
+          "step": 2,
+          "started_at": "2026-11-16T16:16:59.515+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 8,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_tools",
+          "step": 2,
+          "started_at": "2026-11-16T16:16:59.515+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 9,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_prompt",
+          "step": 2,
+          "started_at": "2026-11-16T16:16:59.517+08:00",
+          "ended_at": "2026-11-16T16:16:59.522+08:00",
+          "duration_ms": 5,
+          "tool_call_id": null,
+          "seq": 10,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 2,
+          "started_at": "2026-11-16T16:17:00.183+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 11,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.llm_call",
+          "step": 2,
+          "started_at": "2026-11-16T16:17:17.477+08:00",
+          "ended_at": "2026-11-16T16:17:34.771+08:00",
+          "duration_ms": 17294,
+          "tool_call_id": null,
+          "seq": 12,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.run_action",
+          "step": 2,
+          "started_at": "2026-11-16T16:17:17.489+08:00",
+          "ended_at": "2026-11-16T16:17:17.505+08:00",
+          "duration_ms": 16,
+          "tool_call_id": null,
+          "seq": 13,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "tool_name": "plan_write",
+            "action_type": "plan"
+          }
+        },
+        {
+          "phase": "orch.compact.tool_results",
+          "step": 3,
+          "started_at": "2026-11-16T16:17:17.521+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 14,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_tools",
+          "step": 3,
+          "started_at": "2026-11-16T16:17:17.522+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 15,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.plan.build_prompt",
+          "step": 3,
+          "started_at": "2026-11-16T16:17:17.523+08:00",
+          "ended_at": "2026-11-16T16:17:17.531+08:00",
+          "duration_ms": 8,
+          "tool_call_id": null,
+          "seq": 16,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 3,
+          "started_at": "2026-11-16T16:17:18.215+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 17,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "orch.plan.llm_call",
+          "step": 3,
+          "started_at": "2026-11-16T16:17:35.949+08:00",
+          "ended_at": "2026-11-16T16:17:53.683+08:00",
+          "duration_ms": 17734,
+          "tool_call_id": null,
+          "seq": 18,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "model": "gemini-3.8-flash"
+          }
+        },
+        {
+          "phase": "llm.prefix_chain",
+          "step": 3,
+          "started_at": "2026-11-16T16:17:36.699+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 19,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "model": "gemini-3.1-flash-lite-preview"
+          }
+        },
+        {
+          "phase": "orch.inline_tool.run",
+          "step": 3,
+          "started_at": "2026-11-16T16:17:35.960+08:00",
+          "ended_at": "2026-11-16T16:18:17.731+08:00",
+          "duration_ms": 41771,
+          "tool_call_id": "call_11485448684471973359",
+          "seq": 20,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "tool_name": "tool_product_image_gen",
+            "is_image_gen": true
+          }
+        },
+        {
+          "phase": "orch.plan.run_action",
+          "step": 3,
+          "started_at": "2026-11-16T16:17:35.957+08:00",
+          "ended_at": "2026-11-16T16:18:17.736+08:00",
+          "duration_ms": 41779,
+          "tool_call_id": null,
+          "seq": 21,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "tool_name": "tool_product_image_gen",
+            "action_type": "registry_action"
+          }
+        },
+        {
+          "phase": "orch.automatic_flat_card.run_action",
+          "step": 4,
+          "started_at": "2026-11-16T16:18:17.756+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "auto_flat_card_bec6f7482003401883df24dca059ec6f",
+          "seq": 22,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "tool_name": "canvas_product_add_batch",
+            "decision_source": "host_workflow"
+          }
+        },
+        {
+          "phase": "orch.http.parse_request",
+          "step": 4,
+          "started_at": "2026-11-16T16:18:39",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 23,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.action.frontend_roundtrip",
+          "step": 5,
+          "started_at": "2026-11-16T16:18:39.720+08:00",
+          "ended_at": "2026-11-16T16:19:01.683+08:00",
+          "duration_ms": 21963,
+          "tool_call_id": "auto_flat_card_bec6f7482003401883df24dca059ec6f",
+          "seq": 24,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.disk_write",
+          "step": 5,
+          "started_at": "2026-11-16T16:18:39.720+08:00",
+          "ended_at": "2026-11-16T16:18:39.721+08:00",
+          "duration_ms": 1,
+          "tool_call_id": "auto_flat_card_bec6f7482003401883df24dca059ec6f",
+          "seq": 25,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.snapshot_route",
+          "step": 5,
+          "started_at": "2026-11-16T16:18:39.721+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "auto_flat_card_bec6f7482003401883df24dca059ec6f",
+          "seq": 26,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.observation_emit",
+          "step": 5,
+          "started_at": "2026-11-16T16:18:39.721+08:00",
+          "ended_at": "2026-11-16T16:18:39.722+08:00",
+          "duration_ms": 1,
+          "tool_call_id": "auto_flat_card_bec6f7482003401883df24dca059ec6f",
+          "seq": 27,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.automatic_flat_card.run_action",
+          "step": 5,
+          "started_at": "2026-11-16T16:18:39.745+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "auto_flat_card_c7681f033fe04e21839bece1a2aa97f8",
+          "seq": 28,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "tool_name": "canvas_product_add_status",
+            "decision_source": "host_workflow"
+          }
+        },
+        {
+          "phase": "orch.http.parse_request",
+          "step": 5,
+          "started_at": "2026-11-16T16:18:59",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 29,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.action.frontend_roundtrip",
+          "step": 6,
+          "started_at": "2026-11-16T16:19:00.357+08:00",
+          "ended_at": "2026-11-16T16:19:20.968+08:00",
+          "duration_ms": 20611,
+          "tool_call_id": "auto_flat_card_c7681f033fe04e21839bece1a2aa97f8",
+          "seq": 30,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.disk_write",
+          "step": 6,
+          "started_at": "2026-11-16T16:19:00.357+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "auto_flat_card_c7681f033fe04e21839bece1a2aa97f8",
+          "seq": 31,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.snapshot_route",
+          "step": 6,
+          "started_at": "2026-11-16T16:19:00.358+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "auto_flat_card_c7681f033fe04e21839bece1a2aa97f8",
+          "seq": 32,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.observation_emit",
+          "step": 6,
+          "started_at": "2026-11-16T16:19:00.358+08:00",
+          "ended_at": "2026-11-16T16:19:00.359+08:00",
+          "duration_ms": 1,
+          "tool_call_id": "auto_flat_card_c7681f033fe04e21839bece1a2aa97f8",
+          "seq": 33,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.automatic_flat_card.run_action",
+          "step": 6,
+          "started_at": "2026-11-16T16:19:00.381+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "auto_flat_card_8f9d7192abe34d3da9d6d7dafbaa264e",
+          "seq": 34,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "tool_name": "canvas_product_add_status",
+            "decision_source": "host_workflow"
+          }
+        },
+        {
+          "phase": "orch.http.parse_request",
+          "step": 6,
+          "started_at": "2026-11-16T16:19:08",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": null,
+          "seq": 35,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.action.frontend_roundtrip",
+          "step": 7,
+          "started_at": "2026-11-16T16:19:08.744+08:00",
+          "ended_at": "2026-11-16T16:19:17.107+08:00",
+          "duration_ms": 8363,
+          "tool_call_id": "auto_flat_card_8f9d7192abe34d3da9d6d7dafbaa264e",
+          "seq": 36,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.disk_write",
+          "step": 7,
+          "started_at": "2026-11-16T16:19:08.744+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "auto_flat_card_8f9d7192abe34d3da9d6d7dafbaa264e",
+          "seq": 37,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.snapshot_route",
+          "step": 7,
+          "started_at": "2026-11-16T16:19:08.745+08:00",
+          "ended_at": "",
+          "duration_ms": 0,
+          "tool_call_id": "auto_flat_card_8f9d7192abe34d3da9d6d7dafbaa264e",
+          "seq": 38,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.callback.observation_emit",
+          "step": 7,
+          "started_at": "2026-11-16T16:19:08.746+08:00",
+          "ended_at": "2026-11-16T16:19:08.748+08:00",
+          "duration_ms": 2,
+          "tool_call_id": "auto_flat_card_8f9d7192abe34d3da9d6d7dafbaa264e",
+          "seq": 39,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {}
+        },
+        {
+          "phase": "orch.automatic_flat_card.run_action",
+          "step": 7,
+          "started_at": "2026-11-16T16:19:08.777+08:00",
+          "ended_at": "2026-11-16T16:19:08.779+08:00",
+          "duration_ms": 2,
+          "tool_call_id": "auto_flat_card_8bcf617d02724a85b902c8e31498ad22",
+          "seq": 40,
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "extra": {
+            "tool_name": "respond_to_user",
+            "decision_source": "host_workflow"
+          }
+        }
+      ],
+      "evidence_hashes": [
+        {
+          "task_id": "dd98c410-e6c9-4b2b-b4dd-ac2d88c48c21",
+          "files": {
+            "summary.json": "652b613dc89fbc4a777ce0be02e4cc669b65cb8c193d4cb0ce472e75b6a5a95b",
+            "phase_timings.jsonl": "372fc677527b469c580dd03957eaf40e19964d4d179cd20183c9b63942bf4a9b",
+            "stream_messages.jsonl": "3adef8cfcf9f2707887730379b26b8c6ea279fc7f95e381a0c8e50cf6fad84cc"
+          }
+        }
+      ],
+      "timing_note": "The image parent phase is counted once; image children are nested/parallel. Frontend roundtrip phases are counted once. Other is measured total minus these exclusive categories.",
+      "measurement_id": "R2",
+      "performance_note": "模型等待较11月15日基线少21.317秒，但本轮生图阶段多16.980秒、装配往返多31.610秒。前端两面hidden_ms约41.25秒，主线程max_gap_ms=32400；素材下载等待仅0–1ms。本轮后半段存在较长的后台运行与主线程停顿记录，但现有证据不能精确量化每个环境因素的贡献。不同提示词与运行时次，不能把差值归因为单一修改。",
+      "debug_label": "R2 · 自动接管后的调试",
+      "debug_resolution": "随后由代码预载设计资料，并增加任务期间的后台执行保护；最终R3的实际效果单独记录。"
+    }
+  ]
+}

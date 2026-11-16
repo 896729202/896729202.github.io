@@ -13,7 +13,7 @@
       <a class="home-card home-report" href="tests/2026-11-13/index.html">
         <div class="home-card-heading"><p class="eyebrow">01 / 全品类测试</p><h2>12 个品类，<br>完整生成链路。</h2><p>从最终画稿，追到耗时、错误与调用记录。</p></div>
         <div class="home-report-image"><img src="tests/2026-11-13/images/B09-R1-1.webp" alt="真实测试产物：带主题画稿的马克杯三维截图" width="400" height="400"><span>真实测试产物 / 马克杯</span></div>
-        <div class="home-report-meta"><time datetime="2026-11-13">2026.11.13 — 11.15</time><p>原报告 15 次测试 · 另有 9 次独立复测<br>图片 · 时间分布 · 参考费用 · Langfuse</p></div>
+        <div class="home-report-meta"><time datetime="2026-11-13">2026.11.13 — 11.16</time><p>原报告 15 次测试 · 另有 10 次独立复测<br>图片 · 时间分布 · 参考费用 · Langfuse</p></div>
         <strong class="home-card-link">查看测试报告 <span aria-hidden="true">→</span></strong>
       </a>
       <a href="architecture.html" class="home-card home-report home-architecture" id="architecture" aria-labelledby="architecture-title">
@@ -29,13 +29,14 @@
           <div class="home-flow-node">核验实际结果 → 返回用户</div>
           <figcaption>需要展示时，再调用对应产品的前端适配器。</figcaption>
         </figure>
-        <p class="home-architecture-note"><strong>当前状态：</strong>光栅卡已自动续接装配与核验；其他制品保留原工具流程，可分别优化。<time datetime="2026-11-15">架构版本 · 2026.11.15</time></p>
+        <p class="home-architecture-note"><strong>当前状态：</strong>光栅卡与普通双面卡的新建画稿任务已接入各自自动流程；其他制品保留独立入口，可分别优化。<time datetime="2026-11-16">架构版本 · 2026.11.16</time></p>
         <strong class="home-card-link">查看代码阅读指南 →</strong>
       </a>
     </div>
     <aside class="home-news" aria-labelledby="home-news-title">
-      <div class="home-news-heading"><h2 id="home-news-title">News <span>更新记录</span></h2><span class="home-news-count">03</span></div>
+      <div class="home-news-heading"><h2 id="home-news-title">News <span>更新记录</span></h2><span class="home-news-count">04</span></div>
       <ol class="home-news-list">
+        <li><div class="home-news-meta"><time datetime="2026-11-16">11.16</time><span class="home-news-tag">双面卡优化</span></div><h3><a href="tests/2026-11-13/B07-R1.html">普通双面卡：自动流程正常聊天复测 <span aria-hidden="true">↗</span></a></h3><p>正反面并行生成，装配与保存核验自动接续；原始失败记录保留。</p><p class="home-news-facts"><strong>1分47秒</strong> · 0 次工具失败<br>2 次主规划 · 参考费用 $0.192054</p></li>
         <li><div class="home-news-meta"><time datetime="2026-11-15">11.15</time><span class="home-news-tag home-news-warning">完整复测</span></div><h3><a href="tests/2026-11-13/B01-V1.html">插盖盒：新图流程仍未通过 <span aria-hidden="true">↗</span></a></h3><p>left 面配准失败，整版未保存，最终为白模。</p><p class="home-news-facts"><strong>4分52秒</strong> · 6次失败或拒绝<br>参考费用 $0.4944</p></li>
         <li><div class="home-news-meta"><time datetime="2026-11-15">11.15</time><span class="home-news-tag">优化记录</span></div><h3><a href="tests/2026-11-13/B10-latest.html">光栅卡：三版本、两轮优化 <span aria-hidden="true">↗</span></a></h3><p class="home-news-path"><a href="tests/2026-11-13/B10-R1.html">15分01秒</a><span>→</span><a href="tests/2026-11-13/B10-R7.html">5分10秒</a><span>→</span><a href="tests/2026-11-13/B10-latest.html#latest-tests"><strong>1分32秒</strong></a></p><p>历史代表实测；长短需求耗时不同，最快一轮不代表通用速度。</p></li>
         <li><div class="home-news-meta"><time datetime="2026-11-14">11.14</time><span class="home-news-tag">旧图回放</span></div><h3><a href="tests/2026-11-13/B01-R1.html">插盖盒：五面配准修复 <span aria-hidden="true">↗</span></a></h3><p>同一原图 <strong>13/13 面映射通过</strong>，隔离装配验证通过，边缘仍需复核。</p><p class="home-news-footnote">这是旧图回放；新图完整测试见上方记录。</p></li>
