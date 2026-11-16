@@ -62,16 +62,13 @@ function baselinePanel(baseline){
  return `<section id="baseline"><h2>01 / 改之前：7 轮主模型在安排什么？</h2><p><strong>11 月 15 日这次基线：模型等待 74.4 秒，Agent 共 126.5 秒。</strong>正反两张图已经并行生成；本轮优化重点是减少固定步骤之间反复等待模型。</p>${table(['轮次','模型在安排什么','等模型耗时','随后执行'],BASELINE_ROUNDS.map(([n,what,time,next])=>[n,esc(what),`<strong>${seconds(time)}</strong>`,esc(next)]))}<details><summary>展开：哪些是在等模型，哪些是代码或生图耗时？</summary>${table(['轮次','具体含义'],BASELINE_ROUNDS.map(([n,,,,why])=>[n,esc(why)]))}<p><strong>这 7 轮是主规划模型调用。</strong>另有 2 次图片生成，以及 2 次轻模型辅助调用；后者发生在生图阶段，结合代码推断为图片命名，旧日志未记录独立用途字段。工具、查询和回执也会发生请求，因此这里不是所有 HTTP/API 请求的总数。</p></details>${baseline?runtime(baseline,'baseline-runtime'):''}<p class="method">11 月 13 日原始测试为 Agent 447.109 秒、3 次工具错误；11 月 15 日为 126.530 秒、0 次工具错误。主题、图像质量及是否尝试三维不同，不能把这两次时间差当作严格同条件优化比例。</p></section>`;
 }
 function changesPanel(report){
- const changes=report?.changes;
- const achieved=report?.automatic_workflow_completed&&report.model_calls===2&&report.image_calls===2;
- const rows=changes?.length?changes.map(row=>[esc(row.before),`<strong>${esc(row.after)}</strong>`,esc(row.result||'以本轮回执核验')]):[
-  ['先让模型逐次决定读目录、读规格','选定品类和款式后，代码准备当前款的必要资料','避免为读固定资料反复请求模型'],
-  ['模型填写默认规格和固定步骤','独立双面卡流程补齐缺省参数，继续做校验','保留用户指定值和创意要求'],
-  ['模型分步安排图片生成','一次设计正反面，代码并行生成两张新素材','并行应由代码保证，用户不用写字段或工具名'],
-  ['生图后再问模型加载工具和装配','代码确认两面素材完整后批量提交，查询同一个任务','运行中不重复装配；失败如实返回'],
-  ['保存后再等模型组织完成回复','核验正反面已保存，再根据真实回执返回短结果','不能仅凭生图完成就宣布制作成功']
- ].map(([before,after,result])=>[esc(before),`<strong>${esc(after)}</strong>`,esc(result)]);
- return `<section id="changes"><h2>02 / ${changes?.length?'本轮具体改了什么':'优化方案与验收目标'}</h2><p>普通卡可以理解为一个 workflow。优化前虽然有独立入口，但 <code>execution="planner"</code> 仍让 Agent 一步步安排。${changes?.length?'本轮已把确定性的生产步骤交给普通卡自己的代码流程。':'目标是把确定性的生产步骤交给普通卡自己的代码流程。'}</p>${table(['原来的问题','现在改成什么','要达到的效果'],rows)}<ol class="flow"><li><strong>模型①</strong>理解需求，确定品类、款式和制作范围</li><li><strong>代码</strong>加载规格，补缺省参数，校验并准备任务</li><li><strong>模型②</strong>一次设计正反两面的内容与生图提示词</li><li><strong>代码</strong>并行生图 → 确认素材 → 批量装配 → 查询原任务 → 核验保存 → 返回真实结果</li></ol><p><strong>${achieved?'本轮已达成':'目标'}：7 次主规划＋2 次生图 → 2 次主规划＋2 次生图。</strong>${achieved?`另有 ${count(report.auxiliary_model_calls)} 次辅助模型调用，已计入费用。`:''}适用于普通、需求完整的新建双面卡；这不是所有辅助模型、轮询、保存等网络请求的总数。${achieved?'以上为本轮真实计数；复杂需求仍可回到普通规划流程。':'是否达到目标，由实测记录决定。'}</p></section>`;
+ const rows=[
+  ['模型逐轮决定读哪些资料、怎样填默认参数。','代码提前准备设计规范和规格，补齐默认参数并校验。','减少固定步骤的模型等待；保留用户指定参数。'],
+  ['生图后，还要模型安排装配、查询和完成回复。','模型只负责理解需求与两面创意；代码接续并行生图、批量装配、查询和保存核验。','主规划从7次降到2次；运行中跟踪原任务，避免重复装配。'],
+  ['普通待办没有工具名，会误挡自动流程。','按已校验的品类与制作范围判断是否接管。','一句普通短需求也能进入自动流程，不要求用户写工具字段。'],
+  ['后台装配出现长停顿，耗时变长。','装配期间保持后台执行，任务结束后恢复原设置。','隐藏窗口也能完成；多个任务各自持有，互不打断。']
+ ].map(([before,after,why])=>[`<strong>${esc(before)}</strong>`,`<strong>${esc(after)}</strong>`,esc(why)]);
+ return `<section id="changes"><h2>原来怎样 → 现在怎样 → 为什么改</h2>${table(['原来','现在','修改理由'],rows)}<p class="method">正反面生图原本已并行；本次主要减少模型反复安排固定步骤，并修复后台装配停顿。创意设计与保存校验继续保留。</p></section>`;
 }
 function comparison(baseline,report){
  const status=report?(isVerified(report)?'已核验两面保存':'尚未满足两面保存验收'):'待实测';
@@ -132,7 +129,8 @@ function debugPanel(attempts){
 function render({baseline=null,report=null,pageId='B07-R1',evidenceUrl=null,debugAttempts=[]}={}){
  validateReport(baseline);validateReport(report);
  const verified=isVerified(report);
- return `<nav class="crumb" aria-label="当前位置"><a href="../../index.html">USEIT</a><span>/</span><a href="index.html">全品类测试</a><span>/</span><span>${esc(pageId)}</span></nav><header class="detail-title"><div><p class="eyebrow">CASE ${esc(pageId)} / 普通双面卡自动流程 · ${report?scopeLabel(report):'等待实测'}</p><h1>普通双面卡牌</h1><p class="sub">${esc(report?.test_date||'待复测')} · 北京时间 UTC+8 · 只核验画稿与装配保存</p></div></header>${nav(pageId,pageId,report)}${report?runtime(report):''}<div class="verdict"><span class="badge">${verified?'两面画稿保存已核验':report?'本轮仍需核验':'代码优化方案 · 等待真实测试'}</span><h2>${report?`${scopeLabel(report)}：Agent ${duration(report.agent_seconds)}，${count(report.model_calls)} 次主规划，${count(report.image_calls)} 次生图，${count(report.tool_errors)} 次工具失败。`:'把固定生产步骤交给代码，减少模型反复安排。'}</h2><p>${esc(report?.summary||'主模型负责理解需求和双面的创意；代码负责规格、并行生成、装配、查询与保存核验。目标不等于实测结果。')}</p>${report?`<p><strong>复测范围：</strong>${esc(scopeNote(report))}</p>`:''}</div>${report?`<section><h2>本轮真实输入</h2><blockquote>${esc(report.prompt)}</blockquote></section>`:''}<section><h2>${report?scopeLabel(report):'本轮'}与优化前基线</h2>${comparison(baseline,report)}${runtimeComparison(baseline,report)}<p class="method"><strong>${report?.test_scope==='integration'?'两次接入路径不同：本轮为集成复测，不能按正常聊天全链路直接比较。':'各次实测范围以原始记录为准。'}</strong>主题、提示词和服务响应也可能不同，时间差不能单独归因为某一项改动；画面质量请对照真实画稿。</p></section>${baselinePanel(baseline)}${changesPanel(report)}${imagesPanel(report)}${receiptPanel(report)}${stepsPanel(report)}${costsPanel(baseline,report)}${report?.automatic_workflow_completed?debugPanel(debugAttempts):''}${evidencePanel(baseline,report,evidenceUrl)}`;
+ const verdict=verified?`<strong>本轮验收通过：正反面新画稿已生成、装配并保存，${count(report.tool_errors)} 次工具报错。</strong>隐藏窗口完成；三维与印刷生产未验收。`:'本轮尚待完成保存核验。';
+ return `<nav class="crumb" aria-label="当前位置"><a href="../../index.html">USEIT</a><span>/</span><a href="index.html">全品类测试</a><span>/</span><span>${esc(pageId)}</span></nav><header class="detail-title"><div><p class="eyebrow">普通双面卡 / 优化结果</p><h1>普通双面卡牌</h1><p class="sub">测试日期：${esc(report?.test_date||'待复测')} · 北京时间 UTC+8</p></div></header>${nav(pageId,pageId,report)}<p>${verdict}</p>${report?runtime(report):''}<p><strong>优化前 ${duration(baseline?.agent_seconds)} → 本轮 ${duration(report?.agent_seconds)}</strong>；本次少约${((1-report.agent_seconds/baseline.agent_seconds)*100).toFixed(1)}%。主规划7次 → ${count(report?.model_calls)}次，另有${count(report?.image_calls)}次生图、${count(report?.auxiliary_model_calls)}次辅助调用；参考费用 <strong>${money(costValue(report))}</strong>。这是单次实测，不是每次速度保证。</p>${changesPanel(report)}<details class="b07-archive"><summary>展开画稿、Langfuse、费用与完整测试记录</summary><section><h2>本轮原始需求</h2><blockquote>${esc(report?.prompt)}</blockquote><p>${esc(scopeNote(report))}</p></section><section><h2>完整前后对照</h2>${comparison(baseline,report)}${runtimeComparison(baseline,report)}</section>${baselinePanel(baseline)}${imagesPanel(report)}${receiptPanel(report)}${stepsPanel(report)}${costsPanel(baseline,report)}${report?.automatic_workflow_completed?debugPanel(debugAttempts):''}${evidencePanel(baseline,report,evidenceUrl)}</details>`;
 }
 
 function overviewResult(report){
