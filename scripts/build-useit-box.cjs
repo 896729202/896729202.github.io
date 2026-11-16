@@ -41,6 +41,7 @@ fs.mkdirSync(path.join(root,base,'evidence'),{recursive:true});
 fs.writeFileSync(path.join(root,base,'evidence/B01-R1-fit.json'),JSON.stringify(r,null,2)+'\n');
 function inject(file,marker,fragment,anchor){
  const p=path.join(root,file);let text=fs.readFileSync(p,'utf8');
+ if(file==='useit/index.html' && text.includes('data-useit-home'))return;
  const block=`<!-- ${marker}:start -->${fragment}<!-- ${marker}:end -->`;
  const re=new RegExp(`<!-- ${marker}:start -->[\\s\\S]*?<!-- ${marker}:end -->`);
  if(re.test(text))text=text.replace(re,()=>block);
