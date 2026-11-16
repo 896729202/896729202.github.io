@@ -4,7 +4,7 @@
 // case/report pages; the homepage collects the same three updates as short news.
 const fs = require('node:fs');
 const path = require('node:path');
-const stylesheet = '<link rel="stylesheet" href="../assets/useit-home.css?v=20261116-1">';
+const stylesheet = '<link rel="stylesheet" href="../assets/useit-home.css?v=20261116-2">';
 
 function renderHome({retestCount = 9} = {}) {
   if (!Number.isInteger(retestCount) || retestCount < 0) throw new Error('Invalid retest count');
@@ -23,8 +23,8 @@ function renderHome({retestCount = 9} = {}) {
         <div class="home-report-meta"><time datetime="2026-11-13">2026.11.13 — 11.15</time><p>原报告 15 次测试 · 另有 ${retestCount} 次独立复测<br>图片 · 时间分布 · 参考费用 · Langfuse</p></div>
         <strong class="home-card-link">查看测试报告 <span aria-hidden="true">→</span></strong>
       </a>
-      <article class="home-card home-architecture" id="architecture" aria-labelledby="architecture-title">
-        <div class="home-card-heading"><p class="eyebrow"><a href="architecture.html">02 / 代码架构 →</a></p><h2 id="architecture-title"><a href="architecture.html">一句需求，<br>如何找到制作流程？</a></h2><p>模型理解需求，代码分派到对应制品。</p></div>
+      <a href="architecture.html" class="home-card home-report home-architecture" id="architecture" aria-labelledby="architecture-title">
+        <div class="home-card-heading"><p class="eyebrow">02 / 代码架构 →</p><h2 id="architecture-title">一句需求，<br>如何找到制作流程？</h2><p>模型理解需求，代码分派到对应制品。</p></div>
         <figure class="home-flow" aria-label="用户输入，模型选品，代码校验和分派到光栅卡、盒子或其他模块，再调用共享工具并核验结果">
           <div class="home-flow-node">用户输入需求</div><div class="home-flow-arrow" aria-hidden="true">↓</div>
           <div class="home-flow-node">模型理解与选品<small>确定品类、款式与本次操作</small></div><div class="home-flow-arrow" aria-hidden="true">↓</div>
@@ -36,10 +36,9 @@ function renderHome({retestCount = 9} = {}) {
           <div class="home-flow-node">核验实际结果 → 返回用户</div>
           <figcaption>需要展示时，再调用对应产品的前端适配器。</figcaption>
         </figure>
-        <details class="home-architecture-detail"><summary>“品类”和“款式”有什么区别？</summary><p><strong>品类是大分类，款式是具体产品结构。</strong></p><dl><div><dt>卡片</dt><dd>普通双面卡、立体折叠卡</dd></div><div><dt>周边制品</dt><dd>亚克力挂件、徽章、马克杯</dd></div><div><dt>光栅卡</dt><dd>双图变图卡</dd></div></dl><p>“小狐狸、GTA6、小熊露营”是画面主题，同一个款式可以换不同主题。</p><p>当前有 <strong>13 个顶层品类入口、12 个具体款式入口</strong>；测试报告的“12 个品类”是 12 种代表性制品，与顶层目录的计数口径不同。</p></details>
         <p class="home-architecture-note"><strong>当前状态：</strong>光栅卡已自动续接装配与核验；其他制品保留原工具流程，可分别优化。<time datetime="2026-11-15">架构版本 · 2026.11.15</time></p>
-        <a class="home-card-link" href="architecture.html">查看代码阅读指南 →</a>
-      </article>
+        <strong class="home-card-link">查看代码阅读指南 →</strong>
+      </a>
     </div>
     <aside class="home-news" aria-labelledby="home-news-title">
       <div class="home-news-heading"><h2 id="home-news-title">News <span>更新记录</span></h2><span class="home-news-count">03</span></div>

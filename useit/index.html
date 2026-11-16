@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="USEIT 测试与观察：12种代表性制品测试、按品类分派的代码架构，以及简明更新记录。"><title>USEIT · 测试与观察 · USEIT</title><link rel="canonical" href="https://896729202.github.io/useit/"><link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/useit.css?v=20261115-4"><script>try{document.documentElement.dataset.theme=localStorage.getItem('notebook-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}</script><script defer src="../assets/site.js"></script><script defer src="../assets/useit.js"></script><link rel="stylesheet" href="../assets/useit-home.css?v=20261116-1"></head><body class="useit useit-home-page"><a class="skip-link" href="#main">跳到主要内容</a><header class="site-header"><div class="header-inner">
+<!doctype html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="USEIT 测试与观察：12种代表性制品测试、按品类分派的代码架构，以及简明更新记录。"><title>USEIT · 测试与观察 · USEIT</title><link rel="canonical" href="https://896729202.github.io/useit/"><link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/useit.css?v=20261115-4"><script>try{document.documentElement.dataset.theme=localStorage.getItem('notebook-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}</script><script defer src="../assets/site.js"></script><script defer src="../assets/useit.js"></script><link rel="stylesheet" href="../assets/useit-home.css?v=20261116-2"></head><body class="useit useit-home-page"><a class="skip-link" href="#main">跳到主要内容</a><header class="site-header"><div class="header-inner">
 <a class="brand" href="../index.html" aria-label="896729202 知识手记首页"><span class="brand-mark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h5c2.4 0 4 1.4 4 3v14c0-2-1.6-3-4-3H3zM21 4h-5c-2.4 0-4 1.4-4 3v14c0-2 1.6-3 4-3h5z"/></svg></span><span class="brand-name">896729202<span class="brand-divider">/</span><span class="brand-sub">知识手记</span></span></a>
 <nav class="header-nav" aria-label="主导航"><a href="../thesis/index.html">内窥镜三维重建</a><a href="../notes/index.html">八股文</a><a href="../interviews/index.html">面试</a><a href="../useit/index.html">USEIT</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
 </div></header><main id="main" class="u-main"><div class="useit-home" data-useit-home>
@@ -16,8 +16,8 @@
         <div class="home-report-meta"><time datetime="2026-11-13">2026.11.13 — 11.15</time><p>原报告 15 次测试 · 另有 9 次独立复测<br>图片 · 时间分布 · 参考费用 · Langfuse</p></div>
         <strong class="home-card-link">查看测试报告 <span aria-hidden="true">→</span></strong>
       </a>
-      <article class="home-card home-architecture" id="architecture" aria-labelledby="architecture-title">
-        <div class="home-card-heading"><p class="eyebrow"><a href="architecture.html">02 / 代码架构 →</a></p><h2 id="architecture-title"><a href="architecture.html">一句需求，<br>如何找到制作流程？</a></h2><p>模型理解需求，代码分派到对应制品。</p></div>
+      <a href="architecture.html" class="home-card home-report home-architecture" id="architecture" aria-labelledby="architecture-title">
+        <div class="home-card-heading"><p class="eyebrow">02 / 代码架构 →</p><h2 id="architecture-title">一句需求，<br>如何找到制作流程？</h2><p>模型理解需求，代码分派到对应制品。</p></div>
         <figure class="home-flow" aria-label="用户输入，模型选品，代码校验和分派到光栅卡、盒子或其他模块，再调用共享工具并核验结果">
           <div class="home-flow-node">用户输入需求</div><div class="home-flow-arrow" aria-hidden="true">↓</div>
           <div class="home-flow-node">模型理解与选品<small>确定品类、款式与本次操作</small></div><div class="home-flow-arrow" aria-hidden="true">↓</div>
@@ -29,10 +29,9 @@
           <div class="home-flow-node">核验实际结果 → 返回用户</div>
           <figcaption>需要展示时，再调用对应产品的前端适配器。</figcaption>
         </figure>
-        <details class="home-architecture-detail"><summary>“品类”和“款式”有什么区别？</summary><p><strong>品类是大分类，款式是具体产品结构。</strong></p><dl><div><dt>卡片</dt><dd>普通双面卡、立体折叠卡</dd></div><div><dt>周边制品</dt><dd>亚克力挂件、徽章、马克杯</dd></div><div><dt>光栅卡</dt><dd>双图变图卡</dd></div></dl><p>“小狐狸、GTA6、小熊露营”是画面主题，同一个款式可以换不同主题。</p><p>当前有 <strong>13 个顶层品类入口、12 个具体款式入口</strong>；测试报告的“12 个品类”是 12 种代表性制品，与顶层目录的计数口径不同。</p></details>
         <p class="home-architecture-note"><strong>当前状态：</strong>光栅卡已自动续接装配与核验；其他制品保留原工具流程，可分别优化。<time datetime="2026-11-15">架构版本 · 2026.11.15</time></p>
-        <a class="home-card-link" href="architecture.html">查看代码阅读指南 →</a>
-      </article>
+        <strong class="home-card-link">查看代码阅读指南 →</strong>
+      </a>
     </div>
     <aside class="home-news" aria-labelledby="home-news-title">
       <div class="home-news-heading"><h2 id="home-news-title">News <span>更新记录</span></h2><span class="home-news-count">03</span></div>

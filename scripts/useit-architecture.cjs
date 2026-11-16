@@ -18,6 +18,7 @@ function buildArchitecture(root, shell) {
   <section><h2>按这条线读就行</h2><div class="architecture-reading-flow" aria-label="用户需求到前端展示的流程">
   <div>用户需求</div><span>↓</span><div>模型选择品类、款式，写入产品计划</div><span>↓</span><div>校验并保存计划</div><span>↓</span><div><strong>统一分派器</strong><p>光栅卡流程 ／ 盒子流程 ／ 其他款式流程</p></div><span>↓</span><div>共享生图、装配、保存工具</div><span>↓</span><div>前端选择对应产品结构并展示</div></div></section>
   <section><h2>文件与函数阅读顺序</h2><p><strong>先看②，再对照④和⑤，最容易理解这次拆分。</strong></p><div class="table-wrap"><table><thead><tr><th>顺序</th><th>看哪个文件、函数</th><th>主要看什么</th></tr></thead><tbody>${rows.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')}</tbody></table></div></section>
+<details class="home-architecture-detail"><summary>“品类”和“款式”有什么区别？</summary><p><strong>品类是大分类，款式是具体产品结构。</strong></p><dl><div><dt>卡片</dt><dd>普通双面卡、立体折叠卡</dd></div><div><dt>周边制品</dt><dd>亚克力挂件、徽章、马克杯</dd></div><div><dt>光栅卡</dt><dd>双图变图卡</dd></div></dl><p>“小狐狸、GTA6、小熊露营”是画面主题，同一个款式可以换不同主题。</p><p>当前有 <strong>13 个顶层品类入口、12 个具体款式入口</strong>；测试报告的“12 个品类”是 12 种代表性制品，与顶层目录的计数口径不同。</p></details>
   <aside class="verdict"><strong>当前实现边界</strong><p>目前各款式已有独立入口，但<strong>只有光栅卡接入了完整的自动续接流程</strong>；其他款式仍由模型安排原有工具，并非全部已经自动化。</p><p>品类是大分类，款式是具体产品结构；例如“包装 → 插盖盒”。画面主题不会改变款式。“品类分开”也不等于完全不共享代码，生图、下载、存储等公共能力仍然复用。</p></aside><p><a href="index.html#architecture">← 返回 USEIT 首页</a></p>`;
   let html = shell.replace(/<main\b[^>]*>[\s\S]*?<\/main>/,()=>`<main id="main" class="u-main architecture-guide">${body}</main>`)
     .replace(/<title>[^<]*<\/title>/,'<title>代码架构与阅读指南 · USEIT</title>')
