@@ -1,0 +1,63 @@
+{
+  "case": "B02-R6",
+  "test_date": "2026-11-17",
+  "completed_at": "2026-11-17T21:52:22+08:00",
+  "task_id": "2ce2fefe-6dd5-4fcd-83c9-5804d8441a14",
+  "prompt": "做一个戴宇航员头盔的小狐狸亚克力挂件。",
+  "agent_seconds": 143.29,
+  "main_model_calls": 3,
+  "image_calls": 1,
+  "auxiliary_model_calls": 1,
+  "failed_tools": 0,
+  "reference_usd": 0.129829,
+  "invoice_verified": false,
+  "runtime": {
+    "model_wait": 52.196,
+    "image_generation_tool": 23.962,
+    "frontend_roundtrips": 40.236,
+    "other": 26.896
+  },
+  "steps": {
+    "model_requirement_and_plan": 22.435,
+    "model_artwork_prompt": 11.739,
+    "model_final_reply": 18.022,
+    "image_generation": 23.962,
+    "placement": 21.432,
+    "placement_status": 13.528,
+    "cut_and_hole": 3.344,
+    "inspect_white": 0.429,
+    "white_ink": 1.503
+  },
+  "placement_internal_seconds": {
+    "total": 31.142,
+    "download_wait": 0,
+    "host_read": 6.535,
+    "integrity": 0.001,
+    "decode": 0.052,
+    "hash": 0.003,
+    "load_source_inclusive": 7.452,
+    "prepare_master": 18.147,
+    "version_save": 4.451
+  },
+  "verified_saved": ["artwork", "CUT", "hanging_hole", "WHITE"],
+  "cut_status": "needs_review",
+  "three_dimensional_render_included": false,
+  "independent_final_inspection_in_agent_seconds": false,
+  "automatic_final_verification_completed_in_run": false,
+  "run_limitation": "WHITE 已保存，但 60.0/60 误判触发流程保护，退回模型收尾；随后独立检查确认保存。",
+  "final_numeric_fix": {
+    "local_commit": "0dd978ae",
+    "regression_checks_passed": 37,
+    "real_receipt_replay_result": "saved",
+    "fresh_full_generation_tested": false,
+    "target_main_model_calls": 2
+  },
+  "prior_completed_sample": {"case": "B02-R5", "agent_seconds": 375.75, "main_model_calls": 3, "failed_tools": 0},
+  "evidence_sources": [
+    "report-2ce2fefe-6dd5-4fcd-83c9-5804d8441a14.json",
+    "phase_timings.jsonl",
+    "inspect-a3fc992201284cb685ee70000c14a6d3.json",
+    "r6-white-receipt-replay.json"
+  ],
+  "method": "Agent 执行时间；四段互斥计时相加为总时间。内部阶段包含在工具往返内，不重复累加。费用按记录用量和本地费率计算，不是账单，不含存储、网络和本机计算。不同主题的单次样本对照，不是同条件性能实验。"
+}
