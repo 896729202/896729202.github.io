@@ -44,6 +44,15 @@
   "three_dimensional_render_included": false,
   "independent_final_inspection_in_agent_seconds": false,
   "automatic_final_verification_completed_in_run": false,
+  "quality_validation": {
+    "saved_artwork_cut_hole_white_verified": true,
+    "independent_post_generation_visual_review_in_workflow": false,
+    "same_prompt_before_after_visual_comparison_done": false,
+    "equal_or_better_artwork_quality_proven": false,
+    "physical_sample_verified": false,
+    "preserved_checks": ["generated image bytes, pixel size, aspect and alpha", "effective DPI when applicable rules are known", "committed original and product ownership", "placement source, version and receipt", "final size boundary", "actual saved WHITE settings and state"],
+    "scope_note": "结构与保存校验不等于主题、文字、构图、美观或实物工艺验收；本轮没有证明视觉质量不退化。"
+  },
   "run_limitation": "WHITE 已保存，但 60.0/60 误判触发流程保护，退回模型收尾；随后独立检查确认保存。",
   "final_numeric_fix": {
     "local_commit": "0dd978ae",
