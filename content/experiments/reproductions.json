@@ -2,11 +2,11 @@
   "schema_version": 2,
   "overview": {
     "slug": "reproductions",
-    "date": "2026-10-03",
-    "date_kind": "汇总更新；原实验日期见历史记录",
+    "date": "2026-11-17",
+    "date_kind": "页面补充更新；历史实验日期保留",
     "title": "原方法复现指标汇总",
-    "subtitle": "方法状态、六数据集前馈评价与历史逐场景指标；不同协议分开呈现。",
-    "summary": "截至 2026-10-08 的方法状态、全图图像测试、对齐深度评价、自训练 pilot 与历史逐场景复现。"
+    "subtitle": "早期方法补充、七数据集源报告与历史记录；不同评价口径分表。",
+    "summary": "新增NeRF、D-NeRF、EndoNeRF、EndoSurf的PSNR、SSIM、LPIPS，以及传统双目和SuPer重投影指标；保留原七数据集源报告与历史结果。"
   },
   "groups": [
     {

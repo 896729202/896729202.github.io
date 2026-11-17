@@ -88,5 +88,20 @@
 .latest-explanation li{margin:8px 0}
 .latest-evidence .rk-footer-links{padding-top:4px}
 .latest-history{margin-top:30px}
+.legacy-supplement{margin:0 0 38px;padding-bottom:30px;border-bottom:1px solid var(--line)}
+.legacy-heading h2,.legacy-source-heading{font:600 24px/1.5 var(--serif);margin:0 0 12px;color:var(--ink)}
+.legacy-kicker{font-size:12px;color:var(--accent);margin:0 0 8px;letter-spacing:.04em}
+.legacy-nav{display:flex;flex-wrap:wrap;gap:8px 18px;margin:16px 0;font-size:13px}
+.legacy-nav a{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+.legacy-nav a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.legacy-result-section{margin-top:27px}
+.legacy-result-section h3{font:600 19px/1.6 var(--serif);color:var(--ink);margin:0 0 10px}
+.rankings .legacy-protocol-note{border-left:3px solid var(--accent);background:var(--soft);padding:12px 15px;color:var(--ink);font-size:12px;line-height:1.9;margin:16px 0}
+.legacy-table td small{display:block;font-size:10px;color:var(--muted);font-weight:400}
+.legacy-table th:first-child{min-width:185px}
+.legacy-table th a{color:inherit;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+@media(max-width:640px){.legacy-heading h2,.legacy-source-heading{font-size:21px}.legacy-nav{font-size:12px;gap:10px 15px}.legacy-table th:first-child{min-width:145px}.legacy-result-section h3{font-size:18px}.rankings .legacy-protocol-note{padding:10px 12px;font-size:11px}}
+/* This page's full navigation stays readable after the site added another section. */
+@media(max-width:640px){.site-header{height:auto;min-height:68px}.header-inner{flex-wrap:wrap;gap:4px 12px;padding-top:10px;padding-bottom:10px}.header-nav{flex:1 1 100%;min-width:0;justify-content:space-between;gap:8px}.header-nav>a{padding:6px 0}.header-nav>a[aria-current=page]:after{bottom:0}}
 .latest-history>summary{font-size:14px;font-weight:600}
 @media(max-width:640px){.latest-stats{gap:10px 18px;font-size:11px}.latest-stats strong{font-size:16px}.latest-toolbar{align-items:flex-start;gap:10px}.latest-toolbar label{font-size:12px}.latest-table th:first-child{min-width:140px;max-width:155px;font-size:11px}.latest-table th,.latest-table td{padding:8px}.latest-table .latest-family th{max-width:none}.latest-table .rk-value{min-width:56px}.latest-explanation ul{font-size:11px}}

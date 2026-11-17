@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "updated": "2026-11-17",
+  "title": "早期方法补充实测",
+  "heldout": [
+    {
+      "method": "D-NeRF",
+      "scene": "cutting",
+      "checkpoint_iteration": 3000,
+      "phase": "3000_step_screening",
+      "test_frames": 20,
+      "tissue_psnr": 24.491510436780725,
+      "block_psnr": 28.193243592969594,
+      "block_ssim": 0.7892589595047838,
+      "block_lpips_alex": 0.2565711115777853
+    },
+    {
+      "method": "EndoNeRF",
+      "scene": "cutting",
+      "checkpoint_iteration": 3000,
+      "phase": "3000_step_screening",
+      "test_frames": 20,
+      "tissue_psnr": 23.605948961643236,
+      "block_psnr": 27.460200218566126,
+      "block_ssim": 0.7814664896090635,
+      "block_lpips_alex": 0.3132898143934836
+    },
+    {
+      "method": "EndoNeRF",
+      "scene": "cutting",
+      "checkpoint_iteration": 100000,
+      "phase": "full_100k_budget",
+      "test_frames": 20,
+      "tissue_psnr": 25.995623235164782,
+      "block_psnr": 32.76978715640623,
+      "block_ssim": 0.8740131206546582,
+      "block_lpips_alex": 0.11520807453856004
+    },
+    {
+      "method": "NeRF",
+      "scene": "cutting",
+      "checkpoint_iteration": 3000,
+      "phase": "3000_step_screening",
+      "test_frames": 20,
+      "tissue_psnr": 22.335841400550237,
+      "block_psnr": 25.716377117309566,
+      "block_ssim": 0.7727415231631556,
+      "block_lpips_alex": 0.33382743329086323
+    },
+    {
+      "method": "D-NeRF",
+      "scene": "pulling",
+      "checkpoint_iteration": 3000,
+      "phase": "3000_step_screening",
+      "test_frames": 8,
+      "tissue_psnr": 25.984063426535965,
+      "block_psnr": 30.243470440031416,
+      "block_ssim": 0.841084116657447,
+      "block_lpips_alex": 0.20637941371230145
+    },
+    {
+      "method": "EndoNeRF",
+      "scene": "pulling",
+      "checkpoint_iteration": 3000,
+      "phase": "3000_step_screening",
+      "test_frames": 8,
+      "tissue_psnr": 25.13640817933343,
+      "block_psnr": 28.47271447798083,
+      "block_ssim": 0.8334749495373748,
+      "block_lpips_alex": 0.26110611738634093
+    },
+    {
+      "method": "EndoNeRF",
+      "scene": "pulling",
+      "checkpoint_iteration": 100000,
+      "phase": "full_100k_budget",
+      "test_frames": 8,
+      "tissue_psnr": 27.322156047731546,
+      "block_psnr": 33.67374404714374,
+      "block_ssim": 0.8893517428004436,
+      "block_lpips_alex": 0.10847516238216226
+    },
+    {
+      "method": "EndoSurf",
+      "scene": "pulling",
+      "checkpoint_iteration": 66000,
+      "phase": "intermediate_snapshot",
+      "test_frames": 8,
+      "tissue_psnr": 27.15353419414317,
+      "block_psnr": 34.259221107807704,
+      "block_ssim": 0.9036163291808758,
+      "block_lpips_alex": 0.12635639146848524
+    },
+    {
+      "method": "NeRF",
+      "scene": "pulling",
+      "checkpoint_iteration": 3000,
+      "phase": "3000_step_screening",
+      "test_frames": 8,
+      "tissue_psnr": 23.470021970593294,
+      "block_psnr": 26.480255675575457,
+      "block_ssim": 0.8272237702892085,
+      "block_lpips_alex": 0.27453802390263105
+    }
+  ],
+  "stereo": [
+    {
+      "method": "StereoBM",
+      "split": "all",
+      "frames": 61,
+      "sequences": 4,
+      "protocol": "stereo_reprojection_target_used_in_depth",
+      "coverage": 0.5978377024332683,
+      "full_psnr": 11.036621200778551,
+      "full_ssim": 0.4919645056749384,
+      "full_lpips_alex": 0.4342378635580341,
+      "block_psnr": 14.984519557984198,
+      "block_ssim": 0.47130020011730567,
+      "block_lpips_alex": 0.34039277979754845,
+      "covered_psnr": 24.664715569142608
+    },
+    {
+      "method": "StereoSGBM",
+      "split": "all",
+      "frames": 61,
+      "sequences": 4,
+      "protocol": "stereo_reprojection_target_used_in_depth",
+      "coverage": 0.7276616414388022,
+      "full_psnr": 12.786631875979545,
+      "full_ssim": 0.5749843617280325,
+      "full_lpips_alex": 0.33456433207417524,
+      "block_psnr": 19.281229632408632,
+      "block_ssim": 0.55888398354485,
+      "block_lpips_alex": 0.2645581603321867,
+      "covered_psnr": 25.711502818879858
+    },
+    {
+      "method": "ELAS",
+      "split": "all",
+      "frames": 61,
+      "sequences": 4,
+      "protocol": "stereo_reprojection_target_used_in_depth",
+      "coverage": 0.6750740051269531,
+      "full_psnr": 13.93774593179229,
+      "full_ssim": 0.5736985669160882,
+      "full_lpips_alex": 0.37103274588783586,
+      "block_psnr": 16.18057893423048,
+      "block_ssim": 0.5643168311070137,
+      "block_lpips_alex": 0.286668788229872,
+      "covered_psnr": 25.43469238332281
+    },
+    {
+      "method": "SuPer_sgbm",
+      "split": "all",
+      "frames": 61,
+      "sequences": 4,
+      "protocol": "stereo_reprojection_target_used_in_depth",
+      "coverage": 0.6507247924804688,
+      "full_psnr": 11.673169944430638,
+      "full_ssim": 0.34027113315338886,
+      "full_lpips_alex": 0.5067813759669662,
+      "block_psnr": 15.344370568471522,
+      "block_ssim": 0.3279043216680103,
+      "block_lpips_alex": 0.3712820619742464,
+      "covered_psnr": 21.290051901515724
+    },
+    {
+      "method": "SuPer_elas",
+      "split": "all",
+      "frames": 61,
+      "sequences": 4,
+      "protocol": "stereo_reprojection_target_used_in_depth",
+      "coverage": 0.6290775299072265,
+      "full_psnr": 12.558458793777746,
+      "full_ssim": 0.3517627944238484,
+      "full_lpips_alex": 0.5282212989404798,
+      "block_psnr": 14.565197945884568,
+      "block_ssim": 0.34308299296350614,
+      "block_lpips_alex": 0.38254148220585193,
+      "covered_psnr": 21.595779373004063
+    }
+  ],
+  "depth_components": [
+    {
+      "method": "SAGE-SLAM 深度先验",
+      "year": 2022,
+      "frames": 412,
+      "scope": "官方冻结网络的零编码深度先验；未运行完整SLAM与位姿/编码优化",
+      "rgb_status": "未开展独立留出RGB渲染",
+      "psnr": null,
+      "ssim": null,
+      "lpips": null
+    },
+    {
+      "method": "Monodepth2",
+      "year": 2019,
+      "frames": 412,
+      "scope": "官方KITTI单目权重的跨域冻结推理；深度模块",
+      "rgb_status": "未开展独立留出RGB渲染",
+      "psnr": null,
+      "ssim": null,
+      "lpips": null
+    }
+  ],
+  "methods": [
+    {
+      "name": "NeRF",
+      "year": 2020,
+      "source": "https://github.com/bmild/nerf",
+      "scope": "通用静态网络，适配内窥镜数据与组织掩膜"
+    },
+    {
+      "name": "D-NeRF",
+      "year": 2021,
+      "source": "https://github.com/albertpumarola/D-NeRF",
+      "scope": "通用动态网络，适配内窥镜数据与组织掩膜"
+    },
+    {
+      "name": "EndoNeRF",
+      "year": 2022,
+      "source": "https://github.com/med-air/EndoNeRF",
+      "scope": "内窥镜逐场景方法"
+    },
+    {
+      "name": "EndoSurf",
+      "year": 2023,
+      "source": "https://github.com/Ruyi-Zha/endosurf",
+      "scope": "内窥镜逐场景方法；本次收录66000步中间检查点"
+    },
+    {
+      "name": "ELAS",
+      "year": 2010,
+      "source": "https://www.cvlibs.net/software/libelas/",
+      "scope": "使用SD-DefSLAM仓库中的双目模块，非完整SD-DefSLAM"
+    },
+    {
+      "name": "SuPer",
+      "year": 2020,
+      "source": "https://github.com/ucsdarclab/Python-SuPer",
+      "scope": "官方Python几何后端适配，分别接SGBM和ELAS；无机器人模块"
+    },
+    {
+      "name": "SAGE-SLAM 深度先验",
+      "year": 2022,
+      "source": "https://github.com/lppllppl920/SAGE-SLAM",
+      "scope": "官方冻结网络的零编码深度先验；未运行完整SLAM与位姿/编码优化"
+    },
+    {
+      "name": "Monodepth2",
+      "year": 2019,
+      "source": "https://github.com/nianticlabs/monodepth2",
+      "scope": "官方KITTI单目权重的跨域冻结推理；深度模块"
+    }
+  ],
+  "source_hashes": [
+    {
+      "artifact": "LEGACY-RGB-20261117/heldout_rendering.json",
+      "sha256": "d003df5dcf502302de6f0f76d103621365c65a996e250e1438f65612f6a50951"
+    },
+    {
+      "artifact": "LEGACY-RGB-20261117/heldout_per_frame.json",
+      "sha256": "5879d364f4470f4ccb66071726a6023e746594607c31653d7c04a15a2447bdcb"
+    },
+    {
+      "artifact": "LEGACY-RGB-20261117/stereo_reprojection/summary.json",
+      "sha256": "f0e569c8bf5b09c6376e70b22c5e7c1b8822455e8b03daac92f6c12cffb5256b"
+    },
+    {
+      "artifact": "LEGACY-RGB-20261117/stereo_reprojection/per_frame.json",
+      "sha256": "da11083598ea27407e08fa477e2d0767ecd652395e9e4819e9428c5429a3cfbc"
+    },
+    {
+      "artifact": "ENDOSCOPY-LEGACY-20261117/sage_depth_prior/summary.json",
+      "sha256": "51f61825f1d9358827e6c327e845172e91a2e5efd6b6de945714431e277cad19"
+    },
+    {
+      "artifact": "CLASSIC-BASELINES-20261116/depth/monodepth2/summary.json",
+      "sha256": "924e1eed407032218596839219ee602d2993d4e3cbab8335ca6490a5e193e2df"
+    }
+  ],
+  "counts": {
+    "heldout_methods": 4,
+    "heldout_runs": 9,
+    "heldout_frame_evaluations": 120,
+    "stereo_variants": 5,
+    "stereo_frame_evaluations": 305,
+    "depth_components": 2
+  },
+  "protocols": {
+    "heldout": "EndoNeRF test=1::8；pulling8帧、cutting20帧；官方组织mask；64x64完整组织块；逐块后逐帧平均；LPIPS-AlexNet v0.1，[-1,1]",
+    "stereo": "SCARED既有61对；目标右图参与双目深度估计；左图/融合颜色投影至右图；256x320全图；LPIPS-AlexNet v0.1；空洞为黑色；序列等权",
+    "existing_main": "原七数据集表为256x256 PNG全图、LPIPS-SqueezeNet v0.1；新表不混入其排名",
+    "budgets": "3000步初筛、100000步终点、66000步中间检查点分别标注，不作等预算或论文最终成绩比较"
+  },
+  "verification": {
+    "heldout_ids_masks_and_blocks": "passed",
+    "per_frame_mean_checks": "passed",
+    "renderer_known_disparity_occlusion_checks": "passed",
+    "source_artifact_hashes": "recorded"
+  },
+  "files": [
+    "heldout.csv",
+    "heldout-per-frame.csv",
+    "stereo.csv",
+    "stereo-per-frame.csv",
+    "depth-components.csv"
+  ]
+}

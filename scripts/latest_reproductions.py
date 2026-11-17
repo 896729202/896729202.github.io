@@ -9,6 +9,7 @@ import re
 from datetime import datetime, timedelta, timezone
 from html import escape
 from html.parser import HTMLParser
+from legacy_reproductions import render as render_legacy
 
 SOURCE = 'all-models-20261011.html'
 DATASETS = ['EndoNeRF', 'EndoNeRF-EC', 'SCARED', 'C3VD', 'StereoMIS', 'Hamlyn', 'EndoSLAM']
@@ -164,9 +165,12 @@ def compose(root, historical_main):
     body = '<main id="main" class="experiment-main research-overview rankings" data-rk-root>'
     body += ('<header class="experiment-header ro-header"><div class="ro-breadcrumb">'
              '<a class="back-link" href="../index.html">← 返回实验</a><a href="../datasets/index.html">当前数据集 →</a></div>'
-             f'<p class="experiment-date">源报告更新于 <time datetime="{escape(data["source_report_updated_utc"])}">{updated:%Y-%m-%d %H:%M}</time> · 北京时间</p>'
-             '<h1 tabindex="-1">原方法复现指标汇总</h1><p class="experiment-subtitle">全部模型 · 七类公开内窥镜数据</p></header>')
-    body += ('<section id="latest-comparison" class="latest-comparison" aria-label="最新完整结果">'
+             '<p class="experiment-date">补充更新于 <time datetime="2026-11-17">2026-11-17</time>'
+             f' · 七数据集源报告：<time datetime="{escape(data["source_report_updated_utc"])}">{updated:%Y-%m-%d %H:%M}</time>（北京时间）</p>'
+             '<h1 tabindex="-1">原方法复现指标汇总</h1><p class="experiment-subtitle">早期方法补充 · 七类公开内窥镜数据原始汇总</p></header>')
+    body += render_legacy(root)
+    body += ('<section id="latest-comparison" class="latest-comparison" aria-label="原七数据集完整结果">'
+             '<h2 class="legacy-source-heading">原七数据集汇总 · 2026-10-11 来源表</h2>'
              '<div class="latest-stats"><span><strong>16</strong> 个模型</span><span><strong>7</strong> 个数据集</span>'
              '<span><strong>105 / 105</strong> 完整留出组合</span><span><strong>15,107</strong> 图像指标记录</span></div>'
              '<p class="rk-note">合并覆盖 87 条评价流、1,004 个留出目标。EndoSLAM 新增 65 条评价流、742 个目标；Endo-E2E-GS 的 47 条源视图诊断单列，不参加留出排名。</p>'

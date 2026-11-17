@@ -21,6 +21,8 @@ LoRA 正文保留作者提供的复习笔记，仅调整 Markdown 标记与网�
 
 ## 修改内容
 
+**更新早期方法复现（2026-11-17）：** 数值源在 `content/experiments/legacy-20261117/`。运行 `python3 scripts/legacy_reproductions.py` 只重建复现页，再运行 `python3 scripts/check_legacy_reproductions.py` 核对逐帧均值、42 个指标单元格和下载文件。完整站点构建也会收录本批结果。组织块／LPIPS-Alex 留出帧、SCARED 立体重投影与原全图／LPIPS-Squeeze 主表分开；3000 步初筛、10 万步终点和 EndoSurf 中间检查点分别标注。
+
 **大疆真实面试复盘（2026-11-12）：** 编辑 `content/interviews/dji-2026-11-12.json`，运行 `python scripts/interview_recap.py` 只重建该专题；完整构建也会生成它。目录条目在 `scripts/build_core.py` 的 `INTERVIEWS`。保留原题回忆与名称待确认标记，答案附原论文或官方资料。考前清单 `interviews/dji-image-algorithms.html` 是直接维护的独立页面。
 
 **更新 LoRA：** 编辑 `content/notes/lora.md`。需要时更新 `content/notes/index.json` 的日期与摘要，然后重新构建并提交生成页面。
