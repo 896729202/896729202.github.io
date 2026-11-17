@@ -67,11 +67,11 @@ module.exports=function renderB02Optimization(baseline){
    ['原来为什么慢','保存后还要分别等模型更新清单、撰写完成回复。回复写得完整，不代表每一个文件与图层都经过最终核验。'],
    ['最终修正后的做法','代码核对母版存在且有版本、正面引用本轮原图、CUT 图层存在、白墨状态有效，再更新进度并返回简短结果。保留“切线待审”等提示；失败则报告未完成的步骤并保留已有成果。'],
    ['本轮暴露的问题与修复','白墨保存后的 <code>60.0 → 60</code> 被误认成用户改规格，自动流程退出，因而仍多了一次模型收尾。现已按数值等价比较；真正改尺寸、换产品或改需求仍会阻止旧任务继续执行。'],
-   ['已验证到哪里','本轮依靠事后独立检查确认保存；最后修正通过 37 项回归检查和真实回执重放。<strong>尚未重新完整生图验证“两轮模型”</strong>，也没有把保存成功写成三维或生产验收通过。']
-  ],`<span class="b02-residual">本轮实际仍有第 3 次模型 · ${sec(s.model_final_reply)}</span>，保留在 2分23秒中；修正后的耗时仍待测。`))
+   ['已验证到哪里','本轮依靠事后独立检查确认保存；最后修正通过 37 项回归检查和真实回执重放。<strong>后续 R7、R8 已在修正后各用两轮模型跑完</strong>，并另行从母版渲染三维图。<a href="#b02-short-retests">查看两轮结果 →</a>']
+  ],`<span class="b02-residual">本轮实际仍有第 3 次模型 · ${sec(s.model_final_reply)}</span>，保留在 2分23秒中；修正后的实测见上方 R7 与 R8。`))
  ].join('');
  return `<section id="b02-latest" class="b02-latest" aria-labelledby="b02-latest-title">
- <p class="eyebrow">2026.11.17 / 最新本地实测 · B02-R6</p>
+ <p class="eyebrow">2026.11.17 / 修复前对照 · B02-R6</p>
  <h2 id="b02-latest-title">画稿与装配已保存，本轮 <strong>2分23秒</strong></h2>
  <p>短需求：“${r.prompt}”</p>
  <p class="b02-result"><strong>画稿、切线、挂孔、白墨已保存 · 工具报错 0 次。</strong>这是 Agent 执行的 143.29 秒，不含另行核验和三维截图；切线仍需审核。</p>
@@ -85,9 +85,9 @@ module.exports=function renderB02Optimization(baseline){
  <li><strong>其他执行与衔接 26.9 秒：</strong>总时间扣除以上三段后的剩余，包括启动、事件处理及阶段衔接；现有记录未完整拆分，不能全部归因于网络。</li></ul>
  <p>本轮装配内部耗时 31.1 秒，已包含在上面的工具时间中。素材准备 7.45 秒，其中本机读取接口 6.54 秒、下载等待 0 秒；母版准备 18.15 秒，版本记录 4.45 秒。不能据这一轮反推旧测试素材准备 47.2 秒的根因。</p></details></div>
  <section id="b02-flow-comparison" class="b02-flow-comparison" aria-labelledby="b02-flow-title"><h3 id="b02-flow-title">原来怎样做 → 现在怎样做，为什么这样改</h3><p>每排左右是同一阶段，<strong>对应框等高对齐</strong>。左侧编号是原始 16 轮模型调用，右侧编号是现在的 6 个流程阶段，并不表示每步都调用模型。</p>
- <div class="b02-api-explainer"><h4>先分清：问模型，与让程序执行，是两件事</h4><p><strong>左侧01–16轮，每轮都调用了1次主模型 API。</strong>顺序是：请求模型决定做什么 → 模型返回指令 → 程序执行工具。每项分别列出两段耗时；例如第12轮等模型 6.4 秒，之后工具装配往返 55.9 秒。</p><p><strong>平替的是固定决策，不是删掉实际工作。</strong>代码直接读规格、写计划或调用装配接口后，这些工具和前后端请求仍存在，只是不必每一步先请求主模型。第10轮的创意模型与生图 API 继续保留；第16轮的最终替代仍待完整复测。</p><details><summary>调用数量与旧记录的说明范围</summary><p>${esc(baselineRoundData.source_note)}</p><p>已记录16次主模型、1次生图服务，另有1次辅助模型；辅助模型用途未在这份历史快照中单独记录，不能硬归到某一轮。这里不是全部 HTTP 请求次数。<a href="evidence/B02-baseline-rounds.json">查看16轮用途与平替说明 →</a></p></details></div>
+ <div class="b02-api-explainer"><h4>先分清：问模型，与让程序执行，是两件事</h4><p><strong>左侧01–16轮，每轮都调用了1次主模型 API。</strong>顺序是：请求模型决定做什么 → 模型返回指令 → 程序执行工具。每项分别列出两段耗时；例如第12轮等模型 6.4 秒，之后工具装配往返 55.9 秒。</p><p><strong>平替的是固定决策，不是删掉实际工作。</strong>代码直接读规格、写计划或调用装配接口后，这些工具和前后端请求仍存在，只是不必每一步先请求主模型。第10轮的创意模型与生图 API 继续保留；第16轮的自动回复已在 R7、R8 整轮实测通过。</p><details><summary>调用数量与旧记录的说明范围</summary><p>${esc(baselineRoundData.source_note)}</p><p>已记录16次主模型、1次生图服务，另有1次辅助模型；辅助模型用途未在这份历史快照中单独记录，不能硬归到某一轮。这里不是全部 HTTP 请求次数。<a href="evidence/B02-baseline-rounds.json">查看16轮用途与平替说明 →</a></p></details></div>
  <div class="b02-quality-boundary"><strong>目前能证明流程提速和保存结果，不能保证画面效果一定更好。</strong><p>这次保留模型创意及原有制作工具，把固定调度、参数绑定和保存核验交给代码。像素检查、原图追踪、尺寸校验继续保留；但它们不能代替审美、文字准确性和构图检查。旧流程生图后还会再经过模型，新流程目前没有独立的生成后视觉复审。</p><p><strong>要确认没有牺牲效果：</strong>还需用同一组短需求做新旧多次对照，检查主题符合度、文字与细节、透明背景、切线与关键内容距离，以及实际样片。以下逐项区分“已保留的工作”“已经验证的结果”和“仍待验证的部分”。</p></div>
- <div class="b02-flow-scroll" tabindex="0" role="region" aria-label="新旧流程左右对照，可横向滚动"><div class="b02-flow-grid"><div class="b02-flow-head"><div><span>之前 / 逐步问模型</span><strong>16 轮主模型调用</strong></div><span></span><div><span>现在 / 代码接续固定步骤</span><strong>本轮 3 轮，最终目标 2 轮</strong></div></div>${flow}</div></div><p class="b02-mobile-hint">窄屏可左右滑动，左右对应框保持对齐。</p></section>
- <details class="b02-evidence"><summary>测试范围、费用与证据</summary><p>本轮在独立项目通过本机聊天链路发送短需求，覆盖真实生图与前端装配；结束后独立检查保存状态。截图与独立检查不计入 143.29 秒。保留本轮自动收尾中断的事实，不能当作最终修正后“两轮模型”的完整验收。</p><p>原始 Agent 344.14 秒，首次发送至结束 550.147 秒（9分10秒），包含 194.519 秒等待用户确认；这里统一比较 Agent 时间。上一轮 R5 为 6分16秒，本轮为 2分23秒，尚未证明可稳定保持在两分钟左右。</p><p>参考费用：原始 <strong>$${baseline.cost.reference_total_usd.toFixed(6)}</strong> → 本轮 <strong>$${r.reference_usd.toFixed(6)}</strong>。按记录用量与本地费率计算，非账单，不含存储、网络及本机计算。两次各生成 1 张图，另各有 1 次辅助模型调用；3 次或 16 次指主规划模型，不是全部 API 请求数。</p><p><a href="evidence/B02-R6-optimization.json">查看本轮脱敏计时与验证记录 →</a> · <a href="#numeric-scope-fix">查看数值比较修复 →</a></p></details>
+ <div class="b02-flow-scroll" tabindex="0" role="region" aria-label="新旧流程左右对照，可横向滚动"><div class="b02-flow-grid"><div class="b02-flow-head"><div><span>之前 / 逐步问模型</span><strong>16 轮主模型调用</strong></div><span></span><div><span>现在 / 代码接续固定步骤</span><strong>R6 为 3 轮，R7/R8 各 2 轮</strong></div></div>${flow}</div></div><p class="b02-mobile-hint">窄屏可左右滑动，左右对应框保持对齐。</p></section>
+ <details class="b02-evidence"><summary>测试范围、费用与证据</summary><p>本轮在独立项目通过本机聊天链路发送短需求，覆盖真实生图与前端装配；结束后独立检查保存状态。截图与独立检查不计入 143.29 秒。R6 的自动收尾曾中断。修正后的完整实测为上方 R7 与 R8。</p><p>原始 Agent 344.14 秒，首次发送至结束 550.147 秒（9分10秒），包含 194.519 秒等待用户确认；这里统一比较 Agent 时间。上一轮 R5 为 6分16秒，本轮为 2分23秒，尚未证明可稳定保持在两分钟左右。</p><p>参考费用：原始 <strong>$${baseline.cost.reference_total_usd.toFixed(6)}</strong> → 本轮 <strong>$${r.reference_usd.toFixed(6)}</strong>。按记录用量与本地费率计算，非账单，不含存储、网络及本机计算。两次各生成 1 张图，另各有 1 次辅助模型调用；3 次或 16 次指主规划模型，不是全部 API 请求数。</p><p><a href="evidence/B02-R6-optimization.json">查看本轮脱敏计时与验证记录 →</a> · <a href="#numeric-scope-fix">查看数值比较修复 →</a></p></details>
  </section>`;
 };

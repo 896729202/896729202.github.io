@@ -6,5 +6,5 @@ module.exports=()=>`<section class="verdict" id="numeric-scope-fix" aria-labelle
 <p><strong>原因：</strong>后端记录 <code>60.0</code>，前端保存成 <code>60</code>；比较代码按不同写法判断，误以为用户改了尺寸。</p>
 <p><strong>影响：</strong>白墨已保存，自动流程却提前退出，<strong>额外调用一次模型收尾</strong>，增加等待；已保存画稿不会被取消。</p>
 <p><strong>修复：</strong>比较前统一数值格式，让 <code>60.0</code> 与 <code>60</code> 等价；真正改变尺寸仍会拦截。</p>
-<p class="sub">回归检查与真实回执重放通过；最后这项修正尚未重新完整生图复测。此记录不计入下方 11 月 13 日原始测试。</p>
+<p class="sub">回归检查与真实回执重放通过。修正后的 R7、R8 均从短句重新生图，并由代码完成最终核验与回复。</p>
 </section>`;

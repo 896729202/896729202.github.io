@@ -1,0 +1,82 @@
+{
+  "test_date": "2026-11-17",
+  "agent_revision": "0dd978ae",
+  "agent_overlap_seconds": 64.0,
+  "overlap_basis": "first Agent request received to completion, recorded to whole seconds",
+  "samples": [
+    {
+      "case": "B02-R7",
+      "title": "海贼王 · 草帽路飞",
+      "prompt": "做个戴草帽的路飞亚克力挂件。",
+      "agent_started_at": "2026-11-17T23:19:27+08:00",
+      "agent_completed_at": "2026-11-17T23:22:02+08:00",
+      "agent_seconds": 159.29,
+      "runtime": {
+        "model_wait": 39.316,
+        "image_generation_tool": 30.822,
+        "frontend_roundtrips": 81.639,
+        "other": 7.513
+      },
+      "main_model_calls": 2,
+      "image_calls": 1,
+      "tool_failures": 0,
+      "code_reply_verified": true,
+      "verified_saved": [
+        "artwork",
+        "cut",
+        "hanging_hole",
+        "white"
+      ],
+      "cut_status": "needs_review",
+      "white_tool_called": true,
+      "reference_usd": 0.117167175,
+      "preview": {
+        "path": "images/B02-R7-3d.webp",
+        "width": 1024,
+        "height": 1024,
+        "render_seconds": 27.788,
+        "source_png_sha256": "049724854964601612b7d74d8288a36487fd37d15b31340fabcec8a0487dfbee",
+        "display_sha256": "b1f5d4ad70842019f2ea8942ee529669277cb3c7ccd3242cd9575e351df99e53",
+        "included_in_agent_seconds": false,
+        "receipt_status": "returned"
+      }
+    },
+    {
+      "case": "B02-R8",
+      "title": "火影忍者 · 鸣人",
+      "prompt": "做个鸣人搓螺旋丸的亚克力挂件。",
+      "agent_started_at": "2026-11-17T23:20:58+08:00",
+      "agent_completed_at": "2026-11-17T23:23:11+08:00",
+      "agent_seconds": 133.46,
+      "runtime": {
+        "model_wait": 39.54,
+        "image_generation_tool": 31.191,
+        "frontend_roundtrips": 58.487,
+        "other": 4.242
+      },
+      "main_model_calls": 2,
+      "image_calls": 1,
+      "tool_failures": 0,
+      "code_reply_verified": true,
+      "verified_saved": [
+        "artwork",
+        "cut",
+        "hanging_hole",
+        "white"
+      ],
+      "cut_status": "needs_review",
+      "white_tool_called": false,
+      "reference_usd": 0.136053225,
+      "preview": {
+        "path": "images/B02-R8-3d.webp",
+        "width": 1024,
+        "height": 1024,
+        "render_seconds": null,
+        "source_png_sha256": "7beea5445e8c69be96283c147645a5a83151b9f722afec2c4a5c02b323d451b8",
+        "display_sha256": "4b177dca441c1c257f91ddb2bc3643f3faaf2797cdbead6a42db20b5260b1cab",
+        "included_in_agent_seconds": false,
+        "receipt_status": "timed_out_saved_image_verified"
+      }
+    }
+  ]
+}
