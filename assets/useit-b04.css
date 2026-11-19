@@ -1,0 +1,62 @@
+.b04-results table {
+  min-width: 630px;
+  font-variant-numeric: tabular-nums;
+}
+
+.b04-results .b04-duration {
+  color: var(--u-accent);
+  font-size: 1.08em;
+}
+
+.b04-results details .table-wrap {
+  margin-top: 12px;
+}
+
+.b04-changes th:nth-child(2) {
+  width: 36%;
+}
+
+.b04-changes th:first-child {
+  width: 7.5em;
+}
+
+.gallery.b04-shots {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.b04-shots figure {
+  scroll-margin-top: 90px;
+}
+
+.b04-shots img {
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.b04-shots figcaption {
+  padding: 16px 18px;
+}
+
+.b04-shots figcaption strong {
+  font-size: 17px;
+}
+
+.b04-shots p {
+  margin: 6px 0;
+}
+
+.b04-shots small {
+  display: block;
+  margin: 8px 0 3px;
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .gallery.b04-shots {
+    grid-template-columns: 1fr;
+  }
+
+  .b04-changes table {
+    min-width: 550px;
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "date": "2026-11-19",
+  "cases": [
+    {
+      "id": "luffy",
+      "title": "路飞与千阳号",
+      "date": "2026-11-19",
+      "prompt": "做个双插片亚克力立牌，前面路飞，后面千阳号，想看立体效果。",
+      "wall_seconds": 322.568,
+      "agent_seconds": 285.05,
+      "model_calls": 2,
+      "tool_errors": 0,
+      "reference_usd": 0.199815825,
+      "groups": {
+        "model": 47.801,
+        "images": 31.487,
+        "place": 43.439,
+        "cut": 108.898,
+        "white": 25.867,
+        "inspect": 12.036,
+        "render": 8.767,
+        "other": 6.755
+      },
+      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/333ccc89-1a4f-4a0f-bd29-e628a6050ce5",
+      "image": "images/B04-luffy-3d.webp",
+      "size_mm": "80×120 mm",
+      "image_sizes": [
+        "1024×1536",
+        "1024×1536"
+      ],
+      "status": "completed",
+      "review_required": 2,
+      "assembly_issues": [],
+      "base_slots": 2,
+      "render_revision": "r:2089daae:5923403",
+      "notes": "路飞在前，船帆和狮子船首从人物两侧露出。"
+    },
+    {
+      "id": "naruto",
+      "title": "鸣人与木叶村",
+      "date": "2026-11-19",
+      "prompt": "做个鸣人和木叶村的双插片亚克力立牌，看看立体效果。",
+      "wall_seconds": 185.838,
+      "agent_seconds": 180.04,
+      "model_calls": 2,
+      "tool_errors": 0,
+      "reference_usd": 0.199566575,
+      "groups": {
+        "model": 39.366,
+        "images": 35.432,
+        "place": 33.823,
+        "cut": 60.728,
+        "white": 3.489,
+        "inspect": 2.866,
+        "render": 1.353,
+        "other": 2.983
+      },
+      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/b191ed79-72be-4780-af4b-fcc8f64d6a76",
+      "image": "images/B04-naruto-3d.webp",
+      "size_mm": "100×120 mm",
+      "image_sizes": [
+        "1280×1536",
+        "1280×1536"
+      ],
+      "status": "completed",
+      "review_required": 2,
+      "assembly_issues": [],
+      "base_slots": 2,
+      "render_revision": "r:c566a8e2:6458220",
+      "notes": "鸣人在前，后片的木叶建筑和火影岩仍能辨认。"
+    },
+    {
+      "id": "zoro",
+      "title": "索隆与海港",
+      "date": "2026-11-19",
+      "prompt": "做个索隆和海港的双插片亚克力立牌，看看立体效果。",
+      "wall_seconds": 494.7,
+      "agent_seconds": 471.86,
+      "model_calls": 2,
+      "tool_errors": 0,
+      "reference_usd": 0.201463075,
+      "groups": {
+        "model": 49.056,
+        "images": 39.179,
+        "place": 23.448,
+        "cut": 212.81,
+        "white": 100.455,
+        "inspect": 23.827,
+        "render": 15.71,
+        "other": 7.375
+      },
+      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/d4066b43-3ae1-4b08-ba1e-6647d68a8fa6",
+      "image": "images/B04-zoro-3d.webp",
+      "size_mm": "80×120 mm",
+      "image_sizes": [
+        "1024×1536",
+        "1024×1536"
+      ],
+      "status": "completed",
+      "review_required": 2,
+      "assembly_issues": [],
+      "base_slots": 2,
+      "render_revision": "r:8a5ffd54:6334463",
+      "notes": "索隆在前，后片的船帆、木桶和码头从人物两侧露出。"
+    },
+    {
+      "id": "kakashi",
+      "title": "卡卡西与木叶大门",
+      "status": "incomplete",
+      "date": "2026-11-19",
+      "prompt": "做个卡卡西和木叶大门的双插片亚克力立牌，看看立体效果。",
+      "wall_seconds": 149.784,
+      "agent_seconds": 119.91,
+      "model_calls": 2,
+      "tool_errors": 0,
+      "image_request_timeouts": 2,
+      "reference_usd": 0.041813325,
+      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/29d10340-83df-4646-b61f-dd8d50de7278",
+      "notes": "两轮尝试的前、后片生图请求均超时。没有画稿可装配，未产生三维图。",
+      "groups": {
+        "model": 87.252,
+        "images": 20.436,
+        "other": 12.222
+      }
+    }
+  ],
+  "interrupted_attempts": [
+    {
+      "case_id": "naruto",
+      "title": "鸣人首轮",
+      "date": "2026-11-19",
+      "reason": "切线工具要求指定留边值，流程在此中止。",
+      "wall_seconds": null,
+      "agent_seconds": 133.18,
+      "sent_to_agent_finished_seconds": 155.22,
+      "model_calls": 3,
+      "tool_errors": 1,
+      "image_request_timeouts": 0,
+      "reference_usd": 0.217079825,
+      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/489bffc3-a577-4b6a-aa69-1e52acf7d1b5"
+    },
+    {
+      "case_id": "kakashi",
+      "title": "卡卡西首轮",
+      "date": "2026-11-19",
+      "reason": "前后片的生图请求均超时，两张画稿都未生成。",
+      "wall_seconds": 111.25,
+      "agent_seconds": 74.37,
+      "sent_to_agent_finished_seconds": 108.14,
+      "model_calls": 2,
+      "tool_errors": 0,
+      "image_request_timeouts": 2,
+      "reference_usd": 0.038269325,
+      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/c362efce-597f-4e58-8e87-a2455524aead"
+    },
+    {
+      "case_id": "kakashi",
+      "title": "卡卡西第二轮",
+      "date": "2026-11-19",
+      "reason": "两个生图请求再次超时，未进入装配。",
+      "wall_seconds": 149.784,
+      "agent_seconds": 119.91,
+      "sent_to_agent_finished_seconds": 144.03,
+      "model_calls": 2,
+      "tool_errors": 0,
+      "image_request_timeouts": 2,
+      "reference_usd": 0.041813325,
+      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/29d10340-83df-4646-b61f-dd8d50de7278"
+    }
+  ]
+}
