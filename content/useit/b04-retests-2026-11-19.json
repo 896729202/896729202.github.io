@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-19",
+  "date": "2026-11-20",
   "cases": [
     {
       "id": "luffy",
@@ -106,22 +106,40 @@
     {
       "id": "kakashi",
       "title": "卡卡西与木叶大门",
-      "status": "incomplete",
-      "date": "2026-11-19",
+      "date": "2026-11-20",
       "prompt": "做个卡卡西和木叶大门的双插片亚克力立牌，看看立体效果。",
-      "wall_seconds": 149.784,
-      "agent_seconds": 119.91,
+      "wall_seconds": 276.728,
+      "agent_seconds": 257.46,
       "model_calls": 2,
       "tool_errors": 0,
-      "image_request_timeouts": 2,
-      "reference_usd": 0.041813325,
-      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/29d10340-83df-4646-b61f-dd8d50de7278",
-      "notes": "两轮尝试的前、后片生图请求均超时。没有画稿可装配，未产生三维图。",
+      "reference_usd": 0.199481325,
       "groups": {
-        "model": 87.252,
-        "images": 20.436,
-        "other": 12.222
-      }
+        "model": 47.21,
+        "images": 22.558,
+        "place": 37.91,
+        "cut": 85.526,
+        "white": 24.108,
+        "inspect": 8.696,
+        "render": 4.463,
+        "other": 26.989
+      },
+      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/bed7c984-375d-4bbe-a90c-bcef05a515d5",
+      "image": "images/B04-kakashi-3d.webp",
+      "size_mm": "80×120 mm",
+      "image_sizes": [
+        "1024×1536",
+        "1024×1536"
+      ],
+      "status": "completed",
+      "review_required": 2,
+      "assembly_issues": [],
+      "base_slots": 2,
+      "render_revision": "r:0dc203b6:5151900",
+      "notes": "卡卡西在前片读书，后片的红色木叶大门和树木从人物两侧露出。",
+      "plan_seconds": [
+        23.349,
+        23.861
+      ]
     }
   ],
   "interrupted_attempts": [
@@ -166,6 +184,20 @@
       "image_request_timeouts": 2,
       "reference_usd": 0.041813325,
       "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/29d10340-83df-4646-b61f-dd8d50de7278"
+    },
+    {
+      "case_id": "kakashi",
+      "title": "卡卡西 · 本地误入旧版",
+      "date": "2026-11-20",
+      "reason": "测试请求进了旧版 Agent。读规格、列工具、写计划后手动停止，尚未生图。这笔费用单列，未计入优化版复测。",
+      "wall_seconds": null,
+      "agent_seconds": 145.2,
+      "sent_to_agent_finished_seconds": 161.67,
+      "model_calls": 6,
+      "tool_errors": 0,
+      "image_request_timeouts": 0,
+      "reference_usd": 0.136536,
+      "langfuse_url": "https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/412e4bbe-6e04-4524-8aec-187971f4d987"
     }
   ]
 }

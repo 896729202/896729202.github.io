@@ -1,0 +1,293 @@
+{
+  "case": "B04",
+  "test_date": "2026-11-13",
+  "source_note": "按原始 Langfuse 的 32 条 llm.plan、同一轮紧随的工具观测，以及保存的本地回执、聊天快照和产品历史归纳用途。这里描述可观察的调用与结果，不是模型内部思考记录。历史快照未保留的工具包名、失败面片参数和清单内容，逐行注明，不补猜测。",
+  "model_wait_seconds": 248.787,
+  "timing_note": "每行 seconds 采用 Langfuse llm.plan 耗时，32 行合计 248.787 秒，与旧博客相同。保留的本地 orch.plan.llm_call 同样是 32 次，合计 246.649 秒；两种计时边界有 2.138 秒差异，不混用。生图、前端执行和等待用户确认均不计入这列。",
+  "local_model_wait_seconds": 246.649,
+  "tool_failure_rounds": [
+    19,
+    21,
+    24,
+    25,
+    26,
+    28
+  ],
+  "sources": [
+    "2026-11-13.json / cases[B04].observations、failures、local_runs",
+    "UseIt/diagnostics/category-benchmark-20261113/B04/langfuse.json",
+    "UseIt/diagnostics/category-benchmark-20261113/B04/local/{task_id}/phases.json、events.json、tool-results.json",
+    "UseIt/diagnostics/category-benchmark-20261113/B04/latest.json、followups.jsonl、product-history.json、products.json",
+    "新版代码：UseIt/update-worktrees/b02-auto-20261117/agent/agent_loop/product_workflows/multi_insert_standee.py"
+  ],
+  "rounds": [
+    {
+      "number": 1,
+      "seconds": 16.147,
+      "purpose": "查阅实物设计规范",
+      "action": "读取了实物设计规范。旧记录只保留了规范名。",
+      "observation_id": "7d3cced010830efd"
+    },
+    {
+      "number": 2,
+      "seconds": 10.112,
+      "purpose": "继续查阅多插片立牌的产品资料",
+      "action": "读取多插片立牌的产品目录，取得规格资料。",
+      "observation_id": "4763cb65853b8303"
+    },
+    {
+      "number": 3,
+      "seconds": 19.703,
+      "purpose": "决定先查看可用工具包",
+      "action": "列出可用工具包。",
+      "observation_id": "e7fb0f57cfa841d2"
+    },
+    {
+      "number": 4,
+      "seconds": 24.047,
+      "purpose": "把需求整理成产品交付计划",
+      "action": "保存产品计划草稿。",
+      "observation_id": "e5eca225a9d7c933"
+    },
+    {
+      "number": 5,
+      "seconds": 11.422,
+      "purpose": "向用户说明方案，并要求确认后再制作",
+      "action": "向用户发出确认问题。原需求已授权使用默认值，但流程仍在此暂停。",
+      "observation_id": "361e0f7d6ac8720f"
+    },
+    {
+      "number": 6,
+      "seconds": 4.481,
+      "purpose": "收到确认后，再次查询可用工具包",
+      "action": "用户回复确认后，重新列出工具包。",
+      "observation_id": "246465a0945b1085"
+    },
+    {
+      "number": 7,
+      "seconds": 8.832,
+      "purpose": "选择并加载第一批工具说明",
+      "action": "加载工具说明成功，包名未留存。",
+      "observation_id": "ed652f1f2a2202d1"
+    },
+    {
+      "number": 8,
+      "seconds": 8.946,
+      "purpose": "继续选择并加载另一批工具说明",
+      "action": "再次加载工具说明，包名未留存。",
+      "observation_id": "e77a5ce2a2f56101"
+    },
+    {
+      "number": 9,
+      "seconds": 10.199,
+      "purpose": "安排接下来的制作步骤",
+      "action": "写入制作待办。",
+      "observation_id": "78d4a0e233ab1745"
+    },
+    {
+      "number": 10,
+      "seconds": 4.618,
+      "purpose": "将确认后的产品计划转入制作",
+      "action": "保存产品计划，状态从草稿变为执行中。",
+      "observation_id": "961dc1bb0a689424"
+    },
+    {
+      "number": 11,
+      "seconds": 5.454,
+      "purpose": "在生图前再次更新制作清单",
+      "action": "更新生图前的待办清单，具体条目未留存。",
+      "observation_id": "ba1e588e876db61d"
+    },
+    {
+      "number": 12,
+      "seconds": 7.125,
+      "purpose": "组织第一张插片画稿的创作要求，并请求生图",
+      "action": "生图服务生成第 1 张 1024×1536 原图。",
+      "observation_id": "0efc2b71d2d2b50b"
+    },
+    {
+      "number": 13,
+      "seconds": 5.89,
+      "purpose": "组织第二张插片画稿的创作要求，并继续请求生图",
+      "action": "等第 1 张返回后，生图服务才开始生成第 2 张 1024×1536 原图。",
+      "observation_id": "129d5d9e6dc00a94"
+    },
+    {
+      "number": 14,
+      "seconds": 6.698,
+      "purpose": "根据生图结果更新清单，准备装配",
+      "action": "更新待办，准备装入画稿。",
+      "observation_id": "7252eccb2a151770"
+    },
+    {
+      "number": 15,
+      "seconds": 3.851,
+      "purpose": "决定将第一张画稿装到第 1 片插片",
+      "action": "读取第 1 张原图，写入前片，图片完整性和保存检查通过。",
+      "observation_id": "41baa6f0e0556976"
+    },
+    {
+      "number": 16,
+      "seconds": 3.783,
+      "purpose": "决定将第二张画稿装到第 2 片插片",
+      "action": "读取第 2 张原图，写入后片，图片完整性和保存检查通过。",
+      "observation_id": "43aa1b76c7e86740"
+    },
+    {
+      "number": 17,
+      "seconds": 4.164,
+      "purpose": "装配后更新进度，准备处理切线",
+      "action": "更新待办，准备计算切线。",
+      "observation_id": "4caa42198b150a4d"
+    },
+    {
+      "number": 18,
+      "seconds": 3.863,
+      "purpose": "请求生成第 1 片插片的切线与插脚",
+      "action": "第 1 片切线已保存，工艺状态为待审核。",
+      "observation_id": "6412605f692c242e"
+    },
+    {
+      "number": 19,
+      "seconds": 3.611,
+      "purpose": "继续请求切线处理",
+      "action": "保存设计面失败。记录未保留这次请求的插片编号。",
+      "observation_id": "21a623e7eb490843"
+    },
+    {
+      "number": 20,
+      "seconds": 6.193,
+      "purpose": "切线失败后，先检查产品当前状态",
+      "action": "读取母版当前状态，确认工具能取得产品信息。",
+      "observation_id": "f09e60f101c1ac5d"
+    },
+    {
+      "number": 21,
+      "seconds": 3.1,
+      "purpose": "根据检查结果，再次请求切线",
+      "action": "计算切线时母版版本发生变化，保存失败。此次插片编号未留存。",
+      "observation_id": "88379094da5fc10e"
+    },
+    {
+      "number": 22,
+      "seconds": 3.404,
+      "purpose": "再次请求切线，并等待保存结果",
+      "action": "第 2 片切线已保存，工艺状态为待审核。",
+      "observation_id": "744dfc669c587249"
+    },
+    {
+      "number": 23,
+      "seconds": 3.773,
+      "purpose": "切线完成后，调用白墨处理",
+      "action": "工具认为当时的白墨仍有效，沿用已有白墨。",
+      "observation_id": "1f3e8c831b5aca75"
+    },
+    {
+      "number": 24,
+      "seconds": 4.283,
+      "purpose": "继续尝试指定面片处理白墨",
+      "action": "接口拒绝了指定面片的参数，要求省略该参数。",
+      "observation_id": "eefe5479fb61789e"
+    },
+    {
+      "number": 25,
+      "seconds": 3.873,
+      "purpose": "尝试生成三维截图",
+      "action": "工具返回文件不存在。旧记录未保留文件路径。",
+      "observation_id": "01ef4976c570eb00"
+    },
+    {
+      "number": 26,
+      "seconds": 4.028,
+      "purpose": "调整白墨调用，再次尝试处理",
+      "action": "工具拒绝了无效的白墨来源，未保存。",
+      "observation_id": "d80f5f8f553ef27f"
+    },
+    {
+      "number": 27,
+      "seconds": 6.305,
+      "purpose": "查找可用的三维画布",
+      "action": "读到可用的三维画布列表。",
+      "observation_id": "3bcd0c641d2c7e1f"
+    },
+    {
+      "number": 28,
+      "seconds": 4.874,
+      "purpose": "查到画布后，再次尝试三维截图",
+      "action": "旧版独立截图入口拒绝该产品，提示打开三维界面截取当前视图。",
+      "observation_id": "d5d596dcce597440"
+    },
+    {
+      "number": 29,
+      "seconds": 8.234,
+      "purpose": "再次检查并处理白墨",
+      "action": "工具当时再次判定白墨有效，但任务结束后的独立检查显示白墨已过期。",
+      "observation_id": "d9411df80458f12b"
+    },
+    {
+      "number": 30,
+      "seconds": 5.851,
+      "purpose": "改为获取二维画稿预览",
+      "action": "整张画稿的二维预览渲染成功。",
+      "observation_id": "40066c24725b03f6"
+    },
+    {
+      "number": 31,
+      "seconds": 9.646,
+      "purpose": "整理最终进度并更新待办",
+      "action": "写入最后一次进度更新，具体条目未留存。",
+      "observation_id": "a155efba10332de2"
+    },
+    {
+      "number": 32,
+      "seconds": 22.277,
+      "purpose": "组织最后的完成说明和查看方式",
+      "action": "回复“已完成”，并请用户切换到三维视图。此次运行实际只生成了二维预览。",
+      "observation_id": "69d8d850255c83f7"
+    }
+  ],
+  "groups": [
+    {
+      "title": "准备资料、规格与制作计划",
+      "start": 1,
+      "end": 11,
+      "after": "第 1 次主模型请求理解需求、选择款式。程序加载该款规格，补齐默认值，校验并保存计划。",
+      "reason": "规格来自同一产品目录。用户已授权的默认值直接采用，确有缺项再询问。"
+    },
+    {
+      "title": "创作两张插片画稿",
+      "start": 12,
+      "end": 13,
+      "after": "第 2 次主模型请求统一设计前后片。程序按插片编号并行发出两项生图请求，等两张原图保存。",
+      "reason": "模型仍决定构图、画风和前后关系。两张原图各自真实生成，因此可以同时开工。"
+    },
+    {
+      "title": "更新进度并装配原图",
+      "start": 14,
+      "end": 17,
+      "after": "程序一次提交两片，并行读取素材，按顺序写入同一母版。任务仍在运行就查询原任务，收到保存回执再更新进度。",
+      "reason": "每张图都有目标插片和素材编号。装配、完整性检查、版本保存都保留，程序能从回执判断何时继续。"
+    },
+    {
+      "title": "生成切线、插脚与底座槽",
+      "start": 18,
+      "end": 22,
+      "after": "程序逐片调用原切线工具。每片保存后检查切线、插脚和底座槽位，记录工艺审核状态。",
+      "reason": "切线沿用原算法。前一片保存后才写下一片，减少版本冲突。两片切线仍需工艺审核。"
+    },
+    {
+      "title": "核验白墨并进入正确的三维入口",
+      "start": 23,
+      "end": 29,
+      "after": "程序读取每片白墨状态，有效就沿用，缺失或过期才重做。复查母版后，用同一版本请求带画稿的三维视图。",
+      "reason": "插片编号、白墨来源和截图入口由程序填写。以最终保存状态为准，避免填错参数和反复试入口。"
+    },
+    {
+      "title": "取得可查看的预览并回复结果",
+      "start": 30,
+      "end": 32,
+      "after": "程序核对截图中的产品、画稿与母版版本，取得三维 PNG 后返回结果，并列出仍待审核的切线。",
+      "reason": "保存回执提供了所需数据，可以直接报告交付情况，也能识别截图缺失或引用了旧版本。"
+    }
+  ]
+}
