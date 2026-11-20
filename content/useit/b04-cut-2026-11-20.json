@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-20",
+  "metric": "Local tests on the same worker and saved artwork. API wall time and editor/disk replay are separate measurements. No model, chat, or cloud sync.",
+  "samples": {
+    "hancock-fresh": {
+      "title": "女帝汉库克",
+      "API_old_s": 5.683,
+      "API_new_s": 4.931,
+      "API_saved_percent": 13.2,
+      "old_calls": 4,
+      "new_calls": 2,
+      "editor_disk_s": {
+        "old": 55.833,
+        "new": 41.128
+      },
+      "original_contours_tabs_base_slots_equal": true,
+      "review": "needs_review"
+    },
+    "mihawk": {
+      "title": "鹰眼米霍克",
+      "API_old_s": 8.294,
+      "API_new_s": 7.505,
+      "API_saved_percent": 9.5,
+      "old_calls": 5,
+      "new_calls": 2,
+      "editor_disk_s": {
+        "new": 45.016,
+        "old": 47.582
+      },
+      "original_contours_tabs_base_slots_equal": true,
+      "review": "needs_review"
+    },
+    "crocodile": {
+      "title": "克洛克达尔",
+      "API_old_s": 6.7,
+      "API_new_s": 6.173,
+      "API_saved_percent": 7.9,
+      "old_calls": 4,
+      "new_calls": 2,
+      "editor_disk_s": {
+        "old": 30.895,
+        "new": 31.378
+      },
+      "original_contours_tabs_base_slots_equal": true,
+      "review": "needs_review"
+    }
+  },
+  "historical_callback": {
+    "hancock-fresh": {
+      "insert-1": {
+        "agent_to_client_s": 12.76,
+        "client_before_receipt_s": 52.353,
+        "receipt_to_client_send_s": 15.674,
+        "send_to_agent_resume_s": 0.583,
+        "total_s": 81.37
+      },
+      "insert-2": {
+        "agent_to_client_s": 0.94,
+        "client_before_receipt_s": 61.106,
+        "receipt_to_client_send_s": 7.398,
+        "send_to_agent_resume_s": 0.494,
+        "total_s": 69.938
+      }
+    },
+    "mihawk": {
+      "insert-1": {
+        "agent_to_client_s": 0.955,
+        "client_before_receipt_s": 43.22,
+        "receipt_to_client_send_s": 0.796,
+        "send_to_agent_resume_s": 0.495,
+        "total_s": 45.466
+      },
+      "insert-2": {
+        "agent_to_client_s": 0.883,
+        "client_before_receipt_s": 38.27,
+        "receipt_to_client_send_s": 0.794,
+        "send_to_agent_resume_s": 0.484,
+        "total_s": 40.431
+      }
+    },
+    "crocodile": {
+      "insert-1": {
+        "agent_to_client_s": 0.387,
+        "client_before_receipt_s": 39.576,
+        "receipt_to_client_send_s": 0.765,
+        "send_to_agent_resume_s": 0.604,
+        "total_s": 41.332
+      },
+      "insert-2": {
+        "agent_to_client_s": 0.814,
+        "client_before_receipt_s": 32.795,
+        "receipt_to_client_send_s": 0.219,
+        "send_to_agent_resume_s": 0.487,
+        "total_s": 34.315
+      }
+    }
+  }
+}

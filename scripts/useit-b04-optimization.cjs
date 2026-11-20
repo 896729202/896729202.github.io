@@ -2,13 +2,14 @@
 
 const report = require('../content/useit/b04-retests-2026-11-19.json');
 const workflow = require('../content/useit/b04-rounds-2026-11-13.json');
+const cutComparison = require('../content/useit/b04-cut-2026-11-20.json');
 const interrupted = report.interrupted_attempts || [];
 const dates = [...new Set([...report.cases, ...interrupted].map(run => run.date).filter(Boolean))].sort();
 const latestDate = dates.at(-1) || report.date;
 const dateRange = dates.length > 1 ? `${dates[0]} 至 ${latestDate}` : latestDate;
 
 const tabs = `<nav class="tabs" aria-label="立牌测试记录">
-  <a href="#b04-results">实测对比</a><a href="#b04-changes">流程改动</a>
+  <a href="#b04-results">实测对比</a><a href="#b04-cut">切线耗时</a><a href="#b04-changes">流程改动</a>
   <a href="#b04-rounds">逐轮对照</a>
   <a href="#b04-previews">三维成品</a><a href="#b04-original">原始记录</a>
 </nav>`;
@@ -17,6 +18,25 @@ function duration(value) {
   if (!Number.isFinite(value)) return '未记录';
   const seconds = Math.round(value);
   return `${Math.floor(seconds / 60)} 分 ${String(seconds % 60).padStart(2, '0')} 秒`;
+}
+
+function cutResults(table) {
+  const seconds = s => (Math.round(Math.round(s * 1000) / 10) / 100).toFixed(2);
+  const rows = Object.values(cutComparison.samples).map(run => {
+    const editor = run.editor_disk_s;
+    const saved = editor.old - editor.new;
+    return [run.title, `${run.old_calls} → ${run.new_calls} 次`,
+      `${seconds(run.API_old_s)} → ${seconds(run.API_new_s)} 秒`,
+      `${seconds(editor.old)} → <strong>${seconds(editor.new)} 秒</strong>`,
+      `${saved > 0 ? '快' : '慢'} ${Math.abs(saved).toFixed(1)} 秒`];
+  });
+  return `<section id="b04-cut"><p class="eyebrow">2026.11.20 / 同图本地复测</p><h2>切线优化前后，做完前后两片用了多久？</h2>
+    <p><strong>原来</strong>，插片超出成品尺寸时，编辑器每调一次尺寸就重新准备、发送一次画稿。<strong>现在</strong>，每片只发一次原稿，切线服务按原精度完成测量、缩放和复算。编辑器核对缩放和位置后才保存，有偏差就走原来的逐轮计算。</p>
+    ${table(['样本（前后两片合计）', '切线请求（旧 → 新）', '切线接口（旧 → 新）', '编辑器切线并保存（旧 → 新）', '编辑器用时变化'], rows)}
+    <p>三款共 <strong>13 → 6 次切线请求</strong>。逐片对比保存的画稿，六片切线路径、插脚尺寸和对应底座槽位均与原稿一致，工艺状态仍为「待审核」。</p>
+    <p>女帝旧版的两份回执生成后，客户端合计等了 <strong>23.1 秒</strong>才发出。新版让桌面窗口持续运行到回执发出，并记录后台收件时间。新版完整对话的回执提速仍待实测。</p>
+    <p class="sub">两列耗时分别来自切线接口测试和编辑器保存测试，各自使用相同原稿比较新旧版本。两列不能相加，均不含生图、聊天和云端同步。<a href="../../../content/useit/b04-cut-2026-11-20.json">查看逐款实测数据</a></p>
+  </section>`;
 }
 
 function flowComparison(baseline, esc) {
@@ -118,6 +138,7 @@ function render(baseline, { esc, table, external }) {
     </details>` : ''}
     ${breakdown.length ? `<details><summary>查看优化版 Agent 分步耗时（秒）</summary>${stageTable}</details>` : ''}
   </section>
+  ${cutResults(table)}
   <section id="b04-changes" class="b04-changes"><h2>原来慢在哪里，新版怎么做？</h2>
     ${table(['环节', '旧版遇到的问题', '新版怎么做，保留了什么'], [
       ['理解与计划', `模型逐步查规格、填计划、选工具，默认规格也要等用户确认。整次运行<strong>共请求主模型 ${initial.model_calls} 次，等待 ${baseline.groups['llm.plan'].seconds.toFixed(1)} 秒</strong>。`,
