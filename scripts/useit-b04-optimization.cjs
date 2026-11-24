@@ -4,12 +4,14 @@ const report = require('../content/useit/b04-retests-2026-11-19.json');
 const workflow = require('../content/useit/b04-rounds-2026-11-13.json');
 const cutComparison = require('../content/useit/b04-cut-2026-11-20.json');
 const whiteComparison = require('../content/useit/b04-white-2026-11-20.json');
+const placementDate = '2026-11-24';
 const interrupted = report.interrupted_attempts || [];
 const dates = [...new Set([...report.cases, ...interrupted].map(run => run.date).filter(Boolean))].sort();
 const latestDate = dates.at(-1) || report.date;
 const dateRange = dates.length > 1 ? `${dates[0]} 至 ${latestDate}` : latestDate;
 
 const tabs = `<nav class="tabs" aria-label="立牌测试记录">
+  <a href="#b04-placement">三插片装配修复</a>
   <a href="#b04-results">实测对比</a><a href="#b04-cut">切线耗时</a><a href="#b04-white">白墨耗时</a><a href="#b04-changes">流程改动</a>
   <a href="#b04-rounds">逐轮对照</a>
   <a href="#b04-previews">三维成品</a><a href="#b04-original">原始记录</a>
@@ -19,6 +21,20 @@ function duration(value) {
   if (!Number.isFinite(value)) return '未记录';
   const seconds = Math.round(value);
   return `${Math.floor(seconds / 60)} 分 ${String(seconds % 60).padStart(2, '0')} 秒`;
+}
+
+function placementRecord(table, external) {
+  const session = 'https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/f5fd6f96-3420-4f9d-9052-328638025d86';
+  return `<section id="b04-placement"><p class="eyebrow"><time datetime="${placementDate}">2026.11.24</time> / staging 故障 · 本地修复验证</p>
+    <h2>三张图都生成了，为什么只装好一片？</h2>
+    <p>七武海立牌装配到 <strong>20.9 秒</strong>时返回“进行中”。编辑器结束这次回复时，误发了取消信号。第 1 片已保存，第 2、3 片分别排队 <strong>24.8 秒、22.0 秒</strong>后被取消，切线、白墨和三维预览都没开始。 ${external(session, '查看本次 Langfuse 回执')}</p>
+    ${table(['原来如何', '现在如何', '避免了什么问题'], [
+      ['回复“进行中”时，连排队的插片也一起取消。', '<strong>后台继续原任务</strong>，逐片保存。用户点“停止”后不再写下一片。', '保存慢时可以做完三片，主动停止时保留已完成的片。'],
+      ['装配进度只在原网页里，关页就丢失任务记录。', '<strong>任务和逐片回执存入账号项目</strong>。回执丢失时先核对已保存的画稿和版本。', '关页后仍能装完，重新登录能看到画稿，恢复时也不会重复保存。'],
+      ['请求按文件路径指定原图，编辑器有时按素材编号回报，核验只认路径。', '<strong>逐片核对生图时登记的路径或编号</strong>，同时检查目标产品、保存版本和可见性。', '同一张图不会被误判为错图，错片的编号仍会被拒绝。']
+    ])}
+    <p class="sub"><strong>本地复测</strong>　三张已有 B04 原图完成装配、保存和核验共 <strong>7.8 秒</strong>。模拟关页后用同一测试账号重新登录，三片均可见；第一片保存后主动停止，只留下第一片。计时仅含装配阶段，使用本地模拟存储。</p>
+  </section>`;
 }
 
 function cutResults(table) {
@@ -151,7 +167,8 @@ function render(baseline, { esc, table, external }) {
       ${run.notes ? `<p>${esc(run.notes)}</p>` : ''}${artwork}${status ? `<small>${esc(status)}</small>` : ''}${run.langfuse_url ? external(run.langfuse_url, 'Langfuse 链路') : ''}
     </figcaption></figure>`;
   }
-  return `<section id="b04-results" class="b04-results">
+  return `${placementRecord(table, external)}
+  <section id="b04-results" class="b04-results">
     <h2>从发送需求到运行结束，实际用了多久？</h2>
     ${table(['实测', '发送到完成', 'Agent 执行', '主模型调用', '工具报错', '参考费用'], rows)}
     <p>索隆只用了 <strong>2 次主模型调用</strong>，整轮仍花了 <strong>8 分 15 秒</strong>。其中切线占 3 分 33 秒，白墨占 1 分 40 秒。</p>
@@ -184,4 +201,4 @@ function render(baseline, { esc, table, external }) {
   <section id="b04-original"><p class="eyebrow">2026.11.13 / 原始测试</p><h2>旧版 B04 的画稿、耗时与报错记录</h2></section>`;
 }
 
-module.exports = { render, tabs, date: latestDate };
+module.exports = { render, tabs, date: placementDate };
