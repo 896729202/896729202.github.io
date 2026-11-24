@@ -3,13 +3,14 @@
 const report = require('../content/useit/b04-retests-2026-11-19.json');
 const workflow = require('../content/useit/b04-rounds-2026-11-13.json');
 const cutComparison = require('../content/useit/b04-cut-2026-11-20.json');
+const whiteComparison = require('../content/useit/b04-white-2026-11-20.json');
 const interrupted = report.interrupted_attempts || [];
 const dates = [...new Set([...report.cases, ...interrupted].map(run => run.date).filter(Boolean))].sort();
 const latestDate = dates.at(-1) || report.date;
 const dateRange = dates.length > 1 ? `${dates[0]} 至 ${latestDate}` : latestDate;
 
 const tabs = `<nav class="tabs" aria-label="立牌测试记录">
-  <a href="#b04-results">实测对比</a><a href="#b04-cut">切线耗时</a><a href="#b04-changes">流程改动</a>
+  <a href="#b04-results">实测对比</a><a href="#b04-cut">切线耗时</a><a href="#b04-white">白墨耗时</a><a href="#b04-changes">流程改动</a>
   <a href="#b04-rounds">逐轮对照</a>
   <a href="#b04-previews">三维成品</a><a href="#b04-original">原始记录</a>
 </nav>`;
@@ -22,20 +23,42 @@ function duration(value) {
 
 function cutResults(table) {
   const seconds = s => (Math.round(Math.round(s * 1000) / 10) / 100).toFixed(2);
-  const rows = Object.values(cutComparison.samples).map(run => {
+  const samples = Object.values(cutComparison.samples);
+  const rows = samples.map(run => {
     const editor = run.editor_disk_s;
     const saved = editor.old - editor.new;
-    return [run.title, `${run.old_calls} → ${run.new_calls} 次`,
-      `${seconds(run.API_old_s)} → ${seconds(run.API_new_s)} 秒`,
-      `${seconds(editor.old)} → <strong>${seconds(editor.new)} 秒</strong>`,
+    return [run.title, `${seconds(editor.old)} 秒`, `<strong>${seconds(editor.new)} 秒</strong>`,
       `${saved > 0 ? '快' : '慢'} ${Math.abs(saved).toFixed(1)} 秒`];
   });
   return `<section id="b04-cut"><p class="eyebrow">2026.11.20 / 同图本地复测</p><h2>切线优化前后，做完前后两片用了多久？</h2>
-    <p><strong>原来</strong>，插片超出成品尺寸时，编辑器每调一次尺寸就重新准备、发送一次画稿。<strong>现在</strong>，每片只发一次原稿，切线服务按原精度完成测量、缩放和复算。编辑器核对缩放和位置后才保存，有偏差就走原来的逐轮计算。</p>
-    ${table(['样本（前后两片合计）', '切线请求（旧 → 新）', '切线接口（旧 → 新）', '编辑器切线并保存（旧 → 新）', '编辑器用时变化'], rows)}
-    <p>三款共 <strong>13 → 6 次切线请求</strong>。逐片对比保存的画稿，六片切线路径、插脚尺寸和对应底座槽位均与原稿一致，工艺状态仍为「待审核」。</p>
-    <p>女帝旧版的两份回执生成后，客户端合计等了 <strong>23.1 秒</strong>才发出。新版让桌面窗口持续运行到回执发出，并记录后台收件时间。新版完整对话的回执提速仍待实测。</p>
-    <p class="sub">两列耗时分别来自切线接口测试和编辑器保存测试，各自使用相同原稿比较新旧版本。两列不能相加，均不含生图、聊天和云端同步。<a href="../../../content/useit/b04-cut-2026-11-20.json">查看逐款实测数据</a></p>
+    <p><strong>原来</strong>每调一次尺寸，编辑器就要重新发送画稿。<strong>现在</strong>每片只发一次，由切线服务完成复算，编辑器核对尺寸和位置后再保存。三款合计从 <strong>13 次请求降到 6 次</strong>。</p>
+    ${table(['本地实测 · 前后两片切线并保存', '改前', '改后', '变化'], rows)}
+    <p>六片的切线路径、插脚尺寸和对应底座槽位均与旧版一致，工艺状态仍为待审核。以上耗时仅覆盖切线和保存。</p>
+    <p><strong>适用范围</strong>　每片一次请求已进入 staging，针对 B04 中带底部插脚、用单张图片制作的常规插片。遇到多图层或缩放核对不一致时，编辑器沿用逐轮计算。底层直接读取像素的优化也可供满足相同输入条件的其他插脚制品使用。</p>
+    <details><summary>查看切线接口耗时与回执</summary>
+      ${table(['样本', '切线请求（旧 → 新）', '切线接口（旧 → 新）'], samples.map(run => [run.title, `${run.old_calls} → ${run.new_calls} 次`, `${seconds(run.API_old_s)} → ${seconds(run.API_new_s)} 秒`]))}
+      <p>女帝旧版的两份回执生成后，客户端合计等了 <strong>23.1 秒</strong>才发出。新版让桌面窗口持续运行到回执发出，并记录后台收件时间。新版完整对话的回执提速仍待实测。</p>
+      <p class="sub">接口与编辑器分别用相同原稿测量，两张表的耗时不能相加。<a href="../../../content/useit/b04-cut-2026-11-20.json">查看切线实测数据</a></p>
+    </details>
+  </section>`;
+}
+
+function whiteResults(table) {
+  const { before, verified } = whiteComparison.front_ms;
+  const seconds = ms => `${(Math.round(ms / 10) / 100).toFixed(2)} 秒`;
+  const stages = [['生成白墨图形', 'generate'], ['等待母版保存完成', 'save'], ['记录可回退的版本', 'version'], ['回执生成到测试端收到', 'delivery'], ['前片白墨命令总用时', 'total']];
+  const original = whiteComparison.original_two_face_rounds_ms;
+  const twoFaceStages = [['生成白墨图形', 'generate'], ['切换目标插片', 'focus'], ['保存母版、记录版本', 'save_and_version'], ['其他处理与命令往返', 'other'], ['两片白墨命令总用时', 'total']];
+  return `<section id="b04-white"><p class="eyebrow">2026.11.20 / 索隆与海港 · 同图本地复测</p><h2>白墨优化前后，索隆前片从 ${seconds(before.total)}降到 ${seconds(verified.total)}</h2>
+    <p><strong>原来</strong>，白墨画好后，客户端还要等母版保存、记录版本，再重新读取多片画稿来整理回执。<strong>改后</strong>，后台窗口在白墨命令执行期间保持运行，保存时直接取回文件修改时间，整理回执时复用已读取的插片数据，同时核对底座槽位。</p>
+    ${table(['索隆前片 · 同一张原画', '改前（第二轮排查）', '改后（已核验底座）'], stages.map(([label, key]) => [label, seconds(before[key]), `<strong>${seconds(verified[key])}</strong>`]))}
+    <p>主要省在<strong>等待保存和返回结果</strong>。生成白墨图形这一步反而多花了 ${seconds(verified.generate - before.generate)}。两次都在本机按画稿透明度生成白墨，保留 600 DPI。复测核对白墨轮廓与原稿一致，覆盖率一致，版本已保存，两个底座槽位均有效。</p>
+    <p><strong>适用范围</strong>　按画稿生成白墨、保存母版和记录版本是支持白墨的品类共用的流程。按插片检查白墨、核对底座槽位属于 B04。本表记录的是本地优化版；截至 11 月 24 日，上次推送到 staging 的是切线优化。</p>
+    <details><summary>查看改前两轮排查 · 前后两片合计</summary>
+      ${table(['环节', '第一轮', '第二轮'], twoFaceStages.map(([label, key]) => [label, ...original.map(run => key === 'total' ? duration(run.total / 1000) : `${(run[key] / 1000).toFixed(1)} 秒`)]))}
+      <p>两轮均使用同一份原稿。第二轮生成图形更快，保存和记录版本却用了 99.0 秒。上表的改后复测仅测前片，两片合计的改后耗时尚无同口径数据。</p>
+    </details>
+    <p class="sub">命令总用时含切换插片、生成、保存、校验和往返，表内列出主要阶段。<a href="../../../content/useit/b04-white-2026-11-20.json">查看白墨分步计时</a></p>
   </section>`;
 }
 
@@ -139,6 +162,7 @@ function render(baseline, { esc, table, external }) {
     ${breakdown.length ? `<details><summary>查看优化版 Agent 分步耗时（秒）</summary>${stageTable}</details>` : ''}
   </section>
   ${cutResults(table)}
+  ${whiteResults(table)}
   <section id="b04-changes" class="b04-changes"><h2>原来慢在哪里，新版怎么做？</h2>
     ${table(['环节', '旧版遇到的问题', '新版怎么做，保留了什么'], [
       ['理解与计划', `模型逐步查规格、填计划、选工具，默认规格也要等用户确认。整次运行<strong>共请求主模型 ${initial.model_calls} 次，等待 ${baseline.groups['llm.plan'].seconds.toFixed(1)} 秒</strong>。`,

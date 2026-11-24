@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-20",
+  "sample": "索隆与海港",
+  "dpi": 600,
+  "unit": "ms",
+  "front_ms": {
+    "before": {
+      "generate": 1182,
+      "save": 63161,
+      "version": 14393,
+      "delivery": 40142,
+      "total": 127015
+    },
+    "verified": {
+      "generate": 4954,
+      "save": 3544,
+      "version": 2128,
+      "delivery": 1043,
+      "total": 22053
+    }
+  },
+  "original_two_face_rounds_ms": [
+    {
+      "generate": 28956,
+      "focus": 30751,
+      "save_and_version": 18474,
+      "other": 52897,
+      "total": 131078
+    },
+    {
+      "generate": 19219,
+      "focus": 1352,
+      "save_and_version": 98963,
+      "other": 69977,
+      "total": 189511
+    }
+  ]
+}
