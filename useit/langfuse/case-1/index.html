@@ -31,7 +31,52 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
 #final-3d article .intro{margin-top:12px}
 #final-3d .standee-detail{margin-top:8px}#final-3d .standee-detail figure{max-width:350px}#final-3d .base-close{position:relative;aspect-ratio:1.5;height:auto}#final-3d .base-close img{position:absolute;max-width:none;max-height:none;height:auto;width:205%;left:-52.5%;top:50%;transform:translateY(-76%)}
 #final-3d .standee-rule{margin:8px 0 18px}#final-3d .edit-prompt{margin:6px 0 9px;color:#134f40}#final-3d .acrylic-artwork{background-color:#fff;background-image:conic-gradient(#edf0ec 25%,transparent 0 50%,#edf0ec 0 75%,transparent 0);background-size:16px 16px}
-</style><main><nav aria-label="当前位置"><a href="../../index.html#langfuse">USEIT</a><span>/</span><a href="../index.html">Langfuse</a><span>/</span><span aria-current="page">问题例子 1</span></nav><h1>圣诞树双面立牌 · 9 轮图文回放</h1><p class="meta">2026 年 11 月 26 日 · 北京时间　<a href="https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/2c97d259-c0ac-459a-a0bc-33e92ac0dee8">Langfuse 会话 ↗</a></p><p class="intro"><b>前 3 轮看树干，后 5 轮看透明底座。</b> 起初，生成图漏掉了参考照上的金色树干。树干补好后，用户调整了尺寸和底座造型。后面的反复集中在同一点：<mark class="key-red">做成圆形会留下绿色</mark>，<mark class="key-red">去掉绿色又恢复成矩形</mark>。</p><section class="turn" id="final-3d" aria-labelledby="final-3d-title">
+#results h2{color:var(--ink);font-size:clamp(20px,3vw,26px)}
+#results .gallery{margin-top:12px;row-gap:18px}
+#results .frame{height:clamp(220px,28vw,350px)}
+#results .solution{margin:18px 0 0}
+#results .solution p{margin:5px 0 0}
+@media(max-width:650px){
+  #results .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 8px}
+  #results .frame{height:clamp(110px,42vw,250px)}
+  #results figcaption{font-size:14px;line-height:1.5}
+  #results figcaption span{font-size:13px}
+}
+</style><main><nav aria-label="当前位置"><a href="../../index.html#langfuse">USEIT</a><span>/</span><a href="../index.html">Langfuse</a><span>/</span><span aria-current="page">问题例子 1</span></nav><h1>圣诞树双面立牌 · 9 轮图文回放</h1><p class="meta">2026 年 11 月 26 日 · 北京时间　<a href="https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/2c97d259-c0ac-459a-a0bc-33e92ac0dee8">Langfuse 会话 ↗</a></p>
+<section class="turn" id="results" aria-labelledby="results-title">
+  <h2 id="results-title">成果 · 圣诞树立牌局部编辑</h2>
+  <div class="gallery">
+    <figure>
+      <a class="frame" href="images/reference.jpg" data-preview aria-label="放大原图">
+        <img src="images/reference.jpg" width="1320" height="1733" decoding="async" alt="用户提供的圣诞树立牌实物参考">
+      </a>
+      <figcaption><strong>原图</strong><span>用户提供的实物照片，可见金色树干与透明圆底座。</span></figcaption>
+    </figure>
+    <figure>
+      <a class="frame" href="images/final-3d-20261128/tree-round-base.webp" data-preview aria-label="放大星星版三维成品">
+        <img src="images/final-3d-20261128/tree-round-base.webp" width="1000" height="1000" decoding="async" alt="补回金色树干后的星星版圣诞树三维立牌">
+      </a>
+      <figcaption><strong>星星版 · 局部编辑后的成品</strong><span>补回金色树干和字样，配透明圆底座。</span></figcaption>
+    </figure>
+    <figure>
+      <a class="frame" href="images/shape-edits-20261128/moon-old.png" data-preview aria-label="放大旧流程的弯月版">
+        <img src="images/shape-edits-20261128/moon-old.png" width="1058" height="1487" loading="lazy" decoding="async" alt="旧流程的弯月图，原透明背景出现黑绿光晕">
+      </a>
+      <figcaption><strong>旧流程结果</strong><span>换出了弯月，整图重画也把透明背景变成了黑绿光晕。</span></figcaption>
+    </figure>
+    <figure>
+      <a class="frame" href="images/final-3d-20261128/tree-moon-standee.webp" data-preview aria-label="放大弯月版三维成品">
+        <img src="images/final-3d-20261128/tree-moon-standee.webp" width="1000" height="1000" loading="lazy" decoding="async" alt="树顶换成金色弯月后的圣诞树三维立牌">
+      </a>
+      <figcaption><strong>弯月版 · 局部编辑后的成品</strong><span>树顶换成金色弯月，树身、挂饰和字样保留原样。</span></figcaption>
+    </figure>
+  </div>
+  <div class="guide solution">
+    <b>怎么解决雾边</b>
+    <p>用选区圈住要改的部位，只把通过边缘检查的局部结果合回原画稿。选区外直接沿用原图像素，包括颜色和透明度。成稿通过检查后才写回制品，按新轮廓重算刀线，再装配直径 40 mm 的透明圆底座。</p>
+  </div>
+</section>
+<p class="intro"><b>前 3 轮看树干，后 5 轮看透明底座。</b> 起初，生成图漏掉了参考照上的金色树干。树干补好后，用户调整了尺寸和底座造型。后面的反复集中在同一点：<mark class="key-red">做成圆形会留下绿色</mark>，<mark class="key-red">去掉绿色又恢复成矩形</mark>。</p><section class="turn" id="final-3d" aria-labelledby="final-3d-title">
   <h2 id="final-3d-title">立牌的三维视图</h2>
   <p class="standee-rule"><strong>单插判定</strong>　单张参考图里，主体互相遮挡且拆片需要补画时，把画面做成一片亚克力立牌，保留原有遮挡。提供独立、完整的图层或插片素材时，可以做多插。</p><p>两张花牌实测都明确要求“做个多插片亚克力立牌，想保留原图的构图和花丛”。Agent 识别出花叶挡住人物下半身，两次均选了单插。下方正面和侧面用这两张已有画稿在 USEIT 中单独装配、渲染；两款各有一个插脚和一个底座槽。</p>
   <article aria-labelledby="standee-tree-title">
