@@ -30,6 +30,7 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
 #final-3d article+article{border-top:1px solid var(--line);padding-top:10px;margin-top:22px}
 #final-3d article .intro{margin-top:12px}
 #final-3d .standee-detail{margin-top:8px}#final-3d .standee-detail figure{max-width:350px}#final-3d .base-close{position:relative;aspect-ratio:1.5;height:auto}#final-3d .base-close img{position:absolute;max-width:none;max-height:none;height:auto;width:205%;left:-52.5%;top:50%;transform:translateY(-76%)}
+#shape-edits .moon-approved{margin-top:24px;padding-top:10px;border-top:1px solid var(--line)}#shape-edits .moon-approved h4{margin:4px 0}#shape-edits .moon .moon-approved .moon-3d{background:#f4f4f0}
 </style><main><nav aria-label="当前位置"><a href="../../index.html#langfuse">USEIT</a><span>/</span><a href="../index.html">Langfuse</a><span>/</span><span aria-current="page">问题例子 1</span></nav><h1>圣诞树双面立牌 · 9 轮图文回放</h1><p class="meta">2026 年 11 月 26 日 · 北京时间　<a href="https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/2c97d259-c0ac-459a-a0bc-33e92ac0dee8">Langfuse 会话 ↗</a></p><p class="intro"><b>前 3 轮看树干，后 5 轮看透明底座。</b> 起初，生成图漏掉了参考照上的金色树干。树干补好后，用户调整了尺寸和底座造型。后面的反复集中在同一点：<mark class="key-red">做成圆形会留下绿色</mark>，<mark class="key-red">去掉绿色又恢复成矩形</mark>。</p><section class="turn" id="final-3d" aria-labelledby="final-3d-title">
   <h2 id="final-3d-title">三种立牌的三维视图</h2>
   <article aria-labelledby="standee-tree-title">
@@ -38,6 +39,7 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
       <figure><a class="frame" href="images/reference.jpg" data-preview aria-label="放大：用户提供的实物参照"><img loading="lazy" src="images/reference.jpg" alt="用户提供的实物参照。金色树干下面，是一块无印色的透明底座。"></a><figcaption><strong>用户提供的实物参照</strong><span>金色树干下面，是一块无印色的透明底座。</span></figcaption></figure><figure><a class="frame" href="images/project-preview-9.jpg" data-preview aria-label="放大：最后一轮项目保存的预览"><img loading="lazy" src="images/project-preview-9.jpg" alt="最后一轮项目保存的预览。树干已经补回。底座仍清楚可见绿色。"></a><figcaption><strong>最后一轮项目保存的预览</strong><span>树干已经补回。底座仍清楚可见绿色。</span></figcaption></figure>
       <figure><a class="frame" href="images/final-3d-20261128/tree-round-base.webp" data-preview aria-label="放大圣诞树 · 最终三维图"><img src="images/final-3d-20261128/tree-round-base.webp" loading="lazy" decoding="async" alt="圣诞树 · 最终三维图"></a><figcaption><strong>圣诞树 · 最终三维图</strong><span>金色树干插在直径 40 mm 的透明圆底座上。斜上方视角能看到圆边和树干的连接处。</span></figcaption></figure>
     </div>
+    <p><a href="#moon-standee-result">查看金色弯月版的画稿与三维立牌 ↓</a></p>
     <p class="intro"><b>用户哪里不满意？</b> 她先问“树干怎么没有了？”，直接指出首稿漏画。第 6 至 9 轮，她<mark class="key-red">连续四次要求底座去色或透明</mark>，期间两次收到“已透明”的回复，保存版本却没能同时保住圆形和无印色。这里可以确认她在重复纠正结果；她没有在消息中直接表达愤怒。</p>
     <details class="standee-detail"><summary>查看透明底座细节</summary><figure><a class="frame base-close" href="images/final-3d-20261128/tree-round-base-detail.webp" data-preview aria-label="放大透明圆底座 · 近看"><img src="images/final-3d-20261128/tree-round-base-detail.webp" loading="lazy" decoding="async" alt="透明圆底座 · 近看"></a><figcaption><strong>透明圆底座 · 近看</strong><span>底座是无印色的透明亚克力，中间留一个插槽。</span></figcaption></figure></details>
   </article>
@@ -78,6 +80,15 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
         <a class="frame" href="images/shape-edits-20261128/moon-input.png" data-preview aria-label="放大现有流程保留的圣诞树原图，树顶仍是金色五角星"><img src="images/shape-edits-20261128/moon-input.png" width="1024" height="1440" loading="lazy" decoding="async" alt="现有流程保留的圣诞树原图，树顶仍是金色五角星"></a>
         <figcaption><strong>现有流程 · 保留原图 · 98.6 秒</strong><span class="bad">Agent 扩大选区并自动重试一次，仍触发边缘检查，未产出修改图。</span></figcaption>
       </figure>
+    </div>
+    <div class="moon-approved" id="moon-standee-result">
+      <h4>通过检查的画稿与三维立牌</h4>
+      <p class="edit-prompt">“把圣诞树最顶上的五角星换成一弯金色月亮，树身和其他挂饰保持原样。”</p>
+      <p>局部换月亮 36.8 秒。取这张画稿写回制品并重算刀线，另测 4.6 秒。 后续两轮复跑（103.6 秒、83.5 秒）仍被边缘检查拦下。下图由已通过检查的画稿装配。</p>
+      <div class="gallery">
+        <figure><a class="frame" href="images/shape-edits-20261128/moon-passed.png" data-preview aria-label="放大已通过检查的弯月画稿"><img src="images/shape-edits-20261128/moon-passed.png" width="1024" height="1440" loading="lazy" decoding="async" alt="金色弯月替换树顶星星，透明画稿"></a><figcaption><strong>USEIT 局部编辑结果</strong><span>树顶换成金色弯月，选区外颜色与透明度均未改变。</span></figcaption></figure>
+        <figure><a class="frame moon-3d" href="images/final-3d-20261128/tree-moon-standee.webp" data-preview aria-label="放大金色弯月圣诞树的 USEIT 三维视图"><img src="images/final-3d-20261128/tree-moon-standee.webp" width="1000" height="1000" loading="lazy" decoding="async" alt="金色弯月圣诞树，随形亚克力立牌和透明圆底座"></a><figcaption><strong>USEIT 三维视图</strong><span>刀线按新画稿重算，立牌插入直径 40 mm 的透明圆底座。画稿与刀线通过几何核验，生产规格待供应商确认。</span></figcaption></figure>
+      </div>
     </div>
   </article>
 
