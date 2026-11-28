@@ -1,0 +1,241 @@
+{
+  "date": "2026-11-28",
+  "measurement": "Independent local real-model runs, billable APIs only; provider list prices and USEIT internal reference separated. Excludes infrastructure, tax or invoice discounts.",
+  "rates": {
+    "currency": "USD",
+    "as_of": "2026-11-28",
+    "gemini_per_million_tokens": {
+      "fresh_input": 0.75,
+      "cached_input": 0.075,
+      "output_including_thinking": 3.75
+    },
+    "openai_gpt_image_2_6_flare_standard_per_million_tokens": {
+      "text_input": 5,
+      "image_output": 30
+    },
+    "useit_reference_usd_per_generated_image": 0.08,
+    "formula": "(baseline - updated) / baseline",
+    "invoice_verified": false,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/pricing#gemini-3.8-flash",
+      "https://developers.openai.com/api/docs/pricing",
+      "../tests/2026-11-13/evidence/costs-2026-11-14.json"
+    ]
+  },
+  "fox_standee": {
+    "user_input": "做个小狐狸和森林的双插片立牌。",
+    "before_ref": "175a3df1",
+    "after_ref": "bc30243b",
+    "before": {
+      "planning_calls": [
+        {
+          "action": "project_plan_write",
+          "input_tokens": 49059,
+          "cache_read_tokens": 32101,
+          "output_tokens": 1831,
+          "model": "gemini-3.8-flash",
+          "usd": 0.021992325
+        },
+        {
+          "action": "tool_product_image_gen",
+          "input_tokens": 37405,
+          "cache_read_tokens": 32980,
+          "output_tokens": 1879,
+          "model": "gemini-3.8-flash",
+          "usd": 0.0128385
+        }
+      ],
+      "image_calls": [
+        {
+          "model": "gpt-image-2.6-flare",
+          "text_input": 1624,
+          "image_output": 2723,
+          "usd": 0.08981
+        },
+        {
+          "model": "gpt-image-2.6-flare",
+          "text_input": 1619,
+          "image_output": 2723,
+          "usd": 0.089785
+        }
+      ],
+      "planning_usd": 0.034830825,
+      "images_at_list_usd": 0.179595,
+      "total_at_list_usd": 0.214425825,
+      "total_at_useit_rates_usd": 0.194830825,
+      "manufacturing": {
+        "inserts": [
+          "insert-1",
+          "insert-2"
+        ],
+        "slots_current": true,
+        "slot_count": 2,
+        "white": {
+          "insert-1": "current",
+          "insert-2": "current"
+        },
+        "three_d_rendered": true,
+        "assembly_warnings": [
+          {
+            "code": "hidden-behind",
+            "parts": [
+              "insert-1",
+              "insert-2"
+            ]
+          }
+        ]
+      }
+    },
+    "after": {
+      "planning_calls": [
+        {
+          "action": "project_plan_write",
+          "input_tokens": 31258,
+          "cache_read_tokens": 30302,
+          "output_tokens": 2027,
+          "model": "gemini-3.8-flash",
+          "usd": 0.0105909
+        },
+        {
+          "action": "tool_product_image_gen",
+          "input_tokens": 35493,
+          "cache_read_tokens": 30856,
+          "output_tokens": 1616,
+          "model": "gemini-3.8-flash",
+          "usd": 0.01185195
+        }
+      ],
+      "image_calls": [
+        {
+          "model": "gpt-image-2.6-flare",
+          "text_input": 1704,
+          "image_output": 2723,
+          "usd": 0.09021
+        },
+        {
+          "model": "gpt-image-2.6-flare",
+          "text_input": 1711,
+          "image_output": 2723,
+          "usd": 0.090245
+        }
+      ],
+      "planning_usd": 0.02244285,
+      "images_at_list_usd": 0.180455,
+      "total_at_list_usd": 0.20289785,
+      "total_at_useit_rates_usd": 0.18244285,
+      "manufacturing": {
+        "inserts": [
+          "insert-1",
+          "insert-2"
+        ],
+        "slots_current": true,
+        "slot_count": 2,
+        "white": {
+          "insert-1": "current",
+          "insert-2": "current"
+        },
+        "three_d_rendered": true,
+        "assembly_warnings": []
+      }
+    },
+    "savings_at_list_percent": 5.376206434089737,
+    "savings_at_useit_rates_percent": 6.358323945915642
+  },
+  "four_planning_cases": {
+    "scope": "Product selection and planning, no image API or manufacturing",
+    "cases": [
+      {
+        "case": "路飞与千阳号双插片",
+        "before": {
+          "calls": 1,
+          "input_tokens": 49065,
+          "cache_read_tokens": 32101,
+          "output_tokens": 1888,
+          "usd": 0.022210575
+        },
+        "after": {
+          "calls": 1,
+          "input_tokens": 31256,
+          "cache_read_tokens": 30302,
+          "output_tokens": 2316,
+          "usd": 0.01167315
+        }
+      },
+      {
+        "case": "70 × 95 mm 双面卡，仅做画稿",
+        "before": {
+          "calls": 2,
+          "input_tokens": 101003,
+          "cache_read_tokens": 64202,
+          "output_tokens": 4882,
+          "usd": 0.0507234
+        },
+        "after": {
+          "calls": 2,
+          "input_tokens": 66231,
+          "cache_read_tokens": 60604,
+          "output_tokens": 4978,
+          "usd": 0.02743305
+        }
+      },
+      {
+        "case": "同时做卡牌与立牌",
+        "before": {
+          "calls": 2,
+          "input_tokens": 102499,
+          "cache_read_tokens": 64202,
+          "output_tokens": 6051,
+          "usd": 0.05622915
+        },
+        "after": {
+          "calls": 1,
+          "input_tokens": 31270,
+          "cache_read_tokens": 30302,
+          "output_tokens": 5888,
+          "usd": 0.02507865
+        }
+      },
+      {
+        "case": "修改已有卡牌的宽度",
+        "before": {
+          "calls": 2,
+          "input_tokens": 68290,
+          "cache_read_tokens": 62784,
+          "output_tokens": 1992,
+          "usd": 0.0163083
+        },
+        "after": {
+          "calls": 1,
+          "input_tokens": 30037,
+          "cache_read_tokens": 29268,
+          "output_tokens": 860,
+          "usd": 0.00599685
+        }
+      }
+    ],
+    "total_before_usd": 0.145471425,
+    "total_after_usd": 0.0701817,
+    "savings_percent": 51.75567985258961
+  },
+  "candy_box": {
+    "scope": "One canvas_open reply body only. SVG geometry field lengths after XML decoding.",
+    "old_chars": 79998,
+    "overview_chars": 5027,
+    "svg_chars": 76549,
+    "dieline_structure_chars_decoded": 24624,
+    "product_geometry_chars_decoded": 24361,
+    "indexed_ids": 113,
+    "previewed_ids": 40,
+    "restored_pages": 5,
+    "full_text_identical": true,
+    "model": "gemini-3.8-flash",
+    "body_tokens_before": 56088,
+    "body_tokens_after": 2067,
+    "token_count_method": "Gemini models.countTokens on each reply as plain text; excludes wrapper, tools, other history and later detail reads."
+  },
+  "experiment_overhead": {
+    "purpose": "Earlier baseline attempt stopped on a test-adapter exception before image generation, excluded from the completed-order comparison.",
+    "planning_calls": 4,
+    "planning_usd": 0.06862815
+  }
+}

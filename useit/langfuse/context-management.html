@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="USEIT Agent 上下文规划，涵盖完成核验、按需读取工具回执、分阶段加载和多轮改稿记忆。"><title>长上下文管理 · Langfuse · USEIT</title><link rel="canonical" href="https://896729202.github.io/useit/langfuse/context-management.html"><link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/useit.css?v=20261115-4"><script>try{document.documentElement.dataset.theme=localStorage.getItem('notebook-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}</script><script defer src="../../assets/site.js"></script><script defer src="../../assets/useit.js"></script><link rel="stylesheet" href="../../assets/useit-home.css?v=20261116-2">
+<!doctype html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="USEIT Agent 上下文实测：双插片立牌的整单 API 费用、四组规划费用，以及糖果盒画布如何按需读取。"><title>长上下文管理 · Langfuse · USEIT</title><link rel="canonical" href="https://896729202.github.io/useit/langfuse/context-management.html"><link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/useit.css?v=20261115-4"><script>try{document.documentElement.dataset.theme=localStorage.getItem('notebook-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}</script><script defer src="../../assets/site.js"></script><script defer src="../../assets/useit.js"></script><link rel="stylesheet" href="../../assets/useit-home.css?v=20261116-2">
 <style>
 .context-plan {max-width:1180px;margin-inline:auto}
 .context-plan section {scroll-margin-top:92px}
@@ -15,6 +15,12 @@
 .context-plan .proposal li {margin:10px 0}
 .context-plan .proposal li::marker {color:var(--u-accent);font-weight:bold}
 .context-plan .check {padding:12px 16px;border-left:3px solid var(--u-accent);background:var(--u-soft)}
+.context-plan .measured {margin:32px 0}
+.context-plan .measured p,.context-plan .measured li {max-width:86ch;line-height:1.85}
+.context-plan .measured details {margin:14px 0}
+.context-plan .measured summary {cursor:pointer;color:var(--u-accent);font-weight:650}
+.context-plan .measured td strong {color:var(--u-accent)}
+.context-plan .measured table {font-variant-numeric:tabular-nums}
 @media(max-width:760px){
 .context-plan .ctx-table {border:0;overflow:visible;background:none}
 .context-plan table,.context-plan tbody,.context-plan tr,.context-plan .ctx-table td,.context-plan .ctx-table tbody th {display:block;min-width:0;width:auto}
@@ -29,12 +35,33 @@
 </div></header><main id="main" class="u-main"><article class="context-plan">
   <nav class="crumb" aria-label="当前位置"><a href="../index.html#langfuse">USEIT</a><span>/</span><a href="index.html">Langfuse</a><span>/</span>长上下文管理</nav>
   <header class="report-hero">
-    <p class="eyebrow"><time datetime="2026-11-28">2026.11.28</time> · 方案规划</p>
+    <p class="eyebrow"><time datetime="2026-11-28">2026.11.28</time> · 本地版本对照</p>
     <h1>长上下文管理</h1>
-    <p>让 Agent 知道哪一面真的保存了，改到第十轮仍记得用户想保留什么。四项建议按优先级排列，点击表格第一列可查看具体方案。</p>
+    <p><a href="#cost">做完一件制品花多少钱</a> · <a href="#canvas-receipt">画布回执为什么能少 93.7%</a> · <a href="#overview">四项上下文改动</a></p>
   </header>
+  <section id="cost" class="measured" aria-labelledby="cost-title">
+    <h2 id="cost-title">做完一件双插片立牌，Agent 花多少钱？</h2>
+    <p>同一句「做个小狐狸和森林的双插片立牌」，旧版 <strong>$0.2144</strong>，新版 <strong>$0.2029</strong>，单件省下 <strong>$0.0115（5.38%）</strong>。按两次本地制作记录的模型用量和供应商标准 API 单价估算。</p>
+    <div class="ctx-table"><table aria-label="狐狸与森林立牌的整件 API 估算"><thead><tr><th scope="col">计费环节</th><th scope="col">旧版（USD）</th><th scope="col">新版（USD）</th><th scope="col">变化</th></tr></thead><tbody><tr><th scope="row">模型规划与编写生图指令</th><td data-label="旧版（USD）">$0.0348</td><td data-label="新版（USD）"><strong>$0.0224</strong></td><td data-label="变化">省 35.57%</td></tr><tr><th scope="row">两张插片生图</th><td data-label="旧版（USD）">$0.1796</td><td data-label="新版（USD）"><strong>$0.1805</strong></td><td data-label="变化">增 0.48%</td></tr><tr><th scope="row">整件 API 费用</th><td data-label="旧版（USD）"><strong>$0.2144</strong></td><td data-label="新版（USD）"><strong>$0.2029</strong></td><td data-label="变化"><strong>省 5.38%</strong></td></tr></tbody></table></div>
+    <p>两版都用了 2 次模型规划、生成了 2 张图。省下的钱来自更短的规划输入。两张图的输出 token 一样多，新版生图提示稍长，图像费用反而多了 $0.00086。下方糖果盒的回执是另一项独立测试。</p>
+    <p>两版均在本地分段完成装配、切线、白墨和三维，核验时都有两个匹配的槽。旧版有一条「后片被前片完全遮挡」的警告，新版没有这条警告。费用仅覆盖这组任务的 API 调用，本机计算、存储和账单折扣未计入。</p>
+    <details><summary>计价口径与逐次用量</summary>
+      <p>Gemini 3.8 Flash 每百万 token 的普通输入、缓存输入、输出分别为 $0.75、$0.075、$3.75。GPT Image 2.6 Flare 本次只含文本输入和图像输出，每百万 token 分别为 $5、$30。先逐次算费，再累加。<a href="https://ai.google.dev/gemini-api/docs/pricing#gemini-3.8-flash">Google 标准价</a> · <a href="https://developers.openai.com/api/docs/pricing">OpenAI 标准价</a></p>
+      <p>沿用本博客早期报告的 USEIT 内部参考价，每张原创图固定计 $0.08，同一组的整件参考费为 <strong>$0.1948 → $0.1824（省 6.36%）</strong>。另一次旧版测试因本地测试脚本报错中断在生图前，已发生的 4 轮规划共 $0.0686，单列为评测开销。<a href="context-costs-20261128.json">查看本次用量和两种算法</a> · <a href="../tests/2026-11-13/evidence/costs-2026-11-14.json">博客参考费率</a></p>
+    </details>
+    <details><summary>四组建计划任务合计 $0.1455 → $0.0702，省 51.76%</summary>
+      <p>对照范围到建好计划为止。四组输入 token 合计从 320,857 降至 158,794，缓存命中占比从 69.6% 升到 94.8%，模型调用从 7 次降到 5 次。两版都通过了选品和规格检查。</p>
+      <div class="ctx-table"><table aria-label="四组规划的参考费用"><thead><tr><th scope="col">规划任务</th><th scope="col">旧版（USD）</th><th scope="col">新版（USD）</th><th scope="col">节省比例</th></tr></thead><tbody><tr><th scope="row">路飞与千阳号双插片</th><td data-label="旧版（USD）">$0.0222</td><td data-label="新版（USD）"><strong>$0.0117</strong></td><td data-label="节省比例">47.4%</td></tr><tr><th scope="row">70 × 95 mm 双面卡，仅做画稿</th><td data-label="旧版（USD）">$0.0507</td><td data-label="新版（USD）"><strong>$0.0274</strong></td><td data-label="节省比例">45.9%</td></tr><tr><th scope="row">同时做卡牌与立牌</th><td data-label="旧版（USD）">$0.0562</td><td data-label="新版（USD）"><strong>$0.0251</strong></td><td data-label="节省比例">55.4%</td></tr><tr><th scope="row">修改已有卡牌的宽度</th><td data-label="旧版（USD）">$0.0163</td><td data-label="新版（USD）"><strong>$0.0060</strong></td><td data-label="节省比例">63.2%</td></tr><tr><th scope="row">四例合计</th><td data-label="旧版（USD）"><strong>$0.1455</strong></td><td data-label="新版（USD）"><strong>$0.0702</strong></td><td data-label="节省比例"><strong>51.8%</strong></td></tr></tbody></table></div>
+    </details>
+  </section>
+  <section id="canvas-receipt" class="measured" aria-labelledby="receipt-title">
+    <h2 id="receipt-title">画布回执为什么从 79,998 降到 5,027 字符？</h2>
+    <p>打开糖果盒画稿时，旧工具把<strong>整份 SVG 源码</strong>随回执发给模型。原稿有 <strong>76,549 字符</strong>，占整条回执约 96%。其中仅「盒型刀版结构」和「产品几何」两个字段，解码后就有 48,985 字符。即使只想查「盒子有哪些面」，模型也会收到这些数据。</p>
+    <p><strong>现在先发目录，需要哪块再取哪块。</strong>首次返回文件名、画板尺寸、各面边界、选区和保存状态。这份图有 113 个带 ID 的对象，概览先列 40 个，并附上指向这版原稿的引用。要改正面，模型可以按对象取源码和相关定义。要改整张图，也能按页读全文。</p>
+    <p class="check"><strong>首次少发 74,971 字符（93.72%）。</strong>用 Gemini 3.8 Flash 单独计数，同一条工具回执的输入从 <strong>56,088 降到 2,067 token（−96.31%）</strong>。目录由程序直接生成。本次从同一份快照读回 5 页，拼出的 76,549 字符与原 SVG 逐字一致。任务确实要读全文时，后续读取仍会计入模型输入。</p>
+  </section>
   <section aria-labelledby="overview">
-    <h2 id="overview">当前问题与修改建议</h2>
+    <h2 id="overview">四项改动的设计依据</h2>
     <div class="ctx-table"><table aria-labelledby="overview">
       <thead><tr><th scope="col">优先级</th><th scope="col">现在的问题</th><th scope="col">建议改法</th><th scope="col">怎么保住效果</th></tr></thead>
       <tbody>
@@ -77,7 +104,7 @@
   </section>
   <section id="plan-4" class="proposal">
     <h2>4．长对话只记仍然有效的要求</h2>
-    <p><strong>目标体验</strong>　用户曾要求「透明圆底座，直径 40 mm」，二十多条消息后只说「改成 45 mm」，Agent 应该只改直径，并继续保留圆形和透明。此例中的 45 mm 是拟用测试输入。</p>
+    <p><strong>实测改稿</strong>　用户原先要求透明圆底座，直径 40 mm。隔了 24 条消息再改成 45 mm，旧版只答出直径，新版也记住了圆形和透明。这一例多传了 122 个输入 token，保住了两项仍然有效的要求。</p>
     <ol>
       <li><strong>记录有出处的约束。</strong>每项附用户原话、来源消息、所属项目及制品或面片、参考图版本。可以利用现有意图识别同时提取候选要求，程序核对出处。没有明确指代时保留原话待澄清；记录「用户已采纳」需要用户的选择。</li>
       <li><strong>用户改口时只替换对应项。</strong>直径从 40 改为 45，旧值标为被哪条消息取代。另一个制品的底座保有自己的尺寸。读取时带上本次目标的有效要求、待办和必要的原话。实际结果另从当前母版和回执读取。</li>
@@ -88,7 +115,7 @@
   <section class="proposal" id="evaluation">
     <h2>怎样判断值得采用</h2>
     <p>从成功和失败的历史会话各取样，固定输入、素材、模型和工具版本，每次只替换一项方案。先用同一份回执回放检查状态和版本，再用完整制作核对保存文件；创意效果请评审者隐藏版本标签看图。将输入、预期结果、实际产物和对应 Trace 放在同一组 Langfuse 实验里。 <a href="https://langfuse.com/docs/evaluation/experiments/datasets">Langfuse 实验数据集</a></p>
-    <p><strong>先看质量，再看速度。</strong>虚报完成、错用版本或丢失明确要求的案例须先修正。质量达标后比较模型轮数、总输入与缓存命中 tokens、实际费用、首个输出和端到端耗时；样本足够时报告中位数和 P95。上述数字是历史基线，四项规划的实际收益待对照实验测量。</p>
+    <p><strong>先看质量，再看速度。</strong>逐项核对制品、尺寸、用户原话和保存版本，再比较模型轮数、输入、缓存命中、费用和耗时。本轮四组规划在新旧版本都通过相同的选品和参数检查。<a href="#cost">查看本轮费用对照</a></p>
     <a class="back-link" href="index.html">← 返回 Langfuse 问题回放</a>
   </section>
 </article></main><footer class="u-footer">USEIT / Langfuse · 上下文工程</footer></body></html>
