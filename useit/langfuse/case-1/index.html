@@ -24,7 +24,36 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
 #lion-edits .head-trial,#lion-edits .lion-source{margin-top:12px}
 #lion-edits .head-trial .frame,#lion-edits .lion-source .frame{width:min(100%,320px);height:320px}
 @media(max-width:650px){#lion-edits .lion-result{grid-template-columns:1fr;gap:10px}#lion-edits .lion-result .frame{height:clamp(225px,86vw,370px)}}
-</style><main><nav aria-label="当前位置"><a href="../../index.html#langfuse">USEIT</a><span>/</span><a href="../index.html">Langfuse</a><span>/</span><span aria-current="page">问题例子 1</span></nav><h1>圣诞树双面立牌 · 9 轮图文回放</h1><p class="meta">2026 年 11 月 26 日 · 北京时间　<a href="https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/2c97d259-c0ac-459a-a0bc-33e92ac0dee8">Langfuse 会话 ↗</a></p><p class="intro"><b>前 3 轮看树干，后 5 轮看透明底座。</b> 起初，生成图漏掉了参考照上的金色树干。树干补好后，用户调整了尺寸和底座造型。后面的反复集中在同一点：<mark class="key-red">做成圆形会留下绿色</mark>，<mark class="key-red">去掉绿色又恢复成矩形</mark>。</p><div class="pair"><figure><a class="frame" href="images/reference.jpg" data-preview aria-label="放大：用户提供的实物参照"><img loading="lazy" src="images/reference.jpg" alt="用户提供的实物参照。金色树干下面，是一块无印色的透明底座。"></a><figcaption><strong>用户提供的实物参照</strong><span>金色树干下面，是一块无印色的透明底座。</span></figcaption></figure><figure><a class="frame" href="images/project-preview-9.jpg" data-preview aria-label="放大：最后一轮项目保存的预览"><img loading="lazy" src="images/project-preview-9.jpg" alt="最后一轮项目保存的预览。树干已经补回。底座仍清楚可见绿色。"></a><figcaption><strong>最后一轮项目保存的预览</strong><span>树干已经补回。底座仍清楚可见绿色。</span></figcaption></figure></div><p class="intro"><b>用户哪里不满意？</b> 她先问“树干怎么没有了？”，直接指出首稿漏画。第 6 至 9 轮，她<mark class="key-red">连续四次要求底座去色或透明</mark>，期间两次收到“已透明”的回复，保存版本却没能同时保住圆形和无印色。这里可以确认她在重复纠正结果；她没有在消息中直接表达愤怒。</p><p class="guide"><b>怎么看这些图</b>　参考照、生图和项目预览取自原文件。底座俯视图按各轮保存的画稿绘制，只显示印刷图案和刀线。绿色是印色，粉线是刀线，棋盘格代表透明；白墨另按图层和工具回执核对。日志能确认项目保存了什么，无法确认用户当时打开了哪张图。</p><nav aria-label="跳到关键轮次"><a href="#lion-edits">花牌照片 · 三种测试</a><a href="#shape-edits">局部换造型 · 新旧对比</a><a href="#local-edits">11 月 28 日局部编辑复测</a><a href="#r1">首轮漏了树干</a><a href="#r5">底座为何变绿</a><a href="#r8">去色后为何又变方</a><a href="#r9">最终结果</a></nav>
+
+#final-3d h2{font-size:clamp(20px,3vw,26px);color:var(--ink)}
+#final-3d .frame{height:clamp(210px,29vw,350px)}
+#final-3d article+article{border-top:1px solid var(--line);padding-top:10px;margin-top:22px}
+#final-3d article .intro{margin-top:12px}
+</style><main><nav aria-label="当前位置"><a href="../../index.html#langfuse">USEIT</a><span>/</span><a href="../index.html">Langfuse</a><span>/</span><span aria-current="page">问题例子 1</span></nav><h1>圣诞树双面立牌 · 9 轮图文回放</h1><p class="meta">2026 年 11 月 26 日 · 北京时间　<a href="https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/2c97d259-c0ac-459a-a0bc-33e92ac0dee8">Langfuse 会话 ↗</a></p><p class="intro"><b>前 3 轮看树干，后 5 轮看透明底座。</b> 起初，生成图漏掉了参考照上的金色树干。树干补好后，用户调整了尺寸和底座造型。后面的反复集中在同一点：<mark class="key-red">做成圆形会留下绿色</mark>，<mark class="key-red">去掉绿色又恢复成矩形</mark>。</p><section class="turn" id="final-3d" aria-labelledby="final-3d-title">
+  <h2 id="final-3d-title">三种立牌的三维视图</h2>
+  <article aria-labelledby="standee-tree-title">
+    <h3 id="standee-tree-title">圣诞树</h3>
+    <div class="gallery n3">
+      <figure><a class="frame" href="images/reference.jpg" data-preview aria-label="放大：用户提供的实物参照"><img loading="lazy" src="images/reference.jpg" alt="用户提供的实物参照。金色树干下面，是一块无印色的透明底座。"></a><figcaption><strong>用户提供的实物参照</strong><span>金色树干下面，是一块无印色的透明底座。</span></figcaption></figure><figure><a class="frame" href="images/project-preview-9.jpg" data-preview aria-label="放大：最后一轮项目保存的预览"><img loading="lazy" src="images/project-preview-9.jpg" alt="最后一轮项目保存的预览。树干已经补回。底座仍清楚可见绿色。"></a><figcaption><strong>最后一轮项目保存的预览</strong><span>树干已经补回。底座仍清楚可见绿色。</span></figcaption></figure>
+      <figure><a class="frame" href="images/final-3d-20261128/tree.webp" data-preview aria-label="放大圣诞树 · 最终三维图"><img src="images/final-3d-20261128/tree.webp" loading="lazy" decoding="async" alt="圣诞树 · 最终三维图"></a><figcaption><strong>圣诞树 · 最终三维图</strong><span>树枝无绿雾，保留金色字样，底座是直径 40 mm 的透明圆形。</span></figcaption></figure>
+    </div>
+    <p class="intro"><b>用户哪里不满意？</b> 她先问“树干怎么没有了？”，直接指出首稿漏画。第 6 至 9 轮，她<mark class="key-red">连续四次要求底座去色或透明</mark>，期间两次收到“已透明”的回复，保存版本却没能同时保住圆形和无印色。这里可以确认她在重复纠正结果；她没有在消息中直接表达愤怒。</p>
+  </article>
+  <article aria-labelledby="standee-head-title">
+    <h3 id="standee-head-title">宇智波鼬头</h3>
+    <div class="gallery">
+      <figure><a class="frame" href="images/shape-edits-20261128/itachi-head-trial.png" data-preview aria-label="放大只换头 · 二维试做图"><img src="images/shape-edits-20261128/itachi-head-trial.png" loading="lazy" decoding="async" alt="只换头 · 二维试做图"></a><figcaption><strong>只换头 · 二维试做图</strong><span>宇智波鼬的头，狮子身体和手里的绿心。</span></figcaption></figure>
+      <figure><a class="frame" href="images/final-3d-20261128/head.webp" data-preview aria-label="放大只换头 · 补做的三维预览"><img src="images/final-3d-20261128/head.webp" loading="lazy" decoding="async" alt="只换头 · 补做的三维预览"></a><figcaption><strong>只换头 · 补做的三维预览</strong><span>根据试做图重建立牌画稿，补齐了被花遮住的身体，再用 USEIT 渲染。</span></figcaption></figure>
+    </div>
+  </article>
+  <article aria-labelledby="standee-body-title">
+    <h3 id="standee-body-title">宇智波鼬全身</h3>
+    <div class="gallery">
+      <figure><a class="frame" href="images/shape-edits-20261128/itachi-old.png" data-preview aria-label="放大头和身体都换 · 旧流程出图"><img src="images/shape-edits-20261128/itachi-old.png" loading="lazy" decoding="async" alt="头和身体都换 · 旧流程出图"></a><figcaption><strong>头和身体都换 · 旧流程出图</strong><span>原照片里，黑底红云长袍的下半部分被花叶挡住。</span></figcaption></figure>
+      <figure><a class="frame" href="images/final-3d-20261128/body.webp" data-preview aria-label="放大头和身体都换 · 补做的三维预览"><img src="images/final-3d-20261128/body.webp" loading="lazy" decoding="async" alt="头和身体都换 · 补做的三维预览"></a><figcaption><strong>头和身体都换 · 补做的三维预览</strong><span>根据旧流程图重建全身画稿，再用 USEIT 渲染。</span></figcaption></figure>
+    </div>
+  </article>
+</section><p class="guide"><b>怎么看这些图</b>　参考照、生图和项目预览取自原文件。底座俯视图按各轮保存的画稿绘制，只显示印刷图案和刀线。绿色是印色，粉线是刀线，棋盘格代表透明；白墨另按图层和工具回执核对。日志能确认项目保存了什么，无法确认用户当时打开了哪张图。</p><nav aria-label="跳到关键轮次"><a href="#final-3d">三种立牌的三维视图</a><a href="#lion-edits">花牌照片 · 三种测试</a><a href="#shape-edits">局部换造型 · 新旧对比</a><a href="#local-edits">11 月 28 日局部编辑复测</a><a href="#r1">首轮漏了树干</a><a href="#r5">底座为何变绿</a><a href="#r8">去色后为何又变方</a><a href="#r9">最终结果</a></nav>
 
 <section class="turn" id="shape-edits" aria-labelledby="shape-edits-title">
   <h2 id="shape-edits-title">局部换造型复测 · <time datetime="2026-11-28">2026.11.28</time></h2>
