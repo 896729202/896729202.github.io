@@ -41,10 +41,13 @@ function renderHome({retestCount = 9, root = path.resolve(__dirname, '..')} = {}
         <p class="home-architecture-note"><strong>当前状态：</strong>${flatCard?`${flatCard.test_scope==='integration'?'光栅卡已自动续接；普通双面卡独立自动流程已通过集成复测，正常聊天入口仍待验证。':'光栅卡与普通双面卡的新建画稿任务已接入各自自动流程；其他制品保留独立入口，可分别优化。'}<time datetime="2026-11-16">架构版本 · 2026.11.16</time>`:'光栅卡已自动续接装配与核验；其他制品保留原工具流程，可分别优化。<time datetime="2026-11-15">架构版本 · 2026.11.15</time>'}</p>
         <strong class="home-card-link">查看代码阅读指南 →</strong>
       </a>
-      <a href="langfuse/index.html" class="home-card home-report" id="langfuse" style="grid-column:1/-1" aria-labelledby="langfuse-title">
-        <div class="home-card-heading"><p class="eyebrow">03 / Langfuse</p><h2 id="langfuse-title">Langfuse 问题回放</h2><p>逐轮对照用户原话、Agent 回复和实际生成的图片。</p></div>
-        <strong class="home-card-link">查看问题例子 <span aria-hidden="true">→</span></strong>
-      </a>
+      <div id="langfuse" style="grid-column:1/-1">
+        <a href="langfuse/index.html" class="home-card home-report" aria-labelledby="langfuse-title">
+          <div class="home-card-heading"><p class="eyebrow">03 / Langfuse</p><h2 id="langfuse-title">Langfuse 问题回放</h2><p>逐轮对照用户原话、Agent 回复和实际生成的图片。</p></div>
+          <strong class="home-card-link">查看问题例子 <span aria-hidden="true">→</span></strong>
+        </a>
+        <a class="u-button" style="margin-top:10px" href="langfuse/context-management.html">长上下文管理 →</a>
+      </div>
     </div>
     <aside class="home-news" aria-labelledby="home-news-title">
       <div class="home-news-heading"><h2 id="home-news-title">News <span>更新记录</span></h2><span class="home-news-count">${flatCard?'04':'03'}</span></div>

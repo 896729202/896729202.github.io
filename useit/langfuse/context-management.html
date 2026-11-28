@@ -1,0 +1,94 @@
+<!doctype html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="USEIT Agent 上下文规划，涵盖完成核验、按需读取工具回执、分阶段加载和多轮改稿记忆。"><title>长上下文管理 · Langfuse · USEIT</title><link rel="canonical" href="https://896729202.github.io/useit/langfuse/context-management.html"><link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/useit.css?v=20261115-4"><script>try{document.documentElement.dataset.theme=localStorage.getItem('notebook-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}</script><script defer src="../../assets/site.js"></script><script defer src="../../assets/useit.js"></script><link rel="stylesheet" href="../../assets/useit-home.css?v=20261116-2">
+<style>
+.context-plan {max-width:1180px;margin-inline:auto}
+.context-plan section {scroll-margin-top:92px}
+.context-plan .ctx-table {overflow:auto;border:1px solid var(--u-border);border-radius:10px;background:var(--u-paper)}
+.context-plan table {border-collapse:collapse;width:100%;table-layout:fixed;line-height:1.8}
+.context-plan .ctx-table th,.context-plan .ctx-table td {vertical-align:top;padding:16px;text-align:left;font-size:14px;white-space:normal;overflow-wrap:anywhere;border-bottom:1px solid var(--u-border)}
+.context-plan thead th {background:var(--u-soft)}
+.context-plan thead th:first-child {width:16%}
+.context-plan thead th:nth-child(2) {width:24%}
+.context-plan .ctx-table tr:last-child td,.context-plan .ctx-table tbody tr:last-child th {border-bottom:0}
+.context-plan .proposal {max-width:880px;padding-top:6px;margin-top:36px}
+.context-plan .proposal p,.context-plan .proposal li {font-size:15px;line-height:1.9}
+.context-plan .proposal ol {padding-left:1.7em}
+.context-plan .proposal li {margin:10px 0}
+.context-plan .proposal li::marker {color:var(--u-accent);font-weight:bold}
+.context-plan .check {padding:12px 16px;border-left:3px solid var(--u-accent);background:var(--u-soft)}
+@media(max-width:760px){
+.context-plan .ctx-table {border:0;overflow:visible;background:none}
+.context-plan table,.context-plan tbody,.context-plan tr,.context-plan .ctx-table td,.context-plan .ctx-table tbody th {display:block;min-width:0;width:auto}
+.context-plan thead {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.context-plan .ctx-table tbody tr {background:var(--u-paper);border:1px solid var(--u-border);border-radius:8px;margin-bottom:12px;padding:14px}
+.context-plan .ctx-table tbody td,.context-plan .ctx-table tbody th {border:0;padding:5px 0}
+.context-plan .ctx-table td::before {display:block;content:attr(data-label);color:var(--u-muted);font-size:12px;font-weight:bold}
+}
+</style></head><body class="useit useit-home-page"><a class="skip-link" href="#main">跳到主要内容</a><header class="site-header"><div class="header-inner">
+<a class="brand" href="../../index.html" aria-label="896729202 知识手记首页"><span class="brand-mark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h5c2.4 0 4 1.4 4 3v14c0-2-1.6-3-4-3H3zM21 4h-5c-2.4 0-4 1.4-4 3v14c0-2 1.6-3 4-3h5z"/></svg></span><span class="brand-name">896729202<span class="brand-divider">/</span><span class="brand-sub">知识手记</span></span></a>
+<nav class="header-nav" aria-label="主导航"><a href="../../thesis/index.html">内窥镜三维重建</a><a href="../../notes/index.html">八股文</a><a href="../../interviews/index.html">面试</a><a href="../../useit/index.html">USEIT</a><div class="header-controls"><button class="icon-button" data-theme-toggle type="button" aria-label="切换为深色模式" aria-pressed="false"><span class="theme-dark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 13.1A9 9 0 0 1 10.9 3.2 9 9 0 1 0 20.8 13.1Z"/></svg></span><span class="theme-light"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span></button></div></nav>
+</div></header><main id="main" class="u-main"><article class="context-plan">
+  <nav class="crumb" aria-label="当前位置"><a href="../index.html#langfuse">USEIT</a><span>/</span><a href="index.html">Langfuse</a><span>/</span>长上下文管理</nav>
+  <header class="report-hero">
+    <p class="eyebrow"><time datetime="2026-11-28">2026.11.28</time> · 方案规划</p>
+    <h1>长上下文管理</h1>
+    <p>让 Agent 知道哪一面真的保存了，改到第十轮仍记得用户想保留什么。四项建议按优先级排列，点击表格第一列可查看具体方案。</p>
+  </header>
+  <section aria-labelledby="overview">
+    <h2 id="overview">当前问题与修改建议</h2>
+    <div class="ctx-table"><table aria-labelledby="overview">
+      <thead><tr><th scope="col">优先级</th><th scope="col">现在的问题</th><th scope="col">建议改法</th><th scope="col">怎么保住效果</th></tr></thead>
+      <tbody>
+            <tr><th scope="row"><a href="#plan-1">1．完成状态由程序核验</a></th><td data-label="现在的问题">当前已有回执对账。但在通用回复路径里，如果模型坚持说“已完成”，程序最多提醒两次，之后仍可能把这句话发给用户。</td><td data-label="建议改法">按制品、面片和版本生成最终状态。例如“三片已保存、切线待审核、三维尚未核验”。当模型回复与回执冲突，用已核验状态生成结果句。</td><td data-label="怎么保住效果"><strong>这是最值得先改的一项。</strong> B04 已有逐片核对保存回执、检查三维截图母版版本的实现，可以复用。模型继续负责解释和创意，程序负责判断能否宣称成功。<a href="https://github.com/UseIt-AI/useit-agent-internal/blob/175a3df1/agent/agent_loop/execution/actions/respond.py#L231">通用回复逻辑</a> · <a href="https://github.com/UseIt-AI/useit-agent-internal/blob/175a3df1/agent/agent_loop/product_workflows/multi_insert_standee.py#L246">B04 已有核验</a></td></tr>
+            <tr><th scope="row"><a href="#plan-2">2．工具默认返回下一步用得上的内容</a></th><td data-label="现在的问题">查看画布时可能收到整份 SVG，装配后可能反复携带嵌套回执和计时。</td><td data-label="建议改法">查看画布先给对象列表、选中对象、尺寸和版本，要编辑某个对象时再取其源码。装配默认给任务状态、哪一面、哪份素材、保存版本、警告和失败项，并附详情引用。</td><td data-label="怎么保住效果">完整数据留给程序核验和诊断。模型能按<strong>同一版本</strong>回读细节，失败原因和工艺警告必须保留。现有 <code>canvas_list</code> 已经跑通“先看列表、再取详情”的方式。<a href="https://github.com/UseIt-AI/useit-agent-internal/blob/175a3df1/agent/agent_loop/execution/callbacks/canvas_listing.py#L68">分页回执实现</a></td></tr>
+            <tr><th scope="row"><a href="#plan-3">3．按制作阶段提供工具说明</a></th><td data-label="现在的问题">新建任务第一步就可能带上很长的工具参数，也会预载普通卡和多插片立牌的候选规格。</td><td data-label="建议改法">先缩最重的 <code>project_plan_write</code>。首次选品类时给品类目录和建计划必需参数，选定款式后再给这一款的完整规格与工具。需求模糊或涉及多个品类时保留目录查询。</td><td data-label="怎么保住效果">继续由模型理解自然语言和选择品类，沿用程序的完整参数校验。用“一句短需求”“多品类需求”“修改已有制品”三类任务，检查是否选错款或增加查询轮数。<a href="https://github.com/UseIt-AI/useit-agent-internal/blob/175a3df1/agent/agent_loop/context/product_preload.py#L15">当前规格预载</a></td></tr>
+            <tr><th scope="row"><a href="#plan-4">4．长对话保存仍然有效的用户要求</a></th><td data-label="现在的问题">用户反复改图时，较早的要求会滚出最近 20 条记录。直接总结整段聊天，还可能把助手曾经说错的话记成事实。</td><td data-label="建议改法">为持续改稿的项目记录<strong>用户要求、原话出处、对应制品、用户采用的版本、仍待处理的项</strong>。用户改口时更新对应项。涉及“像不像”“绿色有没有去干净”时，把对应版本的参考图和结果图给模型看。</td><td data-label="怎么保住效果">每条要求能回到原话，每项完成状态能回到母版或回执。短任务直接沿用现有流程，无需额外调用摘要模型。</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section id="plan-1" class="proposal">
+    <h2>1．让「完成」有逐项回执</h2>
+    <p><strong>目标体验</strong>　用户要做三片立牌，回复可以是「前片和中片已保存，后片装配失败。前片切线待审核，三维预览尚未核验。」用户一眼能看出哪些工作完成了、还差哪一步。</p>
+    <ol>
+      <li><strong>先列出本次交付范围。</strong>按用户要求记录制品、面片、动作和目标版本。用户只要求装配时，结果只需说明装配。要求三维时，三维也有自己的核验项。</li>
+      <li><strong>每项单独对账。</strong>程序检查任务编号、保存回执和母版版本。仍在运行就跟踪原任务；重复提交只有能证明目标版本已保存才算成功。切线另记审核状态，三维截图必须与当前母版和素材对应。旧版截图不能给新版验收。</li>
+      <li><strong>在结果发给用户之前核对。</strong>制作过程可以继续显示进度。最终事实句由程序根据各项回执生成，模型补充创意解释和后续选择。回执缺失时显示「待确认」，失败时保留具体面片和原因，其他已成功项照常列出。</li>
+    </ol>
+    <p class="check"><strong>如何验收</strong>　在 B04 分别回放全部成功、一片失败、超时后继续保存、同版重复回执、旧版三维图。逐项比对用户看到的文字和重新打开后的母版，既检查虚报成功，也检查把成功误报为失败。 <a href="../tests/2026-11-13/B04.html">B04 实测记录</a></p>
+  </section>
+  <section id="plan-2" class="proposal">
+    <h2>2．工具先给结果，细节按版本取回</h2>
+    <p><strong>为什么先改画布读取</strong>　糖果盒历史案例的第 44 次规划中，两条含 SVG 的消息合计 144,123 字符，占当步工具文本约 78%。查看文件和精确编辑对象，需要的内容量相差很大。</p>
+    <ol>
+      <li><strong>看画布时给概览。</strong>返回文件、版本、画板尺寸、对象和选区、是否有未保存修改或冲突。用户直接点名对象时，可随首次返回该对象的必要片段。判断画面效果时附对应版预览图。</li>
+      <li><strong>编辑时取同版详情。</strong>建议新增只读详情入口，按项目、文件、版本、对象取源码，并带上对象依赖的蒙版、渐变和定义。未保存的编辑用内容指纹识别。读取不到指定版本就提示重新查看；整页重构仍可请求全文。</li>
+      <li><strong>保存时把诊断和模型输入分开。</strong>完整回执供程序核验和追查。模型收到任务状态、成功与失败面片、素材、版本、警告和详情引用。用户要排查慢在哪一步时再读取分段计时，回查结果不会再次执行装配。</li>
+    </ol>
+    <p class="check"><strong>如何验收</strong>　用同一份糖果盒 SVG 修改一个带蒙版的对象，核对目标对象、其他图层、渲染结果和文件版本。再试编辑途中用户换图、只读详情失效、装配部分失败，检查模型能否拿到正确证据。 <a href="https://www.anthropic.com/research/writing-tools-for-agents">Anthropic 工具返回设计</a></p>
+  </section>
+  <section id="plan-3" class="proposal">
+    <h2>3．选款、制作和核验各用一组工具</h2>
+    <p><strong>为什么先看第一轮</strong>　B04 鸣人快流程首轮尚无工具历史，15 个工具定义已达 74,737 字符，其中建计划工具占 20,799 字符。该请求实际输入 53,858 tokens，其中 31,111 命中缓存。字符和 tokens 是两种计量。</p>
+    <ol>
+      <li><strong>第一次选品。</strong>给现有模型简短品类目录、读规格和建计划入口。用户一句「做一张昼夜变换的光栅卡」就可选款；用户明确指定的面数、尺寸、素材、只做画稿等限制随计划一起传入。歧义时允许查多款，多制品订单允许多个选择。</li>
+      <li><strong>选定后制作。</strong>由现有分派器根据已校验的款式加载完整参数与制作工具。修改已有制品直接读取其款式和当前版本。只有需要未加载的能力时才查目录，固定步骤沿用已验证的工作流，创意交给模型。</li>
+      <li><strong>核验时只给相关动作。</strong>例如三面装配后优先提供原任务查询、母版核验与结果回复。每个阶段保持常用说明顺序稳定，以便缓存复用；完整参数和用户覆盖值仍由程序校验。</li>
+    </ol>
+    <p class="check"><strong>如何验收</strong>　用短句选款、明确自定义参数、一次做两种制品、修改已有制品四组请求比较。看选款和参数是否正确、是否多查一轮、产物是否齐全，同时区分首次请求和缓存命中后的耗时。 <a href="https://www.anthropic.com/research/advanced-tool-use">按需发现工具的做法</a></p>
+  </section>
+  <section id="plan-4" class="proposal">
+    <h2>4．长对话只记仍然有效的要求</h2>
+    <p><strong>目标体验</strong>　用户曾要求「透明圆底座，直径 40 mm」，二十多条消息后只说「改成 45 mm」，Agent 应该只改直径，并继续保留圆形和透明。此例中的 45 mm 是拟用测试输入。</p>
+    <ol>
+      <li><strong>记录有出处的约束。</strong>每项附用户原话、来源消息、所属项目及制品或面片、参考图版本。可以利用现有意图识别同时提取候选要求，程序核对出处。没有明确指代时保留原话待澄清；记录「用户已采纳」需要用户的选择。</li>
+      <li><strong>用户改口时只替换对应项。</strong>直径从 40 改为 45，旧值标为被哪条消息取代。另一个制品的底座保有自己的尺寸。读取时带上本次目标的有效要求、待办和必要的原话。实际结果另从当前母版和回执读取。</li>
+      <li><strong>按需摘要和看图。</strong>短制作直接使用近期消息。长期改稿在早期原话滚出历史窗口前，保存仍有效的约束和引用；预算紧张时再压缩已结束的讨论。对「绿色去干净了吗」取回当前结果和指定参考图，几句文字无法替代这次对照。</li>
+    </ol>
+    <p class="check"><strong>如何验收</strong>　把圣诞树案例延长到 20 条消息以外，再分别改直径、切换制品、回到上一版。核对圆形、直径和印色图层，再看实际预览。另测用户从未采纳某版时，Agent 能否准确回答「尚未选择」。 <a href="case-1/index.html">圣诞树九轮图文回放</a> · <a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents">结构化记录与上下文压缩</a></p>
+  </section>
+  <section class="proposal" id="evaluation">
+    <h2>怎样判断值得采用</h2>
+    <p>从成功和失败的历史会话各取样，固定输入、素材、模型和工具版本，每次只替换一项方案。先用同一份回执回放检查状态和版本，再用完整制作核对保存文件；创意效果请评审者隐藏版本标签看图。将输入、预期结果、实际产物和对应 Trace 放在同一组 Langfuse 实验里。 <a href="https://langfuse.com/docs/evaluation/experiments/datasets">Langfuse 实验数据集</a></p>
+    <p><strong>先看质量，再看速度。</strong>虚报完成、错用版本或丢失明确要求的案例须先修正。质量达标后比较模型轮数、总输入与缓存命中 tokens、实际费用、首个输出和端到端耗时；样本足够时报告中位数和 P95。上述数字是历史基线，四项规划的实际收益待对照实验测量。</p>
+    <a class="back-link" href="index.html">← 返回 Langfuse 问题回放</a>
+  </section>
+</article></main><footer class="u-footer">USEIT / Langfuse · 上下文工程</footer></body></html>
