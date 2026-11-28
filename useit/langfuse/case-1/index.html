@@ -13,9 +13,8 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
 #shape-edits .edit-case+.edit-case{margin-top:26px;padding-top:7px;border-top:1px solid var(--line)}
 #shape-edits .edit-prompt{margin:6px 0 9px;color:#134f40}
 #shape-edits .frame{height:clamp(200px,34vw,430px)}
-#shape-edits .moon .frame:not(.held){background:#fff;background-image:conic-gradient(#edf0ec 25%,transparent 0 50%,#edf0ec 0 75%,transparent 0);background-size:16px 16px}
+#shape-edits .moon .frame{background:#fff;background-image:conic-gradient(#edf0ec 25%,transparent 0 50%,#edf0ec 0 75%,transparent 0);background-size:16px 16px}
 #shape-edits .bad{color:#ad2432}
-#shape-edits .held{padding:8px;text-align:center;color:var(--muted);cursor:default}
 @media(max-width:650px){#shape-edits .gallery.n3{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}#shape-edits .frame{height:clamp(110px,42vw,220px)}#shape-edits figcaption{font-size:13px;line-height:1.4}#shape-edits figcaption span{font-size:12px}}
 </style><main><nav aria-label="当前位置"><a href="../../index.html#langfuse">USEIT</a><span>/</span><a href="../index.html">Langfuse</a><span>/</span><span aria-current="page">问题例子 1</span></nav><h1>圣诞树双面立牌 · 9 轮图文回放</h1><p class="meta">2026 年 11 月 26 日 · 北京时间　<a href="https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/2c97d259-c0ac-459a-a0bc-33e92ac0dee8">Langfuse 会话 ↗</a></p><p class="intro"><b>前 3 轮看树干，后 5 轮看透明底座。</b> 起初，生成图漏掉了参考照上的金色树干。树干补好后，用户调整了尺寸和底座造型。后面的反复集中在同一点：<mark class="key-red">做成圆形会留下绿色</mark>，<mark class="key-red">去掉绿色又恢复成矩形</mark>。</p><div class="pair"><figure><a class="frame" href="images/reference.jpg" data-preview aria-label="放大：用户提供的实物参照"><img loading="lazy" src="images/reference.jpg" alt="用户提供的实物参照。金色树干下面，是一块无印色的透明底座。"></a><figcaption><strong>用户提供的实物参照</strong><span>金色树干下面，是一块无印色的透明底座。</span></figcaption></figure><figure><a class="frame" href="images/project-preview-9.jpg" data-preview aria-label="放大：最后一轮项目保存的预览"><img loading="lazy" src="images/project-preview-9.jpg" alt="最后一轮项目保存的预览。树干已经补回。底座仍清楚可见绿色。"></a><figcaption><strong>最后一轮项目保存的预览</strong><span>树干已经补回。底座仍清楚可见绿色。</span></figcaption></figure></div><p class="intro"><b>用户哪里不满意？</b> 她先问“树干怎么没有了？”，直接指出首稿漏画。第 6 至 9 轮，她<mark class="key-red">连续四次要求底座去色或透明</mark>，期间两次收到“已透明”的回复，保存版本却没能同时保住圆形和无印色。这里可以确认她在重复纠正结果；她没有在消息中直接表达愤怒。</p><p class="guide"><b>怎么看这些图</b>　参考照、生图和项目预览取自原文件。底座俯视图按各轮保存的画稿绘制，只显示印刷图案和刀线。绿色是印色，粉线是刀线，棋盘格代表透明；白墨另按图层和工具回执核对。日志能确认项目保存了什么，无法确认用户当时打开了哪张图。</p><nav aria-label="跳到关键轮次"><a href="#shape-edits">局部换造型 · 新旧对比</a><a href="#local-edits">11 月 28 日局部编辑复测</a><a href="#r1">首轮漏了树干</a><a href="#r5">底座为何变绿</a><a href="#r8">去色后为何又变方</a><a href="#r9">最终结果</a></nav>
 
@@ -35,8 +34,8 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
         <figcaption><strong>旧流程实测 · 88.1 秒</strong><span class="bad">画出了弯月，但把原图的透明背景画成了不透明的黑绿光晕。</span></figcaption>
       </figure>
       <figure>
-        <div class="frame held">原稿保留</div>
-        <figcaption><strong>现有流程实测 · 98.6 秒</strong><span class="bad">Agent 扩大选区并自动重试一次，仍触发边缘检查，原图保留。</span></figcaption>
+        <a class="frame" href="images/shape-edits-20261128/moon-input.png" data-preview aria-label="放大现有流程保留的圣诞树原图，树顶仍是金色五角星"><img src="images/shape-edits-20261128/moon-input.png" width="1024" height="1440" loading="lazy" decoding="async" alt="现有流程保留的圣诞树原图，树顶仍是金色五角星"></a>
+        <figcaption><strong>现有流程 · 保留原图 · 98.6 秒</strong><span class="bad">Agent 扩大选区并自动重试一次，仍触发边缘检查，未产出修改图。</span></figcaption>
       </figure>
     </div>
   </article>
@@ -53,8 +52,8 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
         <figcaption><strong>旧流程实测 · 86.4 秒</strong><span class="bad">宇智波鼬的头和黑底红云长袍都生成了，但上方的红色玩偶被改绿，贺卡文字也被重画。</span></figcaption>
       </figure>
       <figure>
-        <div class="frame held">原稿保留</div>
-        <figcaption><strong>现有流程实测 · 79.5 秒</strong><span class="bad">尝试替换整个立牌，结果越过选区边缘，检查后保留原图。</span></figcaption>
+        <a class="frame" href="images/shape-edits-20261128/itachi-input.png" data-preview aria-label="放大现有流程保留的花牌原图，中央仍是狮子立牌"><img src="images/shape-edits-20261128/itachi-input.png" width="571" height="737" loading="lazy" decoding="async" alt="现有流程保留的花牌原图，中央仍是狮子立牌"></a>
+        <figcaption><strong>现有流程 · 保留原图 · 79.5 秒</strong><span class="bad">尝试替换整个立牌，结果越过选区边缘，未产出修改图。</span></figcaption>
       </figure>
     </div>
   </article>
