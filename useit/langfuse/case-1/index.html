@@ -36,6 +36,9 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
 #results .frame{height:clamp(220px,28vw,350px)}
 #results .solution{margin:18px 0 0}
 #results .solution p{margin:5px 0 0}
+#results .edge-check{margin-top:18px}
+#results .edge-check ol{padding-left:1.5em}
+#results .edge-check li+li{margin-top:8px}
 @media(max-width:650px){
   #results .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 8px}
   #results .frame{height:clamp(110px,42vw,250px)}
@@ -75,6 +78,16 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
     <b>怎么解决雾边</b>
     <p>用选区圈住要改的部位，只把通过边缘检查的局部结果合回原画稿。选区外直接沿用原图像素，包括颜色和透明度。成稿通过检查后才写回制品，按新轮廓重算刀线，再装配直径 40 mm 的透明圆底座。</p>
   </div>
+  <section class="edge-check" id="edge-check" aria-labelledby="edge-check-title">
+    <h3 id="edge-check-title">怎么确定选区和边缘</h3>
+    <p>这里的「边缘」指的是<strong>编辑框和原图的接缝</strong>。程序先检查候选图在接缝附近的变化，再决定是否合成并保存。以星星换弯月为例：</p>
+    <ol>
+      <li><strong>先定选区。</strong> Agent 根据「只换树顶的星星」框住原星星，给新月亮和树尖衔接处留一点空间。这个框是 Agent 看图估出来的。</li>
+      <li><strong>再查接缝。</strong> 程序比较框边内侧几像素宽的区域。如果那里出现大片明显变化，就拒收这次结果，因为月亮或光晕可能被框硬切了一刀。</li>
+      <li><strong>最后核对框外。</strong> 框外直接复制原图。本次弯月成稿逐像素对比后，<strong>框外颜色和透明度变化为 0</strong>。<a href="moon-edit-evidence.json">查看实测记录</a></li>
+    </ol>
+    <p><strong>框选得准不准，还得看成图。</strong> 要确认旧星星去干净了、新月亮完整、树尖没被误改。比如框画大了，把旁边的挂饰也圈进去，接缝检查仍可能通过。边缘检查负责挡住明显的裁断和接缝，成图验收负责确认改对了地方。</p>
+  </section>
 </section>
 <p class="intro"><b>前 3 轮看树干，后 5 轮看透明底座。</b> 起初，生成图漏掉了参考照上的金色树干。树干补好后，用户调整了尺寸和底座造型。后面的反复集中在同一点：<mark class="key-red">做成圆形会留下绿色</mark>，<mark class="key-red">去掉绿色又恢复成矩形</mark>。</p><section class="turn" id="final-3d" aria-labelledby="final-3d-title">
   <h2 id="final-3d-title">立牌的三维视图</h2>

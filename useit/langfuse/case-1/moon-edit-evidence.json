@@ -1,0 +1,19 @@
+{
+  "elapsed_seconds": 36.788,
+  "input_size": [
+    1024,
+    1440
+  ],
+  "result_size": [
+    1024,
+    1440
+  ],
+  "changed_pixels": 57467,
+  "outside_changed_pixels": 0,
+  "region": [
+    0.36,
+    0,
+    0.64,
+    0.14
+  ]
+}
