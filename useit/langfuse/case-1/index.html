@@ -18,9 +18,12 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
 @media(max-width:650px){:is(#shape-edits,#lion-edits) .gallery.n3{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}:is(#shape-edits,#lion-edits) .frame{height:clamp(110px,42vw,220px)}:is(#shape-edits,#lion-edits) figcaption{font-size:13px;line-height:1.4}:is(#shape-edits,#lion-edits) figcaption span{font-size:12px}}
 
 #lion-edits .edit-case{scroll-margin-top:12px}
-#lion-edits .head-trial{margin-top:14px}
-#lion-edits .head-trial .frame{max-width:320px}
-@media(max-width:650px){#lion-edits .gallery:not(.n3){grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+#lion-edits .lion-result{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:9px;align-items:start}
+#lion-edits .lion-result .frame{height:clamp(235px,43vw,440px)}
+#lion-edits .lion-notes p{margin:0 0 10px}
+#lion-edits .head-trial,#lion-edits .lion-source{margin-top:12px}
+#lion-edits .head-trial .frame,#lion-edits .lion-source .frame{width:min(100%,320px);height:320px}
+@media(max-width:650px){#lion-edits .lion-result{grid-template-columns:1fr;gap:10px}#lion-edits .lion-result .frame{height:clamp(225px,86vw,370px)}}
 </style><main><nav aria-label="当前位置"><a href="../../index.html#langfuse">USEIT</a><span>/</span><a href="../index.html">Langfuse</a><span>/</span><span aria-current="page">问题例子 1</span></nav><h1>圣诞树双面立牌 · 9 轮图文回放</h1><p class="meta">2026 年 11 月 26 日 · 北京时间　<a href="https://us.cloud.langfuse.com/project/cmibav1u900atad07zqbj6cx0/sessions/2c97d259-c0ac-459a-a0bc-33e92ac0dee8">Langfuse 会话 ↗</a></p><p class="intro"><b>前 3 轮看树干，后 5 轮看透明底座。</b> 起初，生成图漏掉了参考照上的金色树干。树干补好后，用户调整了尺寸和底座造型。后面的反复集中在同一点：<mark class="key-red">做成圆形会留下绿色</mark>，<mark class="key-red">去掉绿色又恢复成矩形</mark>。</p><div class="pair"><figure><a class="frame" href="images/reference.jpg" data-preview aria-label="放大：用户提供的实物参照"><img loading="lazy" src="images/reference.jpg" alt="用户提供的实物参照。金色树干下面，是一块无印色的透明底座。"></a><figcaption><strong>用户提供的实物参照</strong><span>金色树干下面，是一块无印色的透明底座。</span></figcaption></figure><figure><a class="frame" href="images/project-preview-9.jpg" data-preview aria-label="放大：最后一轮项目保存的预览"><img loading="lazy" src="images/project-preview-9.jpg" alt="最后一轮项目保存的预览。树干已经补回。底座仍清楚可见绿色。"></a><figcaption><strong>最后一轮项目保存的预览</strong><span>树干已经补回。底座仍清楚可见绿色。</span></figcaption></figure></div><p class="intro"><b>用户哪里不满意？</b> 她先问“树干怎么没有了？”，直接指出首稿漏画。第 6 至 9 轮，她<mark class="key-red">连续四次要求底座去色或透明</mark>，期间两次收到“已透明”的回复，保存版本却没能同时保住圆形和无印色。这里可以确认她在重复纠正结果；她没有在消息中直接表达愤怒。</p><p class="guide"><b>怎么看这些图</b>　参考照、生图和项目预览取自原文件。底座俯视图按各轮保存的画稿绘制，只显示印刷图案和刀线。绿色是印色，粉线是刀线，棋盘格代表透明；白墨另按图层和工具回执核对。日志能确认项目保存了什么，无法确认用户当时打开了哪张图。</p><nav aria-label="跳到关键轮次"><a href="#lion-edits">花牌照片 · 三种测试</a><a href="#shape-edits">局部换造型 · 新旧对比</a><a href="#local-edits">11 月 28 日局部编辑复测</a><a href="#r1">首轮漏了树干</a><a href="#r5">底座为何变绿</a><a href="#r8">去色后为何又变方</a><a href="#r9">最终结果</a></nav>
 
 <section class="turn" id="shape-edits" aria-labelledby="shape-edits-title">
@@ -48,54 +51,58 @@ mark.key-red{color:#ad2432;background:transparent;font-weight:700}.claim-preview
 </section>
 <section class="turn" id="lion-edits" aria-labelledby="lion-edits-title">
   <h2 id="lion-edits-title">花牌照片 · 三种局部编辑</h2>
-  <nav aria-label="跳到花牌照片的测试"><a href="#lion-recolor">红色改蓝色</a><a href="#lion-head">只换头</a><a href="#lion-body">头和身体都换</a></nav>
-  <p class="meta">统一从提交到 Agent 返回计时。三次测试都从同一张原图开始。</p>
+  <nav aria-label="跳到花牌照片的测试"><a href="#lion-recolor">狮子换色</a><a href="#lion-head">宇智波鼬头</a><a href="#lion-body">宇智波鼬全身</a></nav>
+  <details class="lion-source">
+    <summary>查看三次测试共用的原图</summary>
+    <a class="frame" href="images/shape-edits-20261128/itachi-input.png" data-preview aria-label="放大花牌照片原图，中间是红色鬃毛的狮子"><img src="images/shape-edits-20261128/itachi-input.png" width="571" height="737" loading="lazy" decoding="async" alt="花牌照片原图，中间是红色鬃毛的狮子"></a>
+  </details>
+
   <article class="edit-case" id="lion-recolor">
-    <h3>红色鬃毛改蓝色</h3>
-    <p class="edit-prompt">“把中间狮子头周围的红色花瓣改成蓝色。”</p>
-    <p class="edit-time">总耗时 <strong>42.5 秒</strong></p>
-    <div class="gallery"><figure><a class="frame photo" href="images/local-edits-20261128/photo-input.png" data-preview aria-label="放大花牌照片 · 狮子花瓣换色，输入图"><img src="images/local-edits-20261128/photo-input.png" width="571" height="737" loading="lazy" decoding="async" alt="花牌照片 · 狮子花瓣换色，输入图"></a><figcaption><strong>输入图</strong></figcaption></figure><figure><a class="frame photo" href="images/local-edits-20261128/photo-result.png" data-preview aria-label="放大花牌照片 · 狮子花瓣换色，结果图"><img src="images/local-edits-20261128/photo-result.png" width="571" height="737" loading="lazy" decoding="async" alt="花牌照片 · 狮子花瓣换色，结果图"></a><figcaption><strong>结果图</strong></figcaption></figure></div>
+    <h3>狮子换色</h3>
+    <div class="lion-result">
+      <figure>
+        <a class="frame" href="images/local-edits-20261128/photo-result.png" data-preview aria-label="放大花牌中间的狮子鬃毛已变成蓝色"><img src="images/local-edits-20261128/photo-result.png" width="571" height="737" loading="lazy" decoding="async" alt="花牌中间的狮子鬃毛已变成蓝色"></a>
+        <figcaption><strong>现有流程出图 · 42.5 秒</strong></figcaption>
+      </figure>
+      <div class="lion-notes">
+        <p class="edit-prompt">“把中间狮子头周围的红色花瓣改成蓝色。”</p>
+
+
+      </div>
+    </div>
   </article>
 
   <article class="edit-case" id="lion-head">
-    <h3>只换头，保留狮子的身体</h3>
-    <p class="edit-prompt">“把照片中间的狮子头换成宇智波鼬的头，保留狮子的身体、手里的绿心和旁边的花。”</p>
-    <div class="gallery n3">
+    <h3>宇智波鼬头</h3>
+    <div class="lion-result">
       <figure>
-        <a class="frame" href="images/shape-edits-20261128/itachi-input.png" data-preview aria-label="放大花牌照片原图"><img src="images/shape-edits-20261128/itachi-input.png" width="571" height="737" loading="lazy" decoding="async" alt="花牌照片原图"></a>
-        <figcaption><strong>原图</strong></figcaption>
+        <a class="frame" href="images/shape-edits-20261128/itachi-head-trial.png" data-preview aria-label="放大宇智波鼬的头，保留原狮子的身体和绿心"><img src="images/shape-edits-20261128/itachi-head-trial.png" width="571" height="737" loading="lazy" decoding="async" alt="宇智波鼬的头，保留原狮子的身体和绿心"></a>
+        <figcaption><strong>早期裁片试做 · 88.5 秒</strong></figcaption>
       </figure>
-      <figure>
-        <a class="frame" href="images/shape-edits-20261128/itachi-head-old.png" data-preview aria-label="放大旧流程只换头的实际出图"><img src="images/shape-edits-20261128/itachi-head-old.png" width="1104" height="1424" loading="lazy" decoding="async" alt="旧流程只换头的实际出图"></a>
-        <figcaption><strong>旧流程实测 · 54.1 秒</strong><span class="bad">换成了宇智波鼬的头，狮子的身体和绿心仍可见。周围的花叶和背景也被重画。</span></figcaption>
-      </figure>
-      <figure>
-        <a class="frame" href="images/shape-edits-20261128/itachi-input.png" data-preview aria-label="放大现有流程拦截换头后保留的原图"><img src="images/shape-edits-20261128/itachi-input.png" width="571" height="737" loading="lazy" decoding="async" alt="现有流程拦截换头后保留的原图"></a>
-        <figcaption><strong>现有流程 · 保留原图 · 68.8 秒</strong><span class="bad">换头结果触发选区边缘检查，未产出修改图。</span></figcaption>
-      </figure>
+      <div class="lion-notes">
+        <p class="edit-prompt">“把照片中间的狮子头换成宇智波鼬的头，保留狮子的身体、手里的绿心和旁边的花。”</p>
+        <p>只换头，狮子的身体和手里的绿心仍可见。试做用的代码后来已撤回。现有流程实测 <strong>68.8 秒</strong>，触发越界检查后保留原图。</p>
+        <details class="head-trial">
+  <summary>查看旧流程出图 · 54.1 秒</summary>
+  <p>旧流程换了头，也重画了周围的花叶和背景。</p>
+  <a class="frame" href="images/shape-edits-20261128/itachi-head-old.png" data-preview aria-label="放大旧流程只换头的出图，周围花叶也被重画"><img src="images/shape-edits-20261128/itachi-head-old.png" width="1104" height="1424" loading="lazy" decoding="async" alt="旧流程只换头的出图，周围花叶也被重画"></a>
+</details>
+      </div>
     </div>
-    <details class="head-trial">
-      <summary>查看早期只换头试做图 · 88.5 秒</summary>
-      <p class="meta">这张图使用了后来撤回的裁片代码。换头后，原狮子的身体和绿心仍可见。现有流程的结果见上图。</p>
-      <a class="frame" href="images/shape-edits-20261128/itachi-head-trial.png" data-preview aria-label="放大早期裁片试做的宇智波鼬头和狮子身体"><img src="images/shape-edits-20261128/itachi-head-trial.png" width="571" height="737" loading="lazy" decoding="async" alt="早期裁片试做的宇智波鼬头和狮子身体"></a>
-    </details>
   </article>
-  <article class="edit-case itachi" id="lion-body">
-    <h3>整只狮子换成宇智波鼬</h3>
-    <p class="edit-prompt">“把照片正中间那只红色鬃毛的小狮子整体换成宇智波鼬，头和身体都换，换上他的黑底红云长袍。周围的花和其他立牌保留。做好后自己检查一下，有问题修好再给我。”</p>
-    <div class="gallery n3">
+
+  <article class="edit-case" id="lion-body">
+    <h3>宇智波鼬全身</h3>
+    <div class="lion-result">
       <figure>
-        <a class="frame" href="images/shape-edits-20261128/itachi-input.png" data-preview aria-label="放大整只狮子换成宇智波鼬，原图"><img src="images/shape-edits-20261128/itachi-input.png" width="571" height="737" loading="lazy" decoding="async" alt="整只狮子换成宇智波鼬，原图"></a>
-        <figcaption><strong>原图</strong></figcaption>
+        <a class="frame" href="images/shape-edits-20261128/itachi-old.png" data-preview aria-label="放大狮子的头和身体都换成了穿黑底红云长袍的宇智波鼬"><img src="images/shape-edits-20261128/itachi-old.png" width="1104" height="1424" loading="lazy" decoding="async" alt="狮子的头和身体都换成了穿黑底红云长袍的宇智波鼬"></a>
+        <figcaption><strong>旧流程出图 · 86.4 秒</strong></figcaption>
       </figure>
-      <figure>
-        <a class="frame" href="images/shape-edits-20261128/itachi-old.png" data-preview aria-label="放大整只狮子换成宇智波鼬，旧流程实测 · 86.4 秒"><img src="images/shape-edits-20261128/itachi-old.png" width="1104" height="1424" loading="lazy" decoding="async" alt="整只狮子换成宇智波鼬，旧流程实测 · 86.4 秒"></a>
-        <figcaption><strong>旧流程实测 · 86.4 秒</strong><span class="bad">宇智波鼬的头和黑底红云长袍都生成了，但上方的红色玩偶被改绿，贺卡文字也被重画。</span></figcaption>
-      </figure>
-      <figure>
-        <a class="frame" href="images/shape-edits-20261128/itachi-input.png" data-preview aria-label="放大现有流程保留的花牌原图，中央仍是狮子立牌"><img src="images/shape-edits-20261128/itachi-input.png" width="571" height="737" loading="lazy" decoding="async" alt="现有流程保留的花牌原图，中央仍是狮子立牌"></a>
-        <figcaption><strong>现有流程 · 保留原图 · 79.5 秒</strong><span class="bad">尝试替换整个立牌，结果越过选区边缘，未产出修改图。</span></figcaption>
-      </figure>
+      <div class="lion-notes">
+        <p class="edit-prompt">“把照片正中间那只红色鬃毛的小狮子整体换成宇智波鼬，头和身体都换，换上他的黑底红云长袍。周围的花和其他立牌保留。做好后自己检查一下，有问题修好再给我。”</p>
+        <p>头和身体都换成了宇智波鼬。上方红色玩偶变绿，贺卡文字也被重画。现有流程实测 <strong>79.5 秒</strong>，触发越界检查后保留原图。</p>
+
+      </div>
     </div>
   </article>
 </section>
